@@ -4,6 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
+  "/home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/databaseFunctions.c" "/home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/cmake-build-debug/CMakeFiles/qrCodeGenerator.dir/databaseFunctions.c.o"
+  "/home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/graphicFunctions.c" "/home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/cmake-build-debug/CMakeFiles/qrCodeGenerator.dir/graphicFunctions.c.o"
   "/home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/main.c" "/home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/cmake-build-debug/CMakeFiles/qrCodeGenerator.dir/main.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
@@ -26,6 +28,7 @@ set(CMAKE_C_TARGET_INCLUDE_PATH
   "/usr/include/gdk-pixbuf-2.0"
   "/usr/include/glib-2.0"
   "/usr/lib/x86_64-linux-gnu/glib-2.0/include"
+  "/usr/include/mysql"
   )
 
 # Targets to which this target links.

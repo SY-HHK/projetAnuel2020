@@ -50,6 +50,7 @@
 					<Add directory="/usr/include/gdk-pixbuf-2.0"/>
 					<Add directory="/usr/include/glib-2.0"/>
 					<Add directory="/usr/lib/x86_64-linux-gnu/glib-2.0/include"/>
+					<Add directory="/usr/include/mysql"/>
 					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
@@ -86,6 +87,7 @@
 					<Add directory="/usr/include/gdk-pixbuf-2.0"/>
 					<Add directory="/usr/include/glib-2.0"/>
 					<Add directory="/usr/lib/x86_64-linux-gnu/glib-2.0/include"/>
+					<Add directory="/usr/include/mysql"/>
 					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
@@ -110,6 +112,18 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/databaseFunctions.c">
+			<Option target="qrCodeGenerator"/>
+		</Unit>
+		<Unit filename="/home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/databaseFunctions.h">
+			<Option target="qrCodeGenerator"/>
+		</Unit>
+		<Unit filename="/home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/graphicFunctions.c">
+			<Option target="qrCodeGenerator"/>
+		</Unit>
+		<Unit filename="/home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/graphicFunctions.h">
+			<Option target="qrCodeGenerator"/>
+		</Unit>
 		<Unit filename="/home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/main.c">
 			<Option target="qrCodeGenerator"/>
 		</Unit>

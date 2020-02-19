@@ -123,6 +123,60 @@ qrCodeGenerator/fast:
 	$(MAKE) -f CMakeFiles/qrCodeGenerator.dir/build.make CMakeFiles/qrCodeGenerator.dir/build
 .PHONY : qrCodeGenerator/fast
 
+databaseFunctions.o: databaseFunctions.c.o
+
+.PHONY : databaseFunctions.o
+
+# target to build an object file
+databaseFunctions.c.o:
+	$(MAKE) -f CMakeFiles/qrCodeGenerator.dir/build.make CMakeFiles/qrCodeGenerator.dir/databaseFunctions.c.o
+.PHONY : databaseFunctions.c.o
+
+databaseFunctions.i: databaseFunctions.c.i
+
+.PHONY : databaseFunctions.i
+
+# target to preprocess a source file
+databaseFunctions.c.i:
+	$(MAKE) -f CMakeFiles/qrCodeGenerator.dir/build.make CMakeFiles/qrCodeGenerator.dir/databaseFunctions.c.i
+.PHONY : databaseFunctions.c.i
+
+databaseFunctions.s: databaseFunctions.c.s
+
+.PHONY : databaseFunctions.s
+
+# target to generate assembly for a file
+databaseFunctions.c.s:
+	$(MAKE) -f CMakeFiles/qrCodeGenerator.dir/build.make CMakeFiles/qrCodeGenerator.dir/databaseFunctions.c.s
+.PHONY : databaseFunctions.c.s
+
+graphicFunctions.o: graphicFunctions.c.o
+
+.PHONY : graphicFunctions.o
+
+# target to build an object file
+graphicFunctions.c.o:
+	$(MAKE) -f CMakeFiles/qrCodeGenerator.dir/build.make CMakeFiles/qrCodeGenerator.dir/graphicFunctions.c.o
+.PHONY : graphicFunctions.c.o
+
+graphicFunctions.i: graphicFunctions.c.i
+
+.PHONY : graphicFunctions.i
+
+# target to preprocess a source file
+graphicFunctions.c.i:
+	$(MAKE) -f CMakeFiles/qrCodeGenerator.dir/build.make CMakeFiles/qrCodeGenerator.dir/graphicFunctions.c.i
+.PHONY : graphicFunctions.c.i
+
+graphicFunctions.s: graphicFunctions.c.s
+
+.PHONY : graphicFunctions.s
+
+# target to generate assembly for a file
+graphicFunctions.c.s:
+	$(MAKE) -f CMakeFiles/qrCodeGenerator.dir/build.make CMakeFiles/qrCodeGenerator.dir/graphicFunctions.c.s
+.PHONY : graphicFunctions.c.s
+
 main.o: main.c.o
 
 .PHONY : main.o
@@ -159,6 +213,12 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... qrCodeGenerator"
 	@echo "... edit_cache"
+	@echo "... databaseFunctions.o"
+	@echo "... databaseFunctions.i"
+	@echo "... databaseFunctions.s"
+	@echo "... graphicFunctions.o"
+	@echo "... graphicFunctions.i"
+	@echo "... graphicFunctions.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
