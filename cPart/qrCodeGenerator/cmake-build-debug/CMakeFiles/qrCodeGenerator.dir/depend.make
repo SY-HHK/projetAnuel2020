@@ -3,11 +3,15 @@
 
 CMakeFiles/qrCodeGenerator.dir/databaseFunctions.c.o: ../databaseFunctions.c
 CMakeFiles/qrCodeGenerator.dir/databaseFunctions.c.o: ../databaseFunctions.h
+CMakeFiles/qrCodeGenerator.dir/databaseFunctions.c.o: ../struct.h
 
+CMakeFiles/qrCodeGenerator.dir/graphicFunctions.c.o: ../databaseFunctions.h
 CMakeFiles/qrCodeGenerator.dir/graphicFunctions.c.o: ../graphicFunctions.c
 CMakeFiles/qrCodeGenerator.dir/graphicFunctions.c.o: ../graphicFunctions.h
+CMakeFiles/qrCodeGenerator.dir/graphicFunctions.c.o: ../struct.h
 
 CMakeFiles/qrCodeGenerator.dir/main.c.o: ../databaseFunctions.h
 CMakeFiles/qrCodeGenerator.dir/main.c.o: ../graphicFunctions.h
 CMakeFiles/qrCodeGenerator.dir/main.c.o: ../main.c
+CMakeFiles/qrCodeGenerator.dir/main.c.o: ../struct.h
 

@@ -118,9 +118,6 @@
 		<Unit filename="/home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/databaseFunctions.h">
 			<Option target="qrCodeGenerator"/>
 		</Unit>
-		<Unit filename="/home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/general.h">
-			<Option target="qrCodeGenerator"/>
-		</Unit>
 		<Unit filename="/home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/graphicFunctions.c">
 			<Option target="qrCodeGenerator"/>
 		</Unit>
@@ -128,6 +125,9 @@
 			<Option target="qrCodeGenerator"/>
 		</Unit>
 		<Unit filename="/home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/main.c">
+			<Option target="qrCodeGenerator"/>
+		</Unit>
+		<Unit filename="/home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/struct.h">
 			<Option target="qrCodeGenerator"/>
 		</Unit>
 		<Unit filename="/home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/CMakeLists.txt">

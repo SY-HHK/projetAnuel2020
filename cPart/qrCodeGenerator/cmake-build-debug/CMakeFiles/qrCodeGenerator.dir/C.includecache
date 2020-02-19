@@ -6,15 +6,21 @@
 
 #IncludeRegexTransform: 
 
+/home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/databaseFunctions.c
+databaseFunctions.h
 /home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/databaseFunctions.h
-stdlib.h
--
-stdio.h
--
-string.h
--
+
+/home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/databaseFunctions.h
+struct.h
+/home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/struct.h
 mysql/mysql.h
 -
+
+/home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/graphicFunctions.c
+graphicFunctions.h
+/home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/graphicFunctions.h
+databaseFunctions.h
+/home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/databaseFunctions.h
 
 /home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/graphicFunctions.h
 gtk-3.0/gtk/gtk.h
@@ -25,4 +31,16 @@ graphicFunctions.h
 /home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/graphicFunctions.h
 databaseFunctions.h
 /home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/databaseFunctions.h
+
+/home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/struct.h
+stdlib.h
+-
+stdio.h
+-
+string.h
+-
+mysql/mysql.h
+-
+gtk-3.0/gtk/gtk.h
+-
 
