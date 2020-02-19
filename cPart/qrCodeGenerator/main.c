@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "graphicFunctions.h"
 #include "databaseFunctions.h"
 
@@ -11,6 +10,9 @@ int main(int argc,char **argv)
     MYSQL *conn = mysql_init(NULL);
 
     db_connect(conn);
+
+    provider p;
+    insertProvider(conn, p);
 
     //listProvider(conn);
 

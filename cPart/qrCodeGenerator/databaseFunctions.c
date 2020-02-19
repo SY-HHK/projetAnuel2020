@@ -40,5 +40,12 @@ void closeConnection(MYSQL *conn) {
     mysql_close(conn);
 }
 
+void insertProvider(MYSQL *conn, provider p) {
+
+    strcpy(p.providerFirstName,"Louis");
+    printf("%s",p.providerFirstName);
+
+}
+
 
 

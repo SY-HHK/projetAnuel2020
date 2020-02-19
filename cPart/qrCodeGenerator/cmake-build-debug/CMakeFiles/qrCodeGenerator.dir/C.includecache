@@ -6,3 +6,23 @@
 
 #IncludeRegexTransform: 
 
+/home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/databaseFunctions.h
+stdlib.h
+-
+stdio.h
+-
+string.h
+-
+mysql/mysql.h
+-
+
+/home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/graphicFunctions.h
+gtk-3.0/gtk/gtk.h
+-
+
+/home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/main.c
+graphicFunctions.h
+/home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/graphicFunctions.h
+databaseFunctions.h
+/home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/databaseFunctions.h
+

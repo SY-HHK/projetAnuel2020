@@ -3,6 +3,7 @@
 //
 
 #include "graphicFunctions.h"
+#include "databaseFunctions.h"
 
 GtkWidget *main_window(void *argc, void *argv) {
 
@@ -31,11 +32,22 @@ GtkWidget *main_window(void *argc, void *argv) {
         //return code;
     }
 
-    /* Récupération du pointeur de la fenêtre principale */
-    GtkWidget *window = GTK_WIDGET(gtk_builder_get_object (builder, "mainWindow"));
+    providerEntry p;
 
-    /* Affectation du signal "destroy" à la fonction gtk_main_quit(); pour la */
-    /* fermeture de la fenêtre. */
+    /* Récupération des pointeurs de la fenêtre */
+    GtkWidget *window = GTK_WIDGET(gtk_builder_get_object (builder, "mainWindow"));
+    p.providerFirstName = GTK_WIDGET(gtk_builder_get_object (builder, "firstNameEntry"));
+    p.providerLastName = GTK_WIDGET(gtk_builder_get_object (builder, "lastNameEntry"));
+    p.providerBirth = GTK_WIDGET(gtk_builder_get_object (builder, "birthEntry"));
+    p.providerEmail = GTK_WIDGET(gtk_builder_get_object (builder, "emailEntry"));
+    p.providerPhone = GTK_WIDGET(gtk_builder_get_object (builder, "phoneEntry"));
+    p.cityRegion = GTK_WIDGET(gtk_builder_get_object (builder, "regionEntry"));
+    p.cityDepartement = GTK_WIDGET(gtk_builder_get_object (builder, "departmentEntry"));
+    p.cityName = GTK_WIDGET(gtk_builder_get_object (builder, "cityEntry"));
+    p.providerAddress = GTK_WIDGET(gtk_builder_get_object (builder, "addressEntry"));
+
+
+
     //g_signal_connect (G_OBJECT (cancel_button), "clicked", (GCallback)gtk_main_quit, NULL);
 
     /* Affichage de la fenêtre principale. */
