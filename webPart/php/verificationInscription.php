@@ -35,22 +35,22 @@ include('../include/config.php');
         }
 
      //Nom
-    if(!isset($_POST['lastname']) || empty($_POST['lastname'])){
+    if(!isset($_POST['lastName']) || empty($_POST['lastName'])){
         header('Location: ../inscription.php?error=name_missing');
         exit;
     }
 
-    if(preg_match('#[0-9]#',$_POST['lastname'])) {
+    if(preg_match('#[0-9]#',$_POST['lastName'])) {
         header('location: ../inscription.php?error=name_format');
         exit;
     }
     //Prenom
-    if(!isset($_POST['firstname']) || empty($_POST['firstname'])){
+    if(!isset($_POST['firstName']) || empty($_POST['firstName'])){
         header('Location: ../inscription.php?error=prenom_missing');
         exit;
     }
 
-    if(preg_match('#[0-9]#',$_POST['firstname'])) {
+    if(preg_match('#[0-9]#',$_POST['firstName'])) {
         header('location: ../inscription.php?error=prenom_format');
         exit;
     }
@@ -80,18 +80,27 @@ include('../include/config.php');
     }
 
 
-    // code postal
-    if(!isset($_POST['postalCode']) || empty($_POST['postalCode'])){
-        header('Location: ../inscription.php?error=postalCode_missing');
+    // region
+    if(!isset($_POST['region']) || empty($_POST['region'])){
+        header('Location: ../inscription.php?error=region_missing');
         exit;
     }
 
-    if(preg_match('#[a-zA-Z]#',$_POST['postalCode'])) {
-        header('location: ../inscription.php?error=postalCode_format');
+    if(preg_match('#[0-9]#',$_POST['region'])) {
+        header('location: ../inscription.php?error=region_format');
         exit;
     }
 
+ // departement
+    if(!isset($_POST['departement']) || empty($_POST['departement'])){
+        header('Location: ../inscription.php?error=region_missing');
+        exit;
+    }
 
+    if(preg_match('#[a-zA-Z]#',$_POST['departement'])) {
+        header('location: ../inscription.php?error=departement_format');
+        exit;
+    }
  //Ville
     if(!isset($_POST['city']) || empty($_POST['city'])){
         header('Location: ../inscription.php?error=city_missing');
@@ -155,7 +164,7 @@ include('../include/config.php');
 
 // Requete preparee
 
-$q = "INSERT INTO USER (userEmail, userPassword, userFirstName, userLastName , userBirth, userAddress,userCity, userPostalCode, userPhone,userPrivilege, userIp, userAgent) VALUES ( :mail, :pwd, :firstName, :lastName , :birth, :adr,:city, :code,:phone, :p, :id, :agent)";
+$q = "INSERT INTO USER (userEmail, userPassword, userFirstName, userLastName , userBirth, userAddress,userCity,userRegion, userDepartement, userPhone,userPrivilege, userIp, userAgent) VALUES ( :mail, :pwd, :firstName, :lastName , :birth, :adr,:city, :region, :departement,:phone, :p, :id, :agent)";
 
 $req = $pdo->prepare($q);
 
@@ -170,12 +179,13 @@ var_dump($userIp);
 $req->execute(array(
   'mail' => htmlspecialchars($_POST['mail']),
   'pwd' => hash('sha256', $_POST['password']),
-  'firstName' => htmlspecialchars($_POST['firstname']),
-  'lastName' => htmlspecialchars($_POST['lastname']),
+  'firstName' => htmlspecialchars($_POST['firstName']),
+  'lastName' => htmlspecialchars($_POST['lastName']),
   'birth' => htmlspecialchars($_POST['birth']),
   'adr' => htmlspecialchars($_POST['adresse']),
   'city' => htmlspecialchars($_POST['city']),
-  'code' => htmlspecialchars($_POST['postalCode']),
+  'region' => htmlspecialchars($_POST['region']),
+  'departement' => htmlspecialchars($_POST['departement']),
   'phone' => htmlspecialchars($_POST['phone']),
   'p' => $privilege,
   'id' => $userIp,

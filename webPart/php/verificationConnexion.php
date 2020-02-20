@@ -15,20 +15,20 @@ if (!isset($_POST['password']) || empty($_POST['password'])) {
 
 $email = htmlspecialchars($_POST['mail']);
 $password = hash('sha256', $_POST['password']);
-var_dump([$email, $password]);
-
+// var_dump([$email, $password]);
+// 
 // Connexion admin 
 $queryAdmin = $pdo->prepare('SELECT * FROM ADMIN WHERE pseudo = ? AND password = ?');
 $queryAdmin->execute([$email, $password]);
 $admin = $queryAdmin->fetch();
 
-session_start();
+
 $err = 0;
 
 if ($admin != 0) {
-
+	session_start();
 	$_SESSION['admin'] = $admin;
-	header('location: ../back/index_back.php?connexion_back=ok');
+	header('location: ../back/indexBack.php?connexion_back=ok');
  exit;
 } 
 

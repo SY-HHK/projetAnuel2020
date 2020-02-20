@@ -1,3 +1,9 @@
 p {
     color: black;
 }
+
+nav a:hover {
+color: #000;
+text-decoration: none;
+}
+

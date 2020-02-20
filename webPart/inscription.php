@@ -84,14 +84,14 @@
          Vous devez entrer votre adresse
         </div>
 
-<?php } else if (isset($_GET['error']) && $_GET['error'] == 'postalCode_missing') { ?>
+<?php } else if (isset($_GET['error']) && $_GET['error'] == 'departement_missing') { ?>
         <div class="alert alert-danger text-center" role="alert">
-         Vous devez entrer votre code postal
+         Vous devez entrer votre département
         </div>
 
-<?php } else if (isset($_GET['error']) && $_GET['error'] == 'postalCode_format') { ?>
+<?php } else if (isset($_GET['error']) && $_GET['error'] == 'departement_format') { ?>
 <div class="alert alert-danger text-center" role="alert">
- Vous devez entrer un code postal valide
+ Vous devez entrer un département valide
 </div>
 
 <?php } else if (isset($_GET['error']) && $_GET['error'] == 'city_missing') { ?>
@@ -102,6 +102,16 @@
 <?php } else if (isset($_GET['error']) && $_GET['error'] == 'city_format') { ?>
           <div class="alert alert-danger text-center" role="alert">
             Veuillez revoir votre ville
+          </div>
+
+<?php } else if (isset($_GET['error']) && $_GET['error'] == 'region_missing') { ?>
+          <div class="alert alert-danger text-center" role="alert">
+            Vous devez indiquer votre région
+          </div>
+
+<?php } else if (isset($_GET['error']) && $_GET['error'] == 'region_format') { ?>
+          <div class="alert alert-danger text-center" role="alert">
+            Veuillez revoir votre région
           </div>
 
 <?php } else if (isset($_GET['error']) && $_GET['error'] == 'password_missing') { ?>
@@ -124,32 +134,37 @@
 
             <div class="form-group">
                 <label>Prénom :</label>
-                <input type="text" class="form-control" name="firstname" placeholder="Prénom">
+                <input type="text" class="form-control" name="firstName" placeholder="Prénom">
             </div>
             <div class="form-group">
                 <label>Nom de famille :</label>
-                <input type="text" class="form-control" name="lastname" placeholder="Nom de famille">
+                <input type="text" class="form-control" name="lastName" placeholder="Nom de famille">
             </div>
             <div class="form-group">
                 <label>Date de naissance :</label>
                 <input type="date" class="form-control" name="birth" placeholder="Date de naissance">
             </div>
             <div class="form-group">
-                <label>Numéro de téléphone</label>
+                <label>Numéro de téléphone:</label>
                 <input type="text" class="form-control" name="phone" placeholder="Numéro de téléphone">
             </div>
             <div class="form-group">
-                <label>Adresse</label>
-                <input type="text" class="form-control" name="adresse" placeholder="adresse">
-            </div>
-            <div class="form-group">
-                <label>Code Postal</label>
-                <input type="text" class="form-control" name="postalCode" placeholder="code postal">
+                <label>Adresse :</label>
+                <input type="text" class="form-control" name="adresse" placeholder="Adresse">
             </div>
             <div class="form-group">
                 <label>Ville :</label>
                 <input type="text" class="form-control" name="city" placeholder="Ville">
             </div>
+            <div class="form-group">
+                <label>Région : </label>
+                <input type="text" class="form-control" name="region" placeholder="Région">
+            </div>
+            <div class="form-group">
+                <label>Département : </label>
+                <input type="text" class="form-control" name="departement" placeholder="Département">
+            </div>
+            
             <div class="form-group">
                 <label>Mot de passe :</label>
                 <input type="password" class="form-control" name="password" placeholder="Mot de passe">
