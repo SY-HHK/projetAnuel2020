@@ -128,7 +128,7 @@ if (isset($_POST['updateProvider'])) {
 	   	$state = 2; //supprimé
 	   }
 
-	   var_dump($id, $firstName, $lastName,$tel,$email,$adr,$city,$region,$departement,$companyName,$annulation,$state);
+	 
 
    		
 	$queryUpdate = $pdo->prepare('UPDATE PROVIDER SET 

@@ -95,7 +95,7 @@ $resultats = $query->fetchAll();
     <div class="card">
       <div class="card-header" id="headingOne">
         <h2 class="mb-0">
-          <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          <button class=" btn collaborateur " type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" >
             Nos collaborateur
           </button>
         </h2>
@@ -156,7 +156,7 @@ $resultats = $query->fetchAll();
     <div class="card">
       <div class="card-header" id="headingTwo">
         <h2 class="mb-0">
-          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          <button class="btn collaborateur collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
             Ajouter un collaborateur
           </button>
         </h2>
