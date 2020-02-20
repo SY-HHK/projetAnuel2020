@@ -114,7 +114,7 @@ if (isset($_POST['updateProvider'])) {
 	    if( isset($_POST['annulation']) && !empty($_POST['annulation']) ){
 	        $annulation = $_POST['annulation'];
 	    }else {
-	    	$annulation = NULL;
+	    	$annulation = 0;
 	    }
 
 	   

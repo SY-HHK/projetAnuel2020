@@ -5,7 +5,7 @@
     
     <a href="indexBack.php"> <img src="../images/logo.png"></a>
   	 <a href="employee.php">Collaborateurs </a>
-     <a href="clients.php">Clients</a>
+     <a href="user.php">Clients</a>
      <a href="prestataires.php">Prestataires</a>
      <a href="services.php">Services et demandes</a>
      <a href="abonnement.php">Abonnements </a>

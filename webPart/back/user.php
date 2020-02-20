@@ -4,7 +4,7 @@ if (!isset($_SESSION['admin'])){
 header('location:../index.php');
 }
 
-$query = $pdo->prepare('SELECT * FROM PROVIDER');
+$query = $pdo->prepare('SELECT * FROM USER');
 $query->execute();
 
 $resultats = $query->fetchAll();
@@ -15,7 +15,7 @@ $resultats = $query->fetchAll();
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Les comptes prestataires</title>
+  <title>Les comptes de nos clients</title>
   <link rel="stylesheet" href="../css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/inscription.css">
 </head>
@@ -33,7 +33,7 @@ $resultats = $query->fetchAll();
     
 <div class="jumbotron table-responsive-xl">
   
-        <h4>Nos prestataires</h4> 
+        <h4>Nos clients</h4> 
         <hr class="my-4">
         <?php if (isset($_GET['error']) && $_GET['error'] == 'name_missing') { ?>
           <div class="alert alert-danger text-center" role="alert">
@@ -78,8 +78,12 @@ $resultats = $query->fetchAll();
                   <div class="alert alert-danger text-center" role="alert">
                  Cette adresse mail existe déjà dans notre base de données
                   </div>
+<?php } else if (isset($_GET['error']) && $_GET['error'] == 'pwd') { ?>
+                  <div class="alert alert-danger text-center" role="alert">
+                 erreur gene mdp
+                  </div>
 
-        <?php } else if (isset($_GET['error']) && $_GET['error'] == 'adresse_missing') { ?>
+                  <?php } else if (isset($_GET['error']) && $_GET['error'] == 'adresse_missing') { ?>
                 <div class="alert alert-danger text-center" role="alert">
                  Vous devez entrer une adresse
                 </div>
@@ -114,6 +118,7 @@ $resultats = $query->fetchAll();
                     Veuillez revoir la région
                   </div>
 
+
         <?php } else if (isset($_GET['genere']) && $_GET['genere'] == 1) { ?>
                   <div class="alert alert-success text-center" role="alert">
                     Le nouveau mot de passe a été généré
@@ -136,14 +141,13 @@ $resultats = $query->fetchAll();
         <th scope="col">Prénom</th>
         <th scope="col">Nom</th>
         <th scope="col">Numéro tél.</th>
+        <th scope="col">Date de naiss</th>
         <th scope="col">Email</th>
         <th scope="col">Adresse</th>
         <th scope="col">Ville</th>
         <th scope="col">Région</th>
         <th scope="col">Départ.</th>
-        <th scope="col">Entreprise</th>
-        <th scope="col">Avis</th>
-        <th scope="col">Pénalités</th>
+        <th scope="col">-</th>
         <th scope="col">State</th>
         <th scope="col">MDP</th>
          <th scope="col">MAJ</th>
@@ -151,51 +155,47 @@ $resultats = $query->fetchAll();
     </thead>
 
   <?php
-      foreach ($resultats as $provider) { ?>
+      foreach ($resultats as $user) { ?>
         <tbody>
-          <tr <?php if ($provider['state'] == 0) echo 'class = "table-success"'; 
-           else if($provider['state'] == 1) echo 'class = "table-warning"';?>>
-            <form action="PHP/prestataireMAJ.php" method="POST">
-              <th scope="row"><?php echo $provider['idProvider']; ?></th>
+          <tr>
+            <form action="PHP/userMAJ.php" method="POST">
+              <th scope="row"><?php echo $user['idUser']; ?></th>
                   <td>
-                    <input type="text" class="input" name="firstName" value="<?php echo $provider['providerFirstName']; ?>">
+                    <input type="text" class="input" name="firstName" value="<?php echo $user['userFirstName']; ?>">
                   </td>
                   <td>
-                    <input type="text" class="input" name="lastName" value="<?php echo $provider['providerLastName']; ?>">
+                    <input type="text" class="input" name="lastName" value="<?php echo $user['userLastName']; ?>">
                   </td>
                   <td>
-                    <input type="text" placeholder= "0123456789" class="input" name="phone" value="<?php echo $provider['providerPhone']; ?>">
+                    <input type="text" placeholder= "0123456789" class="input" name="phone" value="<?php echo $user['userPhone']; ?>">
                   </td>
                   <td>
-                    <input type="text" class="inputEmail" name="mail" value="<?php echo $provider['providerEmail']; ?>">
+                    <input type="date" class="inputDate" name="birth" value="<?php echo $user['userBirth']; ?>">
                   </td>
                   <td>
-                    <input type="text" class="input" name="adresse" value="<?php echo $provider['providerAddress']; ?>">
+                    <input type="text" class="inputEmail" name="mail" value="<?php echo $user['userEmail']; ?>">
                   </td>
                   <td>
-                    <input type="text" class="input" name="city" value="<?php echo $provider['cityName']; ?>">
+                    <input type="text" class="input" name="adresse" value="<?php echo $user['userAddress']; ?>">
                   </td>
                   <td>
-                    <input type="text" class="input" name="region" value="<?php echo $provider['cityRegion']; ?>">
+                    <input type="text" class="input" name="city" value="<?php echo $user['userCity']; ?>">
                   </td>
                   <td>
-                    <input type="text" class="inputNbr" name="departement" value="<?php echo $provider['cityDepartement']; ?>">
+                    <input type="text" class="input" name="region" value="<?php echo $user['userRegion']; ?>">
                   </td>
                   <td>
-                    <input type="text" class="input" name="companyName" value="<?php echo $provider['companyName']; ?>">
+                    <input type="text" class="inputNbr" name="departement" value="<?php echo $user['userDepartement']; ?>">
                   </td>
                   <td>
-                    <input type="text" class="inputNbr" name="providerRate" value="<?php echo $provider['providerRate']; ?>">
-                  </td>
-                  <td>
-                    <input type="text" class="inputNbr" name="annulation" value="<?php echo $provider['providerAnnulation']; ?>">
+                    <input type="text" class="inputNbr" name="annulation" value="<?php echo $user['userAnnulation']; ?>">
                   </td>
                   <td>
                     <div class="form-group">
                       <select class="form-control-sm" name="state">
-                        <option <?php if ($provider['state'] == 0 ){ echo 'selected'; }?>>A</option>
-                        <option <?php if ($provider['state'] == 1){ echo 'selected'; }?>>V</option>
-                        <option <?php if ($provider['state'] == 2){ echo 'selected'; }?>>S</option>
+                        <option <?php if ($user['state'] == 0){ echo 'selected'; }?>>A</option>
+                        <option <?php if ($user['state'] == 1){ echo 'selected'; }?>>V</option>
+                        <option <?php if ($user['state'] == 2){ echo 'selected'; }?>>S</option>
                       </select>
                     </div>
                   </td>
@@ -203,8 +203,8 @@ $resultats = $query->fetchAll();
                     <input type="submit" name="pwd" class="option" value="NEW">
                  </td>
                   <td>
-                    <input type="hidden" name="idProvider" value="<?php echo $provider['idProvider']; ?>">
-                    <input type="submit" name="updateProvider" class="option"value="MAJ">
+                    <input type="hidden" name="idUser" value="<?php echo $user['idUser']; ?>">
+                    <input type="submit" name="updateUser" class="option"value="MAJ">
                   </td>
             </form>
           </tr>

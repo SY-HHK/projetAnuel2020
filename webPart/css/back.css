@@ -31,3 +31,8 @@ nav a:hover {
 	text-decoration: none;
 }
 
+.inputDate {
+    background-color:transparent;
+    border: 0px solid;
+    width: 145px;   
+}

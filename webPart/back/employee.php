@@ -139,7 +139,7 @@ $resultats = $query->fetchAll();
                               
                               <td> 
                                 <input type="hidden" name="idEmployee" value="<?php echo $employee['idEmployee']; ?>">                   
-                                <input type="submit" name="pwd" class="option" value="GENERER">
+                                <input type="submit" name="pwd" class="option" value="NEW">
                              </td>
                               <td>
                                 
