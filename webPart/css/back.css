@@ -1,0 +1,21 @@
+.input{
+    width: 111px;   
+}
+
+.inputNbr{
+    width: 21px;   
+}
+
+.inputEmail{
+    width: 141px;   
+}
+
+input{
+	background-color:transparent;
+    border: 0px solid;
+}
+nav a:hover {
+	color: #000;
+	text-decoration: none;
+}
+

@@ -1,0 +1,3 @@
+idProvider,providerFirstName,providerLastName,providerPhone,providerEmail,providerPassword,providerAddress,companyName,cityName,cityRegion,cityDepartement,providerRate,providerAnnulation
+0,Jean,Dupont,0897567876,jeandupont@gmail.com,8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918,"98 rue test",NULL,paris,"ile de france",75,NULL,NULL
+1,Jacques,Jardin,9067842465,jardin@gmail.com,8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918,"76 avenue test",ematch,lille,cannes,89,NULL,NULL
