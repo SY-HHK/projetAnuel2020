@@ -19,3 +19,9 @@ nav a:hover {
 	text-decoration: none;
 }
 
+.ajt{
+	width: 20px;
+	position: relative;
+	margin-left: 5px;
+	display: inline-block;
+}

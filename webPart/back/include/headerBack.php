@@ -4,7 +4,7 @@
   <nav class="navbar navbar-dark bg-dark">
     
     <a href="indexBack.php"> <img src="../images/logo.png"></a>
-  
+  	 <a href="employee.php">Collaborateurs </a>
      <a href="clients.php">Clients</a>
      <a href="prestataires.php">Prestataires</a>
      <a href="services.php">Services et demandes</a>
