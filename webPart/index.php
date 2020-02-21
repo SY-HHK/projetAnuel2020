@@ -11,33 +11,24 @@ include ('include/config.php');
     <title>Accueil</title>
     <?php include('css/linkCss.php');?>
     <link rel="stylesheet" href="css/index.css">
-
     <meta charset="UTF-8">
 </head>
 
 
 <body>
 
-<?php
-    include('include/header.php');
-?>
- <main>
-
-     <div class="container">
-
-        <h1> Bienvenue sur BRING.ME</h1>
+<?php include('include/header.php'); ?>
 
 
+<main>
+	<div class="jumbotron">
 
- </main>
-
-<?php
-
-	include('include/footer.php');
-
-?>
+	</div>
+</main>
 
 
+ 
+<?php include('include/footer.php'); ?>
 
 
 

@@ -33,6 +33,9 @@ $resultats = $query->fetchAll();
     
 <div class="jumbotron table-responsive-xl">
 
+   <h4>Nos collaborateurs</h4> 
+        <hr class="my-4">
+
 <?php if (isset($_GET['error']) && $_GET['error'] == 'name_missing') { ?>
           <div class="alert alert-danger text-center" role="alert">
             Vous devez indiquez le nom
