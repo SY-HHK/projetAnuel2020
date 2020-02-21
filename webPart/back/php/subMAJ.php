@@ -122,7 +122,7 @@ if (isset($_POST['delete'])) {
 
 	$id = $_POST['idSub'];
 
-	$queryDelete = $pdo->prepare('DELETE FROM 		SUBSCRIPTION WHERE idSub = ?');
+	$queryDelete = $pdo->prepare('DELETE FROM SUBSCRIPTION WHERE idSub = ?');
 	$queryDelete->execute(array($id));
 
 	$rows2 = $queryDelete->rowCount();
