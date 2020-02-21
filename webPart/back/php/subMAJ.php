@@ -122,13 +122,13 @@ if (isset($_POST['delete'])) {
 
 	$id = $_POST['idSub'];
 
-	$queryDelete = $pdo->prepare('DELETE FROM SUBSCRIPTION WHERE idSub = ?');
+	$queryDelete = $pdo->prepare('DELETE FROM 		SUBSCRIPTION WHERE idSub = ?');
 	$queryDelete->execute(array($id));
 
 	$rows2 = $queryDelete->rowCount();
 
 	 if ($rows2 == 1){
-		header('location: ../employee.php?delete='.$rows2.'&id='.$id );
+		header('location: ../subscription.php?delete='.$rows2.'&id='.$id );
         exit;
 	} 
 }
