@@ -9,9 +9,27 @@ CMakeFiles/qrCodeGenerator.dir/graphicFunctions.c.o: ../databaseFunctions.h
 CMakeFiles/qrCodeGenerator.dir/graphicFunctions.c.o: ../graphicFunctions.c
 CMakeFiles/qrCodeGenerator.dir/graphicFunctions.c.o: ../graphicFunctions.h
 CMakeFiles/qrCodeGenerator.dir/graphicFunctions.c.o: ../struct.h
+CMakeFiles/qrCodeGenerator.dir/graphicFunctions.c.o: /usr/include/mysql/errmsg.h
+CMakeFiles/qrCodeGenerator.dir/graphicFunctions.c.o: /usr/include/mysql/field_types.h
+CMakeFiles/qrCodeGenerator.dir/graphicFunctions.c.o: /usr/include/mysql/my_command.h
+CMakeFiles/qrCodeGenerator.dir/graphicFunctions.c.o: /usr/include/mysql/my_compress.h
+CMakeFiles/qrCodeGenerator.dir/graphicFunctions.c.o: /usr/include/mysql/my_list.h
+CMakeFiles/qrCodeGenerator.dir/graphicFunctions.c.o: /usr/include/mysql/mysql.h
+CMakeFiles/qrCodeGenerator.dir/graphicFunctions.c.o: /usr/include/mysql/mysql_com.h
+CMakeFiles/qrCodeGenerator.dir/graphicFunctions.c.o: /usr/include/mysql/mysql_time.h
+CMakeFiles/qrCodeGenerator.dir/graphicFunctions.c.o: /usr/include/mysql/mysql_version.h
 
 CMakeFiles/qrCodeGenerator.dir/main.c.o: ../databaseFunctions.h
 CMakeFiles/qrCodeGenerator.dir/main.c.o: ../graphicFunctions.h
 CMakeFiles/qrCodeGenerator.dir/main.c.o: ../main.c
 CMakeFiles/qrCodeGenerator.dir/main.c.o: ../struct.h
+CMakeFiles/qrCodeGenerator.dir/main.c.o: /usr/include/mysql/errmsg.h
+CMakeFiles/qrCodeGenerator.dir/main.c.o: /usr/include/mysql/field_types.h
+CMakeFiles/qrCodeGenerator.dir/main.c.o: /usr/include/mysql/my_command.h
+CMakeFiles/qrCodeGenerator.dir/main.c.o: /usr/include/mysql/my_compress.h
+CMakeFiles/qrCodeGenerator.dir/main.c.o: /usr/include/mysql/my_list.h
+CMakeFiles/qrCodeGenerator.dir/main.c.o: /usr/include/mysql/mysql.h
+CMakeFiles/qrCodeGenerator.dir/main.c.o: /usr/include/mysql/mysql_com.h
+CMakeFiles/qrCodeGenerator.dir/main.c.o: /usr/include/mysql/mysql_time.h
+CMakeFiles/qrCodeGenerator.dir/main.c.o: /usr/include/mysql/mysql_version.h
 

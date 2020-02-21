@@ -6,8 +6,9 @@
 
 void finish_with_err(MYSQL *conn);
 
-void db_connect(MYSQL *conn);
+int db_connect(MYSQL *conn);
 
 void closeConnection(MYSQL *conn);
 
-void insertProvider(MYSQL *conn, provider p);
+void insertProvider(GtkButton *widget, struct providerEntry *pEntry);
+

@@ -10,7 +10,7 @@
 
 typedef struct providerEntry{
     GtkWidget *providerFirstName;
-    GtkWidget *providerLastName;
+    /*GtkWidget *providerLastName;
     GtkWidget *providerBirth;
     GtkWidget *providerPhone;
     GtkWidget *providerEmail;
@@ -18,15 +18,15 @@ typedef struct providerEntry{
     GtkWidget *companyName;
     GtkWidget *cityName;
     GtkWidget *cityRegion;
-    GtkWidget *cityDepartement;
+    GtkWidget *cityDepartement;*/
 } providerEntry;
 
 typedef struct provider{
     char providerFirstName[50];
     char providerLastName[50];
+    char providerBirth[50];
     char providerPhone[30];
     char providerEmail[50];
-    char providerPassword[255];
     char providerAddress[150];
     char companyName[100];
     char cityName[50];

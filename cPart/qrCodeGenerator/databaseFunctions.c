@@ -12,7 +12,7 @@ void finish_with_err(MYSQL *conn){
 
 }
 
-void db_connect(MYSQL *conn){
+int db_connect(MYSQL *conn){
 
     char dbname[250] = "bringmeC" ;
     char host[250] = "localhost";
@@ -33,6 +33,8 @@ void db_connect(MYSQL *conn){
     printf("Successfully connected to %s !\n", dbname);
     printf("Welcome %s !\n", user);
 
+    return 1;
+
 }
 
 void closeConnection(MYSQL *conn) {
@@ -40,10 +42,28 @@ void closeConnection(MYSQL *conn) {
     mysql_close(conn);
 }
 
-void insertProvider(MYSQL *conn, provider p) {
+void insertProvider(GtkButton *widget, struct providerEntry *pEntry) {
 
-    strcpy(p.providerFirstName,"Louis");
-    printf("%s",p.providerFirstName);
+    printf("testdebut");
+    //provider insert;
+
+    const gchar *providerFirstName;
+    providerFirstName = gtk_entry_get_text(GTK_ENTRY(pEntry->providerFirstName));
+
+    /*strcpy(insert.companyName,companyName);
+    strcpy(insert.providerFirstName,gtk_entry_get_text(GTK_ENTRY(p->providerFirstName)));
+    strcpy(insert.providerLastName,gtk_entry_get_text(GTK_ENTRY(p->providerLastName)));
+    strcpy(insert.providerBirth,gtk_entry_get_text(GTK_ENTRY(p->providerBirth)));
+    strcpy(insert.providerEmail,gtk_entry_get_text(GTK_ENTRY(p->providerEmail)));
+    strcpy(insert.providerPhone,gtk_entry_get_text(GTK_ENTRY(p->providerPhone)));
+    strcpy(insert.cityRegion,gtk_entry_get_text(GTK_ENTRY(p->cityRegion)));
+    strcpy(insert.cityDepartement,gtk_entry_get_text(GTK_ENTRY(p->cityDepartement)));
+    strcpy(insert.cityName,gtk_entry_get_text(GTK_ENTRY(p->cityName)));
+    strcpy(insert.providerAddress,gtk_entry_get_text(GTK_ENTRY(p->providerAddress)));
+
+    mysql_query(conn, "INSERT INTO PROVIDER (companyName) VALUES ('companyTest')");*/
+
+    printf("testfin");
 
 }
 
