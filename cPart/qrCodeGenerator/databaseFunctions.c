@@ -42,13 +42,13 @@ void closeConnection(MYSQL *conn) {
     mysql_close(conn);
 }
 
-void insertProvider(GtkButton *widget, struct providerEntry *pEntry) {
+void insertProvider(GtkButton *widget) {
 
     printf("testdebut");
     //provider insert;
 
     const gchar *providerFirstName;
-    providerFirstName = gtk_entry_get_text(GTK_ENTRY(pEntry->providerFirstName));
+    providerFirstName = gtk_entry_get_text(GTK_ENTRY(pEntry.providerFirstName));
 
     /*strcpy(insert.companyName,companyName);
     strcpy(insert.providerFirstName,gtk_entry_get_text(GTK_ENTRY(p->providerFirstName)));
@@ -59,9 +59,10 @@ void insertProvider(GtkButton *widget, struct providerEntry *pEntry) {
     strcpy(insert.cityRegion,gtk_entry_get_text(GTK_ENTRY(p->cityRegion)));
     strcpy(insert.cityDepartement,gtk_entry_get_text(GTK_ENTRY(p->cityDepartement)));
     strcpy(insert.cityName,gtk_entry_get_text(GTK_ENTRY(p->cityName)));
-    strcpy(insert.providerAddress,gtk_entry_get_text(GTK_ENTRY(p->providerAddress)));
+    strcpy(insert.providerAddress,gtk_entry_get_text(GTK_ENTRY(p->providerAddress)));*/
 
-    mysql_query(conn, "INSERT INTO PROVIDER (companyName) VALUES ('companyTest')");*/
+    if(mysql_query(conn, "INSERT INTO PROVIDER (companyName) VALUES ('companyTest')"))
+        finish_with_err(conn);
 
     printf("testfin");
 

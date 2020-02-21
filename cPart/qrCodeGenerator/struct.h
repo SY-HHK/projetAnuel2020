@@ -8,7 +8,9 @@
 #include <mysql/mysql.h>
 #include <gtk-3.0/gtk/gtk.h>
 
-typedef struct providerEntry{
+MYSQL *conn;
+
+struct providerEntry{
     GtkWidget *providerFirstName;
     /*GtkWidget *providerLastName;
     GtkWidget *providerBirth;
@@ -19,7 +21,8 @@ typedef struct providerEntry{
     GtkWidget *cityName;
     GtkWidget *cityRegion;
     GtkWidget *cityDepartement;*/
-} providerEntry;
+};
+struct providerEntry pEntry;
 
 typedef struct provider{
     char providerFirstName[50];

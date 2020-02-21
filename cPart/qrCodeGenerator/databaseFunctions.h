@@ -10,5 +10,5 @@ int db_connect(MYSQL *conn);
 
 void closeConnection(MYSQL *conn);
 
-void insertProvider(GtkButton *widget, struct providerEntry *pEntry);
+void insertProvider(GtkButton *widget);
 

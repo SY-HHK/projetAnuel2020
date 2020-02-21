@@ -32,8 +32,6 @@ GtkWidget *main_window(void *argc, void *argv) {
         //return code;
     }
 
-    providerEntry pEntry;
-
     /* Récupération des pointeurs de la fenêtre */
     GtkWidget *window = GTK_WIDGET(gtk_builder_get_object (builder, "mainWindow"));
     //pEntry.companyName = GTK_WIDGET(gtk_builder_get_object (builder, "companyNameEntry"));
@@ -50,7 +48,7 @@ GtkWidget *main_window(void *argc, void *argv) {
     GtkWidget *createbutton = GTK_WIDGET(gtk_builder_get_object (builder, "createButton"));
 
 
-    g_signal_connect(G_OBJECT (createbutton), "clicked", (GCallback)insertProvider, &pEntry);
+    g_signal_connect(G_OBJECT (createbutton), "clicked", (GCallback)insertProvider, NULL);
 
     /* Affichage de la fenêtre principale. */
     return window;

@@ -6,10 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/databaseFunctions.c
-databaseFunctions.h
-/home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/databaseFunctions.h
-
 /home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/databaseFunctions.h
 struct.h
 /home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/struct.h
@@ -27,12 +23,6 @@ gtk-3.0/gtk/gtk.h
 -
 mysql.h
 -
-
-/home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/main.c
-graphicFunctions.h
-/home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/graphicFunctions.h
-databaseFunctions.h
-/home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/databaseFunctions.h
 
 /home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/struct.h
 stdlib.h
