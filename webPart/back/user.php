@@ -18,13 +18,12 @@ $resultats = $query->fetchAll();
   <title>Les comptes de nos clients</title>
   <link rel="stylesheet" href="../css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/inscription.css">
+  <link rel="stylesheet" href="../css/linkCss.css">
 </head>
 
 <body>
 
  <?php include('../include/config.php'); 
-
- include('../css/linkCss.php');
 
 
  include('include/headerBack.php'); 
@@ -146,9 +145,10 @@ $resultats = $query->fetchAll();
         <th scope="col">Adresse</th>
         <th scope="col">Ville</th>
         <th scope="col">Région</th>
-        <th scope="col">Départ.</th>
+        <th scope="col">Code</th>
         <th scope="col">-</th>
         <th scope="col">State</th>
+        <th scope="col"> </th>
         <th scope="col">MDP</th>
          <th scope="col">MAJ</th>
       </tr>
@@ -199,6 +199,12 @@ $resultats = $query->fetchAll();
                       </select>
                     </div>
                   </td>
+                  <td>
+                    <?php if ($user['idSubscription'] != NULL){?>
+                    <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom"> Abonnement </button>
+
+                  <?php } ?>
+                  </td>
                   <td>                    
                     <input type="submit" name="pwd" class="option" value="NEW">
                  </td>
@@ -218,6 +224,7 @@ $resultats = $query->fetchAll();
 
   <?php include('../include/footer.php'); ?>
 </body>
+
 </html>
 
 
