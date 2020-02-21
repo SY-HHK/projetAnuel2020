@@ -1,5 +1,7 @@
 <?php
 include('../../include/config.php');
+    
+
 if (isset($_POST['pwd'])) {
 include('../../include/config.php');
 	$id = $_POST['idEmployee'];

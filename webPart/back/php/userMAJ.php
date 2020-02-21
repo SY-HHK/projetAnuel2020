@@ -16,8 +16,6 @@ if (isset($_POST['updateUser'])) {
         exit;
     }
 
-
-
      //Nom
     if(!isset($_POST['lastName']) || empty($_POST['lastName'])){
         header('Location: ../user.php?error=name_missing');

@@ -113,7 +113,7 @@ $resultats = $query->fetchAll();
                   <th scope="col">Email</th>
                   
                   <th scope="col">MDP</th>
-                   <th scope="col">MAJ</th>
+                   <th scope="col"> </th>
                 </tr>
               </thead>
 
@@ -126,14 +126,14 @@ $resultats = $query->fetchAll();
                         <form action="PHP/employeeMAJ.php" method="POST">
                           <th scope="row"><?php echo $employee['idEmployee']; ?></th>
                               <td>
-                                <input type="text" name="firstName" value="<?php echo $employee['employeeFirstName']; ?>">
+                                <input type="text" name="firstName" value="<?php echo $employee['employeeFirstName']; ?>" readonly>
                               </td>
                               <td>
-                                <input type="text"  name="lastName" value="<?php echo $employee['employeeLastName']; ?>">
+                                <input type="text"  name="lastName" value="<?php echo $employee['employeeLastName']; ?>" readonly>
                               </td>
                               
                               <td>
-                                <input type="text"  name="mail" value="<?php echo $employee['employeeEmail']; ?>">
+                                <input type="text"  name="mail" value="<?php echo $employee['employeeEmail']; ?>" readonly>
                               </td>
                               
                               
@@ -142,7 +142,6 @@ $resultats = $query->fetchAll();
                                 <input type="submit" name="pwd" class="option" value="NEW">
                              </td>
                               <td>
-                                
                                 <input type="submit" name="delete" class="option"value="X">
                               </td>
                         </form>
