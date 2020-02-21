@@ -12,7 +12,7 @@ MYSQL *conn;
 
 struct providerEntry{
     GtkWidget *providerFirstName;
-    /*GtkWidget *providerLastName;
+    GtkWidget *providerLastName;
     GtkWidget *providerBirth;
     GtkWidget *providerPhone;
     GtkWidget *providerEmail;
@@ -20,7 +20,7 @@ struct providerEntry{
     GtkWidget *companyName;
     GtkWidget *cityName;
     GtkWidget *cityRegion;
-    GtkWidget *cityDepartement;*/
+    GtkWidget *cityDepartement;
 };
 struct providerEntry pEntry;
 

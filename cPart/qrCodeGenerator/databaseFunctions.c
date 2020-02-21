@@ -47,19 +47,16 @@ void insertProvider(GtkButton *widget) {
     printf("testdebut");
     //provider insert;
 
-    const gchar *providerFirstName;
-    providerFirstName = gtk_entry_get_text(GTK_ENTRY(pEntry.providerFirstName));
-
-    /*strcpy(insert.companyName,companyName);
-    strcpy(insert.providerFirstName,gtk_entry_get_text(GTK_ENTRY(p->providerFirstName)));
-    strcpy(insert.providerLastName,gtk_entry_get_text(GTK_ENTRY(p->providerLastName)));
-    strcpy(insert.providerBirth,gtk_entry_get_text(GTK_ENTRY(p->providerBirth)));
-    strcpy(insert.providerEmail,gtk_entry_get_text(GTK_ENTRY(p->providerEmail)));
-    strcpy(insert.providerPhone,gtk_entry_get_text(GTK_ENTRY(p->providerPhone)));
-    strcpy(insert.cityRegion,gtk_entry_get_text(GTK_ENTRY(p->cityRegion)));
-    strcpy(insert.cityDepartement,gtk_entry_get_text(GTK_ENTRY(p->cityDepartement)));
-    strcpy(insert.cityName,gtk_entry_get_text(GTK_ENTRY(p->cityName)));
-    strcpy(insert.providerAddress,gtk_entry_get_text(GTK_ENTRY(p->providerAddress)));*/
+    const gchar *companyName = companyName = gtk_entry_get_text(GTK_ENTRY(pEntry.companyName));
+    const gchar *providerFirstName = gtk_entry_get_text(GTK_ENTRY(pEntry.providerFirstName));
+    const gchar *providerLastName = gtk_entry_get_text(GTK_ENTRY(pEntry.providerLastName));
+    const gchar *providerBirth = gtk_entry_get_text(GTK_ENTRY(pEntry.providerBirth));
+    const gchar *providerEmail = gtk_entry_get_text(GTK_ENTRY(pEntry.providerEmail));
+    const gchar *providerPhone = gtk_entry_get_text(GTK_ENTRY(pEntry.providerPhone));
+    const gchar *cityRegion = gtk_entry_get_text(GTK_ENTRY(pEntry.cityRegion));
+    const gchar *cityDepartment = gtk_entry_get_text(GTK_ENTRY(pEntry.cityDepartement));
+    const gchar *cityName = gtk_entry_get_text(GTK_ENTRY(pEntry.cityName));
+    const gchar *providerAddress = gtk_entry_get_text(GTK_ENTRY(pEntry.providerAddress));
 
     if(mysql_query(conn, "INSERT INTO PROVIDER (companyName) VALUES ('companyTest')"))
         finish_with_err(conn);
