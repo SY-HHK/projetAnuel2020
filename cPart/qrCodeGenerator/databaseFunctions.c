@@ -45,20 +45,34 @@ void closeConnection(MYSQL *conn) {
 void insertProvider(GtkButton *widget) {
 
     printf("testdebut");
-    //provider insert;
+    provider insert;
 
-    const gchar *companyName = companyName = gtk_entry_get_text(GTK_ENTRY(pEntry.companyName));
-    const gchar *providerFirstName = gtk_entry_get_text(GTK_ENTRY(pEntry.providerFirstName));
-    const gchar *providerLastName = gtk_entry_get_text(GTK_ENTRY(pEntry.providerLastName));
-    const gchar *providerBirth = gtk_entry_get_text(GTK_ENTRY(pEntry.providerBirth));
-    const gchar *providerEmail = gtk_entry_get_text(GTK_ENTRY(pEntry.providerEmail));
-    const gchar *providerPhone = gtk_entry_get_text(GTK_ENTRY(pEntry.providerPhone));
-    const gchar *cityRegion = gtk_entry_get_text(GTK_ENTRY(pEntry.cityRegion));
-    const gchar *cityDepartment = gtk_entry_get_text(GTK_ENTRY(pEntry.cityDepartement));
-    const gchar *cityName = gtk_entry_get_text(GTK_ENTRY(pEntry.cityName));
-    const gchar *providerAddress = gtk_entry_get_text(GTK_ENTRY(pEntry.providerAddress));
+    strcpy(insert.companyName, gtk_entry_get_text(GTK_ENTRY(pEntry.companyName)));
+    strcpy(insert.providerFirstName, gtk_entry_get_text(GTK_ENTRY(pEntry.providerFirstName)));
+    strcpy(insert.providerLastName, gtk_entry_get_text(GTK_ENTRY(pEntry.providerLastName)));
+    strcpy(insert.providerBirth, gtk_entry_get_text(GTK_ENTRY(pEntry.providerBirth)));
+    strcpy(insert.providerEmail, gtk_entry_get_text(GTK_ENTRY(pEntry.providerEmail)));
+    strcpy(insert.providerPhone, gtk_entry_get_text(GTK_ENTRY(pEntry.providerPhone)));
+    strcpy(insert.cityRegion, gtk_entry_get_text(GTK_ENTRY(pEntry.cityRegion)));
+    strcpy(insert.cityDepartement, gtk_entry_get_text(GTK_ENTRY(pEntry.cityDepartement)));
+    strcpy(insert.cityName, gtk_entry_get_text(GTK_ENTRY(pEntry.cityName)));
+    strcpy(insert.providerAddress, gtk_entry_get_text(GTK_ENTRY(pEntry.providerAddress)));
 
-    if(mysql_query(conn, "INSERT INTO PROVIDER (companyName) VALUES ('companyTest')"))
+    char insertInto[500];
+
+    sprintf(insertInto,
+            "INSERT INTO PROVIDER (companyName, providerFirstName, providerLastName, providerBirth, providerEmail, providerPhone, providerAddress, idCity) "
+            "VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', %d)",
+            insert.companyName,
+            insert.providerFirstName,
+            insert.providerLastName,
+            insert.providerBirth,
+            insert.providerEmail,
+            insert.providerPhone,
+            insert.providerAddress,
+            1);
+
+    if(mysql_query(conn, insertInto))
         finish_with_err(conn);
 
     printf("testfin");
