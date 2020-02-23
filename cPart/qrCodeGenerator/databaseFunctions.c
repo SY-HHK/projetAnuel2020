@@ -44,7 +44,6 @@ void closeConnection(MYSQL *conn) {
 
 void insertProvider(GtkButton *widget) {
 
-    printf("testdebut");
     provider insert;
 
     strcpy(insert.companyName, gtk_entry_get_text(GTK_ENTRY(pEntry.companyName)));
@@ -58,9 +57,52 @@ void insertProvider(GtkButton *widget) {
     strcpy(insert.cityName, gtk_entry_get_text(GTK_ENTRY(pEntry.cityName)));
     strcpy(insert.providerAddress, gtk_entry_get_text(GTK_ENTRY(pEntry.providerAddress)));
 
-    char insertInto[500];
+    char insertIntoProvider[500];
+    char insertIntoCity[150];
+    char selectCity[100];
+    int idCity;
+    MYSQL_ROW row;
 
-    sprintf(insertInto,
+    sprintf(selectCity, "SELECT idCity FROM CITY WHERE cityName = '%s'",insert.cityName);
+
+    if(mysql_query(conn, selectCity))
+        finish_with_err(conn);
+    MYSQL_RES *result = mysql_store_result(conn);
+
+    if (result == NULL)
+    {
+        finish_with_err(conn);
+    }
+
+    if (result->row_count == 0) {
+
+        sprintf(insertIntoCity,
+                "INSERT INTO CITY (cityName, cityRegion, cityDepartment) VALUES ('%s', '%s', '%s')",
+                insert.cityName,
+                insert.cityRegion,
+                insert.cityDepartement);
+
+        if(mysql_query(conn, insertIntoCity))
+            finish_with_err(conn);
+
+
+        if(mysql_query(conn, selectCity))
+            finish_with_err(conn);
+        MYSQL_RES *result = mysql_store_result(conn);
+
+        row = mysql_fetch_row(result);
+        sscanf(row[0],"%d",&idCity);
+
+    }
+
+    else {
+        row = mysql_fetch_row(result);
+        sscanf(row[0],"%d",&idCity);
+    }
+
+    mysql_free_result(result);
+
+    sprintf(insertIntoProvider,
             "INSERT INTO PROVIDER (companyName, providerFirstName, providerLastName, providerBirth, providerEmail, providerPhone, providerAddress, idCity) "
             "VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', %d)",
             insert.companyName,
@@ -70,12 +112,10 @@ void insertProvider(GtkButton *widget) {
             insert.providerEmail,
             insert.providerPhone,
             insert.providerAddress,
-            1);
+            idCity);
 
-    if(mysql_query(conn, insertInto))
+    if(mysql_query(conn, insertIntoProvider))
         finish_with_err(conn);
-
-    printf("testfin");
 
 }
 

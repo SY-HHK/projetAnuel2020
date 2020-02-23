@@ -135,7 +135,7 @@
                     <property name="margin_left">50</property>
                     <property name="margin_right">50</property>
                     <property name="margin_top">10</property>
-                    <property name="placeholder_text" translatable="yes">jj/mm/aaaa</property>
+                    <property name="placeholder_text" translatable="yes">aaaa/mm/jj</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
