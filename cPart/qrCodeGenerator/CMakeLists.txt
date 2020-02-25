@@ -20,7 +20,7 @@ LINK_DIRECTORIES(${LIBMYSQLCLIENT_LIBRARY_DIRS})
 ADD_DEFINITIONS(${GTK3_CFLAGS_OTHER})
 
 # Add an executable compiled from hello.c
-add_executable(qrCodeGenerator main.c graphicFunctions.h graphicFunctions.c databaseFunctions.h databaseFunctions.c struct.h)
+add_executable(qrCodeGenerator main.c graphicFunctions.h graphicFunctions.c databaseFunctions.h databaseFunctions.c struct.h qrcode.h qrcode.c)
 
 # Link the target to the GTK+ libraries
 TARGET_LINK_LIBRARIES(qrCodeGenerator ${GTK3_LIBRARIES})

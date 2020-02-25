@@ -13,7 +13,9 @@ MYSQL *conn;
 struct providerEntry{
     GtkWidget *providerFirstName;
     GtkWidget *providerLastName;
-    GtkWidget *providerBirth;
+    GtkWidget *providerBirthDay;
+    GtkWidget *providerBirthMonth;
+    GtkWidget *providerBirthYear;
     GtkWidget *providerPhone;
     GtkWidget *providerEmail;
     GtkWidget *providerAddress;
@@ -21,6 +23,9 @@ struct providerEntry{
     GtkWidget *cityName;
     GtkWidget *cityRegion;
     GtkWidget *cityDepartement;
+    GtkWidget *qrCode;
+    int *argc;
+    char **argv;
 };
 struct providerEntry pEntry;
 

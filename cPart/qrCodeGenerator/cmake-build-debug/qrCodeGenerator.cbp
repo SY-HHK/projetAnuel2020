@@ -127,6 +127,12 @@
 		<Unit filename="/home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/main.c">
 			<Option target="qrCodeGenerator"/>
 		</Unit>
+		<Unit filename="/home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/qrcode.c">
+			<Option target="qrCodeGenerator"/>
+		</Unit>
+		<Unit filename="/home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/qrcode.h">
+			<Option target="qrCodeGenerator"/>
+		</Unit>
 		<Unit filename="/home/hhk/Documents/projetAnuel2020/cPart/qrCodeGenerator/struct.h">
 			<Option target="qrCodeGenerator"/>
 		</Unit>

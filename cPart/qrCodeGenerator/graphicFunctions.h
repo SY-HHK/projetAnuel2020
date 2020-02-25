@@ -6,4 +6,8 @@
 #include <mysql.h>
 
 
-GtkWidget *main_window(void *argc, void *argv);
+GtkWidget *mainWindow(int *argc, char ***argv);
+
+void generateQrCode(char companyName, char providerFirstName, char providerLastName, int idProvider);
+
+GtkWidget *confirmationWindow(int *argc, char ***argv);

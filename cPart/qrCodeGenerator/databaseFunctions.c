@@ -3,6 +3,7 @@
 //
 
 #include "databaseFunctions.h"
+#include "graphicFunctions.h"
 
 void finish_with_err(MYSQL *conn){
 
@@ -46,21 +47,26 @@ void insertProvider(GtkButton *widget) {
 
     provider insert;
 
-    strcpy(insert.companyName, gtk_entry_get_text(GTK_ENTRY(pEntry.companyName)));
-    strcpy(insert.providerFirstName, gtk_entry_get_text(GTK_ENTRY(pEntry.providerFirstName)));
-    strcpy(insert.providerLastName, gtk_entry_get_text(GTK_ENTRY(pEntry.providerLastName)));
-    strcpy(insert.providerBirth, gtk_entry_get_text(GTK_ENTRY(pEntry.providerBirth)));
-    strcpy(insert.providerEmail, gtk_entry_get_text(GTK_ENTRY(pEntry.providerEmail)));
+    strcpy(insert.companyName, toLowerCase(gtk_entry_get_text(GTK_ENTRY(pEntry.companyName))));
+    strcpy(insert.providerFirstName, toLowerCase(gtk_entry_get_text(GTK_ENTRY(pEntry.providerFirstName))));
+    strcpy(insert.providerLastName, toLowerCase(gtk_entry_get_text(GTK_ENTRY(pEntry.providerLastName))));
+    sprintf(insert.providerBirth,"%s/%s/%s",
+            gtk_entry_get_text(GTK_ENTRY(pEntry.providerBirthYear)),
+            gtk_entry_get_text(GTK_ENTRY(pEntry.providerBirthMonth)),
+            gtk_entry_get_text(GTK_ENTRY(pEntry.providerBirthDay)));
+    strcpy(insert.providerEmail, toLowerCase(gtk_entry_get_text(GTK_ENTRY(pEntry.providerEmail))));
     strcpy(insert.providerPhone, gtk_entry_get_text(GTK_ENTRY(pEntry.providerPhone)));
-    strcpy(insert.cityRegion, gtk_entry_get_text(GTK_ENTRY(pEntry.cityRegion)));
+    strcpy(insert.cityRegion, toLowerCase(gtk_entry_get_text(GTK_ENTRY(pEntry.cityRegion))));
     strcpy(insert.cityDepartement, gtk_entry_get_text(GTK_ENTRY(pEntry.cityDepartement)));
-    strcpy(insert.cityName, gtk_entry_get_text(GTK_ENTRY(pEntry.cityName)));
-    strcpy(insert.providerAddress, gtk_entry_get_text(GTK_ENTRY(pEntry.providerAddress)));
+    strcpy(insert.cityName, toLowerCase(gtk_entry_get_text(GTK_ENTRY(pEntry.cityName))));
+    strcpy(insert.providerAddress, toLowerCase(gtk_entry_get_text(GTK_ENTRY(pEntry.providerAddress))));
 
     char insertIntoProvider[500];
     char insertIntoCity[150];
     char selectCity[100];
+    char selectProvider[100];
     int idCity;
+    int idProvider;
     MYSQL_ROW row;
 
     sprintf(selectCity, "SELECT idCity FROM CITY WHERE cityName = '%s'",insert.cityName);
@@ -117,7 +123,43 @@ void insertProvider(GtkButton *widget) {
     if(mysql_query(conn, insertIntoProvider))
         finish_with_err(conn);
 
+
+    sprintf(selectProvider, "SELECT idProvider FROM PROVIDER WHERE companyName = '%s'",insert.companyName);
+
+    if(mysql_query(conn, selectProvider))
+        finish_with_err(conn);
+    result = mysql_store_result(conn);
+
+    row = mysql_fetch_row(result);
+    sscanf(row[0],"%d",&idProvider);
+
+    gtk_widget_show_all(confirmationWindow(&pEntry.argc, &pEntry.argv));
+
+    generateQrCode(insert.companyName[0], insert.providerFirstName[0], insert.providerLastName[0], idProvider);
+
 }
+
+const char *toLowerCase(char *str) {
+
+    int i;
+    for (i = 0; str[i] != '\0'; i++) {
+        if (str[i] >= 'A' && str[i] <= 'Z') {
+            str[i] = str[i] + 32;
+        }
+    }
+    return str;
+
+}
+
+void deleteProvider(GtkWidget *window) {
+
+    if(mysql_query(conn, "DELETE FROM PROVIDER ORDER BY idProvider DESC LIMIT 1 "))
+        finish_with_err(conn);
+    gtk_window_close(window);
+
+}
+
+
 
 
 

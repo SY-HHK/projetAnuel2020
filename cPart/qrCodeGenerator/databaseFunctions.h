@@ -12,3 +12,7 @@ void closeConnection(MYSQL *conn);
 
 void insertProvider(GtkButton *widget);
 
+const char *toLowerCase(char *str);
+
+void deleteProvider(GtkWidget *window);
+

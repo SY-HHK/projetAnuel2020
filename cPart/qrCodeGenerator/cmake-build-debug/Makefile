@@ -204,6 +204,33 @@ main.c.s:
 	$(MAKE) -f CMakeFiles/qrCodeGenerator.dir/build.make CMakeFiles/qrCodeGenerator.dir/main.c.s
 .PHONY : main.c.s
 
+qrcode.o: qrcode.c.o
+
+.PHONY : qrcode.o
+
+# target to build an object file
+qrcode.c.o:
+	$(MAKE) -f CMakeFiles/qrCodeGenerator.dir/build.make CMakeFiles/qrCodeGenerator.dir/qrcode.c.o
+.PHONY : qrcode.c.o
+
+qrcode.i: qrcode.c.i
+
+.PHONY : qrcode.i
+
+# target to preprocess a source file
+qrcode.c.i:
+	$(MAKE) -f CMakeFiles/qrCodeGenerator.dir/build.make CMakeFiles/qrCodeGenerator.dir/qrcode.c.i
+.PHONY : qrcode.c.i
+
+qrcode.s: qrcode.c.s
+
+.PHONY : qrcode.s
+
+# target to generate assembly for a file
+qrcode.c.s:
+	$(MAKE) -f CMakeFiles/qrCodeGenerator.dir/build.make CMakeFiles/qrCodeGenerator.dir/qrcode.c.s
+.PHONY : qrcode.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -222,6 +249,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... qrcode.o"
+	@echo "... qrcode.i"
+	@echo "... qrcode.s"
 .PHONY : help
 
 
