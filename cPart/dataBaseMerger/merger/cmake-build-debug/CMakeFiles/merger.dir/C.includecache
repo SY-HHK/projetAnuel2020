@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/hhk/Documents/projetAnuel2020/cPart/dataBaseMerger/merger/main.c
+stdio.h
+-
+stdlib.h
+-
+
