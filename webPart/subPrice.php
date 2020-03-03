@@ -50,7 +50,7 @@ $resultats = $query->fetchAll();
 									<li>Bénéficiez d'un accès privilégié en illimité <?php echo $sub['subDays']; ?>j/7 de <?php echo $sub['subHourStart']; ?>h à <?php echo $sub['subHourEnd']; ?>h.</li>
 									<li>Demandes illimitées de renseignements</li>
 									<li><?php echo $sub['subPrice']; ?>€ TTC/an</li>
-									
+
 								</ul>
 								<button type="button" class="btn btn-lg btn-block btn-primary">Souscrire !</button>
 							</div>
@@ -65,7 +65,7 @@ $resultats = $query->fetchAll();
 </main>
 
 
- 
+
 <?php include('include/footer.php'); ?>
 
 

@@ -19,11 +19,10 @@ $pdo = new PDO('mysql:host=' . $serveur . ';dbname=' . $base_de_donnees . ';char
 <?php
   try
   {
-    $pdo = new PDO('mysql:host=localhost:3306;dbname=bringme', 'admin', 'test123', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+    $pdo = new PDO('mysql:host=localhost:3306;dbname=bringme', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
   }
   catch(Exception $e)
   {
     die('Erreur : ' . $e->getMessage());
   }
-?> 
-
+?>

@@ -16,53 +16,45 @@ if (!isset($_POST['password']) || empty($_POST['password'])) {
 $email = htmlspecialchars($_POST['mail']);
 $password = hash('sha256', $_POST['password']);
 // var_dump([$email, $password]);
-// 
-// Connexion admin 
-$queryAdmin = $pdo->prepare('SELECT * FROM ADMIN WHERE pseudo = ? AND password = ?');
-$queryAdmin->execute([$email, $password]);
-$admin = $queryAdmin->fetch();
-
-
-$err = 0;
-
-if ($admin != 0) {
-	session_start();
-	$_SESSION['admin'] = $admin;
-	header('location: ../back/indexBack.php?connexion_back=ok');
- exit;
-} 
-
-
-// Connexion USER
-$queryUser = $pdo->prepare('SELECT * FROM USER WHERE (userEmail = ? AND userPassword = ?)');
-$queryUser->execute(array(
-	$email,
-	$password
-));
-$user = $queryUser->fetch();
-if ($user != 0) {
-	session_start();
-	$_SESSION['user'] = $user;
-	header('location: ../profilUser.php?error=login_successfull');
-	exit;
-}
-
-// Connexion PROVIDER
-$queryUser = $pdo->prepare('SELECT * FROM PROVIDER WHERE (providerEmail = ? AND providerPassword = ?)');
+//
+// Connexion admin / user
+$queryUser = $pdo->prepare('SELECT * FROM USER WHERE userEmail = ? AND userPassword = ?');
 $queryUser->execute([$email, $password]);
-$user = $queryUser->fetch();
-if ($user != 0) {
-	session_start();
-	$_SESSION['user'] = $user;
-	header('location: ../profilProvider.php?error=login_successfull');
-	exit;
+$nb = $queryUser->rowCount();
+$res = $queryUser->fetch();
+
+if ($nb == 1) {
+
+	if ($res["userPrivilege"] == 10) {
+		session_start();
+		$_SESSION['admin'] = $res;
+		header('location: ../back/indexBack.php?connexion_back=ok');
+	 exit;
+	}
+	else {
+		session_start();
+		$_SESSION['user'] = $res;
+		header('location: ../profilUser.php?error=login_successfull');
+		exit;
+	}
 }
+else {
 
-
-
-//  header('location: ../connexion.php?error=no_account');
- exit;
-
-
+	// Connexion PROVIDER
+	$queryProvider = $pdo->prepare('SELECT * FROM PROVIDER WHERE providerEmail = ? AND providerPassword = ?');
+	$queryProvider->execute([$email, $password]);
+	$nb = $queryProvider->rowCount();
+	$res = $queryProvider->fetch();
+	if ($nb == 1) {
+		session_start();
+		$_SESSION['user'] = $res;
+		header('location: ../profilProvider.php?error=login_successfull');
+		exit;
+	}
+	else {
+		header('location: ../connexion.php?error=no_user');
+		exit;
+	}
+}
 
 ?>
