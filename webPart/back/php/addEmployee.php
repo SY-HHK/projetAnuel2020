@@ -40,12 +40,12 @@ include('../../include/config.php');
 
 
      //EMAIL DEJA utilisé ?
-        $q = "SELECT employeeEmail FROM EMPLOYEE WHERE employeeEmail = ?";
+        $q = "SELECT userEmail FROM USER WHERE userEmail = ?";
         // var_dump($q);
         $req= $pdo->prepare($q);
         $req-> execute(array(
           $_POST['mail']
-          
+
         ));
 
         $answers = [];
@@ -66,18 +66,18 @@ include('../../include/config.php');
 
 
 
-$req = $pdo->prepare('INSERT INTO EMPLOYEE (employeeFirstName, employeeLastName, employeeEmail, employeePassword) VALUES ( :prenom, :nom, :mail, :pwd) ');
+$req = $pdo->prepare('INSERT INTO USER (userFirstName, userLastName, userEmail, userPassword) VALUES ( :prenom, :nom, :mail, :pwd) ');
 
 
 
 $req->execute(array(
-  
-  
+
+
   'prenom' => $firstName,
   'nom' => $lastName,
   'mail' => $email,
   'pwd' => $newPwd
-  
+
 ));
 
 header('Location: ../employee.php?add=ok');

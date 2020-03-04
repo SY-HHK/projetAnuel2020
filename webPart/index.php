@@ -27,7 +27,7 @@ include ('include/config.php');
 </main>
 
 
- 
+
 <?php include('include/footer.php'); ?>
 
 

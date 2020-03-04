@@ -47,8 +47,8 @@ else {
 	$res = $queryProvider->fetch();
 	if ($nb == 1) {
 		session_start();
-		$_SESSION['user'] = $res;
-		header('location: ../profilProvider.php?error=login_successfull');
+		$_SESSION['provider'] = $res;
+		header('location: ../provider.php?error=login_successfull');
 		exit;
 	}
 	else {

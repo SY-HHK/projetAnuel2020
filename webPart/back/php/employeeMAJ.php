@@ -1,6 +1,6 @@
 <?php
 include('../../include/config.php');
-    
+
 
 if (isset($_POST['pwd'])) {
 include('../../include/config.php');
@@ -8,7 +8,7 @@ include('../../include/config.php');
 	$newPwd = hash('sha256', uniqid());
 var_dump($newPwd);
 
-	$queryUpdate = $pdo->prepare('UPDATE EMPLOYEE SET employeePassword = :pwd WHERE idEmployee = :id');
+	$queryUpdate = $pdo->prepare('UPDATE USER SET userPassword = :pwd WHERE idUser = :id');
 
 	$queryUpdate->execute(array(
 		'id' => $id,
@@ -34,7 +34,7 @@ if (isset($_POST['delete'])) {
 
 	$id = $_POST['idEmployee'];
 
-	$queryDelete = $pdo->prepare('DELETE FROM EMPLOYEE WHERE idEmployee = ?');
+	$queryDelete = $pdo->prepare('DELETE FROM USER WHERE idUser = ?');
 	$queryDelete->execute(array($id));
 
 	$rows2 = $queryDelete->rowCount();
@@ -42,6 +42,6 @@ if (isset($_POST['delete'])) {
 	 if ($rows2 == 1){
 		header('location: ../employee.php?delete='.$rows2.'&id='.$id );
         exit;
-	} 
+	}
 }
 ?>

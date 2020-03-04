@@ -4,7 +4,7 @@ if (!isset($_SESSION['admin'])){
 header('location:../index.php');
 }
 
-$query = $pdo->prepare('SELECT * FROM EMPLOYEE');
+$query = $pdo->prepare('SELECT * FROM USER WHERE userPrivilege = 10');
 $query->execute();
 
 $resultats = $query->fetchAll();
@@ -22,18 +22,18 @@ $resultats = $query->fetchAll();
 
 <body>
 
- <?php include('../include/config.php'); 
+ <?php include('../include/config.php');
 
  include('../css/linkCss.php');
 
 
- include('include/headerBack.php'); 
+ include('include/headerBack.php');
 
  ?>
-    
+
 <div class="jumbotron table-responsive-xl">
 
-   <h4>Nos collaborateurs</h4> 
+   <h4>Nos collaborateurs</h4>
         <hr class="my-4">
 
 <?php if (isset($_GET['error']) && $_GET['error'] == 'name_missing') { ?>
@@ -54,8 +54,8 @@ $resultats = $query->fetchAll();
         <?php } else if (isset($_GET['error']) && $_GET['error'] == 'prenom_format') { ?>
                   <div class="alert alert-danger text-center" role="alert">
                     Veuillez revoir le prenom
-                  </div> 
-        
+                  </div>
+
         <?php } else if (isset($_GET['error']) && $_GET['error'] == 'email_missing') { ?>
                   <div class="alert alert-danger text-center" role="alert">
                      Vous devez indiquez l'adresse mail
@@ -79,9 +79,9 @@ $resultats = $query->fetchAll();
 
                 <?php } else if (isset($_GET['add']) && $_GET['add'] == 'ok') { ?>
               <div class="alert alert-success text-center" role="alert">
-            Collaborateur ajouté ! 
+            Collaborateur ajouté !
           </div>
- 
+
             <?php } else if (isset($_GET['update']) && $_GET['update'] == 1) { ?>
               <div class="alert alert-success text-center" role="alert">
             Modification(s) enregistrée(s)
@@ -91,7 +91,7 @@ $resultats = $query->fetchAll();
             <?php echo 'L\'id '.$_GET['id'].' a été suprimée' ?>
           </div>
         <?php } ?>
-      
+
 
 
   <div class="accordion" id="accordionExample">
@@ -112,9 +112,9 @@ $resultats = $query->fetchAll();
                   <th scope="col">#</th>
                   <th scope="col">Prénom</th>
                   <th scope="col">Nom</th>
-                  
+
                   <th scope="col">Email</th>
-                  
+
                   <th scope="col">MDP</th>
                    <th scope="col"> </th>
                 </tr>
@@ -127,21 +127,21 @@ $resultats = $query->fetchAll();
                     <tbody>
                       <tr>
                         <form action="PHP/employeeMAJ.php" method="POST">
-                          <th scope="row"><?php echo $employee['idEmployee']; ?></th>
+                          <th scope="row"><?php echo $employee['idUser']; ?></th>
                               <td>
                                 <input type="text" name="firstName" value="<?php echo $employee['employeeFirstName']; ?>" readonly>
                               </td>
                               <td>
                                 <input type="text"  name="lastName" value="<?php echo $employee['employeeLastName']; ?>" readonly>
                               </td>
-                              
+
                               <td>
                                 <input type="text"  name="mail" value="<?php echo $employee['employeeEmail']; ?>" readonly>
                               </td>
-                              
-                              
-                              <td> 
-                                <input type="hidden" name="idEmployee" value="<?php echo $employee['idEmployee']; ?>">                   
+
+
+                              <td>
+                                <input type="hidden" name="idEmployee" value="<?php echo $employee['idEmployee']; ?>">
                                 <input type="submit" name="pwd" class="option" value="NEW">
                              </td>
                               <td>
@@ -165,7 +165,7 @@ $resultats = $query->fetchAll();
       </div>
       <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
         <div class="card-body">
-          
+
           <table class="table table-hover table-dark">
               <thead>
                 <tr>
@@ -179,7 +179,7 @@ $resultats = $query->fetchAll();
                     <tbody>
                       <tr>
                         <form action="PHP/addEmployee.php" method="POST">
-                          
+
                               <td>
                                 <input type="text" name="firstName" placeholder="Prénom">
                               </td>
@@ -195,7 +195,7 @@ $resultats = $query->fetchAll();
                         </form>
                       </tr>
                     </tbody>
-               
+
           </table>
 
 
@@ -211,5 +211,3 @@ $resultats = $query->fetchAll();
   <?php include('../include/footer.php'); ?>
 </body>
 </html>
-
-

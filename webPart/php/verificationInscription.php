@@ -20,16 +20,8 @@ include('../include/config.php');
         $q = "SELECT userEmail FROM USER WHERE userEmail = ?";
         // var_dump($q);
         $req= $pdo->prepare($q);
-        $req-> execute(array(
-          $_POST['mail']
-          
-        ));
-
-        $answers = [];
-        while ($INDIVIDU = $req->fetch()) {
-          $answers[] = $INDIVIDU;
-        }
-        if (count($answers) != 0) { //email deja pris
+        $req-> execute(array($_POST['mail']));
+        if ($req->rowCount() != 0) { //email deja pris
           header('Location: ../inscription.php?error=email_taken');
           exit;
         }
@@ -55,7 +47,7 @@ include('../include/config.php');
         exit;
     }
 
-    
+
 
     // Date de naissance
     if(!isset($_POST['birth']) || empty($_POST['birth'])){
@@ -72,7 +64,7 @@ include('../include/config.php');
         header('location: ../inscription.php?error=phone_format');
         exit;
     }
-    
+
     //Adresse
     if(!isset($_POST['adresse']) || empty($_POST['adresse'])){
         header('Location: ../inscription.php?error=adresse_missing');

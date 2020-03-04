@@ -7,92 +7,92 @@ if (isset($_POST['updateProvider'])) {
 
 	//Prenom
     if(!isset($_POST['firstName']) || empty($_POST['firstName'])){
-        header('Location: ../prestataires.php?error=prenom_missing');
+        header('Location: ../provider.php?error=prenom_missing');
         exit;
     }
 
     if(preg_match('#[0-9]#',$_POST['firstName'])) {
-        header('location: ../prestataires.php?error=prenom_format');
+        header('location: ../provider.php?error=prenom_format');
         exit;
     }
 
      //Nom
     if(!isset($_POST['lastName']) || empty($_POST['lastName'])){
-        header('Location: ../prestataires.php?error=name_missing');
+        header('Location: ../provider.php?error=name_missing');
         exit;
     }
 
     if(preg_match('#[0-9]#',$_POST['lastName'])) {
-        header('location: ../prestataires.php?error=name_format');
+        header('location: ../provider.php?error=name_format');
         exit;
     }
 
     // Tel
     if(!isset($_POST['phone']) || empty($_POST['phone'])){
-        header('Location: ../prestataires.php?error=phone_missing');
+        header('Location: ../provider.php?error=phone_missing');
         exit;
     }
 
     if(preg_match('#[a-zA-Z]#',$_POST['phone'])) {
-        header('location: ../prestataires.php?error=phone_format');
+        header('location: ../provider.php?error=phone_format');
         exit;
     }
 
     // format de l'email
 
     if (!filter_var($_POST['mail'],FILTER_VALIDATE_EMAIL)){
-        header('Location: ../prestataires.php?error=email_format');
+        header('Location: ../provider.php?error=email_format');
         exit;
     }
 
     //Email
     if(!isset($_POST['mail']) || empty($_POST['mail'])){
-        header('Location: ../prestataires.php?error=email_missing');
+        header('Location: ../provider.php?error=email_missing');
         exit;
     }
 
     //Adresse
     if(!isset($_POST['adresse']) || empty($_POST['adresse'])){
-        header('Location: ../prestataires.php?error=adresse_missing');
+        header('Location: ../provider.php?error=adresse_missing');
         exit;
     }
 
 
      //Ville
     if(!isset($_POST['city']) || empty($_POST['city'])){
-        header('Location: ../prestataires.php?error=city_missing');
+        header('Location: ../provider.php?error=city_missing');
         exit;
     }
 
     if(preg_match('#[0-9]#',$_POST['city'])) {
-        header('location: ../prestataires.php?error=city_format');
+        header('location: ../provider.php?error=city_format');
         exit;
     }
 
 
 	// region
 	    if(!isset($_POST['region']) || empty($_POST['region'])){
-	        header('Location: ../prestataires.php?error=region_missing');
+	        header('Location: ../provider.php?error=region_missing');
 	        exit;
 	    }
 
 	    if(preg_match('#[0-9]#',$_POST['region'])) {
-	        header('location: ../prestataires.php?error=region_format');
+	        header('location: ../provider.php?error=region_format');
 	        exit;
 	    }
 
 	 // departement
 	    if(!isset($_POST['departement']) || empty($_POST['departement'])){
-	        header('Location: ../prestataires.php?error=region_missing');
+	        header('Location: ../provider.php?error=region_missing');
 	        exit;
 	    }
 
 	    if(preg_match('#[a-zA-Z]#',$_POST['departement'])) {
-	        header('location: ../prestataires.php?error=departement_format');
+	        header('location: ../provider.php?error=departement_format');
 	        exit;
 	    }
 
-	
+
 
 	// Insertion en BDD
 	    $id = $_POST['idProvider'];
@@ -117,7 +117,7 @@ if (isset($_POST['updateProvider'])) {
 	    	$annulation = 0;
 	    }
 
-	   
+
 	   	$state = $_POST['state'];
 
 	   if ($state == 'A') {
@@ -128,10 +128,10 @@ if (isset($_POST['updateProvider'])) {
 	   	$state = 2; //supprimé
 	   }
 
-	 
 
-   		
-	$queryUpdate = $pdo->prepare('UPDATE PROVIDER SET 
+
+
+	$queryUpdate = $pdo->prepare('UPDATE PROVIDER SET
 		providerFirstName = :fn,
 		providerLastName = :ln,
 		providerPhone = :t,
@@ -164,14 +164,14 @@ if (isset($_POST['updateProvider'])) {
 	$rows = $queryUpdate->rowCount();
 
 	 if ($rows == 1){
-		header('location: ../prestataires.php?update='.$rows);
+		header('location: ../provider.php?update='.$rows);
         exit;
 	} else {
-		header('location: ../prestataires.php');
+		header('location: ../provider.php');
         exit;
 	}
 
-    
+
 }
 
 // Générer un mdp
@@ -192,10 +192,10 @@ var_dump($newPwd);
 	$rows = $queryUpdate->rowCount();
 
 	 if ($rows == 1){
-		header('location: ../prestataires.php?genere='.$rows);
+		header('location: ../provider.php?genere='.$rows);
         exit;
 	} else {
-		header('location: ../prestataires.php');
+		header('location: ../provider.php');
         exit;
 	}
 

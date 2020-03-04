@@ -23,16 +23,16 @@ $resultats = $query->fetchAll();
 
 <body>
 
- <?php include('../include/config.php'); 
+ <?php include('../include/config.php');
 
 
- include('include/headerBack.php'); 
+ include('include/headerBack.php');
 
  ?>
-    
+
 <div class="jumbotron table-responsive-xl">
-  
-        <h4>Nos clients</h4> 
+
+        <h4>Nos clients</h4>
         <hr class="my-4">
         <?php if (isset($_GET['error']) && $_GET['error'] == 'name_missing') { ?>
           <div class="alert alert-danger text-center" role="alert">
@@ -52,7 +52,7 @@ $resultats = $query->fetchAll();
         <?php } else if (isset($_GET['error']) && $_GET['error'] == 'prenom_format') { ?>
                   <div class="alert alert-danger text-center" role="alert">
                     Veuillez revoir le prenom
-                  </div> 
+                  </div>
         <?php } else if (isset($_GET['error']) && $_GET['error'] == 'phone_missing') { ?>
                   <div class="alert alert-danger text-center" role="alert">
                     Vous devez indiquer le numéro de téléphone
@@ -61,7 +61,7 @@ $resultats = $query->fetchAll();
         <?php } else if (isset($_GET['error']) && $_GET['error'] == 'phone_format') { ?>
                   <div class="alert alert-danger text-center" role="alert">
                     Veuillez revoir le numéro de téléphone
-                  </div> 
+                  </div>
 
         <?php } else if (isset($_GET['error']) && $_GET['error'] == 'email_missing') { ?>
                   <div class="alert alert-danger text-center" role="alert">
@@ -122,7 +122,7 @@ $resultats = $query->fetchAll();
                   <div class="alert alert-success text-center" role="alert">
                     Le nouveau mot de passe a été généré
                   </div>
- 
+
             <?php } else if (isset($_GET['update']) && $_GET['update'] == 1) { ?>
               <div class="alert alert-success text-center" role="alert">
             Modification(s) enregistrée(s)
@@ -132,7 +132,7 @@ $resultats = $query->fetchAll();
             <?php echo 'L\'id '.$_GET['id'].' a été suprimée' ?>
           </div>
         <?php } ?>
-      
+
  <table class="table table-hover table-dark">
     <thead>
       <tr>
@@ -205,7 +205,7 @@ $resultats = $query->fetchAll();
 
                   <?php } ?>
                   </td>
-                  <td>                    
+                  <td>
                     <input type="submit" name="pwd" class="option" value="NEW">
                  </td>
                   <td>
@@ -217,7 +217,7 @@ $resultats = $query->fetchAll();
         </tbody>
   <?php } ?>
 </table>
- 
+
 </div>
 
 <div class="col-lg-4"></div>
@@ -226,5 +226,3 @@ $resultats = $query->fetchAll();
 </body>
 
 </html>
-
-
