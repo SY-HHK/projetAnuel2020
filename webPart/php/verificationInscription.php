@@ -152,11 +152,36 @@ include('../include/config.php');
 
   <?php
 
+//guid
+  do {
+    //génération guid
+    $guid = str_replace("}","",str_replace("{","",com_create_guid()));
+    //test si déja pris
+    $testGuid = $pdo->prepare("SELECT idUser FROM USER WHERE userGuid = ?");
+    $testGuid->execute(array($guid));
+    $testGuid->rowCount();
+  } while ($testGuid->rowCount() == 1);
+
 // Insertion bdd
+
+$insertCity = $pdo->prepare("INSERT INTO CITY (cityName,cityRegion,cityDepartement) VALUES (?,?,?)");
+$insertCity->execute([
+                      strtolower(htmlspecialchars($_POST['city'])),
+                      strtolower(htmlspecialchars($_POST['region'])),
+                      htmlspecialchars($_POST['departement'])
+                      ]);
+
+$getIdCity = $pdo->prepare("SELECT MAX(idCity) FROM CITY WHERE cityName = ? && cityRegion = ? && cityDepartement = ?");
+$getIdCity->execute([
+                    strtolower(htmlspecialchars($_POST['city'])),
+                    strtolower(htmlspecialchars($_POST['region'])),
+                    htmlspecialchars($_POST['departement'])
+                    ]);
+$idCity = $getIdCity->fetch();
 
 // Requete preparee
 
-$q = "INSERT INTO USER (userEmail, userPassword, userFirstName, userLastName , userBirth, userAddress,userCity,userRegion, userDepartement, userPhone,userPrivilege, userIp, userAgent) VALUES ( :mail, :pwd, :firstName, :lastName , :birth, :adr,:city, :region, :departement,:phone, :p, :id, :agent)";
+$q = "INSERT INTO USER (userEmail, userPassword, userFirstName, userLastName , userBirth, userAddress, userIdCity, userPhone,userPrivilege, userIp, userAgent, userGuid) VALUES ( :mail, :pwd, :firstName, :lastName , :birth, :adr, :userIdCity,:phone, :p, :id, :agent, :guid)";
 
 $req = $pdo->prepare($q);
 
@@ -175,13 +200,12 @@ $req->execute(array(
   'lastName' => htmlspecialchars($_POST['lastName']),
   'birth' => htmlspecialchars($_POST['birth']),
   'adr' => htmlspecialchars($_POST['adresse']),
-  'city' => htmlspecialchars($_POST['city']),
-  'region' => htmlspecialchars($_POST['region']),
-  'departement' => htmlspecialchars($_POST['departement']),
   'phone' => htmlspecialchars($_POST['phone']),
   'p' => $privilege,
   'id' => $userIp,
-  'agent' => $userAgent
+  'agent' => $userAgent,
+  'userIdCity' => $idCity["MAX(idCity)"],
+  'guid' => $guid
 ));
 
 header('Location: ../connexion.php?inscription=ok');

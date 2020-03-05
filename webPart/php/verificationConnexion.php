@@ -18,7 +18,7 @@ $password = hash('sha256', $_POST['password']);
 // var_dump([$email, $password]);
 //
 // Connexion admin / user
-$queryUser = $pdo->prepare('SELECT * FROM USER WHERE userEmail = ? AND userPassword = ?');
+$queryUser = $pdo->prepare('SELECT userGuid,userPrivilege FROM USER WHERE userEmail = ? AND userPassword = ?');
 $queryUser->execute([$email, $password]);
 $nb = $queryUser->rowCount();
 $res = $queryUser->fetch();
@@ -27,28 +27,28 @@ if ($nb == 1) {
 
 	if ($res["userPrivilege"] == 10) {
 		session_start();
-		$_SESSION['admin'] = $res["idUser"];
+		$_SESSION['admin'] = $res["userGuid"];
 		header('location: ../back/indexBack.php?connexion_back=ok');
 	 exit;
 	}
 	else {
 		session_start();
-		$_SESSION['user'] = $res["idUser"];
+		$_SESSION['user'] = $res["userGuid"];
 		echo $_SESSION['user'];
-		//header('location: ../profilUser.php?error=login_successfull');
+		header('location: ../profilUser.php?error=login_successfull');
 		exit;
 	}
 }
 else {
 
 	// Connexion PROVIDER
-	$queryProvider = $pdo->prepare('SELECT * FROM PROVIDER WHERE providerEmail = ? AND providerPassword = ?');
+	$queryProvider = $pdo->prepare('SELECT providerGuid FROM PROVIDER WHERE providerEmail = ? AND providerPassword = ?');
 	$queryProvider->execute([$email, $password]);
 	$nb = $queryProvider->rowCount();
 	$res = $queryProvider->fetch();
 	if ($nb == 1) {
 		session_start();
-		$_SESSION['provider'] = $res["idProvider"];
+		$_SESSION['provider'] = $res["providerGuid"];
 		header('location: ../provider.php?error=login_successfull');
 		exit;
 	}
