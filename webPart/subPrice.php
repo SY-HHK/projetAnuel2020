@@ -14,54 +14,56 @@ $resultats = $query->fetchAll();
 <html>
 <head>
     <title>Souscrire à un abonnement</title>
-    <?php include('css/linkCss.php');?>
+    <!--<?php include('css/linkCss.php');?>-->
     <link rel="stylesheet" href="css/index.css">
-	<link rel="stylesheet" href="css/pricing.css">
+	  <link rel="stylesheet" href="css/pricing.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <meta charset="UTF-8">
 </head>
 
 
 <body>
 
-<?php include('include/header.php'); ?>
+<!--<?php include('include/header.php'); ?>-->
 
 
 <main>
-	<div class="jumbotron">
 
-		<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-			<h1 class="display-4">Les abonnements</h1>
-		  <p class="lead">Home Services vous propose des abonnements qui vous permettent d'avoir de meilleurs accès à nos services. Ce qui peut inclure un service  24/24h selon les abonnements et plein d'autres avantages.</p>
-		</div>
+<div class="container">
 
-		<div class="container">
+  <div class="carousel">
 
-			<div class="card-deck mb-3 text-center">
+    <?php
+    $i = 0;
+    foreach ($resultats as $resultat) { ?>
 
-				<?php foreach ($resultats as $sub) { ?>
-					<div class="card mb-4 shadow-sm">
-						<div class="card mb-4 shadow-sm">
-							<div class="card-header">
-								<h4 class="my-0 font-weight-normal">Abonnement <?php echo $sub['subName']; ?></h4>
-							</div>
-							<div class="card-body">
-								<h1 class="card-title pricing-card-title"><?php echo $sub['subHour']; ?><small class="text-muted">h services/ mois</small></h1>
-								<ul class="list-unstyled mt-3 mb-4">
-									<li>Bénéficiez d'un accès privilégié en illimité <?php echo $sub['subDays']; ?>j/7 de <?php echo $sub['subHourStart']; ?>h à <?php echo $sub['subHourEnd']; ?>h.</li>
-									<li>Demandes illimitées de renseignements</li>
-									<li><?php echo $sub['subPrice']; ?>€ TTC/an</li>
+    <a class="carousel-item" href="#<?=$i?>">
 
-								</ul>
-								<button type="button" class="btn btn-lg btn-block btn-primary">Souscrire !</button>
-							</div>
-			    		</div>
-			  		</div>
-			 	<?php } ?>
+      <div class="col s12">
+        <div class="card">
+          <div class="card-image">
+            <center><h5><?php $resultat["subName"] ?></h5>
+            <i class="material-icons" style="font-size: 50px;">grade</i></center>
+          </div>
+          <div class="card-content">
+            <p><?= $resultat["subDays"] ?> jours sur 7.<br>
+            De <?= $resultat["subHourStart"] ?> heures à <?= $resultat["subHourEnd"] ?> heures.<br>
+            Contrat de <?= $resultat["subHour"] ?> heures</p>
+            <h6><?= $resultat["subPrice"] ?> €</h6>
+            <button type="button" onclick="document.location.href='subUser.php?idSub='+<?=$i?>" class="waves-effect waves-light btn">S'abonner</button>
 
-			</div>
+          </div>
+        </div>
+      </div>
 
-		</div>
-	</div>
+    </a>
+
+    <?php $i++; } ?>
+
+  </div>
+
+</div>
 </main>
 
 
@@ -71,4 +73,13 @@ $resultats = $query->fetchAll();
 
 
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script type="text/javascript">
+
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.carousel');
+    var instances = M.Carousel.init(elems);
+  });
+
+</script>
 </html>

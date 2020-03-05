@@ -36,6 +36,7 @@ CREATE TABLE IF NOT EXISTS `bringme`.`PROVIDER` (
   `providerRate` FLOAT,
   `providerAnnulation` INT,
   `state` TINYINT(1),
+  `providerGuid` char(36),
   PRIMARY KEY (`idProvider`),
   INDEX `PROVIDER_CITY_FK` (`providerIdCity` ASC),
   CONSTRAINT `PROVIDER_CITY_FK`
@@ -114,6 +115,7 @@ CREATE TABLE IF NOT EXISTS `bringme`.`USER` (
   `idSubscription` INT,
   `subStart` DATE,
   `subEnd` DATE,
+  `userGuid` char(36),
   PRIMARY KEY (`idUser`),
   INDEX `fk_USER_SUBSCRIPTION1_idx` (`idSubscription` ASC),
   CONSTRAINT `fk_USER_SUBSCRIPTION1`

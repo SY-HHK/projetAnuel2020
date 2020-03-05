@@ -27,14 +27,15 @@ if ($nb == 1) {
 
 	if ($res["userPrivilege"] == 10) {
 		session_start();
-		$_SESSION['admin'] = $res;
+		$_SESSION['admin'] = $res["idUser"];
 		header('location: ../back/indexBack.php?connexion_back=ok');
 	 exit;
 	}
 	else {
 		session_start();
-		$_SESSION['user'] = $res;
-		header('location: ../profilUser.php?error=login_successfull');
+		$_SESSION['user'] = $res["idUser"];
+		echo $_SESSION['user'];
+		//header('location: ../profilUser.php?error=login_successfull');
 		exit;
 	}
 }
@@ -47,7 +48,7 @@ else {
 	$res = $queryProvider->fetch();
 	if ($nb == 1) {
 		session_start();
-		$_SESSION['provider'] = $res;
+		$_SESSION['provider'] = $res["idProvider"];
 		header('location: ../provider.php?error=login_successfull');
 		exit;
 	}
