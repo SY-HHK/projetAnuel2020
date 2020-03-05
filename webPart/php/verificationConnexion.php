@@ -15,7 +15,7 @@ if (!isset($_POST['password']) || empty($_POST['password'])) {
 
 $email = htmlspecialchars($_POST['mail']);
 $password = hash('sha256', $_POST['password']);
-// var_dump([$email, $password]);
+var_dump([$email, $password]);
 //
 // Connexion admin / user
 $queryUser = $pdo->prepare('SELECT userGuid,userPrivilege,userEmail FROM USER WHERE userEmail = ? AND userPassword = ?');
@@ -27,7 +27,7 @@ if ($nb == 1) {
 
 	if ($res["userPrivilege"] == 10) {
 		session_start();
-		$_SESSION['admin'] = $res["userGuid"];
+		$_SESSION['admin'] = $res;
 		header('location: ../back/indexBack.php?connexion_back=ok');
 	 exit;
 	}
