@@ -15,7 +15,7 @@ if (!isset($_POST['password']) || empty($_POST['password'])) {
 
 $email = htmlspecialchars($_POST['mail']);
 $password = hash('sha256', $_POST['password']);
-var_dump([$email, $password]);
+// var_dump([$email, $password]);
 //
 // Connexion admin / user
 $queryUser = $pdo->prepare('SELECT userGuid,userPrivilege,userEmail FROM USER WHERE userEmail = ? AND userPassword = ?');
@@ -33,7 +33,7 @@ if ($nb == 1) {
 	}
 	else {
 		session_start();
-		$_SESSION['user'] = $res["userGuid"];
+		$_SESSION['user'] = $res;
 		$_SESSION['userEmail'] = $res["userEmail"];
 		header('location: ../profilUser.php?error=login_successfull');
 		exit;
@@ -48,7 +48,7 @@ else {
 	$res = $queryProvider->fetch();
 	if ($nb == 1) {
 		session_start();
-		$_SESSION['provider'] = $res["providerGuid"];
+		$_SESSION['provider'] = $res;
 		header('location: ../provider.php?error=login_successfull');
 		exit;
 	}
