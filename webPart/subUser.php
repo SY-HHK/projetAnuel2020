@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once "vendor/autoload.php";
 
 // Set your secret key. Remember to switch to your live secret key in production!
@@ -12,7 +13,7 @@ $session = \Stripe\Checkout\Session::create([
   ],
   'customer_email' => $_SESSION['userEmail'],
   'success_url' => 'http://localhost/stripe/payment.php?session_id={CHECKOUT_SESSION_ID}',
-  'cancel_url' => 'http://localhost/stripe/index.php',
+  'cancel_url' => 'http://localhost/projetAnuel2020/webPart/subPrice.php?error=cancel',
 ]);
 
 ?>

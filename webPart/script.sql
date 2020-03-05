@@ -91,6 +91,7 @@ CREATE TABLE IF NOT EXISTS `bringme`.`SUBSCRIPTION` (
   `subHourEnd` INT,
   `subHour` INT,
   `subPrice` FLOAT,
+  `subStripeId` VARCHAR(100),
   PRIMARY KEY (`idSub`));
 
 

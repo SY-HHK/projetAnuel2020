@@ -27,31 +27,58 @@ $resultats = $query->fetchAll();
 
 <!--<?php include('include/header.php'); ?>-->
 
+<header>
+  <nav class="blue-grey darken-3">
+    <div class="nav-wrapper">
+      <a href="index.php" class="brand-logo"><img src="images/logo.png" style="width: 90px;"></a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="subPrice.php">Abonnement</a></li>
+        <?php
+        if (isset($_SESSION["user"]) && !empty($_SESSION["user"]))
+        { ?>
+          <li><a href="profilUser.php">Profil</a></li>
+      <?php  } else { ?>
+          <li><a href="connexion.php">Se connecter</a></li>
+      <?php  } ?>
+      </ul>
+    </div>
+  </nav>
+</header>
 
-<main>
+<main style="margin-bottom: 200px;">
 
-<div class="container">
+<div class="container"><center>
+  <br>
+  <p>
+    Nous vous invitons à vous abonner, pour profiter au maximum des services de BrinMe ! <br>
+    En effet cela vous permet de ne pas devoir payer à chaque réservation ou demande, si celles-ci sont comprises dans votre formule alors c'est gratuit !<br>
+    De plus vous pourrez profiter de nos services en dehors des horaires classiques, jusqu'à 7 jours sur 7 et 24h sur 24 !
+  </p>
+
+  <h3>Liste des formules disponible :</h3>
 
   <div class="carousel">
 
     <?php
-    $i = 0;
     foreach ($resultats as $resultat) { ?>
 
-    <a class="carousel-item" href="#<?=$i?>">
+    <a class="carousel-item" href="#<?=$resultat["idSub"]?>">
 
       <div class="col s12">
         <div class="card">
           <div class="card-image">
-            <center><h5><?php $resultat["subName"] ?></h5>
+            <center><h6>Formule <?= $resultat["subName"] ?></h6>
             <i class="material-icons" style="font-size: 50px;">grade</i></center>
           </div>
           <div class="card-content">
             <p><?= $resultat["subDays"] ?> jours sur 7.<br>
             De <?= $resultat["subHourStart"] ?> heures à <?= $resultat["subHourEnd"] ?> heures.<br>
-            Contrat de <?= $resultat["subHour"] ?> heures</p>
-            <h6><?= $resultat["subPrice"] ?> €</h6>
-            <button type="button" onclick="document.location.href='subUser.php?idSub='+<?=$i?>" class="waves-effect waves-light btn">S'abonner</button>
+            Contrat de <?= $resultat["subHour"] ?> heures</p><br>
+            <center>
+              <button type="button" onclick="document.location.href='subUser.php?idSub='+<?=$resultat["idSub"]?>" class="waves-effect waves-light btn">
+                <?= $resultat["subPrice"] ?> €
+              </button>
+            </center>
 
           </div>
         </div>
@@ -59,22 +86,31 @@ $resultats = $query->fetchAll();
 
     </a>
 
-    <?php $i++; } ?>
+  <?php  } ?>
 
   </div>
 
-</div>
+</center></div>
 </main>
 
-
-
-<?php include('include/footer.php'); ?>
-
-
+<footer class="page-footer blue-grey darken-3">
+  <div class="footer-copyright">
+    <div class="container">
+      <p style="color: white"> © <?php echo date('Y'); ?> site officiel de <a class="lien" href="index.php"> BringMe </a></p>
+    </div>
+  <div>
+</footer>
 
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script type="text/javascript">
+
+<?php if (isset($_GET["error"]) && !empty($_GET["error"])) {
+  if ($_GET["error"] == "cancel") { ?>
+    M.toast({html: 'Votre achat n\'à pas abouti !'});
+<?php }
+}
+?>
 
 document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.carousel');

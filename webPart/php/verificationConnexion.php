@@ -18,7 +18,7 @@ $password = hash('sha256', $_POST['password']);
 // var_dump([$email, $password]);
 //
 // Connexion admin / user
-$queryUser = $pdo->prepare('SELECT userGuid,userPrivilege FROM USER WHERE userEmail = ? AND userPassword = ?');
+$queryUser = $pdo->prepare('SELECT userGuid,userPrivilege,userEmail FROM USER WHERE userEmail = ? AND userPassword = ?');
 $queryUser->execute([$email, $password]);
 $nb = $queryUser->rowCount();
 $res = $queryUser->fetch();
@@ -34,7 +34,7 @@ if ($nb == 1) {
 	else {
 		session_start();
 		$_SESSION['user'] = $res["userGuid"];
-		echo $_SESSION['user'];
+		$_SESSION['userEmail'] = $res["userEmail"];
 		header('location: ../profilUser.php?error=login_successfull');
 		exit;
 	}
