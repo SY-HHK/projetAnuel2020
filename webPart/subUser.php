@@ -1,6 +1,12 @@
 <?php
 session_start();
+include("include/config.php");
 require_once "vendor/autoload.php";
+
+$selectStripeId = $pdo->prepare("SELECT subStripeId FROM SUBSCRIPTION WHERE idSub = ?");
+$selectStripeId->execute([$_GET["idSub"]]);
+$stripeId = $selectStripeId->fetch();
+$stripeId = $stripeId["subStripeId"];
 
 // Set your secret key. Remember to switch to your live secret key in production!
 // See your keys here: https://dashboard.stripe.com/account/apikeys
@@ -9,10 +15,10 @@ require_once "vendor/autoload.php";
 $session = \Stripe\Checkout\Session::create([
   'payment_method_types' => ['card'],
   'subscription_data' => [
-    'items' => [['plan' => 'plan_GoQBCDEN85tByV']],
+    'items' => [['plan' => $stripeId]],
   ],
   'customer_email' => $_SESSION['userEmail'],
-  'success_url' => 'http://localhost/stripe/payment.php?session_id={CHECKOUT_SESSION_ID}',
+  'success_url' => 'http://localhost/projetAnuel2020/webPart/payment.php?session_id={CHECKOUT_SESSION_ID}',
   'cancel_url' => 'http://localhost/projetAnuel2020/webPart/subPrice.php?error=cancel',
 ]);
 

@@ -50,7 +50,7 @@ $resultats = $query->fetchAll();
 <div class="container"><center>
   <br>
   <p>
-    Nous vous invitons à vous abonner, pour profiter au maximum des services de BrinMe ! <br>
+    Nous vous invitons à vous abonner, pour profiter au maximum des services de BringMe ! <br>
     En effet cela vous permet de ne pas devoir payer à chaque réservation ou demande, si celles-ci sont comprises dans votre formule alors c'est gratuit !<br>
     De plus vous pourrez profiter de nos services en dehors des horaires classiques, jusqu'à 7 jours sur 7 et 24h sur 24 !
   </p>
@@ -107,9 +107,12 @@ $resultats = $query->fetchAll();
 
 <?php if (isset($_GET["error"]) && !empty($_GET["error"])) {
   if ($_GET["error"] == "cancel") { ?>
-    M.toast({html: 'Votre achat n\'à pas abouti !'});
+    M.toast({html: 'Votre achat n\'a pas abouti car vous avez annuler le paiement !'});
 <?php }
-}
+  if ($_GET["error"] == "unconfirmed") { ?>
+    M.toast({html: 'Votre achat n\'a pas abouti car nous n\'avons pas était en mesure de vous facturer !'});
+<?php }
+  }
 ?>
 
 document.addEventListener('DOMContentLoaded', function() {

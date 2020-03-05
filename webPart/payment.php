@@ -1,4 +1,5 @@
 <?php
+include("include/config.php");
 require_once "vendor/autoload.php";
 
 
@@ -18,13 +19,21 @@ require_once "vendor/autoload.php";
     $session = $event->data->object;
 
     if ($_GET["session_id"] == $session->id) {
-      echo "votre achat a réussi !";
-      $i = 1;
+      $getIdSub = $pdo->prepare("SELECT idSub FROM SUBSCRIPTION WHERE subStripeId = ?");
+      $getIdSub->execute([$session["display_items"][0]->plan->id]);
+      $idSub = $getIdSub->fetch();
+      $idSub = $idSub["idSub"];
+
+      $dateStart = new DateTime();
+      $dateEnd = new DateTime("+1 year");
+
+      $addSub = $pdo->prepare("UPDATE USER SET idSubscription = ?, subStart = ?, subEnd = ? WHERE userEmail = ?");
+      $addSub->execute([$idSub, $dateStart->format("Y-m-d"), $dateEnd->format("Y-m-d"), $session["customer_email"]]);
+      header("location: profilUser.php?sub=yes");
+      exit;
     }
   }
 
-  if ($i == 0) {
-    echo "Votre achat n'a pas abouti !";
-  }
+header("location: subPrice.php?error=unconfirmed");
 
 ?>
