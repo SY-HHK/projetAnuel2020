@@ -106,7 +106,7 @@ $resultats = $query->fetchAll();
 
       <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
         <div class="card-body">
-          <table class="table table-hover table-dark">
+          <table class="table table-hover">
               <thead>
                 <tr>
                   <th scope="col">#</th>
@@ -166,7 +166,7 @@ $resultats = $query->fetchAll();
       <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
         <div class="card-body">
 
-          <table class="table table-hover table-dark">
+          <table class="table table-hover">
               <thead>
                 <tr>
                   <th scope="col">Prénom</th>
