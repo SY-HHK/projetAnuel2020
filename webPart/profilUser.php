@@ -2,6 +2,11 @@
 session_start();
 include("include/config.php");
 
+if (!isset($_SESSION["user"])) {
+  header("location: index.php");
+  exit;
+}
+
 $getUserInfos = $pdo->prepare("SELECT * FROM USER WHERE userGuid = ?");
 $getUserInfos->execute([$_SESSION["user"]["userGuid"]]);
 $nbUser = $getUserInfos->rowCount();
@@ -69,8 +74,8 @@ else {
   <div class="row">
       <div class="col s12">
         <ul class="tabs blue-grey darken-1">
-          <li class="tab col s6"><a class="active white-text" href="#test1">Mes infos :</a></li>
-          <li class="tab col s6"><a class="white-text" href="#test2">Mes commandes :</a></li>
+          <li class="tab col s6"><a class="active white-text" href="#test1">Mes infos</a></li>
+          <li class="tab col s6"><a class="white-text" href="#test2">Mes commandes</a></li>
         </ul>
       </div>
       <div id="test1" class="col s12">
@@ -146,6 +151,14 @@ else {
 
 
 
+<div class="fixed-action-btn">
+  <a class="btn-floating btn-large" href="php/deconnexion.php">
+    <i class="large material-icons">directions_walk</i>
+  </a>
+</div>
+
+
+
 </main>
 
 <footer class="page-footer blue-grey darken-3">
@@ -161,4 +174,9 @@ else {
 <script type="text/javascript">
   var el = document.querySelectorAll('.tabs')
   var instance = M.Tabs.init(el);
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.fixed-action-btn');
+    var instances = M.FloatingActionButton.init(elems);
+  });
 </script>
