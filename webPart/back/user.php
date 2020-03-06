@@ -220,6 +220,8 @@ $resultats = $query->fetchAll();
 
 </div>
 
+
+
 <div class="col-lg-4"></div>
 
   <?php include('../include/footer.php'); ?>
