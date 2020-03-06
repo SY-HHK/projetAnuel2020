@@ -63,10 +63,11 @@ include('../../include/config.php');
         $lastName = htmlspecialchars($_POST['lastName']);
         $email = htmlspecialchars($_POST['mail']);
         $newPwd = hash('sha256', uniqid());
+        $admin = 10;
 
 
 
-$req = $pdo->prepare('INSERT INTO USER (userFirstName, userLastName, userEmail, userPassword) VALUES ( :prenom, :nom, :mail, :pwd) ');
+$req = $pdo->prepare('INSERT INTO USER (userFirstName, userLastName, userEmail, userPassword, userPrivilege) VALUES ( :prenom, :nom, :mail, :pwd, :priv) ');
 
 
 
@@ -76,7 +77,8 @@ $req->execute(array(
   'prenom' => $firstName,
   'nom' => $lastName,
   'mail' => $email,
-  'pwd' => $newPwd
+  'pwd' => $newPwd,
+  'priv' => $admin
 
 ));
 

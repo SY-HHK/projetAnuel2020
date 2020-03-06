@@ -129,19 +129,19 @@ $resultats = $query->fetchAll();
                         <form action="PHP/employeeMAJ.php" method="POST">
                           <th scope="row"><?php echo $employee['idUser']; ?></th>
                               <td>
-                                <input type="text" name="firstName" value="<?php echo $employee['employeeFirstName']; ?>" readonly>
+                                <input type="text" name="firstName" value="<?php echo $employee['userFirstName']; ?>" readonly>
                               </td>
                               <td>
-                                <input type="text"  name="lastName" value="<?php echo $employee['employeeLastName']; ?>" readonly>
+                                <input type="text"  name="lastName" value="<?php echo $employee['userLastName']; ?>" readonly>
                               </td>
 
                               <td>
-                                <input type="text"  name="mail" value="<?php echo $employee['employeeEmail']; ?>" readonly>
+                                <input type="text"  name="mail" value="<?php echo $employee['userEmail']; ?>" readonly>
                               </td>
 
 
                               <td>
-                                <input type="hidden" name="idEmployee" value="<?php echo $employee['idEmployee']; ?>">
+                                <input type="hidden" name="id" value="<?php echo $employee['idUser']; ?>">
                                 <input type="submit" name="pwd" class="option" value="NEW">
                              </td>
                               <td>
