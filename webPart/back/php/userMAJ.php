@@ -107,6 +107,7 @@ if (isset($_POST['updateUser'])) {
   $city = htmlspecialchars($_POST['city']);
   $region = htmlspecialchars($_POST['region']);
   $departement =htmlspecialchars($_POST['departement']);
+  $state =htmlspecialchars($_POST['state']);
 
 echo 'test';
 var_dump($id ,$mail, $firstName, $lastName, $phone, $birth, $adr, $city ,$region, $departement);
@@ -129,18 +130,18 @@ var_dump($id ,$mail, $firstName, $lastName, $phone, $birth, $adr, $city ,$region
      }
 
 
-  $queryUpdate = $pdo->prepare('UPDATE USER SET 
-    userEmail = :mail,
-    userFirstName = :firstName,
-    userLastName = :lastName,
-    userPhone = :phone,
-    userBirth = :birth,
-    userAddress = :adr,
-    userCity = :city,
-    userRegion = :region,
-    userDepartement = :departement,
-    userAnnulation = :annulation,
-    state = :state
+  $queryUpdate = $pdo->prepare('UPDATE USER, CITY SET 
+    USER.userEmail = :mail,
+    USER.userFirstName = :firstName,
+    USER.userLastName = :lastName,
+    USER.userPhone = :phone,
+    USER.userBirth = :birth,
+    USER.userAddress = :adr,
+    USER.userAnnulation = :annulation,
+    CITY.cityName = :city,
+    CITY.cityRegion = :region,
+    CITY.cityDepartement = :departement,
+    USER.state = :state
 
     WHERE idUser = :id');
 

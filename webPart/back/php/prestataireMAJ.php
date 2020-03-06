@@ -131,18 +131,18 @@ if (isset($_POST['updateProvider'])) {
 
 
 
-	$queryUpdate = $pdo->prepare('UPDATE PROVIDER SET
-		providerFirstName = :fn,
-		providerLastName = :ln,
-		providerPhone = :t,
-		providerEmail = :mail,
-		providerAddress = :a,
-		cityName = :city,
-		cityRegion = :region,
-		cityDepartement = :departement,
-		companyName = :companyName,
-		providerAnnulation = :annulation,
-		state = :state
+	$queryUpdate = $pdo->prepare('UPDATE PROVIDER, CITY SET
+		PROVIDER.providerFirstName = :fn,
+		PROVIDER.providerLastName = :ln,
+		PROVIDER.providerPhone = :t,
+		PROVIDER.providerEmail = :mail,
+		PROVIDER.providerAddress = :a,
+		CITY.cityName = :city,
+		CITY.cityRegion = :region,
+		CITY.cityDepartement = :departement,
+		PROVIDER.companyName = :companyName,
+		PROVIDER.providerAnnulation = :annulation,
+		PROVIDER.state = :state
 
 		WHERE idProvider = :id');
 

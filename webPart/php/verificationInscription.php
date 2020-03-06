@@ -162,6 +162,17 @@ include('../include/config.php');
     $testGuid->rowCount();
   } while ($testGuid->rowCount() == 1);
 
+  //regarde si la ville existe deja
+$checkCity = $pdo->prepare("SELECT idCity FROM CITY WHERE cityName = ?");
+$checkCity->execute([strtolower(htmlspecialchars($_POST['city']));
+$nbcity = $checkCity->rowCount();
+
+if ($nbcity == 1) {
+  $idCity = $checkCity->fetch();
+  $idCity = $idCity["idCity"];
+}
+else {
+
 // Insertion bdd
 
 $insertCity = $pdo->prepare("INSERT INTO CITY (cityName,cityRegion,cityDepartement) VALUES (?,?,?)");
@@ -178,6 +189,9 @@ $getIdCity->execute([
                     htmlspecialchars($_POST['departement'])
                     ]);
 $idCity = $getIdCity->fetch();
+
+}
+
 
 // Requete preparee
 

@@ -1,6 +1,8 @@
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+DROP SCHEMA IF EXISTS `bringme` ;
+
 
 -- -----------------------------------------------------
 -- Schema bringme
@@ -196,13 +198,13 @@ INSERT INTO `bringme`.`PROVIDER` (`idProvider`, `providerFirstName`, `providerLa
 -- -----------------------------------------------------
 -- Data for table `bringme`.`SUBSCRIPTION`
 -- -----------------------------------------------------
-INSERT INTO `bringme`.`SUBSCRIPTION` (`idSub`, `subName`, `subDays`, `subHourStart`, `subHourEnd`, `subHour`, `subPrice`) VALUES (1, 'de base', 5, 9, 20, 12, 2400);
-INSERT INTO `bringme`.`SUBSCRIPTION` (`idSub`, `subName`, `subDays`, `subHourStart`, `subHourEnd`, `subHour`, `subPrice`) VALUES (2, 'Familial', 6, 9, 20, 25, 3600);
-INSERT INTO `bringme`.`SUBSCRIPTION` (`idSub`, `subName`, `subDays`, `subHourStart`, `subHourEnd`, `subHour`, `subPrice`) VALUES (3, 'Premium', 7, 24, 24, 50, 6000);
+INSERT INTO `bringme`.`SUBSCRIPTION` (`idSub`, `subName`, `subDays`, `subHourStart`, `subHourEnd`, `subHour`, `subPrice`,`subStripeId`) VALUES (1, 'de base', 5, 9, 20, 12, 2400, "plan_GoQBCDEN85tByV");
+INSERT INTO `bringme`.`SUBSCRIPTION` (`idSub`, `subName`, `subDays`, `subHourStart`, `subHourEnd`, `subHour`, `subPrice`,`subStripeId`) VALUES (2, 'Familial', 6, 9, 20, 25, 3600, "plan_Gr4puDyjnjtFsJ");
+INSERT INTO `bringme`.`SUBSCRIPTION` (`idSub`, `subName`, `subDays`, `subHourStart`, `subHourEnd`, `subHour`, `subPrice`,`subStripeId`) VALUES (3, 'Premium', 7, 24, 24, 50, 6000, "plan_Gr4qs5XjRY8Btr");
 
 -- -----------------------------------------------------
 -- Data for table `bringme`.`USER`
 -- -----------------------------------------------------
 INSERT INTO `bringme`.`USER` (`idUser`, `userEmail`, `userPassword`, `userFirstName`, `userLastName`, `userBirth`, `userAddress`, `userIdCity`, `userPhone`, `userPrivilege`, `userIp`, `userAgent`, `userAnnulation`, `state`, `idSubscription`, `subStart`, `subEnd`, `userGuid`) VALUES (1, 'adeline@yahoo.fr', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'Adeline', 'Hernadez', '1995-08-12', '86 avenue de la Place', 1, '0685643576', 0, '09090909', '35355535', DEFAULT, 0, NULL, NULL, NULL, '05301411-7c9d-422c-8dd1-842ff4e6c3b5');
-INSERT INTO `bringme`.`USER` (`idUser`, `userEmail`, `userPassword`, `userFirstName`, `userLastName`, `userBirth`, `userAddress`, `userIdCity`, `userPhone`, `userPrivilege`, `userIp`, `userAgent`, `userAnnulation`, `state`, `idSubscription`, `subStart`, `subEnd`, `userGuid`) VALUES (2, 'louis.ricour@gmail.com', '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08', 'Louis', 'Ricour', '2000-06-26', '86 avenue de la Place', 1, '0685643576', 10, '09090909', '35355535', DEFAULT, 0, NULL, NULL, NULL, '7fcd2aa7-9d8a-438a-b834-0de6b6ed69db');
+INSERT INTO `bringme`.`USER` (`idUser`, `userEmail`, `userPassword`, `userFirstName`, `userLastName`, `userBirth`, `userAddress`, `userIdCity`, `userPhone`, `userPrivilege`, `userIp`, `userAgent`, `userAnnulation`, `state`, `idSubscription`, `subStart`, `subEnd`, `userGuid`) VALUES (2, 'louis.ricour@gmail.com', '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08', 'Louis', 'Ricour', '2000-06-26', '86 avenue de la Place', 1, '0685643576', 1, '09090909', '35355535', DEFAULT, 0, NULL, NULL, NULL, '7fcd2aa7-9d8a-438a-b834-0de6b6ed69db');
 INSERT INTO `bringme`.`USER` (`idUser`, `userEmail`, `userPassword`, `userFirstName`, `userLastName`, `userBirth`, `userAddress`, `userIdCity`, `userPhone`, `userPrivilege`, `userIp`, `userAgent`, `userAnnulation`, `state`, `idSubscription`, `subStart`, `subEnd`, `userGuid`) VALUES (3, 'suvirtha@bringme.fr', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'Suvirtha', 'Thayaharan', '2000-05-03', '86 avenue de la Place', 1, '0685643576', 10, '09090909', '35355535', DEFAULT, 0, NULL, NULL, NULL, '506617B9-E5EC-48DA-B6D5-9606CB9251B8');

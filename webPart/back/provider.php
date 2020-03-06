@@ -4,7 +4,7 @@ if (!isset($_SESSION['admin'])){
 header('location:../index.php');
 }
 
-$query = $pdo->prepare('SELECT * FROM PROVIDER');
+$query = $pdo->prepare('SELECT * FROM PROVIDER INNER JOIN CITY ON providerIdCity = idCity');
 $query->execute();
 
 $resultats = $query->fetchAll();
