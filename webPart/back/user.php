@@ -4,7 +4,7 @@ if (!isset($_SESSION['admin'])){
 header('location:../index.php');
 }
 
-$query = $pdo->prepare('SELECT * FROM USER');
+$query = $pdo->prepare('SELECT * FROM USER INNER JOIN CITY ON userIdCity = idCity');
 $query->execute();
 
 $resultats = $query->fetchAll();
@@ -179,13 +179,13 @@ $resultats = $query->fetchAll();
                     <input type="text" class="input" name="adresse" value="<?php echo $user['userAddress']; ?>">
                   </td>
                   <td>
-                    <input type="text" class="input" name="city" value="<?php echo $user['userCity']; ?>">
+                    <input type="text" class="input" name="city" value="<?php echo $user['cityName']; ?>">
                   </td>
                   <td>
-                    <input type="text" class="input" name="region" value="<?php echo $user['userRegion']; ?>">
+                    <input type="text" class="input" name="region" value="<?php echo $user['cityRegion']; ?>">
                   </td>
                   <td>
-                    <input type="text" class="inputNbr" name="departement" value="<?php echo $user['userDepartement']; ?>">
+                    <input type="text" class="inputNbr" name="departement" value="<?php echo $user['cityDepartement']; ?>">
                   </td>
                   <td>
                     <input type="text" class="inputNbr" name="annulation" value="<?php echo $user['userAnnulation']; ?>">

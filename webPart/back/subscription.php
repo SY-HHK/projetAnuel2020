@@ -3,7 +3,7 @@
 // if (!isset($_SESSION['admin'])){
 // header('location:../index.php');
 // }
-var_dump($_SESSION['admin']);
+//var_dump($_SESSION['admin']);
 $query = $pdo->prepare('SELECT * FROM SUBSCRIPTION');
 $query->execute();
 
@@ -22,18 +22,18 @@ $resultats = $query->fetchAll();
 
 <body>
 
- <?php include('../include/config.php'); 
+ <?php include('../include/config.php');
 
  include('../css/linkCss.php');
 
 
- include('include/headerBack.php'); 
+ include('include/headerBack.php');
 
  ?>
-    
+
 <div class="jumbotron table-responsive-xl">
-  
-        <h4>Les abonnements</h4> 
+
+        <h4>Les abonnements</h4>
         <hr class="my-4">
 
 
@@ -55,7 +55,7 @@ $resultats = $query->fetchAll();
         <?php } else if (isset($_GET['error']) && $_GET['error'] == 'price_format') { ?>
                   <div class="alert alert-danger text-center" role="alert">
                     Veuillez revoir le prix (minimum 100€/ans)
-                  </div> 
+                  </div>
         <?php } else if (isset($_GET['error']) && $_GET['error'] == 'hour_missing') { ?>
                   <div class="alert alert-danger text-center" role="alert">
                     Vous devez indiquer le nombre d'heures par mois
@@ -64,14 +64,14 @@ $resultats = $query->fetchAll();
         <?php } else if (isset($_GET['error']) && $_GET['error'] == 'hour_format') { ?>
                   <div class="alert alert-danger text-center" role="alert">
                     Veuillez revoir le prix (max 730h/mois)
-                  </div> 
+                  </div>
         <?php } else if (isset($_GET['update']) && $_GET['update'] == 1) { ?>
               <div class="alert alert-success text-center" role="alert">
             Modification(s) enregistrée(s)
           </div>
            <?php } else if (isset($_GET['add']) && $_GET['add'] == 'ok') { ?>
               <div class="alert alert-success text-center" role="alert">
-           Abonnement ajouté ! 
+           Abonnement ajouté !
           </div>
         <?php } else if (isset($_GET['delete']) && $_GET['delete'] == 1 && isset($_GET['id']) && !empty($_GET['id'])) { ?>
             <div class="alert alert-success text-center" role="alert">
@@ -196,7 +196,7 @@ $resultats = $query->fetchAll();
                           <td>
                             <input type="text" class="input" name="price" value="<?php echo $sub['subPrice']; ?>">
                           </td>
-                          
+
                           <td>
                             <input type="hidden" name="idSub" value="<?php echo $sub['idSub']; ?>">
                             <input type="submit" name="updateSub" class="option"value="MAJ">
@@ -209,7 +209,7 @@ $resultats = $query->fetchAll();
                   </tr>
                 </tbody>
           <?php } ?>
-        </table> 
+        </table>
       </div>
     </div>
   </div>
@@ -236,7 +236,7 @@ $resultats = $query->fetchAll();
 
               </tr>
             </thead>
-  
+
                 <tbody>
                   <tr>
                     <form action="PHP/subMAJ.php" method="POST">
@@ -329,15 +329,15 @@ $resultats = $query->fetchAll();
                   </tr>
                 </tbody>
   </table>
-        
+
       </div>
     </div>
   </div>
 </div>
-      
-      
-   
- 
+
+
+
+
 </div>
 
 <div class="col-lg-4"></div>
@@ -345,5 +345,3 @@ $resultats = $query->fetchAll();
   <?php include('../include/footer.php'); ?>
 </body>
 </html>
-
-
