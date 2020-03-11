@@ -6,9 +6,17 @@
 
 #IncludeRegexTransform: 
 
-/home/hhk/Documents/projetAnuel2020/cPart/dataBaseMerger/merger/main.c
+/home/hhk/Documents/projetAnuel2020/cPart/dataBaseMerger/merger/database.c
+database.h
+/home/hhk/Documents/projetAnuel2020/cPart/dataBaseMerger/merger/database.h
+
+/home/hhk/Documents/projetAnuel2020/cPart/dataBaseMerger/merger/database.h
 stdio.h
 -
 stdlib.h
+-
+string.h
+-
+mysql/mysql.h
 -
 
