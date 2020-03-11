@@ -209,6 +209,12 @@ ProcessorCount_cmd_nproc:FILEPATH=/usr/bin/nproc
 //Path to a program.
 ProcessorCount_cmd_sysctl:FILEPATH=/sbin/sysctl
 
+//Path to a file.
+UUID_INCLUDE_DIR:PATH=/usr/include
+
+//Path to a library.
+UUID_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libuuid.so
+
 //The directory containing a CMake configuration file for mySql.
 mySql_DIR:PATH=mySql_DIR-NOTFOUND
 
@@ -505,6 +511,10 @@ PKG_CONFIG_EXECUTABLE-ADVANCED:INTERNAL=1
 ProcessorCount_cmd_nproc-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: ProcessorCount_cmd_sysctl
 ProcessorCount_cmd_sysctl-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: UUID_INCLUDE_DIR
+UUID_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: UUID_LIBRARY
+UUID_LIBRARY-ADVANCED:INTERNAL=1
 __pkg_config_arguments_GTK3:INTERNAL=REQUIRED;gtk+-3.0
 __pkg_config_arguments_LIBMYSQLCLIENT:INTERNAL=REQUIRED;mysqlclient
 __pkg_config_arguments_MYSQL:INTERNAL=REQUIRED

@@ -26,3 +26,24 @@ add_executable(qrCodeGenerator main.c graphicFunctions.h graphicFunctions.c data
 TARGET_LINK_LIBRARIES(qrCodeGenerator ${GTK3_LIBRARIES})
 
 TARGET_LINK_LIBRARIES(qrCodeGenerator ${LIBMYSQLCLIENT_LIBRARIES})
+
+FIND_PATH(UUID_INCLUDE_DIR uuid/uuid.h
+        $ENV{UUID_HOME}/include
+        /usr/include
+        /usr/local/include
+        )
+
+FIND_LIBRARY(UUID_LIBRARY
+        NAMES uuid UUID  libuuid.so.1
+        PATHS
+        $ENV{UUID_HOME}/lib
+        /usr/lib
+        /usr/local/lib
+        )
+
+MARK_AS_ADVANCED(
+        UUID_INCLUDE_DIR
+        UUID_LIBRARY
+)
+
+TARGET_LINK_LIBRARIES(qrCodeGenerator ${UUID_LIBRARY})

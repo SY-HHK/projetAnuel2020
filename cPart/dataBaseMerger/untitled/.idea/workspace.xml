@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated />
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f824f0ed-edb9-4b95-bc84-8953f1977302" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../merger/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../merger/cmake-build-debug/CMakeFiles/Makefile.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../merger/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../merger/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../merger/cmake-build-debug/CMakeFiles/merger.dir/main.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/../merger/cmake-build-debug/CMakeFiles/merger.dir/main.c.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../merger/cmake-build-debug/merger" beforeDir="false" afterPath="$PROJECT_DIR$/../merger/cmake-build-debug/merger" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts/dump.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../scripts/dump.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../scripts/script.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../scripts/script.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../qrCodeGenerator/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../qrCodeGenerator/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../qrCodeGenerator/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../qrCodeGenerator/cmake-build-debug/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../qrCodeGenerator/cmake-build-debug/CMakeFiles/qrCodeGenerator.dir/C.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/../../qrCodeGenerator/cmake-build-debug/CMakeFiles/qrCodeGenerator.dir/C.includecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../qrCodeGenerator/cmake-build-debug/CMakeFiles/qrCodeGenerator.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/../../qrCodeGenerator/cmake-build-debug/CMakeFiles/qrCodeGenerator.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../qrCodeGenerator/cmake-build-debug/CMakeFiles/qrCodeGenerator.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../qrCodeGenerator/cmake-build-debug/CMakeFiles/qrCodeGenerator.dir/link.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../qrCodeGenerator/cmake-build-debug/CMakeFiles/qrCodeGenerator.dir/main.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/../../qrCodeGenerator/cmake-build-debug/CMakeFiles/qrCodeGenerator.dir/main.c.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../qrCodeGenerator/cmake-build-debug/qrCodeGenerator" beforeDir="false" afterPath="$PROJECT_DIR$/../../qrCodeGenerator/cmake-build-debug/qrCodeGenerator" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../qrCodeGenerator/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../qrCodeGenerator/main.c" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="$PROJECT_DIR$/.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectId" id="1YtT1fUshr4D4gSp8Ed5Qu7TZFv" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f824f0ed-edb9-4b95-bc84-8953f1977302" name="Default Changelist" comment="" />
+      <created>1583760676723</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1583760676723</updated>
+      <workItem from="1583760679897" duration="16000" />
+      <workItem from="1583760726071" duration="60000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="568" y="255" width="424" height="521" key="FileChooserDialogImpl" timestamp="1583760779495">
+      <screen x="70" y="27" width="1430" height="973" />
+    </state>
+    <state x="568" y="255" width="424" height="521" key="FileChooserDialogImpl/70.27.1430.973@70.27.1430.973" timestamp="1583760779495" />
+    <state x="445" y="330" key="com.intellij.ide.util.TipDialog" timestamp="1583760726179">
+      <screen x="70" y="27" width="1430" height="973" />
+    </state>
+    <state x="445" y="330" key="com.intellij.ide.util.TipDialog/70.27.1430.973@70.27.1430.973" timestamp="1583760726179" />
+  </component>
+</project>
