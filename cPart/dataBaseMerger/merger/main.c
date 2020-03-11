@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "database.h"
 
 int main() {
 
@@ -10,4 +11,8 @@ int main() {
         printf("Import réussi !");
     }
 
+return 0;
 }
+
+
+//SELECT * FROM PROVIDER INTO OUTFILE '/var/www/html/Backup.mdb' FIELDS TERMINATED BY ',';

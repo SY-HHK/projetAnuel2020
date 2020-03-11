@@ -78,6 +78,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/hhk/Documents/projetAnuel2020/cPart/dataBaseMerger/merger/database.c.h">
+			<Option target="merger"/>
+		</Unit>
+		<Unit filename="/home/hhk/Documents/projetAnuel2020/cPart/dataBaseMerger/merger/database.h">
+			<Option target="merger"/>
+		</Unit>
 		<Unit filename="/home/hhk/Documents/projetAnuel2020/cPart/dataBaseMerger/merger/main.c">
 			<Option target="merger"/>
 		</Unit>
