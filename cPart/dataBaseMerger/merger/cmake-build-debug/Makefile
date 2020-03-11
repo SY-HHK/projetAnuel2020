@@ -123,6 +123,33 @@ merger/fast:
 	$(MAKE) -f CMakeFiles/merger.dir/build.make CMakeFiles/merger.dir/build
 .PHONY : merger/fast
 
+database.o: database.c.o
+
+.PHONY : database.o
+
+# target to build an object file
+database.c.o:
+	$(MAKE) -f CMakeFiles/merger.dir/build.make CMakeFiles/merger.dir/database.c.o
+.PHONY : database.c.o
+
+database.i: database.c.i
+
+.PHONY : database.i
+
+# target to preprocess a source file
+database.c.i:
+	$(MAKE) -f CMakeFiles/merger.dir/build.make CMakeFiles/merger.dir/database.c.i
+.PHONY : database.c.i
+
+database.s: database.c.s
+
+.PHONY : database.s
+
+# target to generate assembly for a file
+database.c.s:
+	$(MAKE) -f CMakeFiles/merger.dir/build.make CMakeFiles/merger.dir/database.c.s
+.PHONY : database.c.s
+
 main.o: main.c.o
 
 .PHONY : main.o
@@ -159,6 +186,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... merger"
 	@echo "... edit_cache"
+	@echo "... database.o"
+	@echo "... database.i"
+	@echo "... database.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

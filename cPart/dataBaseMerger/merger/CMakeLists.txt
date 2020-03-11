@@ -3,4 +3,9 @@ project(merger C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(merger main.c database.h database.c.h)
+INCLUDE_DIRECTORIES(${LIBMYSQLCLIENT_INCLUDE_DIRS})
+LINK_DIRECTORIES(${LIBMYSQLCLIENT_LIBRARY_DIRS})
+
+add_executable(merger main.c database.h database.c)
+
+TARGET_LINK_LIBRARIES(merger ${LIBMYSQLCLIENT_LIBRARIES})
