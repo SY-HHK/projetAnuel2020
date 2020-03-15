@@ -30,11 +30,11 @@ int main() {
             virgule++;
         }
         strcpy(guid, line+virgule); //on met le guid dans une string
-        printf("guid = %s", guid);
+        guid[strlen(guid)-1] = '\0';
 
         if (alreadyExist(conn, guid)) {
             nb_error++;
-            tab_error[nb_error][0] = guid;
+            //tab_error[nb_error][0] = guid;
         }
         else {
             insertProvider(conn, line);

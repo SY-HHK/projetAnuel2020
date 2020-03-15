@@ -22,4 +22,4 @@ void selectNextLine(char line[], FILE *ptr);
 
 int alreadyExist(MYSQL *conn, char guid[]);
 
-void insertProvider(MYSQL *conn, char line);
+void insertProvider(MYSQL *conn, char line[]);
