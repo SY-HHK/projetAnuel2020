@@ -37,7 +37,7 @@ int db_connect(MYSQL *conn){
 }
 
 void closeConnection(MYSQL *conn) {
-    printf("Fermeture de la connexion...\n");
+    printf("Fermeture de la connexion.\n");
     mysql_close(conn);
 }
 
@@ -47,11 +47,11 @@ void selectNextLine(char line[], FILE *ptr) {
 
 }
 
-int alreadyExist(MYSQL *conn, char guid[]) {
+int alreadyExist(MYSQL *conn, char column[], char table[], char condition[], char answer[]) {
 
     char query[150];
 
-    sprintf(query, "SELECT companyName FROM PROVIDER WHERE providerGuid = '%s'", guid);
+    sprintf(query, "SELECT %s FROM %s WHERE %s = '%s'", column, table, condition, answer);
 
     if(mysql_query(conn, query)) finish_with_err(conn);
     MYSQL_RES *result = mysql_store_result(conn);
@@ -63,36 +63,110 @@ int alreadyExist(MYSQL *conn, char guid[]) {
 
 void insertProvider(MYSQL *conn, char line[]) {
 
-    MYSQL_ROW row;
     char insertIntoProvider[1000];
-
     char companyName[50];
     char providerFirstName[50];
     char providerLastName[50];
-    char providerBirth[10];
+    char providerBirth[15];
     char providerEmail[50];
     char providerPhone[15];
     char providerAddress[100];
-    int idCity;
+    char cityName[50];
+    char cityDepartment[5];
+    char cityRegion[50];
     char providerGuid[37];
     int size; //taille de la chaine
-    int start = 3; //emplacement de départ
+    int start = 0; //emplacement de départ
     size = strchr(line+start,',') - line-start;
     strncpy(companyName, line+start, size);
-
+    companyName[size] = '\0';
+    //Prenom
     start += size+1;
     size = strchr(line+start,',') - line-start;
     strncpy(providerFirstName, line+start, size);
+    providerFirstName[size] = '\0';
+    //Nom
+    start += size+1;
+    size = strchr(line+start,',') - line-start;
+    strncpy(providerLastName, line+start, size);
+    providerLastName[size] = '\0';
+    //Date de naissance
+    start += size+1;
+    size = strchr(line+start,',') - line-start;
+    strncpy(providerBirth, line+start, size);
+    providerBirth[size] = '\0';
+    //Email
+    start += size+1;
+    size = strchr(line+start,',') - line-start;
+    strncpy(providerEmail, line+start, size);
+    providerEmail[size] = '\0';
+    //Téléphone
+    start += size+1;
+    size = strchr(line+start,',') - line-start;
+    strncpy(providerPhone, line+start, size);
+    providerPhone[size] = '\0';
+    //Adresse
+    start += size+1;
+    size = strchr(line+start,',') - line-start;
+    strncpy(providerAddress, line+start, size);
+    providerAddress[size] = '\0';
+    //Ville
+    start += size+1;
+    size = strchr(line+start,',') - line-start;
+    strncpy(cityName, line+start, size);
+    cityName[size] = '\0';
+    //Departement
+    start += size+1;
+    size = strchr(line+start,',') - line-start;
+    strncpy(cityDepartment, line+start, size);
+    cityDepartment[size] = '\0';
+    //Region
+    start += size+1;
+    size = strchr(line+start,',') - line-start;
+    strncpy(cityRegion, line+start, size);
+    cityRegion[size] = '\0';
+    //Guid
+    start += size+1;
+    strcpy(providerGuid, line+start);
+    providerGuid[36] = '\0';
 
-    printf("%s", providerFirstName);
+    //création de la ville si elle existe pas
+    if (!alreadyExist(conn, "cityName", "CITY", "cityName", cityName)) {
+        sprintf(insertIntoProvider, "INSERT INTO CITY (cityName, cityDepartment, cityRegion) "
+                                    "VALUES ('%s', %s, '%s')",cityName, cityDepartment, cityRegion);
+        if (mysql_query(conn, insertIntoProvider)) {
+            finish_with_err(conn);
+        }
+    }
 
-    /*sprintf(insertIntoProvider,
-            "INSERT INTO PROVIDER (companyName, providerFirstName, providerLastName, providerBirth, providerEmail, providerPhone, providerAddress, idCity, providerGuid) "
-            "VALUES ('%s')", line+3);
-
-    if(mysql_query(conn, insertIntoProvider))
+    //recuperation de l'id de la ville
+    sprintf(insertIntoProvider, "SELECT idCity FROM CITY WHERE cityName = '%s'", cityName);
+    if (mysql_query(conn, insertIntoProvider)) {
         finish_with_err(conn);
+    }
 
-    printf("%s", insertIntoProvider);*/
+    MYSQL_RES *result = mysql_store_result(conn);
+    MYSQL_ROW row = mysql_fetch_row(result);
+    int idCity;
+    sscanf(row[0],"%d",&idCity);
+
+    printf("%d", idCity);
+
+    sprintf(insertIntoProvider,
+            "INSERT INTO PROVIDER (companyName, providerFirstName, providerLastName, providerBirth, providerEmail, providerPhone, providerAddress, idCity, providerGuid) "
+            "VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', %d, '%s')",
+            companyName,
+            providerFirstName,
+            providerLastName,
+            providerBirth,
+            providerEmail,
+            providerPhone,
+            providerAddress,
+            idCity,
+            providerGuid);
+
+    if(mysql_query(conn, insertIntoProvider)) {
+        finish_with_err(conn);
+    }
 
 }

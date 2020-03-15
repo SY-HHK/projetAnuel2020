@@ -20,6 +20,6 @@ void closeConnection(MYSQL *conn);
 
 void selectNextLine(char line[], FILE *ptr);
 
-int alreadyExist(MYSQL *conn, char guid[]);
+int alreadyExist(MYSQL *conn, char column[], char table[], char condition[], char answer[]);
 
 void insertProvider(MYSQL *conn, char line[]);
