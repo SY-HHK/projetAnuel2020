@@ -64,9 +64,9 @@ CREATE TABLE IF NOT EXISTS `bringme`.`SERVICE` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bringme`.`CONTRACT` (
   `idContract` INT AUTO_INCREMENT,
-  `contactDateStart` DATE ,
-  `contactDateEnd` DATE,
-  `contactPrice` FLOAT,
+  `contractDateStart` DATE ,
+  `contractDateEnd` DATE,
+  `contractPrice` FLOAT,
   `idService` INT,
   `idProvider` INT,
   PRIMARY KEY (`idContract`),
@@ -185,6 +185,17 @@ CREATE TABLE IF NOT EXISTS `bringme`.`DELIVERY` (
 
 
 -- -----------------------------------------------------
+-- Data for table `bringme`.`SERVICE`
+-- -----------------------------------------------------
+
+INSERT INTO `SERVICE` (`idService`, `serviceTitle`, `servicePrice`, `serviceDescription`, `serviceValidate`) VALUES
+(1, 'Baby sitter', 9, 'Le baby-sitter, nounou ou garde d’enfant, veille à la sécurité, au confort et au bien-être des petits dont il a la charge en l’absence des parents.', 1),
+(2, 'Plombier', 50, 'Le plombier installe, répare, règle et entretient les équipements sanitaires (toilettes, salles de bains, etc.), ainsi que les canalisations de distribution de gaz, d’eau et d’évacuation (en acier, cuivre, PVC, etc.)', 1),
+(3, 'Services du quotidien', 15, 'Pressing, retouche, cordonnerie, blanchisserie se sont les services du quotidien que nous vous proposons pour alléger vos journées chargées.\r\n\r\nIl vous suffit de déposer vos articles et nous les récupérerons lors de notre passage.', 1),
+(4, 'Achats express', 10, 'Nous mettons à votre disposition tous types de services qui peuvent faciliter votre vie : paniers bio, bouquets de fleurs, jusqu’à la livraison des vins & spiritueux', 1);
+
+
+-- -----------------------------------------------------
 -- Data for table `bringme`.`CITY`
 -- -----------------------------------------------------
 INSERT INTO `bringme`.`CITY` (`cityName`, `cityDepartement`, `cityRegion`) VALUES ('paris', '75', 'lle de france');
@@ -192,8 +203,14 @@ INSERT INTO `bringme`.`CITY` (`cityName`, `cityDepartement`, `cityRegion`) VALUE
 -- -----------------------------------------------------
 -- Data for table `bringme`.`PROVIDER`
 -- -----------------------------------------------------
-INSERT INTO `bringme`.`PROVIDER` (`idProvider`, `providerFirstName`, `providerLastName`, `providerPhone`, `providerEmail`, `providerPassword`, `providerAddress`, `companyName`, `providerIdCity`, `providerRate`, `providerAnnulation`, `state`) VALUES (1, 'Jean', 'Dupont', '0897567876', 'jeandupont@gmail.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', '98 rue test', NULL, 1, NULL, DEFAULT, 0);
+INSERT INTO `bringme`.`PROVIDER` (`idProvider`, `providerFirstName`, `providerLastName`, `providerPhone`, `providerEmail`, `providerPassword`, `providerAddress`, `companyName`, `providerIdCity`, `providerRate`, `providerAnnulation`, `state`) VALUES (1, 'Jean', 'Dupont', '0897567876', 'jeandupont@gmail.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', '98 rue test', NULL, 1, 5, DEFAULT, 0);
 INSERT INTO `bringme`.`PROVIDER` (`idProvider`, `providerFirstName`, `providerLastName`, `providerPhone`, `providerEmail`, `providerPassword`, `providerAddress`, `companyName`, `providerIdCity`, `providerRate`, `providerAnnulation`, `state`) VALUES (2, 'Jacques', 'Jardin', '9067842465', 'jardin@gmail.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', '76 avenue test', 'ematch', 1, NULL, DEFAULT, 0);
+
+-- -----------------------------------------------------
+-- Data for table `bringme`.`CONTRACT`
+-- -----------------------------------------------------
+INSERT INTO `CONTRACT` (`idContract`,`contractDateStart`,`contractDateEnd`,`contractPrice`,`idService`,`idProvider`) VALUES (1,'2020-03-17','2021-03-17',20,2,1);
+INSERT INTO `CONTRACT` (`idContract`,`contractDateStart`,`contractDateEnd`,`contractPrice`,`idService`,`idProvider`) VALUES (2,'2020-03-17','2021-03-17',5,1,1);
 
 -- -----------------------------------------------------
 -- Data for table `bringme`.`SUBSCRIPTION`
@@ -206,5 +223,5 @@ INSERT INTO `bringme`.`SUBSCRIPTION` (`idSub`, `subName`, `subDays`, `subHourSta
 -- Data for table `bringme`.`USER`
 -- -----------------------------------------------------
 INSERT INTO `bringme`.`USER` (`idUser`, `userEmail`, `userPassword`, `userFirstName`, `userLastName`, `userBirth`, `userAddress`, `userIdCity`, `userPhone`, `userPrivilege`, `userIp`, `userAgent`, `userAnnulation`, `state`, `idSubscription`, `subStart`, `subEnd`, `userGuid`) VALUES (1, 'adeline@yahoo.fr', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'Adeline', 'Hernadez', '1995-08-12', '86 avenue de la Place', 1, '0685643576', 0, '09090909', '35355535', DEFAULT, 0, NULL, NULL, NULL, '05301411-7c9d-422c-8dd1-842ff4e6c3b5');
-INSERT INTO `bringme`.`USER` (`idUser`, `userEmail`, `userPassword`, `userFirstName`, `userLastName`, `userBirth`, `userAddress`, `userIdCity`, `userPhone`, `userPrivilege`, `userIp`, `userAgent`, `userAnnulation`, `state`, `idSubscription`, `subStart`, `subEnd`, `userGuid`) VALUES (2, 'louis.ricour@gmail.com', '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08', 'Louis', 'Ricour', '2000-06-26', '86 avenue de la Place', 1, '0685643576', 1, '09090909', '35355535', DEFAULT, 0, NULL, NULL, NULL, '7fcd2aa7-9d8a-438a-b834-0de6b6ed69db');
+INSERT INTO `bringme`.`USER` (`idUser`, `userEmail`, `userPassword`, `userFirstName`, `userLastName`, `userBirth`, `userAddress`, `userIdCity`, `userPhone`, `userPrivilege`, `userIp`, `userAgent`, `userAnnulation`, `state`, `idSubscription`, `subStart`, `subEnd`, `userGuid`) VALUES (2, 'louis.ricour@gmail.com', '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08', 'Louis', 'Ricour', '2000-06-26', '86 avenue de la Place', 1, '0685643576', 10, '09090909', '35355535', DEFAULT, 0, NULL, NULL, NULL, '7fcd2aa7-9d8a-438a-b834-0de6b6ed69db');
 INSERT INTO `bringme`.`USER` (`idUser`, `userEmail`, `userPassword`, `userFirstName`, `userLastName`, `userBirth`, `userAddress`, `userIdCity`, `userPhone`, `userPrivilege`, `userIp`, `userAgent`, `userAnnulation`, `state`, `idSubscription`, `subStart`, `subEnd`, `userGuid`) VALUES (3, 'suvirtha@bringme.fr', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'Suvirtha', 'Thayaharan', '2000-05-03', '86 avenue de la Place', 1, '0685643576', 10, '09090909', '35355535', DEFAULT, 0, NULL, NULL, NULL, '506617B9-E5EC-48DA-B6D5-9606CB9251B8');

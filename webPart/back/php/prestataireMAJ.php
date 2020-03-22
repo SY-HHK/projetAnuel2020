@@ -202,4 +202,88 @@ var_dump($newPwd);
 }
 
 
+
+
+// // Ajouter un contract
+if (isset($_POST['addContract'])){
+
+	$idService = $_POST['idService'];
+	$start = htmlspecialchars($_POST['startContract']);
+	$end = htmlspecialchars($_POST['endContract']);
+	$price = htmlspecialchars($_POST['priceContract']);
+	$provider = $_POST['idProvider'];
+
+
+	 // Date de debut
+    if(!isset($start) || empty($start)){
+        header('Location: ../provider.php?error=start_missing');
+        exit;
+    }
+
+     // Date de fin
+    if(!isset($end) || empty($end)){
+        header('Location: ../provider.php?error=end_missing');
+        exit;
+    }
+
+    // dates cohérences
+
+    if($start > $end){
+    	header('Location: ../provider.php?error=date_format');
+        exit;
+    }
+
+    // Prix
+    if(!isset($price) || empty($price)){
+        header('Location: ../provider.php?error=priceContract_missing');
+        exit;
+    }
+
+    if(preg_match('#[a-zA-z]#',$price)) {
+        header('location: ../provider.php?error=priceContract_format');
+        exit;
+    }
+
+     if($price < 1) {
+        header('location: ../provider.php?error=priceContract_format');
+        exit;
+    }
+
+$req = $pdo->prepare('INSERT INTO CONTRACT (contractDateStart, contractDateEnd, contractPrice, idService, idProvider) VALUES (:start, :fin, :price, :service, :provider)');
+
+$req->execute(array(
+  'start' => $start,
+  'fin' => $end,
+  'price' => $price,
+  'service' => $idService,
+  'provider' => $provider
+));
+
+header('Location: ../provider.php?addContract=ok');
+  exit;
+
+}
+
+
+
+
+// Supprimer un contract
+
+if (isset($_POST['deleteContract'])) {
+	include('../../include/config.php');
+
+	$id = $_POST['idContract'];
+
+	$queryDelete = $pdo->prepare('DELETE FROM CONTRACT WHERE idContract = ?');
+	$queryDelete->execute(array($id));
+
+	$rows2 = $queryDelete->rowCount();
+
+	 if ($rows2 == 1){
+		header('location: ../provider.php?deleteContract='.$rows2 );
+        exit;
+	} 
+}
+
+
 ?>

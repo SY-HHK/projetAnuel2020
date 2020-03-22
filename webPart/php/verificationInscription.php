@@ -207,7 +207,7 @@ $userAgent =  $_SERVER['HTTP_USER_AGENT'];
 
 var_dump($userAgent);
 var_dump($userIp);
-$req->execute(array(
+$req->execute([
   'mail' => htmlspecialchars($_POST['mail']),
   'pwd' => hash('sha256', $_POST['password']),
   'firstName' => htmlspecialchars($_POST['firstName']),
@@ -220,7 +220,7 @@ $req->execute(array(
   'agent' => $userAgent,
   'userIdCity' => $idCity["MAX(idCity)"],
   'guid' => $guid
-));
+]);
 
 header('Location: ../connexion.php?inscription=ok');
   exit;
