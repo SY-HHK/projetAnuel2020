@@ -25,25 +25,7 @@ $resultats = $query->fetchAll();
 
 <body>
 
-<!--<?php include('include/header.php'); ?>-->
-
-<header>
-  <nav class="blue-grey darken-3">
-    <div class="nav-wrapper">
-      <a href="index.php" class="brand-logo"><img src="images/logo.png" style="width: 90px;"></a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="subPrice.php">Abonnement</a></li>
-        <?php
-        if (isset($_SESSION["user"]) && !empty($_SESSION["user"]))
-        { ?>
-          <li><a href="profilUser.php">Profil</a></li>
-      <?php  } else { ?>
-          <li><a href="connexion.php">Se connecter</a></li>
-      <?php  } ?>
-      </ul>
-    </div>
-  </nav>
-</header>
+<?php include('include/new_header.php'); ?>
 
 <main style="margin-bottom: 200px;">
 
@@ -93,13 +75,7 @@ $resultats = $query->fetchAll();
 </center></div>
 </main>
 
-<footer class="page-footer blue-grey darken-3">
-  <div class="footer-copyright">
-    <div class="container">
-      <p style="color: white"> © <?php echo date('Y'); ?> site officiel de <a class="lien" href="index.php"> BringMe </a></p>
-    </div>
-  <div>
-</footer>
+<?php include("include/new_footer.php"); ?>
 
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

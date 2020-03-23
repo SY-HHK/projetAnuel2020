@@ -1,9 +1,95 @@
-p {
-    color: black;
+h2 {
+  color: white;
 }
 
-nav a:hover {
-color: #000;
-text-decoration: none;
+.ml2 {
+  font-weight: 900;
+  font-size: 3.5em;
 }
 
+.ml2 .letter {
+  display: inline-block;
+  line-height: 1em;
+}
+
+.ml6 {
+  position: relative;
+  font-weight: 900;
+  font-size: 3.3em;
+}
+
+.ml6 .text-wrapper {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+
+.ml6 .letter {
+  display: inline-block;
+  line-height: 1em;
+}
+
+.ml7 {
+  position: relative;
+  font-weight: 900;
+  font-size: 3.3em;
+}
+
+.ml7 .text-wrapper {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+
+.ml7 .letter {
+  display: inline-block;
+  line-height: 1em;
+}
+
+.ml75 {
+  position: relative;
+  font-weight: 900;
+  font-size: 3.3em;
+}
+
+.ml75 .text-wrapper {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.2em;
+  padding-right: 0.05em;
+  padding-bottom: 0.1em;
+  overflow: hidden;
+}
+
+.ml75 .letter {
+  display: inline-block;
+  line-height: 1em;
+}
+
+.ml15 {
+  font-weight: 800;
+  font-size: 3.8em;
+  text-transform: uppercase;
+  letter-spacing: 0.5em;
+}
+
+.ml15 .word {
+  display: inline-block;
+  line-height: 1em;
+}
+
+#blocker {
+    padding-left: 5%;
+    position: absolute;
+    margin-left: 5%;
+    margin-top: 0.5%;
+    width: 90%;
+    height: 90%;
+    background-color: rgba(0,0,0,0.5);
+  }
