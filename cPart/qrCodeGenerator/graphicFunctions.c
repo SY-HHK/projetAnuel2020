@@ -58,20 +58,20 @@ GtkWidget *mainWindow(int *argc, char ***argv) {
 
 
 
-void generateQrCode(char companyName, char providerFirstName, char providerLastName, int idProvider) {
+void generateQrCode(char guid[], int idProvider) {
 
-    char webIdProvider[50];
+    char webIdProvider[105];
     char file[30];
 
     sprintf(file, "qrCode%d.pgm",idProvider);
 
-    sprintf(webIdProvider, "www.bringme.ovh/provider.php?id=%d%d%d%d", companyName, providerFirstName, providerLastName, idProvider);
+    sprintf(webIdProvider, "localhost/projetAnuel2020/webPart/provider.php?id=%s", guid);
 
     QRCode qrcode;
-    uint8_t qrcodeData[qrcode_getBufferSize(4)];
+    uint8_t qrcodeData[qrcode_getBufferSize(6)];
     uint8_t x,y;
 
-    qrcode_initText(&qrcode, qrcodeData, 4, ECC_MEDIUM, webIdProvider);
+    qrcode_initText(&qrcode, qrcodeData, 6, ECC_MEDIUM, webIdProvider);
 
     for (y = 0; y < qrcode.size; y++) {
         for (x = 0; x < qrcode.size; x++) {

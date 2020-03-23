@@ -4,10 +4,22 @@ if (!isset($_SESSION['admin'])){
 header('location:../index.php');
 }
 
-$query = $pdo->prepare('SELECT * FROM PROVIDER');
+$query = $pdo->prepare('SELECT * FROM PROVIDER INNER JOIN CITY ON providerIdCity = idCity');
 $query->execute();
-
 $resultats = $query->fetchAll();
+
+
+$providerCounter = 0; // pr modal
+
+
+$query2 = $pdo->prepare('SELECT * FROM CONTRACT WHERE CONTRACT.idProvider = ?');
+
+$query3 = $pdo->prepare('SELECT serviceTitle FROM SERVICE WHERE idService = ?');
+
+$query4 = $pdo->prepare('SELECT * FROM SERVICE');
+$query4->execute();
+$allServices = $query4->fetchAll();
+// var_dump($allServices);
 ?>
 
 <!DOCTYPE html>
@@ -114,19 +126,61 @@ $resultats = $query->fetchAll();
                     Veuillez revoir la région
                   </div>
 
+        <?php } else if (isset($_GET['error']) && $_GET['error'] == 'start_missing') { ?>
+                <div class="alert alert-danger text-center" role="alert">
+                  Vous devez indiquer la date de début du contrat
+                </div>
+
+        <?php } else if (isset($_GET['error']) && $_GET['error'] == 'end_missing') { ?>
+                <div class="alert alert-danger text-center" role="alert">
+                  Vous devez indiquer la date de fin du contrat
+                </div>
+
+        <?php } else if (isset($_GET['error']) && $_GET['error'] == 'priceContract_missing') { ?>
+                <div class="alert alert-danger text-center" role="alert">
+                  Vous devez indiquer un prix pour le contrat
+                </div>
+
+        <?php } else if (isset($_GET['error']) && $_GET['error'] == 'priceContract_format') { ?>
+                <div class="alert alert-danger text-center" role="alert">
+                  Vous devez indiquer un prix pour le contrat supérieur à 1€
+                </div>
+
+        <?php } else if (isset($_GET['error']) && $_GET['error'] == 'contract_taken') { ?>
+                <div class="alert alert-danger text-center" role="alert">
+                  Ce contrat existe déjà
+                </div>
+
+         <?php } else if (isset($_GET['error']) && $_GET['error'] == 'date_format') { ?>
+                <div class="alert alert-danger text-center" role="alert">
+                  Vous devez revoir les dates entrées 
+                </div>
+
         <?php } else if (isset($_GET['genere']) && $_GET['genere'] == 1) { ?>
                   <div class="alert alert-success text-center" role="alert">
                     Le nouveau mot de passe a été généré
                   </div>
  
-            <?php } else if (isset($_GET['update']) && $_GET['update'] == 1) { ?>
-              <div class="alert alert-success text-center" role="alert">
-            Modification(s) enregistrée(s)
-          </div>
-          <?php } else if (isset($_GET['delete']) && $_GET['delete'] == 1 && isset($_GET['id']) && !empty($_GET['id'])) { ?>
-            <div class="alert alert-success text-center" role="alert">
-            <?php echo 'L\'id '.$_GET['id'].' a été suprimée' ?>
-          </div>
+        <?php } else if (isset($_GET['update']) && $_GET['update'] == 1) { ?>
+                <div class="alert alert-success text-center" role="alert">
+                  Modification(s) enregistrée(s)
+                </div>
+
+        <?php } else if (isset($_GET['delete']) && $_GET['delete'] == 1 && isset($_GET['id']) && !empty($_GET['id'])) { ?>
+                <div class="alert alert-success text-center" role="alert">
+                  <?php echo 'L\'id '.$_GET['id'].' a été suprimée' ?>
+                </div>
+
+        <?php } else if (isset($_GET['deleteContract']) && $_GET['deleteContract'] == 1) { ?>
+                <div class="alert alert-success text-center" role="alert">
+                  <?php echo 'Le contract a été suprimé' ?>
+                </div>
+
+        <?php } else if (isset($_GET['addContract']) && $_GET['addContract'] == 1) { ?>
+                <div class="alert alert-success text-center" role="alert">
+                  <?php echo 'Le contract a été ajouté !' ?>
+                </div>
+
         <?php } ?>
       
  <table class="table table-hover">
@@ -142,19 +196,18 @@ $resultats = $query->fetchAll();
         <th scope="col">Région</th>
         <th scope="col">Départ.</th>
         <th scope="col">Entreprise</th>
-        <th scope="col">Avis</th>
+        <!-- <th scope="col">Avis</th> -->
         <th scope="col">Pénalités</th>
         <th scope="col">State</th>
+        <th scope="col">Plus d'info</th>
         <th scope="col">MDP</th>
          <th scope="col">MAJ</th>
       </tr>
     </thead>
 
-  <?php
-      foreach ($resultats as $provider) { ?>
+  <?php foreach ($resultats as $provider) { ?>
         <tbody>
-          <tr <?php if ($provider['state'] == 0) echo 'class = "table-success"'; 
-           else if($provider['state'] == 1) echo 'class = "table-warning"';?>>
+          <tr>
             <form action="PHP/prestataireMAJ.php" method="POST">
               <th scope="row"><?php echo $provider['idProvider']; ?></th>
                   <td>
@@ -184,10 +237,10 @@ $resultats = $query->fetchAll();
                   <td>
                     <input type="text" class="input" name="companyName" value="<?php echo $provider['companyName']; ?>">
                   </td>
-                  <td>
+                  <!-- <td>
                     <input type="text" class="inputNbr" name="providerRate" value="<?php echo $provider['providerRate']; ?>">
-                  </td>
-                  <td>
+                  </td> -->
+                  <td> 
                     <input type="text" class="inputNbr" name="annulation" value="<?php echo $provider['providerAnnulation']; ?>">
                   </td>
                   <td>
@@ -199,9 +252,179 @@ $resultats = $query->fetchAll();
                       </select>
                     </div>
                   </td>
+
+                  <td>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal-<?php echo $providerCounter; ?>">
+                       + 
+                    </button>
+
+              <!-- DEBUT MODAL -->
+                      <div class="modal fade" id="exampleModal-<?php echo $providerCounter; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <?php echo $provider['providerLastName']; ?>
+                        <div class="modal-dialog modal-xl" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              
+                              <h5 class="modal-title" id="exampleModalLabel">Informations complémentaires sur M.<?php echo $provider['providerLastName']; ?></h5>
+                              
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <?php 
+                              if ($provider['providerRate'] == NULL){
+                                echo "Ce prestataire n'a pas recu d'avis par nos clients";
+                              }else{
+                              echo "L'avis sur ce prestataire par nos client : ". $provider['providerRate'] . "/10"; 
+                              }?>
+                                <hr class="my-4">
+
+                              <?php 
+                                $query2->execute([$provider["idProvider"]]);
+                                $resultats2 = $query2->fetchAll();
+
+                                // var_dump($resultats2);
+
+                                if ($resultats2 == NULL){
+                                  echo "Ce prestataire n'a pas de contract en cours. ";
+
+                                } else {
+
+                                
+                                 ?>
+
+                                  
+                              
+                                  <div class="card">
+                                  <div class="card-header" id="headingOne">
+                                    <h2 class="mb-0">
+                                      <button class=" btn collaborateur " type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" >
+                                        <h6>Les contats en cours </h6>
+                                      </button>
+                                    </h2>
+                                  </div>
+
+
+                                    <div class="accordion" id="accordionExample">
+                                      <div class="card">
+                                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                          <div class="card-body">
+
+                                            <table class="table table-hover">
+                                              <thead>
+                                                <tr>
+                                                  <th scope="col">start</th>
+                                                  <th scope="col">end</th>
+                                                  <th scope="col">€/heure</th>
+                                                  <th scope="col">service</th>
+                                                  <th scope="col"> </th>
+                                                </tr>
+                                              </thead>
+                                               <?php        
+                                                foreach ($resultats2 as $contract) {
+
+                                                      $query3->execute([$contract['idService']]);
+                                                      $service = $query3->fetch();
+                                                       // var_dump($service);
+                                                ?>
+                                                              <tr>
+                                                                      <td>
+                                                                        <input type="date" class="inputContract" name="start" value="<?php echo $contract['contractDateStart']; ?>" disabled="disabled">
+                                                                      </td>
+                                                                      <td>
+                                                                        <input type="date" class="inputContract" name="end" value="<?php echo $contract['contractDateEnd']; ?>" disabled="disabled">
+                                                                      </td>
+                                                                      <td>
+                                                                        <input type="text" class="inputNbr" name="price" value="<?php echo $contract['contractPrice']; ?>" disabled="disabled">
+                                                                      </td>
+                                                                      <td>
+                                                                        <input type="text" class="input" name="service" value="<?php echo $service['serviceTitle']; ?>" disabled="disabled">
+                                                                      </td>
+                                                                      <td>
+                                                                        <input type="hidden" class="input" name="idContract" value="<?php echo $contract['idContract']; ?>">
+
+
+                                                                        <input type="submit" name="deleteContract" class="option"value="X">
+                                                                      </td>
+                                                              </tr>
+                                                <?php } ?>
+                                            </table>
+                                           </div>
+                                          </div>
+                                        </div>
+                                        <div class="card">
+                                          <div class="card-header" id="headingTwo">
+                                            <h2 class="mb-0">
+                                              <button class="btn collaborateur collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                <h6>Ajouter un contrat</h6>
+                                              </button>
+                                            </h2>
+                                          </div>
+                                          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                            <div class="card-body"> 
+                                               <table class="table table-hover">
+                                              <thead>
+                                                <tr>
+                                                  <th scope="col">start</th>
+                                                  <th scope="col">end</th>
+                                                  <th scope="col">€/heure</th>
+                                                  <th scope="col">service</th>
+                                                  <th scope="col"> </th>
+                                                </tr>
+                                              </thead>
+                                              
+                                                <tr>
+                                                        <td>
+                                                          <input type="date" class="inputContract" name="startContract">
+                                                        </td>
+                                                        <td>
+                                                          <input type="date" class="inputContract" name="endContract">
+                                                        </td>
+                                                        <td>
+                                                          <input type="text" class="inputNbr" name="priceContract" placeholder="...">
+                                                        </td>
+                                                        <td>
+                                                           <div class="form-group">
+                                                              <select class="form-control-sm" name="idService">
+
+                                                                <?php foreach ($allServices as $service) { ?>
+                                                                 
+                                                                <option value="<?php echo $service['idService']; ?>"><?php echo $service['serviceTitle']; ?></option>
+
+
+                                                                <?php } ?>
+                                                              </select>
+                                                            </div>
+                                                          <!-- <input type="text" class="input" name="serviceContract" placeholder="..."> -->
+                                                        </td>
+                                                        <td>
+                                                          <input type="hidden" name="idProvider" value="<?php echo $provider['idProvider']; ?>">
+                                                          <input type="submit" name="addContract" class="option" value="Ajouter !">
+                                                        </td>
+                                                </tr>
+                                            </table>
+
+
+                                            </div>
+                                          </div>
+                                        </div>      
+
+                              </div>
+                                                     <!--  <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                      </div> -->
+                          </div>
+                        </div>
+                      </div>
+
+                    <?php $providerCounter++; //pr modal 
+                          } ?>
+              <!-- FIN MODAL -->
+                  </td>
                   <td>                    
                     <input type="submit" name="pwd" class="option" value="NEW">
-                 </td>
+                  </td>
                   <td>
                     <input type="hidden" name="idProvider" value="<?php echo $provider['idProvider']; ?>">
                     <input type="submit" name="updateProvider" class="option"value="MAJ">
@@ -209,7 +432,11 @@ $resultats = $query->fetchAll();
             </form>
           </tr>
         </tbody>
-  <?php } ?>
+  <?php 
+                              
+        
+          
+        } ?>
 </table>
  
 </div>

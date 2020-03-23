@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/merger.dir/database.c.o"
   "CMakeFiles/merger.dir/main.c.o"
   "merger"
   "merger.pdb"

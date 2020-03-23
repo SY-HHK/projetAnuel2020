@@ -4,12 +4,14 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
+  "/home/hhk/Documents/projetAnuel2020/cPart/dataBaseMerger/merger/database.c" "/home/hhk/Documents/projetAnuel2020/cPart/dataBaseMerger/merger/cmake-build-debug/CMakeFiles/merger.dir/database.c.o"
   "/home/hhk/Documents/projetAnuel2020/cPart/dataBaseMerger/merger/main.c" "/home/hhk/Documents/projetAnuel2020/cPart/dataBaseMerger/merger/cmake-build-debug/CMakeFiles/merger.dir/main.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_C_TARGET_INCLUDE_PATH
+  "/usr/include/mysql"
   )
 
 # Targets to which this target links.

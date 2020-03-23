@@ -4,6 +4,7 @@
 
 #include "databaseFunctions.h"
 #include "graphicFunctions.h"
+#include <uuid/uuid.h>
 
 void finish_with_err(MYSQL *conn){
 
@@ -61,8 +62,8 @@ void insertProvider(GtkButton *widget) {
     strcpy(insert.cityName, toLowerCase(gtk_entry_get_text(GTK_ENTRY(pEntry.cityName))));
     strcpy(insert.providerAddress, toLowerCase(gtk_entry_get_text(GTK_ENTRY(pEntry.providerAddress))));
 
-    char insertIntoProvider[500];
-    char insertIntoCity[150];
+    char insertIntoProvider[750];
+    char insertIntoCity[250];
     char selectCity[100];
     char selectProvider[100];
     int idCity;
@@ -108,9 +109,16 @@ void insertProvider(GtkButton *widget) {
 
     mysql_free_result(result);
 
+    uuid_t uuid;
+    // generate
+    uuid_generate_time_safe(uuid);
+    // unparse (to string)
+    char uuid_str[37];      // ex. "1b4e28ba-2fa1-11d2-883f-0016d3cca427" + "\0"
+    uuid_unparse_lower(uuid, uuid_str);
+
     sprintf(insertIntoProvider,
-            "INSERT INTO PROVIDER (companyName, providerFirstName, providerLastName, providerBirth, providerEmail, providerPhone, providerAddress, idCity) "
-            "VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', %d)",
+            "INSERT INTO PROVIDER (companyName, providerFirstName, providerLastName, providerBirth, providerEmail, providerPhone, providerAddress, idCity, providerGuid) "
+            "VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', %d, '%s')",
             insert.companyName,
             insert.providerFirstName,
             insert.providerLastName,
@@ -118,7 +126,8 @@ void insertProvider(GtkButton *widget) {
             insert.providerEmail,
             insert.providerPhone,
             insert.providerAddress,
-            idCity);
+            idCity,
+            uuid_str);
 
     if(mysql_query(conn, insertIntoProvider))
         finish_with_err(conn);
@@ -135,7 +144,7 @@ void insertProvider(GtkButton *widget) {
 
     gtk_widget_show_all(confirmationWindow(&pEntry.argc, &pEntry.argv));
 
-    generateQrCode(insert.companyName[0], insert.providerFirstName[0], insert.providerLastName[0], idProvider);
+    generateQrCode(uuid_str, idProvider);
 
 }
 

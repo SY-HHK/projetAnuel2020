@@ -1,3 +1,22 @@
+input{
+	background-color:transparent;
+    border: 0px solid;
+}
+nav a:hover {
+	color: #000;
+	text-decoration: none;
+}
+
+#desc{
+	background-color:transparent;
+    border: 0px solid;
+	width: 900px;
+}
+
+.inputContract{
+	width: 150px;
+}
+
 .input{
     width: 111px;   
 }
@@ -7,17 +26,10 @@
 }
 
 .inputEmail{
-    width: 141px;   
+    width: 181px;   
 }
 
-input{
-	background-color:transparent;
-    border: 0px solid;
-}
-nav a:hover {
-	color: #000;
-	text-decoration: none;
-}
+
 
 .ajt{
 	width: 20px;
@@ -36,3 +48,9 @@ nav a:hover {
     border: 0px solid;
     width: 145px;   
 }
+
+
+.inputDelivery{
+	width: 155px;   
+}
+

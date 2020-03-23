@@ -1,5 +1,6 @@
 #include "graphicFunctions.h"
 #include "databaseFunctions.h"
+#include <uuid/uuid.h>
 
 int main(int argc,char **argv)
 {

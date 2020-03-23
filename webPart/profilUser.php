@@ -8,7 +8,7 @@ if (!isset($_SESSION["user"])) {
 }
 
 $getUserInfos = $pdo->prepare("SELECT * FROM USER WHERE userGuid = ?");
-$getUserInfos->execute([$_SESSION["user"]["userGuid"]]);
+$getUserInfos->execute([$_SESSION["user"]]);
 $nbUser = $getUserInfos->rowCount();
 if ($nbUser == 0) {
   header("location: php/deconnexion.php");

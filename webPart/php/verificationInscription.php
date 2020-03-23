@@ -162,6 +162,17 @@ include('../include/config.php');
     $testGuid->rowCount();
   } while ($testGuid->rowCount() == 1);
 
+  //regarde si la ville existe deja
+$checkCity = $pdo->prepare("SELECT idCity FROM CITY WHERE cityName = ?");
+$checkCity->execute([strtolower(htmlspecialchars($_POST['city']));
+$nbcity = $checkCity->rowCount();
+
+if ($nbcity == 1) {
+  $idCity = $checkCity->fetch();
+  $idCity = $idCity["idCity"];
+}
+else {
+
 // Insertion bdd
 
 $insertCity = $pdo->prepare("INSERT INTO CITY (cityName,cityRegion,cityDepartement) VALUES (?,?,?)");
@@ -179,6 +190,9 @@ $getIdCity->execute([
                     ]);
 $idCity = $getIdCity->fetch();
 
+}
+
+
 // Requete preparee
 
 $q = "INSERT INTO USER (userEmail, userPassword, userFirstName, userLastName , userBirth, userAddress, userIdCity, userPhone,userPrivilege, userIp, userAgent, userGuid) VALUES ( :mail, :pwd, :firstName, :lastName , :birth, :adr, :userIdCity,:phone, :p, :id, :agent, :guid)";
@@ -193,7 +207,7 @@ $userAgent =  $_SERVER['HTTP_USER_AGENT'];
 
 var_dump($userAgent);
 var_dump($userIp);
-$req->execute(array(
+$req->execute([
   'mail' => htmlspecialchars($_POST['mail']),
   'pwd' => hash('sha256', $_POST['password']),
   'firstName' => htmlspecialchars($_POST['firstName']),
@@ -206,7 +220,7 @@ $req->execute(array(
   'agent' => $userAgent,
   'userIdCity' => $idCity["MAX(idCity)"],
   'guid' => $guid
-));
+]);
 
 header('Location: ../connexion.php?inscription=ok');
   exit;

@@ -58,7 +58,7 @@ $resultats = $query->fetchAll();
             Contrat de <?= $resultat["subHour"] ?> heures</p><br>
             <center>
               <button type="button" onclick="document.location.href='subUser.php?idSub='+<?=$resultat["idSub"]?>" class="waves-effect waves-light btn">
-                <?= $resultat["subPrice"] ?> €
+                <?= $resultat["subPrice"] ?> €/an
               </button>
             </center>
 

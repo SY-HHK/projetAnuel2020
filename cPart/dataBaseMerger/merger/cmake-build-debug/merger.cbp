@@ -34,6 +34,7 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add directory="/usr/include/mysql"/>
 					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include-fixed"/>
@@ -54,6 +55,7 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add directory="/usr/include/mysql"/>
 					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include-fixed"/>
@@ -78,6 +80,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/hhk/Documents/projetAnuel2020/cPart/dataBaseMerger/merger/database.c">
+			<Option target="merger"/>
+		</Unit>
+		<Unit filename="/home/hhk/Documents/projetAnuel2020/cPart/dataBaseMerger/merger/database.h">
+			<Option target="merger"/>
+		</Unit>
 		<Unit filename="/home/hhk/Documents/projetAnuel2020/cPart/dataBaseMerger/merger/main.c">
 			<Option target="merger"/>
 		</Unit>

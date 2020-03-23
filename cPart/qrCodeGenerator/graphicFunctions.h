@@ -8,6 +8,6 @@
 
 GtkWidget *mainWindow(int *argc, char ***argv);
 
-void generateQrCode(char companyName, char providerFirstName, char providerLastName, int idProvider);
+void generateQrCode(char guid[], int idProvider);
 
 GtkWidget *confirmationWindow(int *argc, char ***argv);

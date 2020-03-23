@@ -43,7 +43,7 @@ include ('include/header.php');
           <h2>Le mdp doit etre rempli</h2>
         </div>
 
-<?php } else if (isset($_GET['error']) &&  $_GET['error'] == 'no_account') { ?>
+<?php } else if (isset($_GET['error']) &&  $_GET['error'] == 'no_user') { ?>
       <div class="alert alert-danger text-center" role="alert">
         <h2> Mauvais email/mot de passe</h2>
       </div>
