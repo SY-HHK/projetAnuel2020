@@ -36,7 +36,7 @@ include('../../include/config.php');
         exit;
     }
 
-     if(preg_match('#[a-zA-z]#',$_POST['price'])) {
+    if(preg_match('#[a-zA-z]#',$_POST['price'])) {
         header('location: ../subscription.php?error=price_format');
         exit;
     }
