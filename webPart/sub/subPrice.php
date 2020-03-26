@@ -1,7 +1,11 @@
 <?php
-
 session_start();
-include ('include/config.php');
+if (!isset($_SESSION["user"]) || empty($_SESSION["user"])) {
+  header("location: ../login/connexion.php?error=plz_login");
+  exit;
+}
+
+include ('../include/config.php');
 
 $query = $pdo->prepare('SELECT * FROM SUBSCRIPTION');
 $query->execute();
@@ -15,7 +19,6 @@ $resultats = $query->fetchAll();
 <head>
     <title>Souscrire à un abonnement</title>
     <!--<?php include('css/linkCss.php');?>-->
-    <link rel="stylesheet" href="css/index.css">
 	  <link rel="stylesheet" href="css/pricing.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -25,7 +28,7 @@ $resultats = $query->fetchAll();
 
 <body>
 
-<?php include('include/new_header.php'); ?>
+<?php include('../include/new_header.php'); ?>
 
 <main style="margin-bottom: 200px;">
 
@@ -75,7 +78,7 @@ $resultats = $query->fetchAll();
 </center></div>
 </main>
 
-<?php include("include/new_footer.php"); ?>
+<?php include("../include/new_footer.php"); ?>
 
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

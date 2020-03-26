@@ -1,6 +1,11 @@
 <?php
-include("include/config.php");
-require_once "vendor/autoload.php";
+session_start();
+if (!isset($_SESSION["user"]) || empty($_SESSION["user"])) {
+  header("location: ../login/connexion.php?error=plz_login");
+  exit;
+}
+include("../include/config.php");
+require_once "../vendor/autoload.php";
 
 
   // Set your secret key. Remember to switch to your live secret key in production!
@@ -29,7 +34,7 @@ require_once "vendor/autoload.php";
 
       $addSub = $pdo->prepare("UPDATE USER SET idSubscription = ?, subStart = ?, subEnd = ? WHERE userEmail = ?");
       $addSub->execute([$idSub, $dateStart->format("Y-m-d"), $dateEnd->format("Y-m-d"), $session["customer_email"]]);
-      header("location: profilUser.php?sub=yes");
+      header("location: ../login/profilUser.php?sub=yes");
       exit;
     }
   }

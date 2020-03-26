@@ -36,7 +36,7 @@ include('../../include/config.php');
         exit;
     }
 
-    
+
 
 
 // MAJ service
@@ -111,7 +111,7 @@ if (isset($_POST['delete'])) {
 	 if ($rows2 == 1){
 		header('location: ../service.php?delete='.$rows2.'&id='.$id );
         exit;
-	} 
+	}
 }
 
 ?>

@@ -12,6 +12,7 @@ include ('include/config.php');
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Thambi+2:600|Roboto&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
 </head>
 
@@ -26,30 +27,9 @@ include ('include/config.php');
 
     <div id="blocker">
 
-      <h2 class="ml6">
-        <span class="text-wrapper">
-          <span class="letters"></span>
-        </span>
-      </h2>
-      <h2 class="ml7">
-        <span class="text-wrapper">
-          <span class="letters 2"></span>
-        </span>
-      </h2>
-      <h2 class="ml75">
-        <span class="text-wrapper">
-          <span class="letters 2"></span>
-        </span>
-      </h2>
-      <h2 class="ml2"></h2>
-
-      <center><a href="inscription.php">
-      <h2 class="ml15">
-        <span class="word"></span>
-        <span class="word"></span>
-      </h2>
-      </a>
-    </center>
+      <h2>Besoin d'un babysitter ?</h2>
+      <p>Trouver un babysitter facilement ainsi que des centaines d'autres services sur BringMe.com</p>
+      <a class="waves-effect waves-light btn-large" href="login/inscription.php">Inscrivez vous dès maintenant !</a>
 
     </div>
 
@@ -87,22 +67,6 @@ include ('include/config.php');
 				camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 1000 );
 				camera.position.set( -30, 43, 39 );
         camera.lookAt(2,32,0);
-
-				/* controls
-
-				controls = new OrbitControls( camera, renderer.domElement );
-
-				//controls.addEventListener( 'change', render ); // call this only in static scenes (i.e., if there is no animation loop)
-
-				controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
-				controls.dampingFactor = 0.05;
-
-				controls.screenSpacePanning = false;
-
-				controls.minDistance = 100;
-				controls.maxDistance = 500;
-
-				controls.maxPolarAngle = Math.PI / 2; */
 
 				// world
 
@@ -182,90 +146,6 @@ include ('include/config.php');
 				renderer.render( scene, camera );
 
 			}
-
-      //animation text
-
-      setTimeout(function(){
-      // Wrap every letter in a span
-      var textWrapper = document.querySelector('.ml6 .letters');
-      textWrapper.innerHTML = "Besoin d'un babysitter ?";
-      textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
-
-      anime.timeline({loop: false})
-      .add({
-        targets: '.ml6 .letter',
-        translateY: ["1.1em", 0],
-        translateZ: 0,
-        duration: 750,
-        delay: (el, i) => 50 * i
-      });
-    }, 3000);
-
-
-    setTimeout(function(){
-    // Wrap every letter in a span
-    var textWrapper = document.querySelector('.ml7 .letters');
-    textWrapper.innerHTML = "Besoin d'un cuisinier ?";
-    textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
-
-    anime.timeline({loop: false})
-    .add({
-      targets: '.ml7 .letter',
-      translateY: ["1.1em", 0],
-      translateZ: 0,
-      duration: 750,
-      delay: (el, i) => 50 * i
-    });
-  }, 5000);
-
-  setTimeout(function(){
-  // Wrap every letter in a span
-  var textWrapper = document.querySelector('.ml75 .letters');
-  textWrapper.innerHTML = "Besoin d'un plombier ?";
-  textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
-
-  anime.timeline({loop: false})
-  .add({
-    targets: '.ml75 .letter',
-    translateY: ["1.1em", 0],
-    translateZ: 0,
-    duration: 750,
-    delay: (el, i) => 50 * i
-  });
-}, 7000);
-
-
-       setTimeout(function(){
-      // Wrap every letter in a span
-      var textWrapper = document.querySelector('.ml2');
-      textWrapper.innerHTML = "Choisissez parmis des centaines de services sur BringMe.com !";
-      textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
-
-      anime.timeline({loop: false})
-      .add({
-        targets: '.ml2 .letter',
-        scale: [4,1],
-        opacity: [0,1],
-        translateZ: 0,
-        easing: "easeOutExpo",
-        duration: 950,
-        delay: (el, i) => 70*i
-      });
-    }, 10000);
-
-    setTimeout(function(){
-      document.querySelectorAll(".word")[0].innerHTML = "S'inscrire";
-      document.querySelectorAll(".word")[1].innerHTML = "Dès maintenant";
-      anime.timeline({loop: false})
-      .add({
-        targets: '.ml15 .word',
-        scale: [14,1],
-        opacity: [0,1],
-        easing: "easeOutCirc",
-        duration: 800,
-        delay: (el, i) => 800 * i
-      });
-    }, 15000);
 
 		</script>
     <?php include('include/new_footer.php'); ?>

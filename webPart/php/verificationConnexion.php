@@ -3,12 +3,12 @@
 include('../include/config.php');
 
 if (!isset($_POST['mail']) || empty($_POST['mail'])) {
-	header('location: ../connexion.php?error=connect_email_missing');
+	header('location: ../login/connexion.php?error=connect_email_missing');
 	exit;
 }
 
 if (!isset($_POST['password']) || empty($_POST['password'])) {
-	header('location: ../connexion.php?error=connect_password_missing');
+	header('location: ../login/connexion.php?error=connect_password_missing');
 	exit;
 }
 
@@ -35,7 +35,7 @@ if ($nb == 1) {
 		session_start();
 		$_SESSION['user'] = $res["userGuid"];
 		$_SESSION['userEmail'] = $res["userEmail"];
-		header('location: ../profilUser.php?error=login_successfull');
+		header('location: ../login/profilUser.php?error=login_successfull');
 		exit;
 	}
 }
@@ -49,11 +49,11 @@ else {
 	if ($nb == 1) {
 		session_start();
 		$_SESSION['provider'] = $res;
-		header('location: ../provider.php?error=login_successfull');
+		header('location: ../login/provider.php?error=login_successfull');
 		exit;
 	}
 	else {
-		header('location: ../connexion.php?error=no_user');
+		header('location: ../login/connexion.php?error=no_user');
 		exit;
 	}
 }

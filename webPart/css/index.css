@@ -1,95 +1,30 @@
-h2 {
+main h2 {
+  margin-left: 22%;
   color: white;
+  font-family: 'Baloo Thambi 2', cursive;
 }
 
-.ml2 {
-  font-weight: 900;
-  font-size: 3.5em;
+main p {
+  margin-left: 12%;
+  color: white;
+  font-size: 20px;
+  font-family: 'Roboto', sans-serif;
 }
 
-.ml2 .letter {
-  display: inline-block;
-  line-height: 1em;
-}
-
-.ml6 {
-  position: relative;
-  font-weight: 900;
-  font-size: 3.3em;
-}
-
-.ml6 .text-wrapper {
-  position: relative;
-  display: inline-block;
-  padding-top: 0.2em;
-  padding-right: 0.05em;
-  padding-bottom: 0.1em;
-  overflow: hidden;
-}
-
-.ml6 .letter {
-  display: inline-block;
-  line-height: 1em;
-}
-
-.ml7 {
-  position: relative;
-  font-weight: 900;
-  font-size: 3.3em;
-}
-
-.ml7 .text-wrapper {
-  position: relative;
-  display: inline-block;
-  padding-top: 0.2em;
-  padding-right: 0.05em;
-  padding-bottom: 0.1em;
-  overflow: hidden;
-}
-
-.ml7 .letter {
-  display: inline-block;
-  line-height: 1em;
-}
-
-.ml75 {
-  position: relative;
-  font-weight: 900;
-  font-size: 3.3em;
-}
-
-.ml75 .text-wrapper {
-  position: relative;
-  display: inline-block;
-  padding-top: 0.2em;
-  padding-right: 0.05em;
-  padding-bottom: 0.1em;
-  overflow: hidden;
-}
-
-.ml75 .letter {
-  display: inline-block;
-  line-height: 1em;
-}
-
-.ml15 {
-  font-weight: 800;
-  font-size: 3.8em;
-  text-transform: uppercase;
-  letter-spacing: 0.5em;
-}
-
-.ml15 .word {
-  display: inline-block;
-  line-height: 1em;
+main a {
+  margin-left: 32%;
+  color: white;
+  font-size: 20px;
+  font-family: 'Roboto', sans-serif;
 }
 
 #blocker {
+    border-radius: 20px;
     padding-left: 5%;
     position: absolute;
-    margin-left: 5%;
-    margin-top: 0.5%;
-    width: 90%;
-    height: 90%;
-    background-color: rgba(0,0,0,0.5);
+    margin-left: 10%;
+    margin-top: 10%;
+    width: 80%;
+    height: 30%;
+    background-color: rgba(0,0,0,0.6);
   }

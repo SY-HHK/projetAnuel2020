@@ -56,6 +56,7 @@ CREATE TABLE IF NOT EXISTS `bringme`.`SERVICE` (
   `servicePrice` FLOAT,
   `serviceDescription` TEXT,
   `serviceValidate` TINYINT,
+  `serviceImage` VARCHAR(100)
   PRIMARY KEY (`idService`));
 
 

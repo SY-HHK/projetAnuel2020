@@ -1,7 +1,11 @@
 <?php
 session_start();
-include("include/config.php");
-require_once "vendor/autoload.php";
+if (!isset($_SESSION["user"]) || empty($_SESSION["user"])) {
+  header("location: ../login/connexion.php?error=plz_login");
+  exit;
+}
+include("../include/config.php");
+require_once "../vendor/autoload.php";
 
 $selectStripeId = $pdo->prepare("SELECT subStripeId FROM SUBSCRIPTION WHERE idSub = ?");
 $selectStripeId->execute([$_GET["idSub"]]);
@@ -18,8 +22,8 @@ $session = \Stripe\Checkout\Session::create([
     'items' => [['plan' => $stripeId]],
   ],
   'customer_email' => $_SESSION['userEmail'],
-  'success_url' => 'http://localhost/projetAnuel2020/webPart/payment.php?session_id={CHECKOUT_SESSION_ID}',
-  'cancel_url' => 'http://localhost/projetAnuel2020/webPart/subPrice.php?error=cancel',
+  'success_url' => 'http://localhost/projetAnuel2020/webPart/sub/payment.php?session_id={CHECKOUT_SESSION_ID}',
+  'cancel_url' => 'http://localhost/projetAnuel2020/webPart/sub/subPrice.php?error=cancel',
 ]);
 
 ?>
@@ -52,6 +56,8 @@ $session = \Stripe\Checkout\Session::create([
     // using `result.error.message`..
     });
   }
+
+   setTimeout(function(){ buy() }, 5000);
 
   </script>
 </html>

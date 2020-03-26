@@ -5,13 +5,13 @@ include('../include/config.php');
     // format de l'email
 
     if (!filter_var($_POST['mail'],FILTER_VALIDATE_EMAIL)){
-        header('Location: ../inscription.php?error=email_format');
+        header('Location: ../login/inscription.php?error=email_format');
         exit;
     }
 
     //Email
     if(!isset($_POST['mail']) || empty($_POST['mail'])){
-        header('Location: ../inscription.php?error=email_missing');
+        header('Location: ../login/inscription.php?error=email_missing');
         exit;
     }
 
@@ -22,28 +22,28 @@ include('../include/config.php');
         $req= $pdo->prepare($q);
         $req-> execute(array($_POST['mail']));
         if ($req->rowCount() != 0) { //email deja pris
-          header('Location: ../inscription.php?error=email_taken');
+          header('Location: ../login/inscription.php?error=email_taken');
           exit;
         }
 
      //Nom
     if(!isset($_POST['lastName']) || empty($_POST['lastName'])){
-        header('Location: ../inscription.php?error=name_missing');
+        header('Location: ../login/inscription.php?error=name_missing');
         exit;
     }
 
     if(preg_match('#[0-9]#',$_POST['lastName'])) {
-        header('location: ../inscription.php?error=name_format');
+        header('location: ../login/inscription.php?error=name_format');
         exit;
     }
     //Prenom
     if(!isset($_POST['firstName']) || empty($_POST['firstName'])){
-        header('Location: ../inscription.php?error=prenom_missing');
+        header('Location: ../login/inscription.php?error=prenom_missing');
         exit;
     }
 
     if(preg_match('#[0-9]#',$_POST['firstName'])) {
-        header('location: ../inscription.php?error=prenom_format');
+        header('location: ../login/inscription.php?error=prenom_format');
         exit;
     }
 
@@ -51,70 +51,70 @@ include('../include/config.php');
 
     // Date de naissance
     if(!isset($_POST['birth']) || empty($_POST['birth'])){
-        header('Location: ../inscription.php?error=birth_missing');
+        header('Location: ../login/inscription.php?error=birth_missing');
         exit;
     }
 
     if(!isset($_POST['phone']) || empty($_POST['phone'])){
-        header('Location: ../inscription.php?error=phone_missing');
+        header('Location: ../login/inscription.php?error=phone_missing');
         exit;
     }
 
     if(preg_match('#[a-zA-Z]#',$_POST['phone'])) {
-        header('location: ../inscription.php?error=phone_format');
+        header('location: ../login/inscription.php?error=phone_format');
         exit;
     }
 
     //Adresse
     if(!isset($_POST['adresse']) || empty($_POST['adresse'])){
-        header('Location: ../inscription.php?error=adresse_missing');
+        header('Location: ../login/inscription.php?error=adresse_missing');
         exit;
     }
 
 
     // region
     if(!isset($_POST['region']) || empty($_POST['region'])){
-        header('Location: ../inscription.php?error=region_missing');
+        header('Location: ../login/inscription.php?error=region_missing');
         exit;
     }
 
     if(preg_match('#[0-9]#',$_POST['region'])) {
-        header('location: ../inscription.php?error=region_format');
+        header('location: ../login/inscription.php?error=region_format');
         exit;
     }
 
  // departement
     if(!isset($_POST['departement']) || empty($_POST['departement'])){
-        header('Location: ../inscription.php?error=region_missing');
+        header('Location: ../login/inscription.php?error=region_missing');
         exit;
     }
 
     if(preg_match('#[a-zA-Z]#',$_POST['departement'])) {
-        header('location: ../inscription.php?error=departement_format');
+        header('location: ../login/inscription.php?error=departement_format');
         exit;
     }
  //Ville
     if(!isset($_POST['city']) || empty($_POST['city'])){
-        header('Location: ../inscription.php?error=city_missing');
+        header('Location: ../login/inscription.php?error=city_missing');
         exit;
     }
 
     if(preg_match('#[0-9]#',$_POST['city'])) {
-        header('location: ../inscription.php?error=city_format');
+        header('location: ../login/inscription.php?error=city_format');
         exit;
     }
 
 // mdp
 
     if(!isset($_POST['password']) || empty($_POST['password'])){
-            header('location: ../inscription.php?error=password_missing');
+            header('location: ../login/inscription.php?error=password_missing');
             exit;
         }
     ?>
   <script>
         const pwdInput = document.getElementByName('password');
         if(checkPassword(pwdInput.value) == false ) {
-          header('location: ../inscription.php?error=password_format');
+          header('location: ../login/inscription.php?error=password_format');
          }
 
         function checkPassword(p) {
@@ -164,7 +164,7 @@ include('../include/config.php');
 
   //regarde si la ville existe deja
 $checkCity = $pdo->prepare("SELECT idCity FROM CITY WHERE cityName = ?");
-$checkCity->execute([strtolower(htmlspecialchars($_POST['city']));
+$checkCity->execute([strtolower(htmlspecialchars($_POST['city']))]);
 $nbcity = $checkCity->rowCount();
 
 if ($nbcity == 1) {
@@ -222,7 +222,7 @@ $req->execute([
   'guid' => $guid
 ]);
 
-header('Location: ../connexion.php?inscription=ok');
+header('Location: ../login/connexion.php?inscription=ok');
   exit;
 
 ?>
