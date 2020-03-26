@@ -68,6 +68,9 @@ $resultats = $query->fetchAll();
                             <textarea id="desc" type="text" name="description" ><?php echo $service['serviceDescription']; ?></textarea>
                           </td>
                           <td>
+                            <input type="hidden" name="etat" value="<?php if ($service['idService'] == 0) echo ?>">
+                          </td>
+                          <td>
                             <input type="hidden" name="idService" value="<?php echo $service['idService']; ?>">
                           </td>
                           <td>

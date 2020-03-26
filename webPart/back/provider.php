@@ -176,6 +176,12 @@ $allServices = $query4->fetchAll();
                   <?php echo 'Le contract a été suprimé' ?>
                 </div>
 
+
+        <?php } else if (isset($_GET['renew']) && $_GET['renew'] == 1) { ?>
+                <div class="alert alert-success text-center" role="alert">
+                  <?php echo 'Le contract a été renouvelé' ?>
+                </div>
+
         <?php } else if (isset($_GET['addContract']) && $_GET['addContract'] == 1) { ?>
                 <div class="alert alert-success text-center" role="alert">
                   <?php echo 'Le contract a été ajouté !' ?>
@@ -258,7 +264,7 @@ $allServices = $query4->fetchAll();
                        + 
                     </button>
 
-              <!-- DEBUT MODAL -->
+<!-- DEBUT MODAL -->
                       <div class="modal fade" id="exampleModal-<?php echo $providerCounter; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <?php echo $provider['providerLastName']; ?>
                         <div class="modal-dialog modal-xl" role="document">
@@ -312,115 +318,125 @@ $allServices = $query4->fetchAll();
                                           <div class="card-body">
 
                                             <table class="table table-hover">
-                                              <thead>
-                                                <tr>
-                                                  <th scope="col">start</th>
-                                                  <th scope="col">end</th>
-                                                  <th scope="col">€/heure</th>
-                                                  <th scope="col">service</th>
-                                                  <th scope="col"> </th>
-                                                </tr>
-                                              </thead>
-                                               <?php        
-                                                foreach ($resultats2 as $contract) {
-
-                                                      $query3->execute([$contract['idService']]);
-                                                      $service = $query3->fetch();
-                                                       // var_dump($service);
-                                                ?>
-                                                              <tr>
-                                                                      <td>
-                                                                        <input type="date" class="inputContract" name="start" value="<?php echo $contract['contractDateStart']; ?>" disabled="disabled">
-                                                                      </td>
-                                                                      <td>
-                                                                        <input type="date" class="inputContract" name="end" value="<?php echo $contract['contractDateEnd']; ?>" disabled="disabled">
-                                                                      </td>
-                                                                      <td>
-                                                                        <input type="text" class="inputNbr" name="price" value="<?php echo $contract['contractPrice']; ?>" disabled="disabled">
-                                                                      </td>
-                                                                      <td>
-                                                                        <input type="text" class="input" name="service" value="<?php echo $service['serviceTitle']; ?>" disabled="disabled">
-                                                                      </td>
-                                                                      <td>
-                                                                        <input type="hidden" class="input" name="idContract" value="<?php echo $contract['idContract']; ?>">
-
-
-                                                                        <input type="submit" name="deleteContract" class="option"value="X">
-                                                                      </td>
-                                                              </tr>
-                                                <?php } ?>
-                                            </table>
-                                           </div>
-                                          </div>
-                                        </div>
-                                        <div class="card">
-                                          <div class="card-header" id="headingTwo">
-                                            <h2 class="mb-0">
-                                              <button class="btn collaborateur collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                <h6>Ajouter un contrat</h6>
-                                              </button>
-                                            </h2>
-                                          </div>
-                                          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                                            <div class="card-body"> 
-                                               <table class="table table-hover">
-                                              <thead>
-                                                <tr>
-                                                  <th scope="col">start</th>
-                                                  <th scope="col">end</th>
-                                                  <th scope="col">€/heure</th>
-                                                  <th scope="col">service</th>
-                                                  <th scope="col"> </th>
-                                                </tr>
-                                              </thead>
                                               
-                                                <tr>
-                                                        <td>
-                                                          <input type="date" class="inputContract" name="startContract">
-                                                        </td>
-                                                        <td>
-                                                          <input type="date" class="inputContract" name="endContract">
-                                                        </td>
-                                                        <td>
-                                                          <input type="text" class="inputNbr" name="priceContract" placeholder="...">
-                                                        </td>
-                                                        <td>
-                                                           <div class="form-group">
-                                                              <select class="form-control-sm" name="idService">
+                                                  <thead>
+                                                    <tr>
+                                                      <th scope="col">start</th>
+                                                      <th scope="col">end</th>
+                                                      <th scope="col">€/heure</th>
+                                                      <th scope="col">service</th>
+                                                      <th scope="col"> </th>
+                                                      <th scope="col"> </th>
 
-                                                                <?php foreach ($allServices as $service) { ?>
-                                                                 
-                                                                <option value="<?php echo $service['idService']; ?>"><?php echo $service['serviceTitle']; ?></option>
+                                                    </tr>
+                                                  </thead>
+                                                   <?php        
+                                                    foreach ($resultats2 as $contract) {
+
+                                                          $query3->execute([$contract['idService']]);
+                                                          $service = $query3->fetch();
+                                                           // var_dump($service);
+                                                    ?>
+
+                                                    
+                                                                  <tr>
+                                                                   
+                                                                          <td>
+                                                                            <input type="hidden" class="input" name="idContract" value="<?php echo $contract['idContract']; ?>">
+
+                                                                            <input type="date" class="inputContract" name="hello" value="<?php echo $contract['contractDateStart']; ?>" disabled="disabled">
+                                                                          </td>
+                                                                          <td>
+                                                                            <input type="date" class="inputContract" name="end" value="<?php echo $contract['contractDateEnd']; ?>" disabled="disabled">
+                                                                          </td>
+                                                                          <td>
+                                                                            <input type="text" class="inputNbr" name="price" value="<?php echo $contract['contractPrice']; ?>" disabled="disabled">
+                                                                          </td>
+                                                                          <td>
+                                                                            <input type="text" class="inputContract" name="service" value="<?php echo $service['serviceTitle']; ?>" disabled="disabled">
+                                                                          </td>
+                                                                          <td>
+                                                                            <a class="btn btn-secondary" href="PHP/prestataireMAJ.php?idContract=<?php echo $contract['idContract']; ?>&start=<?php echo $contract['contractDateStart']; ?>&end= <?php echo $contract['contractDateEnd'];?>">renew</a>
+                                                                            
+                                                                          </td>
+                                                                          <td>
+                                                                            <input type="hidden" class="input" name="idContract" value="<?php echo $contract['idContract']; ?>">
+                                                                            <a class="" href="PHP/prestataireMAJ.php?deleteContract=<?php echo $contract['idContract']; ?>">X</a>
+
+                                                                            <!-- <input type="submit" name="deleteContract" class="option"value="X"> -->
+                                                                          </td>
+                                                                         
+                                                                  </tr>
+                                                     
+                                                    <?php } ?>
+                                                  
+                                                </table>
+                                               </div>
+                                              </div>
+                                            </div>
+                                            <div class="card">
+                                              <div class="card-header" id="headingTwo">
+                                                <h2 class="mb-0">
+                                                  <button class="btn collaborateur collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                    <h6>Ajouter un contrat</h6>
+                                                  </button>
+                                                </h2>
+                                              </div>
+                                              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                                <div class="card-body"> 
+                                                   <table class="table table-hover">
+                                                  <thead>
+                                                    <tr>
+                                                      <th scope="col">start</th>
+                                                      <th scope="col">end</th>
+                                                      <th scope="col">€/heure</th>
+                                                      <th scope="col">service</th>
+                                                      <th scope="col"> </th>
+                                                    </tr>
+                                                  </thead>
+                                                  
+                                                    <tr>
+                                                            <td>
+                                                              <input type="date" class="inputContract" name="startContract">
+                                                            </td>
+                                                            <td>
+                                                              <input type="date" class="inputContract" name="endContract">
+                                                            </td>
+                                                            <td>
+                                                              <input type="text" class="inputNbr" name="priceContract" placeholder="...">
+                                                            </td>
+                                                            <td>
+                                                               <div class="form-group">
+                                                                  <select class="form-control-sm" name="idService">
+
+                                                                    <?php foreach ($allServices as $service) { ?>
+                                                                     
+                                                                    <option value="<?php echo $service['idService']; ?>"><?php echo $service['serviceTitle']; ?></option>
 
 
-                                                                <?php } ?>
-                                                              </select>
-                                                            </div>
-                                                          <!-- <input type="text" class="input" name="serviceContract" placeholder="..."> -->
-                                                        </td>
-                                                        <td>
-                                                          <input type="hidden" name="idProvider" value="<?php echo $provider['idProvider']; ?>">
-                                                          <input type="submit" name="addContract" class="option" value="Ajouter !">
-                                                        </td>
-                                                </tr>
+                                                                    <?php } ?>
+                                                                  </select>
+                                                                </div>
+                                                              <!-- <input type="text" class="input" name="serviceContract" placeholder="..."> -->
+                                                            </td>
+                                                            <td>
+                                                              <input type="hidden" name="idProvider" value="<?php echo $provider['idProvider']; ?>">
+                                                              <input type="submit" name="addContract" class="option" value="Ajouter !">
+                                                            </td>
+                                                    </tr>
+                                               
                                             </table>
-
-
                                             </div>
                                           </div>
                                         </div>      
-
                               </div>
-                                                     <!--  <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                      </div> -->
                           </div>
                         </div>
                       </div>
 
                     <?php $providerCounter++; //pr modal 
                           } ?>
-              <!-- FIN MODAL -->
+<!-- FIN MODAL -->
                   </td>
                   <td>                    
                     <input type="submit" name="pwd" class="option" value="NEW">
