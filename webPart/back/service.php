@@ -60,17 +60,32 @@ $resultats = $query->fetchAll();
                   <div class="alert alert-danger text-center" role="alert">
                     Veuillez revoir le prix (min 3€ l'heure)
                   </div>
+
+        <?php } else if (isset($_GET['error']) && $_GET['error'] == 'file_type') { ?>
+                  <div class="alert alert-danger text-center" role="alert">
+                    Veuillez revoir le format de l'image (png, jpeg, gif, jpg)
+                  </div>
+
+        <?php } else if (isset($_GET['error']) && $_GET['error'] == 'file_size') { ?>
+                  <div class="alert alert-danger text-center" role="alert">
+                    Attention taille maximum image 2Mo
+                  </div>
+
+
+
         <?php } else if (isset($_GET['update']) && $_GET['update'] == 1) { ?>
               <div class="alert alert-success text-center" role="alert">
             Modification(s) enregistrée(s)
           </div>
-           <?php } else if (isset($_GET['add']) && $_GET['add'] == 'ok') { ?>
+
+        <?php } else if (isset($_GET['add']) && $_GET['add'] == 'ok') { ?>
               <div class="alert alert-success text-center" role="alert">
            Service ajouté !
           </div>
+
         <?php } else if (isset($_GET['delete']) && $_GET['delete'] == 1 && isset($_GET['id']) && !empty($_GET['id'])) { ?>
             <div class="alert alert-success text-center" role="alert">
-            <?php echo 'L\'id '.$_GET['id'].' a été suprimée' ?>
+            <?php echo 'Le service a été suprimée' ?>
           </div>
 
         <?php } ?>
@@ -95,7 +110,8 @@ $resultats = $query->fetchAll();
                 <th scope="col">Nom</th>
                 <th scope="col">€/heure</th>
                 <th scope="col">Description</th>
-                <th scope="col">MAJ</th>
+                <th scope="col">Image</th>
+                <th scope="col"></th>
                 <th scope="col"> </th>
 
               </tr>
@@ -104,24 +120,27 @@ $resultats = $query->fetchAll();
               foreach ($resultats as $service) { ?>
                 <tbody>
                   <tr>
-                    <form action="PHP/serviceMAJ.php" method="POST">
-                      <th scope="row"><?php echo $service['idService']; ?></th>
+                    <form action="PHP/serviceMAJ.php" method="POST" enctype="multipart/form-data">
+                      <th scope="row"><img src="<?php echo $service['serviceImage']; ?>" id="serviceImage"></th>
                           <td>
                             <input type="text" class="inputDelivery" name="name" value="<?php echo $service['serviceTitle']; ?>">
                           </td>
                           <td>
-                            <input type="text" class="input" name="price" value="<?php echo $service['servicePrice']; ?>">
+                            <input type="text" class="inputNbr" name="price" value="<?php echo $service['servicePrice']; ?>">
                           </td>
                           <td>
                             <textarea id="desc" type="text" name="description" ><?php echo $service['serviceDescription']; ?></textarea>
                           </td>
                           <td>
+                            <input type="file" class="form-control-file" name="image">
+                          </td>
+                          <td>
                             <input type="hidden" name="idService" value="<?php echo $service['idService']; ?>">
-                            <input type="submit" name="updateSub" class="option"value="MAJ">
+                            <input type="submit" name="updateSub" class="btn btn-warning"value="MAJ">
                           </td>
                           <td>
                             <input type="hidden" name="idSub" value="<?php echo $service['idService']; ?>">
-                            <input type="submit" name="delete" class="option"value="X">
+                            <input type="submit" name="delete" class="btn btn-outline-danger"value="X">
                           </td>
                     </form>
                   </tr>
@@ -147,6 +166,7 @@ $resultats = $query->fetchAll();
                 <th scope="col">Nom</th>
                 <th scope="col">€/heure</th>
                 <th scope="col">Description</th>
+                <th scope="col">Image</th>
                 <th scope="col"> </th>
 
               </tr>
@@ -154,18 +174,21 @@ $resultats = $query->fetchAll();
 
                 <tbody>
                   <tr>
-                    <form action="PHP/serviceMAJ.php" method="POST">
-                          <td>
+                    <form action="PHP/serviceMAJ.php" method="POST" enctype="multipart/form-data">
+                         <td>
                             <input type="text" class="input" name="name" placeholder="... ">
                           </td>
-                          <td>
+                         <td>
                             <input type="text" class="input" name="price" placeholder="...">
                           </td>
                           <td>
                             <textarea id="desc" type="text" name="description" ></textarea>
                           </td>
                           <td>
-                            <input type="submit" name="addService" class="option"value="Ajouter !">
+                          <input type="file" class="form-control-file" name="image">
+                          </td>
+                          <td>
+                            <input type="submit" name="addService" class="btn btn-success" value="Ajouter !">
                           </td>
                     </form>
                   </tr>

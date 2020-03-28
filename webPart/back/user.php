@@ -149,8 +149,8 @@ $resultats = $query->fetchAll();
         <th scope="col">-</th>
         <th scope="col">State</th>
         <th scope="col"> </th>
-        <th scope="col">MDP</th>
-         <th scope="col">MAJ</th>
+        <th scope="col"> </th>
+         <th scope="col"> </th>
       </tr>
     </thead>
 
@@ -206,11 +206,11 @@ $resultats = $query->fetchAll();
                   <?php } ?>
                   </td>
                   <td>
-                    <input type="submit" name="pwd" class="option" value="NEW">
+                    <input type="submit" name="pwd" class="btn btn-primary" value="MDP">
                  </td>
                   <td>
                     <input type="hidden" name="idUser" value="<?php echo $user['idUser']; ?>">
-                    <input type="submit" name="updateUser" class="option"value="MAJ">
+                    <input type="submit" name="updateUser" class="btn btn-warning"value="MAJ">
                   </td>
             </form>
           </tr>

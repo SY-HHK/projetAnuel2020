@@ -115,7 +115,7 @@ $resultats = $query->fetchAll();
 
                   <th scope="col">Email</th>
 
-                  <th scope="col">MDP</th>
+                  <th scope="col"></th>
                    <th scope="col"> </th>
                 </tr>
               </thead>
@@ -142,10 +142,10 @@ $resultats = $query->fetchAll();
 
                               <td>
                                 <input type="hidden" name="id" value="<?php echo $employee['idUser']; ?>">
-                                <input type="submit" name="pwd" class="option" value="NEW">
+                                <input type="submit" name="pwd" class="btn btn-primary" value="Générer un mdp">
                              </td>
                               <td>
-                                <input type="submit" name="delete" class="option"value="X">
+                                <input type="submit" name="delete" class="btn btn-outline-danger"value="X">
                               </td>
                         </form>
                       </tr>
@@ -190,7 +190,7 @@ $resultats = $query->fetchAll();
                                 <input type="text"  name="mail" placeholder="Adresse mail">
                               </td>
                               <td>
-                                <input type="submit" name="add" value="Ajouter !">
+                                <input type="submit" name="add" class="btn btn-success" value="Ajouter !">
                               </td>
                         </form>
                       </tr>

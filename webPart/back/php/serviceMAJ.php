@@ -2,8 +2,25 @@
 include('../../include/config.php');
 
 
+if (isset($_POST['delete'])) {
+  include('../../include/config.php');
+
+  $id = $_POST['idService'];
+
+  $queryDelete = $pdo->prepare('DELETE FROM service WHERE idService = ?');
+  $queryDelete->execute(array($id));
+
+  $rows2 = $queryDelete->rowCount();
+
+   if ($rows2 == 1){
+    header('location: ../service.php?delete='.$rows2.'&id='.$id );
+        exit;
+  }
+}
+
+
 // Vérification des champs
-  //Nom
+  // Nom
     if(!isset($_POST['name']) || empty($_POST['name'])){
         header('location: ../service.php?error=name_missing');
         exit;
@@ -36,6 +53,36 @@ include('../../include/config.php');
         exit;
     }
 
+    // Image
+
+    $service = $_POST['idService'];
+
+    $photo_name = 'service'. $service;
+
+    echo $photo_name;
+    $filename = $_FILES['image']['name']; // récupère le nom de base du fichier avec son extension
+    $temp_array = explode('.', $filename); // 'explode' = transf chaine de char en tab
+    $imageFileType = strtolower(end($temp_array)); // Transforme la chaine de char en miniscule prend le dernier élement du tableau (ici l'exension)
+    $photo_path = '../images/' . $photo_name . ".". $imageFileType;
+
+
+  // Verification type de fichier
+
+    if ($imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" && $imageFileType != "jpg"){
+      header("location: ../service.php?error=file_type");
+      exit;
+    } 
+
+    // vérification taille du fichier
+    $maximumsize = 4097152; // 2Mo: 2*1024*1024
+    if(($_FILES['image']['size'] >= $maximumsize)){  // si le fichier dépasse la taille max -> redirection
+      header("location: ../service.php?error=file_size");
+      exit;
+    }
+
+
+    move_uploaded_file($_FILES['image']['tmp_name'], '../'.$photo_path);
+
 
 
 
@@ -50,18 +97,21 @@ $name = htmlspecialchars($_POST['name']);
 $price = htmlspecialchars($_POST['price']);
 $description = htmlspecialchars($_POST['description']);
 
+
 echo $id;
 $queryUpdate = $pdo->prepare('UPDATE SERVICE SET
 	serviceTitle = :name,
 	servicePrice = :price,
-  serviceDescription = :description WHERE idService = :id');
+  serviceDescription = :description,
+  serviceImage = :image WHERE idService = :id');
 
 
 $queryUpdate->execute(array(
 'id' => $id,
 'name' => $name,
 'price' => $price,
-'description' => $description
+'description' => $description,
+'image' => $photo_path
 
 ));
 
@@ -83,12 +133,13 @@ $name = htmlspecialchars($_POST['name']);
 $price = htmlspecialchars($_POST['price']);
 $description = htmlspecialchars($_POST['description']);
 
-$req = $pdo->prepare('INSERT INTO service (serviceTitle, servicePrice, serviceDescription, serviceValidate) VALUES (:title, :price, :description, :validation)');
+$req = $pdo->prepare('INSERT INTO service (serviceTitle, servicePrice, serviceDescription, serviceImage, serviceValidate) VALUES (:title, :price, :description, :image, :validation)');
 
 $req->execute(array(
   'title' => $name,
   'price' => $price,
   'description' => $description,
+  'image' => $photo_path,
   'validation' =>1
 ));
 
@@ -98,20 +149,6 @@ header('Location: ../service.php?add=ok');
 }
 
 
-if (isset($_POST['delete'])) {
-	include('../../include/config.php');
 
-	$id = $_POST['idService'];
-
-	$queryDelete = $pdo->prepare('DELETE FROM service WHERE idService = ?');
-	$queryDelete->execute(array($id));
-
-	$rows2 = $queryDelete->rowCount();
-
-	 if ($rows2 == 1){
-		header('location: ../service.php?delete='.$rows2.'&id='.$id );
-        exit;
-	}
-}
 
 ?>

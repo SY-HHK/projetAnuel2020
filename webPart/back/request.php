@@ -4,10 +4,12 @@ if (!isset($_SESSION['admin'])){
 header('location:../index.php');
 }
 //var_dump($_SESSION['admin']);
-$query = $pdo->prepare('SELECT * FROM SERVICE WHERE serviceValidate = 0');
+$query = $pdo->prepare('SELECT * FROM SERVICE INNER JOIN USER ON USER.idUser = SERVICE.idUser WHERE serviceValidate != 1');
 $query->execute();
 
 $resultats = $query->fetchAll();
+
+// var_dump($resultats);
 ?>
 
 <!DOCTYPE html>
@@ -22,19 +24,15 @@ $resultats = $query->fetchAll();
 
 <body>
 
- <?php include('../include/config.php');
-
-
-
- include('include/headerBack.php');
-
- ?>
+<?php 
+  include('../include/config.php');
+  include('include/headerBack.php');
+?>
 
 <div class="jumbotron table-responsive-xl">
 
         <h4>Les demandes de services</h4>
         <hr class="my-4">
-
 
 <div class="accordion" id="accordionExample">
   <div class="card">
@@ -44,11 +42,11 @@ $resultats = $query->fetchAll();
         <table class="table table-hover">
             <thead>
               <tr>
+                <th scope="col">Client</th>
                 <th scope="col">Nom</th>
-                <!-- <th scope="col">€/heure</th> -->
                 <th scope="col">Description</th>
-                <th scope="col"> Etat </th>
-                <th scope="col"> Ajouter ! </th>
+                <th scope="col">Décision</th>
+                <th scope="col"> </th>
 
               </tr>
             </thead>
@@ -56,26 +54,28 @@ $resultats = $query->fetchAll();
               foreach ($resultats as $service) { ?>
                 <tbody>
                   <tr>
-                    <form action="PHP/serviceMAJ.php" method="POST">
-                      <th scope="row"><?php echo $service['idService']; ?></th>
+                    <form action="PHP/demandes.php" method="POST">
+                          <td>
+                            <input type="text" name="user" value="<?php echo $service['userLastName']; ?>">
+                          </td>
+                     
                           <td>
                             <input type="text" class="inputDelivery" name="name" value="<?php echo $service['serviceTitle']; ?>">
                           </td>
-                          <!-- <td>
-                            <input type="text" class="input" name="price" value="<?php echo $service['servicePrice']; ?>">
-                          </td> -->
                           <td>
                             <textarea id="desc" type="text" name="description" ><?php echo $service['serviceDescription']; ?></textarea>
                           </td>
                           <td>
-                            <input type="hidden" name="etat" value="<?php if ($service['idService'] == 0) echo ?>">
-                          </td>
-                          <td>
-                            <input type="hidden" name="idService" value="<?php echo $service['idService']; ?>">
+                            <div class="form-group">
+                              <select class="form-control-sm" name="state">
+                                <option value="1">Valider la demande</option>
+                                <option value="0">Refuser la demande</option>
+                              </select>
+                            </div>
                           </td>
                           <td>
                             <input type="hidden" name="idSub" value="<?php echo $service['idService']; ?>">
-                            <input type="submit" name="delete" class="option"value="X">
+                            <input type="submit" class="btn btn-success" name="enregistrer" value="valider">
                           </td>
                     </form>
                   </tr>
@@ -130,9 +130,6 @@ $resultats = $query->fetchAll();
     </div>
   </div> -->
 </div>
-
-
-
 
 </div>
 

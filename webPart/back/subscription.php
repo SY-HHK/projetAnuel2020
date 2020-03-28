@@ -103,7 +103,7 @@ $resultats = $query->fetchAll();
                 <th scope="col">Heure fin</th>
                 <th scope="col">Heures/mois</th>
                 <th scope="col"> € TTC/an</th>
-                <th scope="col">MAJ</th>
+                <th scope="col"> </th>
                 <th scope="col"> </th>
 
               </tr>
@@ -199,11 +199,11 @@ $resultats = $query->fetchAll();
 
                           <td>
                             <input type="hidden" name="idSub" value="<?php echo $sub['idSub']; ?>">
-                            <input type="submit" name="updateSub" class="option"value="MAJ">
+                            <input type="submit" name="updateSub" class = "btn btn-warning" value="MAJ">
                           </td>
                           <td>
                             <input type="hidden" name="idSub" value="<?php echo $sub['idSub']; ?>">
-                            <input type="submit" name="delete" class="option"value="X">
+                            <input type="submit" name="delete" class="btn btn-outline-danger "value="X">
                           </td>
                     </form>
                   </tr>
@@ -323,7 +323,7 @@ $resultats = $query->fetchAll();
                             <input type="text" class="input" name="price" placeholder="...">
                           </td>
                           <td>
-                            <input type="submit" name="addSub" class="option"value="Ajouter !">
+                            <input type="submit" name="addSub" class="btn btn-success" value="Ajouter !">
                           </td>
                     </form>
                   </tr>
