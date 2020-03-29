@@ -7,10 +7,16 @@ nav a:hover {
 	text-decoration: none;
 }
 
+#serviceImage{
+	width: 100px;
+	height: 70px;
+}
+
+
 #desc{
 	background-color:transparent;
     border: 0px solid;
-	width: 900px;
+	width: 862px;
 }
 
 .inputContract{

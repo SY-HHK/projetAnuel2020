@@ -56,8 +56,15 @@ CREATE TABLE IF NOT EXISTS `bringme`.`SERVICE` (
   `servicePrice` FLOAT,
   `serviceDescription` TEXT,
   `serviceValidate` TINYINT,
-  `serviceImage` VARCHAR(100)
-  PRIMARY KEY (`idService`));
+  `serviceImage` VARCHAR(100),
+  `idUser` INT,
+  INDEX `idUser_SERVICE_FK` (`idUser` ASC),
+  PRIMARY KEY (`idService`),
+  CONSTRAINT `idUser_SERVICE_FK`
+    FOREIGN KEY (`idUser`)
+    REFERENCES `bringme`.`USER` (`idUser`)
+    ON DELETE CASCADE
+  );
 
 
 -- -----------------------------------------------------
@@ -189,11 +196,11 @@ CREATE TABLE IF NOT EXISTS `bringme`.`DELIVERY` (
 -- Data for table `bringme`.`SERVICE`
 -- -----------------------------------------------------
 
-INSERT INTO `SERVICE` (`idService`, `serviceTitle`, `servicePrice`, `serviceDescription`, `serviceValidate`) VALUES
-(1, 'Baby sitter', 9, 'Le baby-sitter, nounou ou garde d’enfant, veille à la sécurité, au confort et au bien-être des petits dont il a la charge en l’absence des parents.', 1),
-(2, 'Plombier', 50, 'Le plombier installe, répare, règle et entretient les équipements sanitaires (toilettes, salles de bains, etc.), ainsi que les canalisations de distribution de gaz, d’eau et d’évacuation (en acier, cuivre, PVC, etc.)', 1),
-(3, 'Services du quotidien', 15, 'Pressing, retouche, cordonnerie, blanchisserie se sont les services du quotidien que nous vous proposons pour alléger vos journées chargées.\r\n\r\nIl vous suffit de déposer vos articles et nous les récupérerons lors de notre passage.', 1),
-(4, 'Achats express', 10, 'Nous mettons à votre disposition tous types de services qui peuvent faciliter votre vie : paniers bio, bouquets de fleurs, jusqu’à la livraison des vins & spiritueux', 1);
+INSERT INTO `SERVICE` (`idService`, `serviceTitle`, `servicePrice`, `serviceDescription`, `serviceValidate`, `serviceImage`) VALUES
+(1, 'Baby sitter', 9, 'Le baby-sitter, nounou ou garde d’enfant, veille à la sécurité, au confort et au bien-être des petits dont il a la charge en l’absence des parents.', 1, '../images/service1.jpg'),
+(2, 'Plombier', 50, 'Le plombier installe, répare, règle et entretient les équipements sanitaires (toilettes, salles de bains, etc.), ainsi que les canalisations de distribution de gaz, d’eau et d’évacuation (en acier, cuivre, PVC, etc.)', 1, '../images/service2.jpg'),
+(3, 'Services du quotidien', 15, 'Pressing, retouche, cordonnerie, blanchisserie se sont les services du quotidien que nous vous proposons pour alléger vos journées chargées.\r\n\r\nIl vous suffit de déposer vos articles et nous les récupérerons lors de notre passage.', 1, '../images/service3.jpg'),
+(4, 'Achats express', 10, 'Nous mettons à votre disposition tous types de services qui peuvent faciliter votre vie : paniers bio, bouquets de fleurs, jusqu’à la livraison des vins & spiritueux', 1, '../images/service4.jpeg');
 
 
 -- -----------------------------------------------------

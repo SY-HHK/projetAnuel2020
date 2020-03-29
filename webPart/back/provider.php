@@ -206,8 +206,8 @@ $allServices = $query4->fetchAll();
         <th scope="col">Pénalités</th>
         <th scope="col">State</th>
         <th scope="col">Plus d'info</th>
-        <th scope="col">MDP</th>
-         <th scope="col">MAJ</th>
+        <th scope="col"> </th>
+         <th scope="col"> </th>
       </tr>
     </thead>
 
@@ -260,7 +260,7 @@ $allServices = $query4->fetchAll();
                   </td>
 
                   <td>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal-<?php echo $providerCounter; ?>">
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal-<?php echo $providerCounter; ?>">
                        + 
                     </button>
 
@@ -340,7 +340,6 @@ $allServices = $query4->fetchAll();
 
                                                     
                                                                   <tr>
-                                                                   
                                                                           <td>
                                                                             <input type="hidden" class="input" name="idContract" value="<?php echo $contract['idContract']; ?>">
 
@@ -357,7 +356,6 @@ $allServices = $query4->fetchAll();
                                                                           </td>
                                                                           <td>
                                                                             <a class="btn btn-secondary" href="PHP/prestataireMAJ.php?idContract=<?php echo $contract['idContract']; ?>&start=<?php echo $contract['contractDateStart']; ?>&end= <?php echo $contract['contractDateEnd'];?>">renew</a>
-                                                                            
                                                                           </td>
                                                                           <td>
                                                                             <input type="hidden" class="input" name="idContract" value="<?php echo $contract['idContract']; ?>">
@@ -439,11 +437,11 @@ $allServices = $query4->fetchAll();
 <!-- FIN MODAL -->
                   </td>
                   <td>                    
-                    <input type="submit" name="pwd" class="option" value="NEW">
+                    <input type="submit" name="pwd" class="btn btn-primary" value="MDP">
                   </td>
                   <td>
                     <input type="hidden" name="idProvider" value="<?php echo $provider['idProvider']; ?>">
-                    <input type="submit" name="updateProvider" class="option"value="MAJ">
+                    <input type="submit" name="updateProvider" class="btn btn-warning"value="MAJ">
                   </td>
             </form>
           </tr>
