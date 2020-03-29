@@ -155,4 +155,11 @@ else {
     var elems = document.querySelectorAll('.fixed-action-btn');
     var instances = M.FloatingActionButton.init(elems);
   });
+
+
+  <?php if (isset($_GET["shop"]) && !empty($_GET["shop"])) {
+    if ($_GET["shop"] == "yes") { ?>
+      M.toast({html: 'Votre réservation a été effectuée. Pour plus d\'information consulter l\'onglet \'mes commandes\''});
+  <?php } } ?>
+
 </script>
