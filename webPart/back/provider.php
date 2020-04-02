@@ -292,10 +292,10 @@ $allServices = $query4->fetchAll();
 
                                 // var_dump($resultats2);
 
-                                if ($resultats2 == NULL){
-                                  echo "Ce prestataire n'a pas de contract en cours. ";
+                                // if ($resultats2 == NULL){
+                                //   echo "Ce prestataire n'a pas de contract en cours. ";
 
-                                } else {
+                                // } else {
 
                                 
                                  ?>
@@ -318,7 +318,11 @@ $allServices = $query4->fetchAll();
                                           <div class="card-body">
 
                                             <table class="table table-hover">
-                                              
+                                              <?php
+                                                if ($resultats2 == NULL){
+                                                    echo "Ce prestataire n'a pas de contract";
+                                                   } else {
+                                              ?>
                                                   <thead>
                                                     <tr>
                                                       <th scope="col">start</th>
@@ -330,7 +334,9 @@ $allServices = $query4->fetchAll();
 
                                                     </tr>
                                                   </thead>
-                                                   <?php        
+                                                   <?php     
+
+                                                 
                                                     foreach ($resultats2 as $contract) {
 
                                                           $query3->execute([$contract['idService']]);
@@ -366,7 +372,8 @@ $allServices = $query4->fetchAll();
                                                                          
                                                                   </tr>
                                                      
-                                                    <?php } ?>
+                                                    <?php }
+                                                    } ?>
                                                   
                                                 </table>
                                                </div>
@@ -433,7 +440,9 @@ $allServices = $query4->fetchAll();
                       </div>
 
                     <?php $providerCounter++; //pr modal 
-                          } ?>
+                          // }
+
+                           ?>
 <!-- FIN MODAL -->
                   </td>
                   <td>                    
