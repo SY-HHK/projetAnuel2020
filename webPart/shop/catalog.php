@@ -7,10 +7,10 @@ if (!isset($_SESSION["user"]) || empty($_SESSION["user"])) {
 
 include ('../include/config.php');
 
-$query = $pdo->prepare('SELECT * FROM SUBSCRIPTION');
-$query->execute();
-
-$resultats = $query->fetchAll();
+$getInfosUser = $pdo->prepare("SELECT * FROM USER WHERE userGuid = ?");
+$getInfosUser->execute([$_SESSION["user"]]);
+$getInfosUser = $getInfosUser->fetch();
+$subHourLeft = $getInfosUser["subHourLeft"];
 
 ?>
 
@@ -40,7 +40,7 @@ $resultats = $query->fetchAll();
         <label class="active" for="search_bar">Trouver un service en particulier</label>
       </div>
       <div class="input-field col s6 offset-s4">
-          <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Faire une demande non catalogué</a>
+          <a class="waves-effect waves-light btn modal-trigger" href="#demandModal">Faire une demande non catalogué</a>
       </div>
 
 
@@ -54,14 +54,14 @@ $resultats = $query->fetchAll();
     ?>
 
     <div class="col s4 service">
-      <div class="card">
+      <div class="card large">
         <div class="card-image">
-          <img src="../images/ménage.jpeg">
+          <img src="<?=$service["serviceImage"]?>">
           <span class="card-title"><?=$service["serviceTitle"]?></span>
         </div>
         <div class="card-content">
           <p><?=$service["serviceDescription"]?></p>
-          <h6><?=$service["servicePrice"]?>/heure</h6>
+          <h6><?=$service["servicePrice"]?>€/heure</h6>
         </div>
         <div class="card-action">
           <a class="waves-effect waves-light btn modal-trigger" href="#cartModal" onclick="addService('<?=addslashes($service["serviceTitle"])?>')">Ajouter au panier</a>
@@ -83,21 +83,64 @@ $resultats = $query->fetchAll();
       <h4>Mon panier :</h4>
     </div>
     <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-light btn">Continuer mes réservations</a>
+      <a href="#!" class="modal-close waves-effect waves-light grey btn">Continuer mes achats</a>
+      <?php
+      if ($subHourLeft > 0) { ?>
+      <button class="btn waves-effect waves-light" name="subButton" type="submit" name="action">Payer avec mon abonnement (<?=$subHourLeft?> heures restantes)</button>
+      <?php } ?>
       <button class="btn waves-effect waves-light" type="submit" name="action">Payer</button>
     </div>
     </form>
   </div>
 
   <!-- Modal Structure for demand -->
-    <div class="modal">
+    <div id="demandModal" class="modal">
       <form class="" action="demand.php" method="post">
       <div class="modal-content" id="cart">
+        <div class="row">
         <h4>Faire une demande</h4>
+          <div class="input-field col s6">
+            <input name="title" type="text" required>
+            <label for="title">Titre de la demande</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s1">
+            <p>Date :</p>
+          </div>
+          <div class="input-field col s3">
+            <input name="date" type="date" required>
+          </div>
+          <div class="input-field col s1">
+            <p>Début:</p>
+          </div>
+          <div class="input-field col s2">
+            <input name="timeStart" type="time" required>
+          </div>
+          <div class="input-field col s2">
+            <p>Fin (optionnel):</p>
+          </div>
+          <div class="input-field col s2">
+            <input name="timeStop" type="time">
+            <div class="switch">
+              <label>
+                <input name="endTomorow" type="checkbox">
+                <span class="lever"></span>
+                Fini le &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp lendemain
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+        <div class="input-field col s12">
+          <textarea id="textarea1" class="materialize-textarea" required></textarea>
+          <label for="description">Description</label>
+        </div>
       </div>
+    </div>
       <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect waves-light btn">Continuer mes réservations</a>
-        <button class="btn waves-effect waves-light" type="submit" name="action">Payer</button>
+        <a href="#!" class="modal-close waves-effect waves-light btn">Fermer</a>
+        <button class="btn waves-effect waves-light" type="submit" name="action">Valider</button>
       </div>
       </form>
     </div>
@@ -117,19 +160,26 @@ $resultats = $query->fetchAll();
       <input id="serviceTitle" name="serviceTitle" type="text" class="validate" value="1" readonly>
     </div>
     <div class="input-field col s2">
-      <input name="date" id="date" type="date">
+      <input name="date" id="date" type="date" required>
     </div>
     <div class="input-field col s1">
       <p>Début:</p>
     </div>
     <div class="input-field col s2">
-      <input name="timeStart" id="timeStart" type="time">
+      <input name="timeStart" id="timeStart" type="time" required>
     </div>
     <div class="input-field col s1">
       <p>Fin:</p>
     </div>
     <div class="input-field col s2">
-      <input name="timeStop" id="timeStop" type="time">
+      <input name="timeStop" id="timeStop" type="time" required>
+      <div class="switch">
+        <label>
+          <input id="timeStopDay" type="checkbox">
+          <span class="lever"></span>
+          Fini le &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp lendemain
+        </label>
+      </div>
     </div>
     <div class="col s1">
       <a id="supServiceButton" class="btn-floating modal-trigger btn-large">
@@ -168,6 +218,15 @@ document.addEventListener('DOMContentLoaded', function() {
     if ($_GET["error"] == "unconfirmed") { ?>
       M.toast({html: 'Votre achat n\'a pas abouti car nous n\'avons pas était en mesure de vous facturer !'});
   <?php }
+    if ($_GET["error"] == "date") { ?>
+      M.toast({html: 'Date indiquée non valide !'});
+    <?php }
+    if ($_GET["error"] == "time") { ?>
+      M.toast({html: 'Horraires indiquées non valides ! (impossible de reserver en dessous de 30 minutes)'});
+    <?php }
+    if ($_GET["error"] == "noEnoughtHours") { ?>
+      M.toast({html: 'Votre panier dépasse le nombre d\'heures restantes avec votre abonnement !'});
+    <?php }
       if ($_GET["error"] == "nothingInCart") { ?>
       M.toast({html: 'Votre panier est vide !'});
   <?php } } ?>
@@ -186,6 +245,7 @@ function addService(serviceTitle) {
   service.querySelector("#date").setAttribute("name", service.querySelector("#date").getAttribute("name")+numberServiceInCart);
   service.querySelector("#timeStart").setAttribute("name", service.querySelector("#timeStart").getAttribute("name")+numberServiceInCart);
   service.querySelector("#timeStop").setAttribute("name", service.querySelector("#timeStop").getAttribute("name")+numberServiceInCart);
+  service.querySelector("#timeStopDay").setAttribute("name", service.querySelector("#timeStopDay").getAttribute("name")+numberServiceInCart);
   service.querySelector("#supServiceButton").setAttribute("onclick", "delService('form"+numberServiceInCart+"')");
 
   cart.appendChild(service);

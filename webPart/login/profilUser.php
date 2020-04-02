@@ -16,6 +16,7 @@ if ($nbUser == 0) {
 }
 else {
   $userInfos = $getUserInfos->fetch();
+  $idUser = $userInfos["idUser"];
 
   $getUserCity = $pdo->prepare("SELECT * FROM CITY WHERE idCity = ?");
   $getUserCity->execute([$userInfos["userIdCity"]]);
@@ -60,8 +61,8 @@ else {
           <li class="tab col s6"><a class="white-text" href="#test2">Mes commandes</a></li>
         </ul>
       </div>
-      <div id="test1" class="col s12">
 
+      <div id="test1" class="col s12">
     <div class="row">
       <form class="col s12">
         <div class="row">
@@ -124,8 +125,35 @@ else {
 
 
       <div id="test2" class="col s12">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+        <ul class="collapsible">
+
+          <?php
+
+            $getAllbills = $pdo->prepare("SELECT * FROM BILL WHERE idUser = ? && (billState = 1 || billState = 2) ORDER BY billDate DESC");
+            $getAllbills->execute([$idUser]);
+            $bills = $getAllbills->fetchAll();
+            foreach ($bills as $bill) { ?>
+
+          <li>
+            <div class="collapsible-header"><i class="material-icons">chevron_right</i>Commande n°<?=$bill["idBill"]?>
+              du <?=date("d/m/yy", strtotime($bill["billDate"]))?>
+              pour <?=$bill["billPrice"]?>€ <?php if ($bill["billState"] == 2) echo "(Compris dans l'abonnement)"?>
+            </div>
+            <div class="collapsible-body"><span>
+
+              <?=$bill["billDescription"]?>
+              <br>Vos réservations n'ont pas encore été attribuées.
+
+            </span></div>
+          </li>
+
+          <?php } ?>
+
+        </ul>
+
       </div>
+
   </div>
 
 
@@ -156,10 +184,15 @@ else {
     var instances = M.FloatingActionButton.init(elems);
   });
 
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.collapsible');
+    var instances = M.Collapsible.init(elems);
+  });
+
 
   <?php if (isset($_GET["shop"]) && !empty($_GET["shop"])) {
     if ($_GET["shop"] == "yes") { ?>
-      M.toast({html: 'Votre réservation a été effectuée. Pour plus d\'information consulter l\'onglet \'mes commandes\''});
+      M.toast({html: 'Votre réservation a été effectuée. Pour plus d\'information consultez l\'onglet \'mes commandes\''});
   <?php } } ?>
 
 </script>
