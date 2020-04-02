@@ -57,7 +57,7 @@ $session = \Stripe\Checkout\Session::create([
     });
   }
 
-   setTimeout(function(){ buy() }, 5000);
+   setTimeout(function(){ buy() }, 3000);
 
   </script>
 </html>
