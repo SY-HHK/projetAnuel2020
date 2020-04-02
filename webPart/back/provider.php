@@ -321,7 +321,7 @@ $allServices = $query4->fetchAll();
                                               <?php
                                                 if ($resultats2 == NULL){
                                                     echo "Ce prestataire n'a pas de contract";
-                                                   }   else {
+                                                   } else {
                                               ?>
                                                   <thead>
                                                     <tr>
