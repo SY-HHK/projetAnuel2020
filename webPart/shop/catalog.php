@@ -84,6 +84,7 @@ $subHourLeft = $getInfosUser["subHourLeft"];
     </div>
     <div class="modal-footer">
       <a href="#!" class="modal-close waves-effect waves-light grey btn">Continuer mes achats</a>
+      <button name="quoteButton" type="submit" class="waves-effect waves-light btn">Devis</button>
       <?php
       if ($subHourLeft > 0) { ?>
       <button class="btn waves-effect waves-light" name="subButton" type="submit" name="action">Payer avec mon abonnement (<?=$subHourLeft?> heures restantes)</button>

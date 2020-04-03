@@ -89,6 +89,11 @@ else {
   $insertNewBill->execute([$idUser, $description, $totalPrice, 0]);
   $idBill = $pdo->lastInsertId();
 
+  if (isset($_POST["quoteButton"])) {
+    header("location: ../pdfGenerator.php?idBill=".$idBill);
+    exit;
+  }
+
   //conversion for amount type of stripe api
   $totalPrice = $totalPrice * 100;
 

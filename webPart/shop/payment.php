@@ -24,8 +24,8 @@ require_once "../vendor/autoload.php";
     $session = $event->data->object;
 
     if ($_GET["session_id"] == $session->id) {
-      $bill = $pdo->prepare("UPDATE BILL SET billState = 1 WHERE idBill = ?");
-      $bill->execute([$session->client_reference_id]);
+      $bill = $pdo->prepare("UPDATE BILL SET billState = 1, billStripeId = ? WHERE idBill = ?");
+      $bill->execute([$_GET["session_id"] ,$session->client_reference_id]);
       header("location: ../login/profilUser.php?shop=yes");
       exit;
     }

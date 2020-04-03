@@ -139,6 +139,7 @@ else {
             <div class="collapsible-header"><i class="material-icons">chevron_right</i>Commande n°<?=$bill["idBill"]?>
               du <?=date("d/m/yy", strtotime($bill["billDate"]))?>
               pour <?=$bill["billPrice"]?>€ <?php if ($bill["billState"] == 2) echo "(Compris dans l'abonnement)"?>
+              <a class="waves-effect waves-light btn col s3" target="_blank" href="../pdfGenerator.php?idBill=<?=$bill["idBill"]?>">Facture</a>
             </div>
             <div class="collapsible-body"><span>
 
