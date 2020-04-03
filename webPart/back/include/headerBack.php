@@ -11,7 +11,7 @@
      <a href="service.php">Services</a>
      <a href="request.php">Demandes</a>
      <a href="subscription.php">Abonnements </a>
-     <a href="historique.php">Historique </a>
+     <a href="history.php">Historique </a>
 
     <a href="../PHP/deconnexion.php"> Déconnexion </span></a>
 
