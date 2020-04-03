@@ -8,6 +8,12 @@ $query = $pdo->prepare('SELECT * FROM SERVICE WHERE serviceValidate = 1');
 $query->execute();
 
 $resultats = $query->fetchAll();
+
+
+$query2 = $pdo->prepare('SELECT * FROM SERVICE WHERE serviceValidate = 2');
+$query2->execute();
+
+$resultats2 = $query2->fetchAll();
 ?>
 
 <!DOCTYPE html>
@@ -71,11 +77,13 @@ $resultats = $query->fetchAll();
                     Attention taille maximum image 2Mo
                   </div>
 
-
-
         <?php } else if (isset($_GET['update']) && $_GET['update'] == 1) { ?>
               <div class="alert alert-success text-center" role="alert">
             Modification(s) enregistrée(s)
+          </div>
+        <?php } else if (isset($_GET['request']) && $_GET['request'] == 1) { ?>
+              <div class="alert alert-success text-center" role="alert">
+            La demande spéciale a été ajoutée.
           </div>
 
         <?php } else if (isset($_GET['add']) && $_GET['add'] == 'ok') { ?>
@@ -121,12 +129,73 @@ $resultats = $query->fetchAll();
                 <tbody>
                   <tr>
                     <form action="PHP/serviceMAJ.php" method="POST" enctype="multipart/form-data">
-                      <th scope="row"><img src="<?php echo $service['serviceImage']; ?>" id="serviceImage"></th>
+                      <th scope="row"><img src="<?php echo $service['serviceImage']; ?>" id="image"></th>
                           <td>
                             <input type="text" class="inputDelivery" name="name" value="<?php echo $service['serviceTitle']; ?>">
                           </td>
                           <td>
                             <input type="text" class="inputNbr" name="price" value="<?php echo $service['servicePrice']; ?>">
+                          </td>
+                          <td>
+                            <textarea id="desc" type="text" name="description" ><?php echo $service['serviceDescription']; ?></textarea>
+                          </td>
+                          <td>
+                            <input type="file" class="form-control-file file-upload" name="image" value="<?php echo $service['serviceImage']; ?>">
+                          </td>
+                          <td>
+                            <input type="hidden" name="idService" value="<?php echo $service['idService']; ?>">
+                            <input type="submit" name="updateSub" class="btn btn-warning"value="MAJ">
+                          </td>
+                          <td>
+                            <input type="hidden" name="idSub" value="<?php echo $service['idService']; ?>">
+                            <input type="hidden" name="verifPhoto" value="<?php echo $service['serviceImage']; ?>">
+
+                            <input type="submit" name="delete" class="btn btn-outline-danger"value="X">
+                          </td>
+                    </form>
+                  </tr>
+                </tbody>
+          <?php } ?>
+        </table>
+      </div>
+    </div>
+  </div>
+
+    <div class="card">
+    <div class="card-header" id="headingtwo">
+      <h2 class="mb-0">
+        <button class="btn collaborateur" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+          Nos demandes spéciales
+        </button>
+      </h2>
+    </div>
+
+    <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
+      <div class="card-body">
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nom</th>
+                <th scope="col">€/heure</th>
+                <th scope="col">Description</th>
+                <th scope="col">Image</th>
+                <th scope="col"></th>
+                <th scope="col"> </th>
+
+              </tr>
+            </thead>
+          <?php
+              foreach ($resultats2 as $service) { ?>
+                <tbody>
+                  <tr>
+                    <form action="PHP/serviceMAJ.php" method="POST" enctype="multipart/form-data">
+                      <th scope="row"><img src="<?php echo $service['serviceImage']; ?>" id="serviceImage"></th>
+                          <td>
+                            <input type="text" class="inputDelivery" name="name" value="<?php echo $service['serviceTitle']; ?>">
+                          </td>
+                          <td>
+                            <input type="text" class="inputNbr" name="price" value="<?php echo $service['servicePrice']; ?>" >
                           </td>
                           <td>
                             <textarea id="desc" type="text" name="description" ><?php echo $service['serviceDescription']; ?></textarea>
@@ -139,6 +208,7 @@ $resultats = $query->fetchAll();
                             <input type="submit" name="updateSub" class="btn btn-warning"value="MAJ">
                           </td>
                           <td>
+                            <input type="hidden" name="verifPhoto" value="<?php echo $service['serviceImage']; ?>">
                             <input type="hidden" name="idSub" value="<?php echo $service['idService']; ?>">
                             <input type="submit" name="delete" class="btn btn-outline-danger"value="X">
                           </td>
@@ -150,15 +220,16 @@ $resultats = $query->fetchAll();
       </div>
     </div>
   </div>
+
   <div class="card">
-    <div class="card-header" id="headingTwo">
+    <div class="card-header" id="headingThree">
       <h2 class="mb-0">
-        <button class="btn collaborateur collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        <button class="btn collaborateur collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
           Ajouter un service
         </button>
       </h2>
     </div>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
       <div class="card-body">
         <table class="table table-hover">
             <thead>

@@ -4,7 +4,7 @@ if (!isset($_SESSION['admin'])){
 header('location:../index.php');
 }
 //var_dump($_SESSION['admin']);
-$query = $pdo->prepare('SELECT * FROM SERVICE INNER JOIN USER ON USER.idUser = SERVICE.idUser WHERE serviceValidate != 1');
+$query = $pdo->prepare('SELECT * FROM SERVICE INNER JOIN USER ON USER.idUser = SERVICE.idUser WHERE serviceValidate = 0');
 $query->execute();
 
 $resultats = $query->fetchAll();
@@ -34,6 +34,14 @@ $resultats = $query->fetchAll();
         <h4>Les demandes de services</h4>
         <hr class="my-4">
 
+
+      <?php if(isset($_GET['request']) && $_GET['request'] == 1) { ?>
+            <div class="alert alert-success text-center" role="alert">
+            <?php echo 'La demande a été refusée' ?>
+          </div>
+
+        <?php } ?>
+
 <div class="accordion" id="accordionExample">
   <div class="card">
 
@@ -51,19 +59,19 @@ $resultats = $query->fetchAll();
               </tr>
             </thead>
           <?php
-              foreach ($resultats as $service) { ?>
+              foreach ($resultats as $demande) { ?>
                 <tbody>
                   <tr>
-                    <form action="PHP/demandes.php" method="POST">
+                    <form action="PHP/requestValidation.php" method="POST">
                           <td>
-                            <input type="text" name="user" value="<?php echo $service['userLastName']; ?>">
+                            <input type="text" name="user" value="<?php echo $demande['userLastName']; ?>">
                           </td>
                      
                           <td>
-                            <input type="text" class="inputDelivery" name="name" value="<?php echo $service['serviceTitle']; ?>">
+                            <input type="text" class="inputDelivery" name="name" value="<?php echo $demande['serviceTitle']; ?>">
                           </td>
                           <td>
-                            <textarea id="desc" type="text" name="description" ><?php echo $service['serviceDescription']; ?></textarea>
+                            <textarea id="desc" type="text" name="description" ><?php echo $demande['serviceDescription']; ?></textarea>
                           </td>
                           <td>
                             <div class="form-group">
@@ -74,7 +82,7 @@ $resultats = $query->fetchAll();
                             </div>
                           </td>
                           <td>
-                            <input type="hidden" name="idSub" value="<?php echo $service['idService']; ?>">
+                            <input type="hidden" name="idRequest" value="<?php echo $demande['idService']; ?>">
                             <input type="submit" class="btn btn-success" name="enregistrer" value="valider">
                           </td>
                     </form>

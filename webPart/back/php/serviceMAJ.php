@@ -53,41 +53,11 @@ if (isset($_POST['delete'])) {
         exit;
     }
 
-    // Image
-
-    $service = $_POST['idService'];
-
-    $photo_name = 'service'. $service;
-
-    echo $photo_name;
-    $filename = $_FILES['image']['name']; // récupère le nom de base du fichier avec son extension
-    $temp_array = explode('.', $filename); // 'explode' = transf chaine de char en tab
-    $imageFileType = strtolower(end($temp_array)); // Transforme la chaine de char en miniscule prend le dernier élement du tableau (ici l'exension)
-    $photo_path = '../images/' . $photo_name . ".". $imageFileType;
-
-
-  // Verification type de fichier
-
-    if ($imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" && $imageFileType != "jpg"){
-      header("location: ../service.php?error=file_type");
-      exit;
-    } 
-
-    // vérification taille du fichier
-    $maximumsize = 4097152; // 2Mo: 2*1024*1024
-    if(($_FILES['image']['size'] >= $maximumsize)){  // si le fichier dépasse la taille max -> redirection
-      header("location: ../service.php?error=file_size");
-      exit;
-    }
-
-
-    move_uploaded_file($_FILES['image']['tmp_name'], '../'.$photo_path);
-
-
-
+    
 
 // MAJ service
 if (isset($_POST['updateSub'])){
+
 // Insertion en BDD
 
     // Création des variables
@@ -96,9 +66,60 @@ $id = $_POST['idService'];
 $name = htmlspecialchars($_POST['name']);
 $price = htmlspecialchars($_POST['price']);
 $description = htmlspecialchars($_POST['description']);
+$photo_path = '../images/'.htmlspecialchars($_POST['verifPhoto']);
 
 
-echo $id;
+
+  $filename = $_FILES['image']['name']; 
+  $photoActuelle =$filename;
+
+if ($filename != ''){ // Si un nouveau fichier est entré
+
+  $queryImg = $pdo->prepare('SELECT serviceImage FROM SERVICE WHERE idService = ?');
+  $queryImg->execute(array($id));
+  $rows2 = $queryImg->rowCount();
+  $resultats2 = $queryImg->fetch();
+
+  $temp_array = explode('/', $resultats2['serviceImage']);
+  $photoBDD =  end($temp_array);
+
+  if ($rows2 == 1 ){
+
+    if ($photoActuelle != $photoBDD){
+
+
+      var_dump($photoActuelle, $photoBDD);
+
+    $photo_name = 'service'.rand();
+
+    $newFileName = $_FILES['image']['name'];
+    $temp_array = explode('.', $newFileName); 
+    $imageFileType = strtolower(end($temp_array)); 
+    $photo_path = '../images/' . $photo_name . ".". $imageFileType;
+
+
+      // Verification type de fichier
+
+      if ($imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" && $imageFileType != "jpg"){
+        header("location: ../service.php?error=file_type");
+        exit;
+      } 
+
+      // vérification taille du fichier
+      $maximumsize = 4097152; // 2Mo: 2*1024*1024
+      if(($_FILES['image']['size'] >= $maximumsize)){  // si le fichier dépasse la taille max -> redirection
+        header("location: ../service.php?error=file_size");
+        exit;
+      }
+      move_uploaded_file($_FILES['image']['tmp_name'], '../'.$photo_path);
+    
+
+      }
+    }
+  }
+
+
+
 $queryUpdate = $pdo->prepare('UPDATE SERVICE SET
 	serviceTitle = :name,
 	servicePrice = :price,
@@ -128,6 +149,38 @@ $rows = $queryUpdate->rowCount();
 
 // // Ajouter un service
 if (isset($_POST['addService'])){
+
+  // Image
+
+    $service = $_POST['idService'];
+
+    $photo_name = 'service'.rand();
+
+  
+    $filename = $_FILES['image']['name']; // récupère le nom de base du fichier avec son extension
+    $temp_array = explode('.', $filename); // 'explode' = transf chaine de char en tab
+    $imageFileType = strtolower(end($temp_array)); // Transforme la chaine de char en miniscule prend le dernier élement du tableau (ici l'exension)
+    $photo_path = '../images/' . $photo_name . ".". $imageFileType;
+
+  // Verification type de fichier
+
+    if ($imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" && $imageFileType != "jpg"){
+      header("location: ../service.php?error=file_type");
+      exit;
+    } 
+
+    // vérification taille du fichier
+    $maximumsize = 4097152; // 2Mo: 2*1024*1024
+    if(($_FILES['image']['size'] >= $maximumsize)){  // si le fichier dépasse la taille max -> redirection
+      header("location: ../service.php?error=file_size");
+      exit;
+    }
+
+
+    move_uploaded_file($_FILES['image']['tmp_name'], '../'.$photo_path);
+
+
+
 
 $name = htmlspecialchars($_POST['name']);
 $price = htmlspecialchars($_POST['price']);

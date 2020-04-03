@@ -155,7 +155,7 @@ include('../include/config.php');
 //guid
   do {
     //génération guid
-    $guid = str_replace("}","",str_replace("{","",com_create_guid()));
+    $guid = str_replace('}',"",str_replace('{',"",com_create_guid() ) );
     //test si déja pris
     $testGuid = $pdo->prepare("SELECT idUser FROM USER WHERE userGuid = ?");
     $testGuid->execute(array($guid));

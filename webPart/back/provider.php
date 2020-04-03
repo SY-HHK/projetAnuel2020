@@ -16,7 +16,7 @@ $query2 = $pdo->prepare('SELECT * FROM CONTRACT WHERE CONTRACT.idProvider = ?');
 
 $query3 = $pdo->prepare('SELECT serviceTitle FROM SERVICE WHERE idService = ?');
 
-$query4 = $pdo->prepare('SELECT * FROM SERVICE');
+$query4 = $pdo->prepare('SELECT * FROM SERVICE WHERE serviceValidate = 1 ');
 $query4->execute();
 $allServices = $query4->fetchAll();
 // var_dump($allServices);
