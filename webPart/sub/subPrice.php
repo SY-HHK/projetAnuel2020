@@ -1,4 +1,5 @@
 <?php
+include ('../include/lang.php');
 session_start();
 if (!isset($_SESSION["user"]) || empty($_SESSION["user"])) {
   header("location: ../login/connexion.php?error=plz_login");
@@ -17,7 +18,7 @@ $resultats = $query->fetchAll();
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Souscrire à un abonnement</title>
+    <title><?php echo $lang['titleSubPrice']; ?></title>
     <!--<?php include('css/linkCss.php');?>-->
 	  <link rel="stylesheet" href="css/pricing.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -35,12 +36,12 @@ $resultats = $query->fetchAll();
 <div class="container"><center>
   <br>
   <p>
-    Nous vous invitons à vous abonner, pour profiter au maximum des services de BringMe ! <br>
-    En effet cela vous permet de ne pas devoir payer à chaque réservation ou demande, si celles-ci sont comprises dans votre formule alors c'est gratuit !<br>
-    De plus vous pourrez profiter de nos services en dehors des horaires classiques, jusqu'à 7 jours sur 7 et 24h sur 24 !
+      <?php echo $lang['subPriceText1']; ?> <br>
+      <?php echo $lang['subPriceText2']; ?><br>
+      <?php echo $lang['subPriceText3']; ?>
   </p>
 
-  <h3>Liste des formules disponible :</h3>
+  <h3><?php echo $lang['availableFormulas']; ?></h3>
 
   <div class="carousel">
 
@@ -52,16 +53,16 @@ $resultats = $query->fetchAll();
       <div class="col s12">
         <div class="card">
           <div class="card-image">
-            <center><h6>Formule <?= $resultat["subName"] ?></h6>
+            <center><h6><?php echo $lang['formula']; ?> <?= $resultat["subName"] ?></h6>
             <i class="material-icons" style="font-size: 50px;">grade</i></center>
           </div>
           <div class="card-content">
-            <p><?= $resultat["subDays"] ?> jours sur 7.<br>
-            De <?= $resultat["subHourStart"] ?> heures à <?= $resultat["subHourEnd"] ?> heures.<br>
-            Contrat de <?= $resultat["subHour"] ?> heures</p><br>
+            <p><?= $resultat["subDays"] ?> <?php echo $lang['subDays']; ?> 7.<br>
+            De <?= $resultat["subHourStart"] ?> <?php echo $lang['subHours2']; ?> <?= $resultat["subHourEnd"] ?> <?php echo $lang['subHours']; ?>.<br>
+                <?php echo $lang['subContract']; ?> <?= $resultat["subHour"] ?> <?php echo $lang['subHours']; ?></p><br>
             <center>
               <button type="button" onclick="document.location.href='subUser.php?idSub='+<?=$resultat["idSub"]?>" class="waves-effect waves-light btn">
-                <?= $resultat["subPrice"] ?> €/an
+                <?= $resultat["subPrice"] ?> €/<?php echo $lang['year']; ?>
               </button>
             </center>
 
@@ -86,10 +87,10 @@ $resultats = $query->fetchAll();
 
 <?php if (isset($_GET["error"]) && !empty($_GET["error"])) {
   if ($_GET["error"] == "cancel") { ?>
-    M.toast({html: 'Votre achat n\'a pas abouti car vous avez annuler le paiement !'});
+    M.toast({html: '<?php echo $lang['error=cancel']; ?>'});
 <?php }
   if ($_GET["error"] == "unconfirmed") { ?>
-    M.toast({html: 'Votre achat n\'a pas abouti car nous n\'avons pas était en mesure de vous facturer !'});
+    M.toast({html: '<?php echo $lang['error=unconfirmed']; ?>'});
 <?php }
   }
 ?>

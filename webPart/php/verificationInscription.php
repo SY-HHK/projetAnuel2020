@@ -2,19 +2,18 @@
 include('../include/config.php');
     // VERIFICATION DES CHAMPS
 
-    // format de l'email
-
-    if (!filter_var($_POST['mail'],FILTER_VALIDATE_EMAIL)){
-        header('Location: ../login/inscription.php?error=email_format');
-        exit;
-    }
-
     //Email
     if(!isset($_POST['mail']) || empty($_POST['mail'])){
         header('Location: ../login/inscription.php?error=email_missing');
         exit;
     }
 
+    // format de l'email
+
+    if (!filter_var($_POST['mail'],FILTER_VALIDATE_EMAIL)){
+        header('Location: ../login/inscription.php?error=email_format');
+        exit;
+    }
 
     //EMAIL DEJA utilisé ?
         $q = "SELECT userEmail FROM USER WHERE userEmail = ?";

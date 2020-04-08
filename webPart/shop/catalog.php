@@ -1,4 +1,5 @@
 <?php
+include ('../include/lang.php');
 session_start();
 if (!isset($_SESSION["user"]) || empty($_SESSION["user"])) {
   header("location: ../login/connexion.php?error=plz_login");
@@ -17,7 +18,7 @@ $subHourLeft = $getInfosUser["subHourLeft"];
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Liste des services</title>
+    <title><?php echo $lang['titleCatalog'];?></title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <meta charset="UTF-8">
@@ -37,10 +38,10 @@ $subHourLeft = $getInfosUser["subHourLeft"];
 
       <div class="input-field col s6 offset-s3">
         <input id="search_bar" type="text" class="validate" onkeyup="findService()">
-        <label class="active" for="search_bar">Trouver un service en particulier</label>
+        <label class="active" for="search_bar"><?php echo $lang['searchBarService'];?></label>
       </div>
       <div class="input-field col s6 offset-s4">
-          <a class="waves-effect waves-light btn modal-trigger" href="#demandModal">Faire une demande non catalogué</a>
+          <a class="waves-effect waves-light btn modal-trigger" href="#demandModal"><?php echo $lang['makeDemandBtn'];?></a>
       </div>
 
 
@@ -83,7 +84,7 @@ $subHourLeft = $getInfosUser["subHourLeft"];
       <h4>Mon panier :</h4>
     </div>
     <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-light grey btn">Continuer mes achats</a>
+      <a href="#!" class="modal-close waves-effect waves-light grey btn"></a>
       <button name="quoteButton" type="submit" class="waves-effect waves-light btn">Devis</button>
       <?php
       if ($subHourLeft > 0) { ?>
@@ -99,27 +100,27 @@ $subHourLeft = $getInfosUser["subHourLeft"];
       <form class="" action="demand.php" method="post">
       <div class="modal-content" id="cart">
         <div class="row">
-        <h4>Faire une demande</h4>
+        <h4><?php echo $lang['makeDemand']; ?></h4>
           <div class="input-field col s6">
             <input name="title" type="text" required>
-            <label for="title">Titre de la demande</label>
+            <label for="title"><?php echo $lang['titleDemand']; ?></label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s1">
-            <p>Date :</p>
+            <p><?php echo $lang['date']; ?> :</p>
           </div>
           <div class="input-field col s3">
             <input name="date" type="date" required>
           </div>
           <div class="input-field col s1">
-            <p>Début:</p>
+            <p><?php echo $lang['beginning']; ?>:</p>
           </div>
           <div class="input-field col s2">
             <input name="timeStart" type="time" required>
           </div>
           <div class="input-field col s2">
-            <p>Fin (optionnel):</p>
+            <p><?php echo $lang['endOptional']; ?>:</p>
           </div>
           <div class="input-field col s2">
             <input name="timeStop" type="time">
@@ -127,7 +128,7 @@ $subHourLeft = $getInfosUser["subHourLeft"];
               <label>
                 <input name="endTomorow" type="checkbox">
                 <span class="lever"></span>
-                Fini le &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp lendemain
+                  <?php echo $lang['endNextDay']; ?>
               </label>
             </div>
           </div>
@@ -135,13 +136,13 @@ $subHourLeft = $getInfosUser["subHourLeft"];
         <div class="row">
         <div class="input-field col s12">
           <textarea id="textarea1" class="materialize-textarea" required></textarea>
-          <label for="description">Description</label>
+          <label for="description"><?php echo $lang['desc']; ?></label>
         </div>
       </div>
     </div>
       <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect waves-light btn">Fermer</a>
-        <button class="btn waves-effect waves-light" type="submit" name="action">Valider</button>
+        <a href="#!" class="modal-close waves-effect waves-light btn"><?php echo $lang['close']; ?></a>
+        <button class="btn waves-effect waves-light" type="submit" name="action"><?php echo $lang['validate']; ?></button>
       </div>
       </form>
     </div>

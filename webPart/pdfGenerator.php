@@ -22,7 +22,7 @@ if ($getInfosBill->rowCount() != 1) {
   exit;
 }
 $infosBill = $getInfosBill->fetch();
-if ($infosBill["billState"] == -1) $type = "Devis";
+if ($infosBill["billState"] == 0) $type = "Devis";
 else $type = "Facture";
 ?>
 

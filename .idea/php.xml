@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PhpIncludePathManager">
+    <include_path>
+      <path value="$PROJECT_DIR$/webPart/vendor/tecnickcom/tcpdf" />
+      <path value="$PROJECT_DIR$/webPart/vendor/stripe/stripe-php" />
+      <path value="$PROJECT_DIR$/webPart/vendor/composer" />
+      <path value="$PROJECT_DIR$/webPart/vendor/spipu/html2pdf" />
+    </include_path>
+  </component>
+</project>

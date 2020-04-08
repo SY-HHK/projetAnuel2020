@@ -1,21 +1,19 @@
 <?php
-
+include('include/lang.php');
 session_start();
 include ('include/config.php');
-
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Accueil</title>
+    <title><?php echo $lang['title']; ?></title>
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Baloo+Thambi+2:600|Roboto&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
 </head>
-
 
 <body>
 
@@ -27,9 +25,9 @@ include ('include/config.php');
 
     <div id="blocker">
 
-      <h2>Besoin d'un babysitter ?</h2>
-      <p>Trouver un babysitter facilement ainsi que des centaines d'autres services sur BringMe.com</p>
-      <a class="waves-effect waves-light btn-large" href="login/inscription.php">Inscrivez vous dès maintenant !</a>
+      <h2><?php echo $lang['question1'];?></h2>
+      <p><?php echo $lang['hook'];?></p>
+      <a class="waves-effect waves-light btn-large" href="login/inscription.php"><?php echo $lang['buttonIndex'];?></a>
 
     </div>
 
@@ -148,6 +146,7 @@ include ('include/config.php');
 			}
 
 		</script>
-    <?php include('include/new_footer.php'); ?>
+   
     </body>
-</html>
+     <?php include('include/new_footer.php'); ?>
+
