@@ -6,7 +6,7 @@ use Spipu\Html2Pdf\Html2Pdf;
 use Spipu\Html2Pdf\Exception\Html2PdfException;
 use Spipu\Html2Pdf\Exception\ExceptionFormatter;
 include("include/config.php");
-$getInfosUser = $pdo->prepare("SELECT * FROM USER WHERE userGuid = ?");
+$getInfosUser = $pdo->prepare("SELECT * FROM USER INNER JOIN CITY ON USER.userIdCity = CITY.idCity WHERE userGuid = ?");
 $getInfosUser->execute([$_SESSION["user"]]);
 if ($getInfosUser->rowCount() != 1) {
   header("location: index.php");
@@ -26,18 +26,131 @@ if ($infosBill["billState"] == 0) $type = "Devis";
 else $type = "Facture";
 ?>
 
-<img src="images/logo.png" style="width: 30%;">
+<style media="screen">
+#price th {
+  width: 100px;
+  border: 1px solid black;
+}
 
-<div style="width: 80%; margin-left: 10%;">
+#price table {
+  border: 1px solid black;
+}
+
+#price {
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 40px;
+}
+
+#tableTotal {
+  margin-left: 76.4%;
+  margin-top: 10px;
+}
+
+#header {
+  display: inline;
+  width: 75%;
+}
+
+img {
+  display: inline;
+  width: 25%;
+}
+
+#client th {
+  width: 450px;
+  font-weight: normal;
+}
+
+#conditions {
+  font-size: 9px;
+  margin-left: 150px;
+}
+</style>
+
+<div style="margin-bottom: 20px;">
+<div id="header">
+<h3>BringMe</h3>
+242 Rue du Faubourg Saint-Antoine <br>
+75012 Paris <br>
+0660762384 <br>
+BringMe.com
+</div>
+<img src="images/logo.png">
+</div>
+
+<table id="client">
+<tr>
+  <th>
+    Numéro de facture : <?=$infosBill["idBill"]?><br>
+    Date : <?=$infosBill["billDate"]?><br>
+    Numéro de client : <?=$infosUser["userGuid"]?>
+  </th>
+  <th>
+    <?=$infosUser["userFirstName"]." ".$infosUser["userLastName"]?><br>
+    <?=$infosUser["userAddress"]?><br>
+    <?=$infosUser["cityName"]."(".$infosUser["cityDepartement"]."), ".$infosUser["cityRegion"]?>
+  </th>
+</tr>
+</table>
+
+<div id="price">
 
   <div style="margin-left: 30%;"><h2><?=$type?> du <?=date("d/m/yy", strtotime($infosBill["billDate"]))?></h2></div>
 
-  <p>Prix : <?=$infosBill["billPrice"]?>€</p>
+  <table style="padding-bottom: 100px;">
+        <thead>
+          <tr>
+              <th>Quantité</th>
+              <th style="width: 300px;">Désignation</th>
+              <th>Prix unitaire HT</th>
+              <th>Prix total HT</th>
+          </tr>
+        </thead>
 
-  <p>Description : <?=str_replace(",", "\n", $infosBill["billDescription"])?></p>
+        <tbody>
+
+<?php
+
+$getDelivery = $pdo->prepare("SELECT * FROM DELIVERY INNER JOIN SERVICE on DELIVERY.idService = SERVICE.idService WHERE idBill = ?");
+$getDelivery->execute([$_GET["idBill"]]);
+$deliverys = $getDelivery->fetchAll();
+
+foreach ($deliverys as $delivery) {
+
+?>
+          <tr>
+            <td><?=$delivery["deliveryHourStart"]?></td>
+            <td><?=$delivery["serviceTitle"]?></td>
+            <td><?=$delivery["servicePrice"]?></td>
+            <td><?=$delivery["servicePrice"] * 2?></td>
+          </tr>
+
+<?php } ?>
+
+        </tbody>
+      </table>
+
+      <table id="tableTotal">
+        <tr>
+          <td>Total Hors taxe</td>
+          <td>xx€</td>
+        </tr>
+        <tr>
+          <td>TVA à 20%</td>
+          <td>xx€</td>
+        </tr>
+        <tr>
+          <td>Total TTC en euros</td>
+          <td>xx€</td>
+        </tr>
+      </table>
 
 </div>
 
+<page_footer>
+  <p id="conditions">Réglement par carte bancaire à l'aide de la plateforme Stripe. Pour plus d'informations voir les conditions d'utilisations.</p>
+</page_footer>
 
 
 

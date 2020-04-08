@@ -130,7 +130,7 @@ else {
 
           <?php
 
-            $getAllbills = $pdo->prepare("SELECT * FROM BILL WHERE idUser = ? && (billState = 1 || billState = 2) ORDER BY billDate DESC");
+            $getAllbills = $pdo->prepare("SELECT * FROM BILL WHERE idUser = ? && billState != 0 ORDER BY billDate DESC");
             $getAllbills->execute([$idUser]);
             $bills = $getAllbills->fetchAll();
             foreach ($bills as $bill) { ?>
@@ -138,8 +138,10 @@ else {
           <li>
             <div class="collapsible-header"><i class="material-icons">chevron_right</i>Commande n°<?=$bill["idBill"]?>
               du <?=date("d/m/yy", strtotime($bill["billDate"]))?>
-              pour <?=$bill["billPrice"]?>€ <?php if ($bill["billState"] == 2) echo "(Compris dans l'abonnement)"?>
+              pour <?php if (!empty($bill["billPrice"])) echo $bill["billPrice"]."€ "; else echo "XX€ (prix pas non déterminé, traitement en cours par le service client)."; if ($bill["billState"] == 2) echo "(Compris dans l'abonnement)"?>
+              <?php if ($bill["billState"] !=3) { ?>
               <a class="waves-effect waves-light btn col s3" target="_blank" href="../pdfGenerator.php?idBill=<?=$bill["idBill"]?>">Facture</a>
+              <?php } ?>
             </div>
             <div class="collapsible-body"><span>
 

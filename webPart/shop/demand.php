@@ -18,8 +18,9 @@ $getIdUser->execute([$_SESSION["user"]]);
 $getIdUser = $getIdUser->fetch();
 $idUser = $getIdUser["idUser"];
 
-$insertNewBill = $pdo->prepare("INSERT INTO BILL (idUser, billDate, billDescription, billState) VALUES (?,now(),?,0)");
+$insertNewBill = $pdo->prepare("INSERT INTO BILL (idUser, billDate, billDescription, billState) VALUES (?,now(),?,3)");
 $insertNewBill->execute([$idUser, $_POST["description"]]);
+$idBill = $pdo->lastInsertId();
 
 $insertNewDemand = $pdo->prepare("INSERT INTO service (serviceTitle, serviceDescription, serviceValidate, idUser) VALUES (?,?,0,?)");
 $insertNewDemand->execute([$_POST["title"], $_POST["description"], $idUser]);
@@ -35,10 +36,10 @@ if (isset($_POST["endTomorow"])) {
 }
 else $dateEnd = $_POST["date"];
 
-$insertNewDelivery = $pdo->prepare("INSERT INTO delivery (deliveryDateStart, deliveryDateEnd, deliveryHourStart, deliveryHourEnd, deliveryState, idService, idUser) VALUES (?,?,?,?,?,?,?)");
-$insertNewDelivery->execute([$_POST["date"], $dateEnd, $_POST["timeStart"], $timeStop, 0, $idDemand, $idUser])
+$insertNewDelivery = $pdo->prepare("INSERT INTO delivery (deliveryDateStart, deliveryDateEnd, deliveryHourStart, deliveryHourEnd, deliveryState, idService, idBill) VALUES (?,?,?,?,?,?,?)");
+$insertNewDelivery->execute([$_POST["date"], $dateEnd, $_POST["timeStart"], $timeStop, 0, $idDemand, $idBill]);
 
-
+header("location: ../login/profilUser.php?shop=yes");
 
 
 ?>
