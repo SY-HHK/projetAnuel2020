@@ -1,7 +1,7 @@
 <?php
 session_start();
 include("../include/config.php");
-
+include('../include/lang.php');
 if (!isset($_SESSION["user"])) {
   header("../location: index.php");
   exit;
@@ -39,7 +39,7 @@ else {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Profil</title>
+    <title><?php echo $lang['titleProfile']; ?></title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <meta charset="UTF-8">
@@ -57,8 +57,8 @@ else {
   <div class="row">
       <div class="col s12">
         <ul class="tabs blue-grey darken-1">
-          <li class="tab col s6"><a class="active white-text" href="#test1">Mes infos</a></li>
-          <li class="tab col s6"><a class="white-text" href="#test2">Mes commandes</a></li>
+          <li class="tab col s6"><a class="active white-text" href="#test1"><?php echo $lang['myInfo']; ?></a></li>
+          <li class="tab col s6"><a class="white-text" href="#test2"><?php echo $lang['myOrders']; ?></a></li>
         </ul>
       </div>
 
@@ -68,52 +68,52 @@ else {
         <div class="row">
           <div class="input-field col s12">
             <input id="last_name" type="text" class="validate" value="<?=$userInfos["userFirstName"]." ".$userInfos["userLastName"]?>">
-            <label for="last_name">Prénom et nom :</label>
+            <label for="last_name"><?php echo $lang['firstName']; echo ' & '.$lang['lastName'] ?></label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
             <input id="last_name" type="email" class="validate" value="<?=$userInfos["userEmail"]?>">
-            <label for="last_name">Adresse email :</label>
+            <label for="last_name"><?php echo $lang['email']; ?> :</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
             <input id="last_name" type="text" class="validate" value="<?=$userInfos["userAddress"]?>">
-            <label for="last_name">Adresse :</label>
+            <label for="last_name"><?php echo $lang['address']; ?> :</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s5">
             <input id="last_name" type="text" class="validate" value="<?=$userInfos["cityName"]?>">
-            <label for="last_name">Ville :</label>
+            <label for="last_name"><?php echo $lang['city']; ?> :</label>
           </div>
           <div class="input-field col s2">
             <input id="last_name" type="text" class="validate" value="<?=$userInfos["cityDepartement"]?>">
-            <label for="last_name">Département :</label>
+            <label for="last_name"><?php echo $lang['department']; ?> :</label>
           </div>
           <div class="input-field col s5">
             <input id="last_name" type="text" class="validate" value="<?=$userInfos["cityRegion"]?>">
-            <label for="last_name">Région :</label>
+            <label for="last_name"><?php echo $lang['region']; ?> :</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <input disabled id="last_name" type="text" class="validate" value="<?if (isset($userInfos['subName'])) echo $userInfos['subName'].' jusqu\'au '.date('d-m-Y',strtotime($userInfos['subEnd'])); else echo "aucun";?>">
-            <label for="last_name">Abonnement :</label>
+            <input disabled id="last_name" type="text" class="validate" value="<?php if (isset($userInfos['subName'])) echo $userInfos['subName'].' '.$lang['to'].' '.date('d-m-Y',strtotime($userInfos['subEnd'])); else echo $lang['no'];?>">
+            <label for="last_name"><?php echo $lang['sub']; ?> :</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s6">
             <input id="password" type="password" class="validate">
-            <label for="password">Mot de passe :</label>
+            <label for="password"><?php echo $lang['pwd']; ?> :</label>
           </div>
           <div class="input-field col s6">
             <input id="password" type="password" class="validate">
-            <label for="password">Confirmer mot de passe :</label>
+            <label for="password"><?php echo $lang['confirmPwd']; ?> :</label>
           </div>
         </div>
-        <button class="btn waves-effect waves-light" type="submit" name="action">Modifier
+        <button class="btn waves-effect waves-light" type="submit" name="action"><?php echo $lang['edit']; ?>
           <i class="material-icons right">send</i>
         </button>
 

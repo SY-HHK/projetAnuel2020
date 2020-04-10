@@ -1,4 +1,5 @@
 <?php
+include ('../include/lang.php');
 session_start();
 if (!isset($_SESSION["user"]) || empty($_SESSION["user"])) {
   header("location: ../login/connexion.php?error=plz_login");

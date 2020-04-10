@@ -235,12 +235,12 @@ INSERT INTO `bringme`.`SUBSCRIPTION` (`idSub`, `subName`, `subDays`, `subHourSta
 -- -----------------------------------------------------
 INSERT INTO `bringme`.`USER` (`idUser`, `userEmail`, `userPassword`, `userFirstName`, `userLastName`, `userBirth`, `userAddress`, `userIdCity`, `userPhone`, `userPrivilege`, `userIp`, `userAgent`, `userAnnulation`, `state`, `idSubscription`, `subStart`, `subEnd`, `userGuid`) VALUES (1, 'adeline@yahoo.fr', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'Adeline', 'Hernadez', '1995-08-12', '86 avenue de la Place', 1, '0685643576', 0, '09090909', '35355535', DEFAULT, 0, NULL, NULL, NULL, '05301411-7c9d-422c-8dd1-842ff4e6c3b5');
 INSERT INTO `bringme`.`USER` (`idUser`, `userEmail`, `userPassword`, `userFirstName`, `userLastName`, `userBirth`, `userAddress`, `userIdCity`, `userPhone`, `userPrivilege`, `userIp`, `userAgent`, `userAnnulation`, `state`, `idSubscription`, `subStart`, `subEnd`, `userGuid`) VALUES (2, 'louis.ricour@gmail.com', '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08', 'Louis', 'Ricour', '2000-06-26', '86 avenue de la Place', 1, '0685643576', 10, '09090909', '35355535', DEFAULT, 0, NULL, NULL, NULL, '7fcd2aa7-9d8a-438a-b834-0de6b6ed69db');
-INSERT INTO `bringme`.`USER` (`idUser`, `userEmail`, `userPassword`, `userFirstName`, `userLastName`, `userBirth`, `userAddress`, `userIdCity`, `userPhone`, `userPrivilege`, `userIp`, `userAgent`, `userAnnulation`, `state`, `idSubscription`, `subStart`, `subEnd`, `userGuid`) VALUES (3, 'suvirtha@bringme.fr', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'Suvirtha', 'Thayaharan', '2000-05-03', '86 avenue de la Place', 1, '0685643576', 10, '09090909', '35355535', DEFAULT, 0, NULL, NULL, NULL, '506617B9-E5EC-48DA-B6D5-9606CB9251B8');
+INSERT INTO `bringme`.`USER` (`idUser`, `userEmail`, `userPassword`, `userFirstName`, `userLastName`, `userBirth`, `userAddress`, `userIdCity`, `userPhone`, `userPrivilege`, `userIp`, `userAgent`, `userAnnulation`, `state`, `idSubscription`, `subStart`, `subEnd`, `userGuid`) VALUES (3, 'suvirtha@bringme.fr', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'Suvirtha', 'Thayaharan', '2000-05-03', '86 avenue de la Place', 1, '0685643576', 1, '09090909', '35355535', DEFAULT, 0, NULL, NULL, NULL, '506617B9-E5EC-48DA-B6D5-9606CB9251B8');
 
 -- -----------------------------------------------------
 -- Data for table `bringme`.`BILL`
 -- -----------------------------------------------------
-INSERT INTO `bringme`.`BILL` (`idBill`,`idUser` ,`billDate` ,`billDescription`,`billPrice`,`billState` ,`billStripeId`) VALUES (1,1,'2020-03-17','Bill description',789,NULL,NULL);
+INSERT INTO `bringme`.`BILL` (`idBill`,`idUser` ,`billDate` ,`billDescription`,`billPrice`,`billState` ,`billStripeId`) VALUES (1,3,'2020-03-17','Bill description',789,1,NULL);
 
 
 -- -----------------------------------------------------
