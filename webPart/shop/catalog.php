@@ -46,7 +46,7 @@ $subHourLeft = $getInfosUser["subHourLeft"];
 
     <?php
 
-      $services = $pdo->prepare("SELECT * FROM SERVICE");
+      $services = $pdo->prepare("SELECT * FROM SERVICE WHERE serviceValidate = 1");
       $services->execute();
       $services = $services->fetchAll();
       foreach ($services as $service) {
@@ -64,7 +64,7 @@ $subHourLeft = $getInfosUser["subHourLeft"];
           <h6><?=$service["servicePrice"]?>€/heure</h6>
         </div>
         <div class="card-action">
-          <a class="waves-effect waves-light btn modal-trigger" href="#cartModal" onclick="addService('<?=addslashes($service["serviceTitle"])?>')">Ajouter au panier</a>
+          <a class="waves-effect waves-light btn modal-trigger" href="#cartModal" onclick="addService('<?=addslashes($service["serviceTitle"])."',".$service["idService"]?>)">Ajouter au panier</a>
         </div>
       </div>
     </div>
@@ -85,10 +85,6 @@ $subHourLeft = $getInfosUser["subHourLeft"];
     <div class="modal-footer">
       <a href="#!" class="modal-close waves-effect waves-light grey btn">Continuer mes achats</a>
       <button name="quoteButton" type="submit" class="waves-effect waves-light btn">Devis</button>
-      <?php
-      if ($subHourLeft > 0) { ?>
-      <button class="btn waves-effect waves-light" name="subButton" type="submit" name="action">Payer avec mon abonnement (<?=$subHourLeft?> heures restantes)</button>
-      <?php } ?>
       <button class="btn waves-effect waves-light" type="submit" name="action">Payer</button>
     </div>
     </form>
@@ -157,6 +153,7 @@ $subHourLeft = $getInfosUser["subHourLeft"];
 
   <!--formulaire exemple-->
   <div class="row" id="exemple" style="display:none">
+    <input style="display: none" id="idService" name="idService" type="text" class="validate" value="" readonly>
     <div class="input-field col s2">
       <input id="serviceTitle" name="serviceTitle" type="text" class="validate" value="1" readonly>
     </div>
@@ -167,18 +164,18 @@ $subHourLeft = $getInfosUser["subHourLeft"];
       <p>Début:</p>
     </div>
     <div class="input-field col s2">
-      <input name="timeStart" id="timeStart" type="time" required>
+      <input name="hourStart" id="timeStart" type="time" required>
     </div>
     <div class="input-field col s1">
       <p>Fin:</p>
     </div>
     <div class="input-field col s2">
-      <input name="timeStop" id="timeStop" type="time" required>
+      <input name="hourStop" id="timeStop" type="time" required>
       <div class="switch">
         <label>
-          <input id="timeStopDay" type="checkbox">
+          <input name="payWithSub" id="payWithSub" type="checkbox">
           <span class="lever"></span>
-          Fini le &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp lendemain
+          Payer avec mon abonnement
         </label>
       </div>
     </div>
@@ -233,7 +230,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <?php } } ?>
 
 
-function addService(serviceTitle) {
+function addService(serviceTitle, idService) {
   var cart = document.getElementById('cart');
   var form = document.getElementById('exemple'); //formulaire vide
   numberServiceInCart = form.querySelector("#serviceTitle").getAttribute("value");
@@ -243,10 +240,12 @@ function addService(serviceTitle) {
   service.innerHTML = form.innerHTML;
   service.querySelector("#serviceTitle").setAttribute("value", serviceTitle);
   service.querySelector("#serviceTitle").setAttribute("name", service.querySelector("#serviceTitle").getAttribute("name")+numberServiceInCart);
+  service.querySelector("#idService").setAttribute("value", idService);
+  service.querySelector("#idService").setAttribute("name", service.querySelector("#idService").getAttribute("name")+numberServiceInCart);
   service.querySelector("#date").setAttribute("name", service.querySelector("#date").getAttribute("name")+numberServiceInCart);
   service.querySelector("#timeStart").setAttribute("name", service.querySelector("#timeStart").getAttribute("name")+numberServiceInCart);
   service.querySelector("#timeStop").setAttribute("name", service.querySelector("#timeStop").getAttribute("name")+numberServiceInCart);
-  service.querySelector("#timeStopDay").setAttribute("name", service.querySelector("#timeStopDay").getAttribute("name")+numberServiceInCart);
+  service.querySelector("#payWithSub").setAttribute("name", service.querySelector("#payWithSub").getAttribute("name")+numberServiceInCart);
   service.querySelector("#supServiceButton").setAttribute("onclick", "delService('form"+numberServiceInCart+"')");
 
   cart.appendChild(service);

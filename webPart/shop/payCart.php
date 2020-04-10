@@ -9,6 +9,7 @@ if (!isset($_POST["serviceTitle1"])) {
   exit;
 }
 include("../include/config.php");
+require_once "FindProvider.php";
 require_once "../vendor/autoload.php";
 
 $getInfosUser = $pdo->prepare("SELECT * FROM USER WHERE userGuid = ?");
@@ -17,12 +18,67 @@ $getInfosUser = $getInfosUser->fetch();
 $idUser = $getInfosUser["idUser"];
 $subHourLeft = $getInfosUser["subHourLeft"];
 
-function decimalHours($time)
-{
-    $hms = explode(":", $time);
-    $time = ($hms[0] + ($hms[1]/60));
-    return round($time, 2);
+$bookList = new FindProvider($_POST, $pdo);
+
+$i = 1;
+while (isset($_POST["serviceTitle".$i])) {
+
+////////////////////////////check form
+  if (empty($_POST["date".$i]) || empty($_POST["hourStart".$i]) || empty($_POST["hourStop".$i])) {
+    header("location: catalog.php?error=empty");
+    exit;
+  }
+  if (strtotime($_POST["date".$i]) < time()) {
+    header("location: catalog.php?error=date");
+    exit;
+  }
+
+  $time = $bookList->getTimeOfDelivery($i);
+  if ($time == -1) {
+    header("location: catalog.php?error=noEnoughtHours");
+    exit;
+  }
+
+  if ($bookList->checkProvider($i, $getInfosUser["userIdCity"]) == 0) {
+    header("location: catalog.php?error=noProvider");
+    exit;
+  }
+
+  if ($bookList->checkSub($idUser) == 0) {
+    header("location: catalog.php?error=noEnoughtSub");
+    exit;
+  }
+$i++;
 }
+
+$billInfos = $bookList->insertBill($idUser);
+
+$i = 1;
+while (isset($_POST["serviceTitle".$i])) {
+  $bookList->insertDelivery($i, $billInfos["idBill"], $getInfosUser["userIdCity"]);
+  $i++;
+}
+
+\Stripe\Stripe::setApiKey('sk_test_9bT77JdwRJaBD1Mn0YJj1Zb600k6QROR7E');
+
+$session = \Stripe\Checkout\Session::create([
+  'payment_method_types' => ['card'],
+  'line_items' => [[
+    'name' => 'Service(s) BringMe.com',
+    'description' => $billInfos["description"],
+    //'images' => [''],
+    'amount' => round($billInfos["totalPrice"], 2) * 100,
+    'currency' => 'eur',
+    'quantity' => 1,
+  ]],
+  "client_reference_id" => $billInfos["idBill"],
+  'customer_email' => $_SESSION['userEmail'],
+  'success_url' => 'http://localhost/projetAnuel2020/webPart/shop/payment.php?session_id={CHECKOUT_SESSION_ID}',
+  'cancel_url' => 'http://localhost/projetAnuel2020/webPart/shop/catalog.php?error=cancel',
+]);
+
+
+/*
 
 $time = 0;
 $totalTime = 0;
@@ -97,29 +153,10 @@ else {
   //conversion for amount type of stripe api
   $totalPrice = $totalPrice * 100;
 
-
-  \Stripe\Stripe::setApiKey('sk_test_9bT77JdwRJaBD1Mn0YJj1Zb600k6QROR7E');
-
-  $session = \Stripe\Checkout\Session::create([
-    'payment_method_types' => ['card'],
-    'line_items' => [[
-      'name' => 'Service(s) BringMe.com',
-      'description' => $description,
-      //'images' => [''],
-      'amount' => $totalPrice,
-      'currency' => 'eur',
-      'quantity' => 1,
-    ]],
-    "client_reference_id" => $idBill,
-    'customer_email' => $_SESSION['userEmail'],
-    'success_url' => 'http://localhost/projetAnuel2020/webPart/shop/payment.php?session_id={CHECKOUT_SESSION_ID}',
-    'cancel_url' => 'http://localhost/projetAnuel2020/webPart/shop/catalog.php?error=cancel',
-  ]);
-
 }
-
+*/
 ?>
-
+<!--
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
