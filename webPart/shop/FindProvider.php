@@ -158,6 +158,9 @@ class FindProvider {
       if (isset($bookList["payWithSub".$i])) {
         $description = $description."Service de ".$bookList["serviceTitle".$i]." : "
                       .$time." heures le ".date("d/m/yy", strtotime($bookList["date".$i]))."(payé avec l'abonnement), ";
+
+        $updateHourLeft = $this->pdo->prepare("UPDATE USER SET subHourLeft -= ? WHERE idUser = ?");
+        $updateHourLeft->execute([$time,$idUser]);
       }
       else {
         $description = $description."Service de ".$this->bookList["serviceTitle".$i]." : "
@@ -181,9 +184,9 @@ class FindProvider {
   public function checkSub($idUser) {
     $totalTime = 0;
     $i = 1;
-    foreach ($this->bookList as $book) {
-      if (isset($book["payWithSub"])) {
-        $totalTime += getTimeOfDelivery($i);
+    while(isset($this->bookList["serviceTitle".$i])) {
+      if (isset($this->bookList["payWithSub".$i])) {
+        $totalTime += $this->getTimeOfDelivery($i);
       }
       $i++;
     }

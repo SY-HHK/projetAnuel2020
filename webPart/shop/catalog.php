@@ -84,7 +84,7 @@ $subHourLeft = $getInfosUser["subHourLeft"];
       <h4>Mon panier :</h4>
     </div>
     <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-light grey btn"></a>
+      <a href="#!" class="modal-close waves-effect waves-light grey btn">Continuer mes achats</a>
       <button name="quoteButton" type="submit" class="waves-effect waves-light btn">Devis</button>
       <button class="btn waves-effect waves-light" type="submit" name="action">Payer</button>
     </div>
