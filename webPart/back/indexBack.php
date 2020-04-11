@@ -1,12 +1,12 @@
 <?php
 
-
 include('../include/config.php');
 
 session_start();
 if (!isset($_SESSION['admin'])){
 header('location:../index.php');
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -27,19 +27,19 @@ header('location:../index.php');
 ?>
  <main>
 
-     <div class="container">
+     <div class="jumbotron table-responsive-xl">
 
-        <center><h1> Bienvenue sur le back-office de BRING.ME</h1></center>
+        <div  class="align-content-center"><h1> Bienvenue sur le back-office de BRING.ME</h1></div>
+         <hr class="my-4">
 
-      </div>
+
+     </div>
 
  </main>
 
-<?php
+<div class="col-lg-4"></div>
 
-	include('../include/footer.php');
-
-?>
+<?php include('../include/footer.php'); ?>
 
 
 

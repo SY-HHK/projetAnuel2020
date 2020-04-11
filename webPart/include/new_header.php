@@ -13,8 +13,8 @@
       <?php  } else { ?>
           <li><a href="/projetAnuel2020/webPart/login/connexion.php"><?php echo $lang['logIn'];?></a></li>
       <?php  } ?>
-        <li>
-          <div class="input-field col s12">
+        <li class="langSelect">
+          <div>
           <select onChange="location.href='/projetAnuel2020/webPart/index.php?lang='+this.options[this.selectedIndex].value;">
               <option value="fr" <?php if (isset($_COOKIE['lang']) && $_COOKIE['lang'] == 'fr') echo 'selected';   ?>>FR</option>
               <option value="en" <?php if (isset($_COOKIE['lang']) && $_COOKIE['lang'] == 'en') echo 'selected';   ?>>EN</option>

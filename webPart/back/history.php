@@ -3,12 +3,13 @@
 if (!isset($_SESSION['admin'])){
 header('location:../index.php');
 }
+//$query = $pdo->prepare('SELECT * FROM DELIVERY INNER JOIN SERVICE ON SERVICE.idService = DELIVERY.idDelivery INNER JOIN PROVIDER ON PROVIDER.idProvider = DELIVERY.idProvider INNER JOIN BILL ON BILL.idBill = DELIVERY.idBill INNER JOIN USER ON USER.idUser = BILL.idUser WHERE DELIVERY.deliveryState = 1 ');
 
-$query = $pdo->prepare('SELECT * FROM DELIVERY INNER JOIN SERVICE ON SERVICE.idService = DELIVERY.idDelivery INNER JOIN PROVIDER ON PROVIDER.idProvider = DELIVERY.idProvider INNER JOIN BILL ON BILL.idBill = DELIVERY.idBill INNER JOIN USER ON USER.idUser = BILL.idUser');
+$query = $pdo->prepare('SELECT * FROM DELIVERY INNER JOIN SERVICE ON SERVICE.idService = DELIVERY.idService INNER JOIN PROVIDER ON PROVIDER.idProvider = DELIVERY.idProvider INNER JOIN BILL ON BILL.idBill = DELIVERY.idBill INNER JOIN USER ON USER.idUser = BILL.idUser WHERE DELIVERY.deliveryState = 1 OR DELIVERY.deliveryState = 0');
 $query->execute();
 $resultats = $query->fetchAll();
 
-// var_dump($resultats);
+//var_dump($resultats);
 $providerCounter = 0; // pr modal
 
 ?>
@@ -38,7 +39,13 @@ $providerCounter = 0; // pr modal
   
         <h4>Les préstations réalisées</h4> 
         <hr class="my-4">
-      
+
+    <?php if (isset($_GET['request']) && $_GET['request'] == 1) { ?>
+    <div class="alert alert-success text-center" role="alert">
+        La demande spéciale a été ajoutée.
+    </div>
+
+    <?php } ?>
  <table class="table table-hover">
     <thead>
       <tr>
@@ -59,16 +66,16 @@ $providerCounter = 0; // pr modal
             <!-- <form action="PHP/prestataireMAJ.php" method="POST"> -->
               <th scope="row"><?php echo $delivery['idDelivery']; ?></th>
                   <td>
-                    <input type="text" class="input" name="user" value="<?php echo $delivery['userFirstName']. '  '. $delivery['userLastName']; ?>">
+                    <input type="text" class="inputHistory" name="user" value="<?php echo $delivery['userFirstName']. '  '. $delivery['userLastName']; ?>">
                   </td>
                   <td>
-                    <input type="text" class="input" name="provider" value="<?php echo $delivery['providerFirstName'].'  '.$delivery['providerLastName']; ?>">
+                    <input type="text" class="inputHistory" name="provider" value="<?php echo $delivery['providerFirstName'].'  '.$delivery['providerLastName']; ?>">
                   </td>
                   <td>
-                    <input type="text" class="input" name="service" value="<?php echo $delivery['serviceTitle']; ?>">
+                    <input type="text" class="inputHistory" name="service" value="<?php echo $delivery['serviceTitle']; ?>">
                   </td>
                   <td>
-                    <input type="text" class="input" name="avis" value="<?php echo $delivery['deliveryRate']; ?>">
+                    <input type="text" class="input" name="avis" value="<?php echo $delivery['deliveryRate']; ?>/5">
                   </td>
                   
                   <td>
@@ -76,8 +83,7 @@ $providerCounter = 0; // pr modal
                        + 
                     </button> -->
 
-                    <a class="btn btn-info" target="_blank" href="../pdfGenerator.php?idBill=<?=$delivery["idBill"]?>">Facture</a>
-
+                    <a class="btn btn-info" target="_blank" href="../pdfGenerator.php?idBill=<?=$delivery['idBill']?>&userGuid=<?=$delivery['userGuid']?>">Facture</a>
 
 <!-- DEBUT MODAL -->
             <!--           <div class="modal fade" id="exampleModal-<?php echo $providerCounter; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
