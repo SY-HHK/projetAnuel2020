@@ -97,7 +97,7 @@ $allServices = $query4->fetchAll();
                         </td>
 
                         <td>
-                            <input type="text" class="inputTime" name="hourStart" value="<?php echo date("G:H",strtotime ($demande['deliveryHourStart'])); ?>">
+                            <input type="time" class="inputTime" name="hourStart" value="<?php echo $demande['deliveryHourStart']; ?>">
                         </td>
 
                         <td>
@@ -105,7 +105,7 @@ $allServices = $query4->fetchAll();
                         </td>
 
                         <td>
-                            <input type="text" class="inputTime" name="hourEnd" value="<?php if ($demande['deliveryHourEnd'] == NULL )echo '--'; else echo  date("G:H",strtotime ($demande['deliveryHourEnd'])); ?>">
+                            <input type="time" class="inputTime" name="hourEnd" value="<?php if ($demande['deliveryHourEnd'] == NULL )echo '--'; else echo $demande['deliveryHourEnd']; ?>">
                         </td>
 
                         <td>
