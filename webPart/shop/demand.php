@@ -6,8 +6,12 @@ if (!isset($_SESSION["user"]) || empty($_SESSION["user"])) {
   header("location: ../login/connexion.php?error=plz_login");
   exit;
 }
-if (!isset($_POST["title"]) || !isset($_POST["date"]) || !isset($_POST["timeStart"]) || !isset($_POST["description"])) {
+if (!isset($_POST["title"]) || !isset($_POST["date"]) || !isset($_POST["hourStart"]) || !isset($_POST["description"])) {
   header("location: catalog.php?error=missing_fields");
+  exit;
+}
+if (strtotime($_POST["date"]) < time()) {
+  header("location: catalog.php?error=date");
   exit;
 }
 include("../include/config.php");
@@ -18,28 +22,23 @@ $getIdUser->execute([$_SESSION["user"]]);
 $getIdUser = $getIdUser->fetch();
 $idUser = $getIdUser["idUser"];
 
-$insertNewBill = $pdo->prepare("INSERT INTO BILL (idUser, billDate, billDescription, billState) VALUES (?,now(),?,3)");
+$insertNewBill = $pdo->prepare("INSERT INTO BILL (idUser, billDate, billDescription, billState) VALUES (?,now(),?,2)");
 $insertNewBill->execute([$idUser, $_POST["description"]]);
 $idBill = $pdo->lastInsertId();
 
-$insertNewDemand = $pdo->prepare("INSERT INTO service (serviceTitle, serviceDescription, serviceValidate, idUser) VALUES (?,?,0,?)");
-$insertNewDemand->execute([$_POST["title"], $_POST["description"], $idUser]);
-$idDemand = $pdo->lastInsertId();
-
-if (isset($_POST["timeStop"]) && !empty($_POST["timeStop"])) $timeStop = $_POST["timeStop"];
+if (isset($_POST["hourStop"]) && !empty($_POST["hourStop"])) $timeStop = $_POST["hourStop"];
 else $timeStop = NULL;
 
-if (isset($_POST["endTomorow"])) {
-  $dateEnd = date_create($_POST["date"]);
-  date_add($dateEnd, date_interval_create_from_date_string('1 days'));
-  $dateEnd = date_format($dateEnd, "yy-m-d");
+if ($_POST["hourStart"] > $_POST["hourStop"]) {
+  $dateEnd = date("Y-m-d", strtotime($_POST["date"]."+ 1 days"));
 }
-else $dateEnd = $_POST["date"];
+else {
+  $dateEnd = $_POST["date"];
+}
 
 $insertNewDelivery = $pdo->prepare("INSERT INTO delivery (deliveryDateStart, deliveryDateEnd, deliveryHourStart, deliveryHourEnd, deliveryState, idService, idBill) VALUES (?,?,?,?,?,?,?)");
-$insertNewDelivery->execute([$_POST["date"], $dateEnd, $_POST["timeStart"], $timeStop, 0, $idDemand, $idBill]);
+$insertNewDelivery->execute([$_POST["date"], $dateEnd, $_POST["hourStart"], $timeStop, 2, 1, $idBill]);
 
 header("location: ../login/profilUser.php?shop=yes");
-
 
 ?>

@@ -137,17 +137,39 @@ else {
             foreach ($bills as $bill) { ?>
 
           <li>
-            <div class="collapsible-header"><i class="material-icons">chevron_right</i>Commande n°<?=$bill["idBill"]?>
-              du <?=date("d/m/yy", strtotime($bill["billDate"]))?>
-              pour <?php if (!empty($bill["billPrice"])) echo $bill["billPrice"]."€ "; else echo "XX€ (prix pas non déterminé, traitement en cours par le service client)."; if ($bill["billState"] == 2) echo "(Compris dans l'abonnement)"?>
-              <?php if ($bill["billState"] !=3) { ?>
+            <div class="collapsible-header"><i class="material-icons">chevron_right</i>
+              Commande du <?=date("d/m/yy", strtotime($bill["billDate"]))?> pour <?php if (!empty($bill["billPrice"])) echo $bill["billPrice"]."€ "; else echo "0€";?>
+              .
+              <?php if ($bill["billState"] == 1) { ?>
               <a class="waves-effect waves-light btn col s3" target="_blank" href="../pdfGenerator.php?idBill=<?=$bill["idBill"]?>">Facture</a>
+              <?php } ?>
+              <?php if ($bill["billState"] == 3) { ?>
+              <a class="waves-effect waves-light btn col s2" target="_blank" href="../pdfGenerator.php?idBill=<?=$bill["idBill"]?>">Devis</a>
+              <a class="waves-effect waves-light btn col s2" target="_blank" href="payment.php?idBill=<?=$bill["idBill"]?>">Payer</a>
+              <a class="waves-effect waves-light btn col s2 red darken-2" href="cancelBill.php?idBill=<?=$bill["idBill"]?>">Annuler</a>
+              <?php } ?>
+              <?php if ($bill["billState"] == 2) { ?>
+              Demande en cours d'étude.
+              <a class="waves-effect waves-light btn col s2 red darken-2" href="cancelBill.php?idBill=<?=$bill["idBill"]?>">Annuler</a>
               <?php } ?>
             </div>
             <div class="collapsible-body"><span>
 
               <?=$bill["billDescription"]?>
-              <br>Vos réservations n'ont pas encore été attribuées.
+              <?php
+              if ($bill["billState"] != 2) {
+                $getDeliveryInfos = $pdo->prepare("SELECT * FROM DELIVERY INNER JOIN PROVIDER ON DELIVERY.idProvider = PROVIDER.idProvider INNER JOIN SERVICE ON DELIVERY.idService = SERVICE.idService WHERE idBill = ?");
+                $getDeliveryInfos->execute([$bill["idBill"]]);
+                $deliveryInfos = $getDeliveryInfos->fetchAll();
+                foreach ($deliveryInfos as $delivery) { ?>
+
+                  <p>Le <?=date("d/m/Y", strtotime($delivery["deliveryDateStart"]))?>, <?=$delivery["providerFirstName"]?> de la société <?=$delivery["companyName"]?>
+                    <?php if (strtotime($delivery["deliveryDateStart"]) > time()) echo "effectuera"; else echo "a effectué"; ?>
+                    le service <?=$delivery["serviceTitle"]?> de <?=$delivery["deliveryHourStart"]?> à <?=$delivery["deliveryHourEnd"]?> heures.</p>
+
+              <?php  }
+              }
+              ?>
 
             </span></div>
           </li>

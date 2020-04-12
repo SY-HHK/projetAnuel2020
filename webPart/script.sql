@@ -249,9 +249,3 @@ INSERT INTO `bringme`.`DELIVERY` (`idDelivery`,`deliveryDateStart`,`deliveryDate
 INSERT INTO `bringme`.`DELIVERY` (`idDelivery`,`deliveryDateStart`,`deliveryDateEnd`,`deliveryHourStart` ,`deliveryState` ,`deliveryRate` ,`idService` ,`idProvider` ,`idBill` ,`deliveryHourEnd`) VALUES (4,'2020-03-17','2020-03-17','12:30',2,5,1,1,4,'15:30');
 INSERT INTO `bringme`.`DELIVERY` (`idDelivery`,`deliveryDateStart`,`deliveryDateEnd`,`deliveryHourStart` ,`deliveryState` ,`deliveryRate` ,`idService` ,`idProvider` ,`idBill` ,`deliveryHourEnd`) VALUES (5,'2020-03-17','2020-03-17','12:30',2,5,1,1,5,'15:30');
 INSERT INTO `bringme`.`DELIVERY` (`idDelivery`,`deliveryDateStart`,`deliveryDateEnd`,`deliveryHourStart` ,`deliveryState` ,`deliveryRate` ,`idService` ,`idProvider` ,`idBill` ,`deliveryHourEnd`) VALUES (6,'2020-03-17','2020-03-17','12:30',2,5,1,1,6,'15:30');
-
-
-
-
-
-
