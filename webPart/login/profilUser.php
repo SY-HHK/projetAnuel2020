@@ -145,7 +145,7 @@ else {
               <?php } ?>
               <?php if ($bill["billState"] == 3) { ?>
               <a class="waves-effect waves-light btn col s2" target="_blank" href="../pdfGenerator.php?idBill=<?=$bill["idBill"]?>">Devis</a>
-              <a class="waves-effect waves-light btn col s2" target="_blank" href="payment.php?idBill=<?=$bill["idBill"]?>">Payer</a>
+              <a class="waves-effect waves-light btn col s2" href="payDemand.php?idBill=<?=$bill["idBill"]?>">Payer</a>
               <a class="waves-effect waves-light btn col s2 red darken-2" href="cancelBill.php?idBill=<?=$bill["idBill"]?>">Annuler</a>
               <?php } ?>
               <?php if ($bill["billState"] == 2) { ?>
@@ -157,7 +157,7 @@ else {
 
               <?=$bill["billDescription"]?>
               <?php
-              if ($bill["billState"] != 2) {
+              if ($bill["billState"] == 1 || $bill["billState"] == 3) {
                 $getDeliveryInfos = $pdo->prepare("SELECT * FROM DELIVERY INNER JOIN PROVIDER ON DELIVERY.idProvider = PROVIDER.idProvider INNER JOIN SERVICE ON DELIVERY.idService = SERVICE.idService WHERE idBill = ?");
                 $getDeliveryInfos->execute([$bill["idBill"]]);
                 $deliveryInfos = $getDeliveryInfos->fetchAll();
@@ -218,7 +218,10 @@ else {
 
   <?php if (isset($_GET["shop"]) && !empty($_GET["shop"])) {
     if ($_GET["shop"] == "yes") { ?>
-      M.toast({html: 'Votre réservation a été effectuée. Pour plus d\'information consultez l\'onglet \'mes commandes\''});
-  <?php } } ?>
+      M.toast({html: 'Votre réservation a été effectuée. Pour plus d\'information consultez l\'onglet \'mes commandes !'});
+  <?php }
+  if ($_GET["shop"] == "succesfullyCanceled") { ?>
+    M.toast({html: 'Votre réservation a bien été annulée !'});
+<?php } } ?>
 
 </script>
