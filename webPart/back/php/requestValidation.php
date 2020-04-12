@@ -16,9 +16,7 @@ if (isset($_POST['enregistrer'])){
     $idDelivery = $_POST['idDelivery'];
     $idBill = $_POST['idBill'];
 
-
     echo ($state .$description .$service.$idDelivery.$idBill);
-
 	
 if ($state == 1) {
 
@@ -39,7 +37,8 @@ if ($state == 1) {
 		DELIVERY.deliveryState = :newState,
 		DELIVERY.idService = :service,
 		DELIVERY.deliveryHourEnd = :hourEnd,
-		BILL.billDescription = :description
+		BILL.billDescription = :description,
+		BILL.billState = :newBillState
 		WHERE idDelivery = :idDelivery AND BILL.idBill = :idBill');
 
 
@@ -52,7 +51,8 @@ if ($state == 1) {
 	'newState' => 0,
 	'service' => $service,
 	'hourEnd' => $hourEnd,
-	'description' => htmlspecialchars($description)
+	'description' => htmlspecialchars($description),
+    'newBillState' => 3
 	));
 
 	$rows = $queryUpdate->rowCount();
