@@ -111,7 +111,7 @@ $resultats = $query->fetchAll();
           <?php
               foreach ($resultats as $sub) { ?>
                 <tbody>
-                  <tr>
+                  <tr <?php if (isset($_GET['subSelected']) && $_GET['subSelected'] == $sub['idSub']){ echo 'class="table-active"'; }?>>
                     <form action="PHP/subMAJ.php" method="POST">
                       <th scope="row"><?php echo $sub['idSub']; ?></th>
                           <td>

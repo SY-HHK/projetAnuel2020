@@ -212,7 +212,7 @@ $allServices = $query4->fetchAll();
 
   <?php foreach ($resultats as $provider) { ?>
         <tbody>
-          <tr>
+          <tr <?php if (isset($_GET['providerSelected']) && $_GET['providerSelected'] == $provider['idProvider']){ echo 'class="table-active"'; }?>>
             <form action="PHP/prestataireMAJ.php" method="POST">
               <th scope="row"><?php echo $provider['idProvider']; ?></th>
                   <td>

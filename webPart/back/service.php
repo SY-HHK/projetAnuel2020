@@ -121,7 +121,7 @@ $resultats2 = $query2->fetchAll();*/
           <?php
               foreach ($resultats as $service) { ?>
                 <tbody>
-                  <tr>
+                  <tr  <?php if (isset($_GET['serviceSelected']) && $_GET['serviceSelected'] == $service['idService']){ echo 'class="table-active"'; }?>>
                     <form action="PHP/serviceMAJ.php" method="POST" enctype="multipart/form-data">
                       <th scope="row"><img src="<?php echo $service['serviceImage']; ?>" id="image"></th>
                           <td>
