@@ -12,13 +12,22 @@ nav a:hover {
 	height: 70px;
 }
 
+#file{
+	border-radius: 10px;
+}
 
 #desc{
 	background-color:transparent;
     border: 0px solid;
 	width: 862px;
+	height: 95px;
 }
-
+#descRequest{
+	background-color:transparent;
+	border: 0px solid;
+	width: 680px;
+	height: 70px;
+}
 .inputContract{
 	width: 150px;
 }
@@ -35,7 +44,21 @@ nav a:hover {
     width: 181px;   
 }
 
+.inputRequest{
+	width: 100px;
+}
 
+.inputTime{
+	width: 50px;
+}
+
+.requestDesc{
+	width: 718px;
+}
+
+.inputHistory{
+	width: 190px;
+}
 
 .ajt{
 	width: 20px;

@@ -4,12 +4,17 @@ if (!isset($_SESSION['admin'])){
 header('location:../index.php');
 }
 //var_dump($_SESSION['admin']);
-$query = $pdo->prepare('SELECT * FROM SERVICE INNER JOIN USER ON USER.idUser = SERVICE.idUser WHERE serviceValidate = 0');
+$query = $pdo->prepare('SELECT * FROM DELIVERY INNER JOIN BILL on BILL.idBill = DELIVERY.idBILL INNER JOIN USER on USER.idUser = BILL.idUser WHERE DELIVERY.deliveryState = 2');
 $query->execute();
 
 $resultats = $query->fetchAll();
 
-// var_dump($resultats);
+
+$query4 = $pdo->prepare('SELECT * FROM SERVICE ');
+$query4->execute();
+$allServices = $query4->fetchAll();
+
+//var_dump($resultats);
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +36,7 @@ $resultats = $query->fetchAll();
 
 <div class="jumbotron table-responsive-xl">
 
-        <h4>Les demandes de services</h4>
+        <h4>Les demandes spéciales</h4>
         <hr class="my-4">
 
 
@@ -50,12 +55,15 @@ $resultats = $query->fetchAll();
         <table class="table table-hover">
             <thead>
               <tr>
-                <th scope="col">Client</th>
-                <th scope="col">Nom</th>
-                <th scope="col">Description</th>
-                <th scope="col">Décision</th>
-                <th scope="col"> </th>
-
+                    <th scope="col">Client</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Date début</th>
+                    <th scope="col">Heure début</th>
+                    <th scope="col">Date fin</th>
+                    <th scope="col">Heure fin</th>
+                    <th scope="col">Liéer à un autre service</th>
+                    <th scope="col">Décision</th>
+                    <th scope="col"> </th>
               </tr>
             </thead>
           <?php
@@ -63,28 +71,54 @@ $resultats = $query->fetchAll();
                 <tbody>
                   <tr>
                     <form action="PHP/requestValidation.php" method="POST">
-                          <td>
-                            <input type="text" name="user" value="<?php echo $demande['userLastName']; ?>">
-                          </td>
+                         <td>
+                            <input type="text" class="inputRequest" name="user" value="<?php echo $demande['userLastName']; ?>" disabled>
+                         </td>
+
+                        <td>
+                            <textarea id="descRequest" type="text" name="description" ><?php echo $demande['billDescription']; ?></textarea>
+                        </td>
                      
-                          <td>
-                            <input type="text" class="inputDelivery" name="name" value="<?php echo $demande['serviceTitle']; ?>">
-                          </td>
-                          <td>
-                            <textarea id="desc" type="text" name="description" ><?php echo $demande['serviceDescription']; ?></textarea>
-                          </td>
-                          <td>
+                        <td>
+                            <input type="text" class="inputRequest" name="dateStart" value="<?php echo $demande['deliveryDateStart']; ?>">
+                        </td>
+
+                        <td>
+                            <input type="text" class="inputTime" name="hourStart" value="<?php echo date("G:H",strtotime ($demande['deliveryHourStart'])); ?>">
+                        </td>
+
+                        <td>
+                            <input type="text" class="inputRequest" name="dateEnd" value="<?php echo $demande['deliveryDateEnd']; ?>">
+                        </td>
+
+                        <td>
+                            <input type="text" class="inputTime" name="hourEnd" value="<?php if ($demande['deliveryHourEnd'] == NULL )echo '--'; else echo  date("G:H",strtotime ($demande['deliveryHourEnd'])); ?>">
+                        </td>
+
+                        <td>
+                            <div class="form-group">
+                                <select class="form-control-sm" name="idService">
+                                    <?php foreach ($allServices as $service) { ?>
+                                        <option value="<?php echo $service['idService']; ?>"><?php echo $service['serviceTitle']; ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </td>
+
+                        <td>
                             <div class="form-group">
                               <select class="form-control-sm" name="state">
-                                <option value="1">Valider la demande</option>
-                                <option value="0">Refuser la demande</option>
+                                <option value="1">Valider</option>
+                                <option value="0">Refuser</option>
                               </select>
                             </div>
-                          </td>
-                          <td>
-                            <input type="hidden" name="idRequest" value="<?php echo $demande['idService']; ?>">
+                        </td>
+                        <td>
+                            <input type="hidden" name="idDelivery" value="<?php echo $demande['idDelivery']; ?>">
+                            <input type="hidden" name="idBill" value="<?php echo $demande['idBill']; ?>">
+
                             <input type="submit" class="btn btn-success" name="enregistrer" value="valider">
-                          </td>
+                        </td>
                     </form>
                   </tr>
                 </tbody>
@@ -93,50 +127,6 @@ $resultats = $query->fetchAll();
       </div>
     </div>
   </div>
-<!--   <div class="card">
-    <div class="card-header" id="headingTwo">
-      <h2 class="mb-0">
-        <button class="btn collaborateur collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          Ajouter un service
-        </button>
-      </h2>
-    </div>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-      <div class="card-body">
-        <table class="table table-hover">
-            <thead>
-              <tr>
-                <th scope="col">Nom</th>
-                <th scope="col">€/heure</th>
-                <th scope="col">Description</th>
-                <th scope="col"> </th>
-
-              </tr>
-            </thead>
-
-                <tbody>
-                  <tr>
-                    <form action="PHP/serviceMAJ.php" method="POST">
-                          <td>
-                            <input type="text" class="input" name="name" placeholder="... ">
-                          </td>
-                          <td>
-                            <input type="text" class="input" name="price" placeholder="...">
-                          </td>
-                          <td>
-                            <textarea id="desc" type="text" name="description" ></textarea>
-                          </td>
-                          <td>
-                            <input type="submit" name="addService" class="option"value="Ajouter !">
-                          </td>
-                    </form>
-                  </tr>
-                </tbody>
-  </table>
-
-      </div>
-    </div>
-  </div> -->
 </div>
 
 </div>

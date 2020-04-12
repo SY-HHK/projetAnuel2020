@@ -55,16 +55,9 @@ CREATE TABLE IF NOT EXISTS `bringme`.`SERVICE` (
   `serviceTitle` VARCHAR(50),
   `servicePrice` FLOAT,
   `serviceDescription` TEXT,
-  `serviceValidate` TINYINT,
   `serviceImage` VARCHAR(100),
-  `idUser` INT,
-  INDEX `idUser_SERVICE_FK` (`idUser` ASC),
-  PRIMARY KEY (`idService`),
-  CONSTRAINT `idUser_SERVICE_FK`
-    FOREIGN KEY (`idUser`)
-    REFERENCES `bringme`.`USER` (`idUser`)
-    ON DELETE CASCADE
-  );
+  PRIMARY KEY (`idService`)
+);
 
 
 -- -----------------------------------------------------
@@ -198,13 +191,12 @@ CREATE TABLE IF NOT EXISTS `bringme`.`DELIVERY` (
 -- -----------------------------------------------------
 
 
-INSERT INTO `SERVICE` (`idService`, `serviceTitle`, `servicePrice`, `serviceDescription`, `serviceValidate`, `serviceImage`, `idUser`) VALUES
-(1, 'Baby sitter', 9, 'Le baby-sitter, nounou ou garde d’enfant, veille à la sécurité, au confort et au bien-être des petits dont il a la charge en l’absence des parents.', 1, '../images/service1.jpg', NULL),
-(2, 'Plombier', 50, 'Le plombier installe, répare, règle et entretient les équipements sanitaires (toilettes, salles de bains, etc.), ainsi que les canalisations de distribution de gaz, d’eau et d’évacuation (en acier, cuivre, PVC, etc.)', 1, '../images/service2.jpg', NULL),
-(3, 'Services du quotidien', 15, 'Pressing, retouche, cordonnerie, blanchisserie se sont les services du quotidien que nous vous proposons pour alléger vos journées chargées.\r\n\r\nIl vous suffit de déposer vos articles et nous les récupérerons lors de notre passage.', 1, '../images/service3.jpg', NULL),
-(4, 'Achats express', 10, 'Nous mettons à votre disposition tous types de services qui peuvent faciliter votre vie : paniers bio, bouquets de fleurs, jusqu’à la livraison des vins & spiritueux', 1, '../images/service4.jpeg', NULL),
-(5, 'demande spéciale', NULL, 'Je veux qqn pour descendre mes poubelles merci', 0, NULL, 1),
-(6, 'arrosage', NULL, 'Jaimerai avoir quelquun qui vienne arroser mes plantes pendant quelques jours ' , 0, NULL, 1);
+INSERT INTO `SERVICE` (`idService`, `serviceTitle`, `servicePrice`, `serviceDescription`, `serviceImage`) VALUES
+(1, 'Demande spéciale', 50, 'Toute demande non catalogué et spéciale correspond à ce service', '../images/request.png'),
+(2, 'Baby sitter', 9, 'Le baby-sitter, nounou ou garde d’enfant, veille à la sécurité, au confort et au bien-être des petits dont il a la charge en l’absence des parents.', '../images/service1.jpg'),
+(3, 'Plombier', 50, 'Le plombier installe, répare, règle et entretient les équipements sanitaires (toilettes, salles de bains, etc.), ainsi que les canalisations de distribution de gaz, d’eau et d’évacuation (en acier, cuivre, PVC, etc.)', '../images/service2.jpg'),
+(4, 'Services du quotidien', 15, 'Pressing, retouche, cordonnerie, blanchisserie se sont les services du quotidien que nous vous proposons pour alléger vos journées chargées.\r\n\r\nIl vous suffit de déposer vos articles et nous les récupérerons lors de notre passage.','../images/service3.jpg'),
+(5, 'Achats express', 10, 'Nous mettons à votre disposition tous types de services qui peuvent faciliter votre vie : paniers bio, bouquets de fleurs, jusqu’à la livraison des vins & spiritueux', '../images/service4.jpeg');
 
 -- -----------------------------------------------------
 -- Data for table `bringme`.`CITY`
@@ -235,18 +227,28 @@ INSERT INTO `bringme`.`SUBSCRIPTION` (`idSub`, `subName`, `subDays`, `subHourSta
 -- -----------------------------------------------------
 INSERT INTO `bringme`.`USER` (`idUser`, `userEmail`, `userPassword`, `userFirstName`, `userLastName`, `userBirth`, `userAddress`, `userIdCity`, `userPhone`, `userPrivilege`, `userIp`, `userAgent`, `userAnnulation`, `state`, `idSubscription`, `subStart`, `subEnd`, `userGuid`) VALUES (1, 'adeline@yahoo.fr', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'Adeline', 'Hernadez', '1995-08-12', '86 avenue de la Place', 1, '0685643576', 0, '09090909', '35355535', DEFAULT, 0, NULL, NULL, NULL, '05301411-7c9d-422c-8dd1-842ff4e6c3b5');
 INSERT INTO `bringme`.`USER` (`idUser`, `userEmail`, `userPassword`, `userFirstName`, `userLastName`, `userBirth`, `userAddress`, `userIdCity`, `userPhone`, `userPrivilege`, `userIp`, `userAgent`, `userAnnulation`, `state`, `idSubscription`, `subStart`, `subEnd`, `userGuid`) VALUES (2, 'louis.ricour@gmail.com', '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08', 'Louis', 'Ricour', '2000-06-26', '86 avenue de la Place', 1, '0685643576', 10, '09090909', '35355535', DEFAULT, 0, NULL, NULL, NULL, '7fcd2aa7-9d8a-438a-b834-0de6b6ed69db');
-INSERT INTO `bringme`.`USER` (`idUser`, `userEmail`, `userPassword`, `userFirstName`, `userLastName`, `userBirth`, `userAddress`, `userIdCity`, `userPhone`, `userPrivilege`, `userIp`, `userAgent`, `userAnnulation`, `state`, `idSubscription`, `subStart`, `subEnd`, `userGuid`) VALUES (3, 'suvirtha@bringme.fr', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'Suvirtha', 'Thayaharan', '2000-05-03', '86 avenue de la Place', 1, '0685643576', 1, '09090909', '35355535', DEFAULT, 0, NULL, NULL, NULL, '506617B9-E5EC-48DA-B6D5-9606CB9251B8');
+INSERT INTO `bringme`.`USER` (`idUser`, `userEmail`, `userPassword`, `userFirstName`, `userLastName`, `userBirth`, `userAddress`, `userIdCity`, `userPhone`, `userPrivilege`, `userIp`, `userAgent`, `userAnnulation`, `state`, `idSubscription`, `subStart`, `subEnd`, `userGuid`) VALUES (3, 'suvirtha@bringme.fr', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'Suvirtha', 'Thayaharan', '2000-05-03', '86 avenue de la Place', 1, '0685643576', 10, '09090909', '35355535', DEFAULT, 0, NULL, NULL, NULL, '506617B9-E5EC-48DA-B6D5-9606CB9251B8');
 
 -- -----------------------------------------------------
 -- Data for table `bringme`.`BILL`
 -- -----------------------------------------------------
-INSERT INTO `bringme`.`BILL` (`idBill`,`idUser` ,`billDate` ,`billDescription`,`billPrice`,`billState` ,`billStripeId`) VALUES (1,3,'2020-03-17','Bill description',789,1,NULL);
+INSERT INTO `bringme`.`BILL` (`idBill`,`idUser` ,`billDate` ,`billDescription`,`billPrice`,`billState` ,`billStripeId`) VALUES (1,1,'2020-03-17','Bill description',789,1,NULL);
+INSERT INTO `bringme`.`BILL` (`idBill`,`idUser` ,`billDate` ,`billDescription`,`billPrice`,`billState` ,`billStripeId`) VALUES (2,2,'2020-03-17','Demande speciale ',100,0,NULL);
+INSERT INTO `bringme`.`BILL` (`idBill`,`idUser` ,`billDate` ,`billDescription`,`billPrice`,`billState` ,`billStripeId`) VALUES (3,3,'2020-03-17','Demande speciale je veux un arroseur chez moi',100,0,NULL);
+INSERT INTO `bringme`.`BILL` (`idBill`,`idUser` ,`billDate` ,`billDescription`,`billPrice`,`billState` ,`billStripeId`) VALUES (4,1,'2020-03-17','Demande speciale descendre poubelle',100,0,NULL);
+INSERT INTO `bringme`.`BILL` (`idBill`,`idUser` ,`billDate` ,`billDescription`,`billPrice`,`billState` ,`billStripeId`) VALUES (5,2,'2020-03-17','Demande speciale manger chien',100,0,NULL);
+INSERT INTO `bringme`.`BILL` (`idBill`,`idUser` ,`billDate` ,`billDescription`,`billPrice`,`billState` ,`billStripeId`) VALUES (6,3,'2020-03-17','Demande speciale sortir hamster',100,0,NULL);
 
 
 -- -----------------------------------------------------
 -- Data for table `bringme`.`DELIVERY`
 -- -----------------------------------------------------
-INSERT INTO `bringme`.`DELIVERY` (`idDelivery`,`deliveryDateStart`,`deliveryDateEnd`,`deliveryHourStart` ,`deliveryState` ,`deliveryRate` ,`idService` ,`idProvider` ,`idBill` ,`deliveryHourEnd`) VALUES (1,'2020-03-17','2020-03-17',12,1,5,1,1,1,15);
+INSERT INTO `bringme`.`DELIVERY` (`idDelivery`,`deliveryDateStart`,`deliveryDateEnd`,`deliveryHourStart` ,`deliveryState` ,`deliveryRate` ,`idService` ,`idProvider` ,`idBill` ,`deliveryHourEnd`) VALUES (1,'2020-03-17','2020-03-17','12:00',1,3,3,2,1,'19:00');
+INSERT INTO `bringme`.`DELIVERY` (`idDelivery`,`deliveryDateStart`,`deliveryDateEnd`,`deliveryHourStart` ,`deliveryState` ,`deliveryRate` ,`idService` ,`idProvider` ,`idBill` ,`deliveryHourEnd`) VALUES (2,'2020-03-17','2020-03-17','12:30',2,5,1,1,2,'15:30');
+INSERT INTO `bringme`.`DELIVERY` (`idDelivery`,`deliveryDateStart`,`deliveryDateEnd`,`deliveryHourStart` ,`deliveryState` ,`deliveryRate` ,`idService` ,`idProvider` ,`idBill` ,`deliveryHourEnd`) VALUES (3,'2020-03-17','2020-03-17','12:30',2,5,1,1,3,'15:30');
+INSERT INTO `bringme`.`DELIVERY` (`idDelivery`,`deliveryDateStart`,`deliveryDateEnd`,`deliveryHourStart` ,`deliveryState` ,`deliveryRate` ,`idService` ,`idProvider` ,`idBill` ,`deliveryHourEnd`) VALUES (4,'2020-03-17','2020-03-17','12:30',2,5,1,1,4,'15:30');
+INSERT INTO `bringme`.`DELIVERY` (`idDelivery`,`deliveryDateStart`,`deliveryDateEnd`,`deliveryHourStart` ,`deliveryState` ,`deliveryRate` ,`idService` ,`idProvider` ,`idBill` ,`deliveryHourEnd`) VALUES (5,'2020-03-17','2020-03-17','12:30',2,5,1,1,5,'15:30');
+INSERT INTO `bringme`.`DELIVERY` (`idDelivery`,`deliveryDateStart`,`deliveryDateEnd`,`deliveryHourStart` ,`deliveryState` ,`deliveryRate` ,`idService` ,`idProvider` ,`idBill` ,`deliveryHourEnd`) VALUES (6,'2020-03-17','2020-03-17','12:30',2,5,1,1,6,'15:30');
 
 
 

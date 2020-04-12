@@ -6,12 +6,20 @@ use Spipu\Html2Pdf\Html2Pdf;
 use Spipu\Html2Pdf\Exception\Html2PdfException;
 use Spipu\Html2Pdf\Exception\ExceptionFormatter;
 include("include/config.php");
+
 $getInfosUser = $pdo->prepare("SELECT * FROM USER INNER JOIN CITY ON USER.userIdCity = CITY.idCity WHERE userGuid = ?");
-$getInfosUser->execute([$_SESSION["user"]]);
-if ($getInfosUser->rowCount() != 1) {
-  header("location: index.php");
-  exit;
+
+if (isset($_SESSION['admin']) && isset($_GET['userGuid']) && !empty($_GET['userGuid'])){
+    $getInfosUser->execute([$_GET['userGuid']]);
+}else {
+    $getInfosUser->execute([$_SESSION["user"]]);
 }
+
+if ($getInfosUser->rowCount() != 1) {
+     header("location: index.php");
+     exit;
+}
+
 $infosUser = $getInfosUser->fetch();
 $idUser = $infosUser["idUser"];
 

@@ -4,16 +4,14 @@ if (!isset($_SESSION['admin'])){
 header('location:../index.php');
 }
 //var_dump($_SESSION['admin']);
-$query = $pdo->prepare('SELECT * FROM SERVICE WHERE serviceValidate = 1');
+$query = $pdo->prepare('SELECT * FROM SERVICE');
 $query->execute();
 
 $resultats = $query->fetchAll();
 
-
-$query2 = $pdo->prepare('SELECT * FROM SERVICE WHERE serviceValidate = 2');
+/*$query2 = $pdo->prepare('SELECT * FROM SERVICE WHERE serviceValidate = 2');
 $query2->execute();
-
-$resultats2 = $query2->fetchAll();
+$resultats2 = $query2->fetchAll();*/
 ?>
 
 <!DOCTYPE html>
@@ -81,10 +79,6 @@ $resultats2 = $query2->fetchAll();
               <div class="alert alert-success text-center" role="alert">
             Modification(s) enregistrée(s)
           </div>
-        <?php } else if (isset($_GET['request']) && $_GET['request'] == 1) { ?>
-              <div class="alert alert-success text-center" role="alert">
-            La demande spéciale a été ajoutée.
-          </div>
 
         <?php } else if (isset($_GET['add']) && $_GET['add'] == 'ok') { ?>
               <div class="alert alert-success text-center" role="alert">
@@ -137,10 +131,13 @@ $resultats2 = $query2->fetchAll();
                             <input type="text" class="inputNbr" name="price" value="<?php echo $service['servicePrice']; ?>">
                           </td>
                           <td>
-                            <textarea id="desc" type="text" name="description" ><?php echo $service['serviceDescription']; ?></textarea>
+                            <textarea id="descRequest" type="text" name="description" ><?php echo $service['serviceDescription']; ?></textarea>
                           </td>
                           <td>
-                            <input type="file" class="form-control-file file-upload" name="image" value="<?php echo $service['serviceImage']; ?>">
+                              <div class="custom-file">
+                                  <input type="file" class="custom-file-input" id="customFile" value="<?php echo $service['serviceImage']; ?>">
+                                  <label class="custom-file-label" for="customFile">Choose file</label>
+                              </div>
                           </td>
                           <td>
                             <input type="hidden" name="idService" value="<?php echo $service['idService']; ?>">
@@ -161,7 +158,7 @@ $resultats2 = $query2->fetchAll();
     </div>
   </div>
 
-    <div class="card">
+    <!--    <div class="card">
     <div class="card-header" id="headingtwo">
       <h2 class="mb-0">
         <button class="btn collaborateur" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
@@ -170,7 +167,7 @@ $resultats2 = $query2->fetchAll();
       </h2>
     </div>
 
-    <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
+  <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
       <div class="card-body">
         <table class="table table-hover">
             <thead>
@@ -186,41 +183,41 @@ $resultats2 = $query2->fetchAll();
               </tr>
             </thead>
           <?php
-              foreach ($resultats2 as $service) { ?>
+/*              foreach ($resultats2 as $service) { */?>
                 <tbody>
                   <tr>
                     <form action="PHP/serviceMAJ.php" method="POST" enctype="multipart/form-data">
-                      <th scope="row"><img src="<?php echo $service['serviceImage']; ?>" id="serviceImage"></th>
+                      <th scope="row"><img src="<?php /*echo $service['serviceImage']; */?>" id="serviceImage"></th>
                           <td>
-                            <input type="text" class="inputDelivery" name="name" value="<?php echo $service['serviceTitle']; ?>">
+                            <input type="text" class="inputDelivery" name="name" value="<?php /*echo $service['serviceTitle']; */?>">
                           </td>
                           <td>
-                            <input type="text" class="inputNbr" name="price" value="<?php echo $service['servicePrice']; ?>" >
+                            <input type="text" class="inputNbr" name="price" value="<?php /*echo $service['servicePrice']; */?>" >
                           </td>
                           <td>
-                            <textarea id="desc" type="text" name="description" ><?php echo $service['serviceDescription']; ?></textarea>
+                            <textarea id="desc" type="text" name="description" ><?php /*echo $service['serviceDescription']; */?></textarea>
                           </td>
                           <td>
                             <input type="file" class="form-control-file" name="image">
                           </td>
                           <td>
-                            <input type="hidden" name="idService" value="<?php echo $service['idService']; ?>">
+                            <input type="hidden" name="idService" value="<?php /*echo $service['idService']; */?>">
                             <input type="submit" name="updateSub" class="btn btn-warning"value="MAJ">
                           </td>
                           <td>
-                            <input type="hidden" name="verifPhoto" value="<?php echo $service['serviceImage']; ?>">
-                            <input type="hidden" name="idSub" value="<?php echo $service['idService']; ?>">
+                            <input type="hidden" name="verifPhoto" value="<?php /*echo $service['serviceImage']; */?>">
+                            <input type="hidden" name="idSub" value="<?php /*echo $service['idService']; */?>">
                             <input type="submit" name="delete" class="btn btn-outline-danger"value="X">
                           </td>
                     </form>
                   </tr>
                 </tbody>
-          <?php } ?>
+          <?php /*} */?>
         </table>
       </div>
     </div>
   </div>
-
+-->
   <div class="card">
     <div class="card-header" id="headingThree">
       <h2 class="mb-0">
