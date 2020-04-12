@@ -8,11 +8,13 @@ if (!isset($_SESSION["user"]) || empty($_SESSION["user"])) {
 
 include ('../include/config.php');
 
-$getInfosUser = $pdo->prepare("SELECT * FROM USER WHERE userGuid = ?");
+$getInfosUser = $pdo->prepare("SELECT * FROM USER INNER JOIN SUBSCRIPTION ON idSubscription = idSub WHERE userGuid = ?");
 $getInfosUser->execute([$_SESSION["user"]]);
 $getInfosUser = $getInfosUser->fetch();
 $subHourLeft = $getInfosUser["subHourLeft"];
-
+$subId = $getInfosUser["idSubscription"];
+$subStart = $getInfosUser["subHourStart"];
+$subEnd = $getInfosUser["subHourEnd"];
 ?>
 
 <!DOCTYPE html>
@@ -82,6 +84,10 @@ $subHourLeft = $getInfosUser["subHourLeft"];
     <form class="" action="payCart.php" method="post">
     <div class="modal-content" id="cart">
       <h4>Mon panier :</h4>
+      <?php
+      if (!empty($subId)) echo "<p>Vous disposez d'un abonnement avec ".$subHourLeft." heures de service gratuit entre ".$subStart."h et ".$subEnd."h !</p>";
+      else echo "<p>Vous ne disposez pas d'un abonnement, n'hésitez pas à souscrire pour profiter de nos services gratuitement !<p>";
+      ?>
     </div>
     <div class="modal-footer">
       <a href="#!" class="modal-close waves-effect waves-light grey btn">Continuer mes achats</a>
@@ -177,8 +183,10 @@ $subHourLeft = $getInfosUser["subHourLeft"];
       <div class="switch">
         <label>
           <input name="payWithSub" id="payWithSub" type="checkbox">
+          <?php if (!empty($subId) && $subHourLeft != 0) { ?>
           <span class="lever"></span>
           Payer avec mon abonnement
+          <?php } ?>
         </label>
       </div>
     </div>
@@ -227,6 +235,15 @@ document.addEventListener('DOMContentLoaded', function() {
     <?php }
     if ($_GET["error"] == "noEnoughtHours") { ?>
       M.toast({html: 'Votre panier dépasse le nombre d\'heures restantes avec votre abonnement !'});
+    <?php }
+    if ($_GET["error"] == "noEnoughtSub") { ?>
+      M.toast({html: 'Il ne vous reste pas assez d\'heures dans votre abonnement pour payer !'});
+    <?php }
+    if ($_GET["error"] == "noAvailibleSub") { ?>
+      M.toast({html: 'Votre formule d\'abonnement ne vous permet pas de payer en abonnement dans cette tranche d\'horaire ou ce jour la !'});
+    <?php }
+    if ($_GET["error"] == "noProvider") { ?>
+      M.toast({html: 'Aucun prestataire disponible pour une des dates choisis !'});
     <?php }
       if ($_GET["error"] == "nothingInCart") { ?>
       M.toast({html: 'Votre panier est vide !'});

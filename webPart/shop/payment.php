@@ -31,6 +31,17 @@ require_once "../vendor/autoload.php";
     }
   }
 
+  $eventNotPaid = \Stripe\Checkout\Session::retrieve($_GET["session_id"]);
+
+  $cancelDelivery = $pdo->prepare("DELETE FROM DELIVERY WHERE idBill = ?");
+  $cancelDelivery->execute([$eventNotPaid->client_reference_id]);
+
+  $cancelBill = $pdo->prepare("DELETE FROM BILL WHERE idBill = ?");
+  $cancelBill->execute([$eventNotPaid->client_reference_id]);
+
+  $updateHourLeft = $pdo->prepare("UPDATE USER SET subHourLeft = subHourLeft + ? WHERE idUser = ?");
+  $updateHourLeft->execute([$eventNotPaid->metadata->subHourUsed,$eventNotPaid->metadata->idUser]);
+
 header("location: catalog.php?error=unconfirmed");
 
 ?>

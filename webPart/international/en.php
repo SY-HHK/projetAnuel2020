@@ -72,6 +72,7 @@ $lang = [
     'bill' => 'Bill',
     'bookingNotAllocated' => 'Your reservations have not yet been allocated.',
     'bookingPerformed' => 'Your reservation has been made. For more information see the tab \'my orders\'',
+    'hourLeft' => 'Hours left',
 
      //catalog.php
     'titleCatalog' => 'List of services',

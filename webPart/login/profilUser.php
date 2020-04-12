@@ -99,7 +99,8 @@ else {
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <input disabled id="last_name" type="text" class="validate" value="<?php if (isset($userInfos['subName'])) echo $userInfos['subName'].' '.$lang['to'].' '.date('d-m-Y',strtotime($userInfos['subEnd'])); else echo $lang['no'];?>">
+            <input disabled id="last_name" type="text" class="validate" value="<?php if (isset($userInfos['subName'])) echo $userInfos['subName'].' '.$lang['to'].' '.date('d-m-Y',strtotime($userInfos['subEnd']))
+            .' ('.$userInfos['subHourLeft']." ".$lang['hourLeft'].')'; else echo $lang['no'];?>">
             <label for="last_name"><?php echo $lang['sub']; ?> :</label>
           </div>
         </div>

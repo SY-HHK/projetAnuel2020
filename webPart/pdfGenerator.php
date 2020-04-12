@@ -24,6 +24,23 @@ if ($getInfosBill->rowCount() != 1) {
 $infosBill = $getInfosBill->fetch();
 if ($infosBill["billState"] == 0) $type = "Devis";
 else $type = "Facture";
+
+function decimalHours($time) {
+    $hms = explode(":", $time);
+    $time = ($hms[0] + ($hms[1]/60));
+    return round($time, 2);
+}
+
+function getTimeOfDelivery($hourStart, $hourStop) {
+  if(strtotime($hourStop) < strtotime($hourStart)) {
+    $time = 24 - $this->decimalHours($hourStart) + decimalHours($hourStop);
+  }
+  else {
+    $time = decimalHours($hourStop) - decimalHours($hourStart);
+  }
+
+  return $time;
+}
 ?>
 
 <style media="screen">
@@ -43,7 +60,7 @@ else $type = "Facture";
 }
 
 #tableTotal {
-  margin-left: 76.4%;
+  margin-left: 73%;
   margin-top: 10px;
 }
 
@@ -120,10 +137,10 @@ foreach ($deliverys as $delivery) {
 
 ?>
           <tr>
-            <td><?=$delivery["deliveryHourStart"]?></td>
+            <td><?=getTimeOfDelivery($delivery["deliveryHourStart"], $delivery["deliveryHourEnd"])?> heures</td>
             <td><?=$delivery["serviceTitle"]?></td>
             <td><?=$delivery["servicePrice"]?></td>
-            <td><?=$delivery["servicePrice"] * 2?></td>
+            <td><?=round($delivery["servicePrice"] * getTimeOfDelivery($delivery["deliveryHourStart"], $delivery["deliveryHourEnd"]), 2)?></td>
           </tr>
 
 <?php } ?>
@@ -134,15 +151,15 @@ foreach ($deliverys as $delivery) {
       <table id="tableTotal">
         <tr>
           <td>Total Hors taxe</td>
-          <td>xx€</td>
+          <td><?=$infosBill["billPrice"] * 0.8?>€</td>
         </tr>
         <tr>
           <td>TVA à 20%</td>
-          <td>xx€</td>
+          <td><?=$infosBill["billPrice"] * 0.2?>€</td>
         </tr>
         <tr>
           <td>Total TTC en euros</td>
-          <td>xx€</td>
+          <td><?=$infosBill["billPrice"]?>€</td>
         </tr>
       </table>
 
@@ -164,5 +181,13 @@ try{
   $pdf->Output('Facture.pdf'); //nom du fichier pdf
 } catch(HTML2PDF_exception $e) {
   die($e);
+}
+
+if ($type = "Devis") {
+  $cancelDelivery = $pdo->prepare("DELETE FROM DELIVERY WHERE idBill = ?");
+  $cancelDelivery->execute([$_GET["idBill"]]);
+
+  $cancelBill = $pdo->prepare("DELETE FROM BILL WHERE idBill = ?");
+  $cancelBill->execute([$_GET["idBill"]]);
 }
 ?>

@@ -73,6 +73,7 @@ $lang = [
     'bill' => 'Facture',
     'bookingNotAllocated' => 'Vos réservations n\'ont pas encore été attribuées.',
     'bookingPerformed' => 'Votre réservation a été effectuée. Pour plus d\'information consultez l\'onglet \'mes commandes\'',
+    'hourLeft' => 'heures restantes',
 
     //catalog.php
     'titleCatalog' => 'Liste des services',

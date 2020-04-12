@@ -153,13 +153,15 @@ class FindProvider {
     $description = "";
     $i = 1;
     $totalPrice = 0;
+    $subHourUsed = 0;
     while (isset($this->bookList["idService".$i])) {
       $time = $this->getTimeOfDelivery($i);
-      if (isset($bookList["payWithSub".$i])) {
-        $description = $description."Service de ".$bookList["serviceTitle".$i]." : "
-                      .$time." heures le ".date("d/m/yy", strtotime($bookList["date".$i]))."(payé avec l'abonnement), ";
+      if (isset($this->bookList["payWithSub".$i])) {
+        $description = $description."Service de ".$this->bookList["serviceTitle".$i]." : "
+                      .$time." heures le ".date("d/m/yy", strtotime($this->bookList["date".$i]))."(payé avec l'abonnement), ";
+        $subHourUsed += $time;
 
-        $updateHourLeft = $this->pdo->prepare("UPDATE USER SET subHourLeft -= ? WHERE idUser = ?");
+        $updateHourLeft = $this->pdo->prepare("UPDATE USER SET subHourLeft = subHourLeft - ? WHERE idUser = ?");
         $updateHourLeft->execute([$time,$idUser]);
       }
       else {
@@ -177,25 +179,46 @@ class FindProvider {
       "idBill" => $this->pdo->lastInsertId(),
       "description" => $description,
       "totalPrice" => $totalPrice,
+      "subHourUsed" => $subHourUsed,
     );
     return $billInfos;
   }
 
   public function checkSub($idUser) {
+
+    $getTimeSubAvailible = $this->pdo->prepare("SELECT * FROM USER INNER JOIN SUBSCRIPTION ON USER.idSubscription = SUBSCRIPTION.idSub WHERE idUser = ?");
+    $getTimeSubAvailible->execute([$idUser]);
+    $subInfos = $getTimeSubAvailible->fetch();
+
     $totalTime = 0;
     $i = 1;
     while(isset($this->bookList["serviceTitle".$i])) {
       if (isset($this->bookList["payWithSub".$i])) {
-        $totalTime += $this->getTimeOfDelivery($i);
+        if (isset($subInfos["idSubscription"])) {
+          if (strtotime($this->bookList["date".$i]."last Monday") >= strtotime($this->bookList["date".$i]."-".($subInfos["subDays"])." days")
+              || date("D", strtotime($this->bookList["date".$i])) == "Mon") {
+            if (strtotime($this->bookList["hourStart".$i]) >= strtotime($subInfos["subHourStart"].":00:00") && strtotime($this->bookList["hourStop".$i]) <= strtotime($subInfos["subHourEnd"].":00:00")) {
+              $totalTime += $this->getTimeOfDelivery($i);
+            }
+            else {
+              return -1;
+              exit;
+            }
+          }
+          else {
+            return -1;
+            exit;
+          }
+        }
+        else {
+          return -1;
+          exit;
+        }
       }
       $i++;
     }
 
-    $getTimeSubAvailible = $this->pdo->prepare("SELECT subHourLeft FROM user WHERE idUser = ?");
-    $getTimeSubAvailible->execute([$idUser]);
-    $timeSubAvailible = $getTimeSubAvailible->fetch();
-
-    if ($totalTime > $timeSubAvailible["subHourLeft"]) return 0;
+    if ($totalTime > $subInfos["subHourLeft"]) return 0;
     else return 1;
   }
 
