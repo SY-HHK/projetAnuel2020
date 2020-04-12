@@ -25,7 +25,7 @@ nav a:hover {
 #descRequest{
 	background-color:transparent;
 	border: 0px solid;
-	width: 680px;
+	width: 590px;
 	height: 70px;
 }
 .inputContract{
@@ -50,10 +50,6 @@ nav a:hover {
 
 .inputTime{
 	width: 50px;
-}
-
-.requestDesc{
-	width: 718px;
 }
 
 .inputHistory{

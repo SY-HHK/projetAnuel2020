@@ -45,7 +45,20 @@ $allServices = $query4->fetchAll();
             <?php echo 'La demande a été refusée' ?>
           </div>
 
-        <?php } ?>
+    <?php } else if(isset($_GET['error']) && $_GET['error'] == 'hourEnd') { ?>
+        <div class="alert alert-danger text-center" role="alert">
+            <?php echo ' L\'heure de fin de la préstation est obligatoire' ?>
+        </div>
+
+      <?php } else if(isset($_GET['error']) && $_GET['error'] == 'dateEnd') { ?>
+          <div class="alert alert-danger text-center" role="alert">
+              <?php echo 'La date de fin de préstation est à indiquer ou à revoir' ?>
+          </div>
+
+    <?php } ?>
+
+
+
 
 <div class="accordion" id="accordionExample">
   <div class="card">
@@ -80,7 +93,7 @@ $allServices = $query4->fetchAll();
                         </td>
                      
                         <td>
-                            <input type="text" class="inputRequest" name="dateStart" value="<?php echo $demande['deliveryDateStart']; ?>">
+                            <input type="date" class="inputDate" name="dateStart" value="<?php echo $demande['deliveryDateStart']; ?>">
                         </td>
 
                         <td>
@@ -88,7 +101,7 @@ $allServices = $query4->fetchAll();
                         </td>
 
                         <td>
-                            <input type="text" class="inputRequest" name="dateEnd" value="<?php echo $demande['deliveryDateEnd']; ?>">
+                            <input type="date" class="inputDate" name="dateEnd" value="<?php echo $demande['deliveryDateEnd']; ?>">
                         </td>
 
                         <td>

@@ -20,7 +20,17 @@ if (isset($_POST['enregistrer'])){
     echo ($state .$description .$service.$idDelivery.$idBill);
 
 	
-if ($state == 1){
+if ($state == 1) {
+
+    if (!isset($hourEnd) || empty($hourEnd)){
+        header('Location: ../request.php?error=hourEnd');
+        exit;
+    }
+
+    if (!isset($dateEnd) || empty($dateEnd) || $dateEnd < $dateStart){
+        header('Location: ../request.php?error=dateEnd');
+        exit;
+    }
 
 	$queryUpdate = $pdo->prepare('UPDATE DELIVERY, BILL SET
 		DELIVERY.deliveryDateStart = :dateStart,
