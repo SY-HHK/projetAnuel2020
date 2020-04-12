@@ -191,7 +191,7 @@ try{
   die($e);
 }
 
-if ($type = "Devis") {
+if ($infosBill["billState"] == 0) {
   $cancelDelivery = $pdo->prepare("DELETE FROM DELIVERY WHERE idBill = ?");
   $cancelDelivery->execute([$_GET["idBill"]]);
 

@@ -233,19 +233,19 @@ INSERT INTO `bringme`.`USER` (`idUser`, `userEmail`, `userPassword`, `userFirstN
 -- Data for table `bringme`.`BILL`
 -- -----------------------------------------------------
 INSERT INTO `bringme`.`BILL` (`idBill`,`idUser` ,`billDate` ,`billDescription`,`billPrice`,`billState` ,`billStripeId`) VALUES (1,1,'2020-03-17','Bill description',789,1,NULL);
-INSERT INTO `bringme`.`BILL` (`idBill`,`idUser` ,`billDate` ,`billDescription`,`billPrice`,`billState` ,`billStripeId`) VALUES (2,2,'2020-03-17','Demande speciale ',100,0,NULL);
-INSERT INTO `bringme`.`BILL` (`idBill`,`idUser` ,`billDate` ,`billDescription`,`billPrice`,`billState` ,`billStripeId`) VALUES (3,3,'2020-03-17','Demande speciale je veux un arroseur chez moi',100,0,NULL);
-INSERT INTO `bringme`.`BILL` (`idBill`,`idUser` ,`billDate` ,`billDescription`,`billPrice`,`billState` ,`billStripeId`) VALUES (4,1,'2020-03-17','Demande speciale descendre poubelle',100,0,NULL);
-INSERT INTO `bringme`.`BILL` (`idBill`,`idUser` ,`billDate` ,`billDescription`,`billPrice`,`billState` ,`billStripeId`) VALUES (5,2,'2020-03-17','Demande speciale manger chien',100,0,NULL);
-INSERT INTO `bringme`.`BILL` (`idBill`,`idUser` ,`billDate` ,`billDescription`,`billPrice`,`billState` ,`billStripeId`) VALUES (6,3,'2020-03-17','Demande speciale sortir hamster',100,0,NULL);
+INSERT INTO `bringme`.`BILL` (`idBill`,`idUser` ,`billDate` ,`billDescription`,`billPrice`,`billState` ,`billStripeId`) VALUES (2,2,'2020-03-17','Demande speciale ',150,2,NULL);
+INSERT INTO `bringme`.`BILL` (`idBill`,`idUser` ,`billDate` ,`billDescription`,`billPrice`,`billState` ,`billStripeId`) VALUES (3,3,'2020-03-17','Demande speciale je veux un arroseur chez moi',150,2,NULL);
+INSERT INTO `bringme`.`BILL` (`idBill`,`idUser` ,`billDate` ,`billDescription`,`billPrice`,`billState` ,`billStripeId`) VALUES (4,1,'2020-03-17','Demande speciale descendre poubelle',150,2,NULL);
+INSERT INTO `bringme`.`BILL` (`idBill`,`idUser` ,`billDate` ,`billDescription`,`billPrice`,`billState` ,`billStripeId`) VALUES (5,2,'2020-03-17','Demande speciale manger chien',150,2,NULL);
+INSERT INTO `bringme`.`BILL` (`idBill`,`idUser` ,`billDate` ,`billDescription`,`billPrice`,`billState` ,`billStripeId`) VALUES (6,3,'2020-03-17','Demande speciale sortir hamster',150,2,NULL);
 
 
 -- -----------------------------------------------------
 -- Data for table `bringme`.`DELIVERY`
 -- -----------------------------------------------------
-INSERT INTO `bringme`.`DELIVERY` (`idDelivery`,`deliveryDateStart`,`deliveryDateEnd`,`deliveryHourStart` ,`deliveryState` ,`deliveryRate` ,`idService` ,`idProvider` ,`idBill` ,`deliveryHourEnd`) VALUES (1,'2020-03-17','2020-03-17','12:00',1,3,3,2,1,'19:00');
-INSERT INTO `bringme`.`DELIVERY` (`idDelivery`,`deliveryDateStart`,`deliveryDateEnd`,`deliveryHourStart` ,`deliveryState` ,`deliveryRate` ,`idService` ,`idProvider` ,`idBill` ,`deliveryHourEnd`) VALUES (2,'2020-03-17','2020-03-17','12:30',2,5,1,1,2,'15:30');
-INSERT INTO `bringme`.`DELIVERY` (`idDelivery`,`deliveryDateStart`,`deliveryDateEnd`,`deliveryHourStart` ,`deliveryState` ,`deliveryRate` ,`idService` ,`idProvider` ,`idBill` ,`deliveryHourEnd`) VALUES (3,'2020-03-17','2020-03-17','12:30',2,5,1,1,3,'15:30');
-INSERT INTO `bringme`.`DELIVERY` (`idDelivery`,`deliveryDateStart`,`deliveryDateEnd`,`deliveryHourStart` ,`deliveryState` ,`deliveryRate` ,`idService` ,`idProvider` ,`idBill` ,`deliveryHourEnd`) VALUES (4,'2020-03-17','2020-03-17','12:30',2,5,1,1,4,'15:30');
-INSERT INTO `bringme`.`DELIVERY` (`idDelivery`,`deliveryDateStart`,`deliveryDateEnd`,`deliveryHourStart` ,`deliveryState` ,`deliveryRate` ,`idService` ,`idProvider` ,`idBill` ,`deliveryHourEnd`) VALUES (5,'2020-03-17','2020-03-17','12:30',2,5,1,1,5,'15:30');
-INSERT INTO `bringme`.`DELIVERY` (`idDelivery`,`deliveryDateStart`,`deliveryDateEnd`,`deliveryHourStart` ,`deliveryState` ,`deliveryRate` ,`idService` ,`idProvider` ,`idBill` ,`deliveryHourEnd`) VALUES (6,'2020-03-17','2020-03-17','12:30',2,5,1,1,6,'15:30');
+INSERT INTO `bringme`.`DELIVERY` (`idDelivery`,`deliveryDateStart`,`deliveryDateEnd`,`deliveryHourStart` ,`deliveryState` ,`idService` ,`idProvider` ,`idBill` ,`deliveryHourEnd`) VALUES (1,'2020-03-17','2020-03-17','12:00',1,3,2,1,'19:00');
+INSERT INTO `bringme`.`DELIVERY` (`idDelivery`,`deliveryDateStart`,`deliveryDateEnd`,`deliveryHourStart` ,`deliveryState` ,`idService` ,`idBill` ,`deliveryHourEnd`) VALUES (2,'2020-03-17','2020-03-17','12:30',2,1,2,'15:30');
+INSERT INTO `bringme`.`DELIVERY` (`idDelivery`,`deliveryDateStart`,`deliveryDateEnd`,`deliveryHourStart` ,`deliveryState` ,`idService` ,`idBill` ,`deliveryHourEnd`) VALUES (3,'2020-03-17','2020-03-17','12:30',2,1,3,'15:30');
+INSERT INTO `bringme`.`DELIVERY` (`idDelivery`,`deliveryDateStart`,`deliveryDateEnd`,`deliveryHourStart` ,`deliveryState` ,`idService` ,`idBill` ,`deliveryHourEnd`) VALUES (4,'2020-03-17','2020-03-17','12:30',2,1,4,'15:30');
+INSERT INTO `bringme`.`DELIVERY` (`idDelivery`,`deliveryDateStart`,`deliveryDateEnd`,`deliveryHourStart` ,`deliveryState` ,`idService` ,`idBill` ,`deliveryHourEnd`) VALUES (5,'2020-03-17','2020-03-17','12:30',2,1,5,'15:30');
+INSERT INTO `bringme`.`DELIVERY` (`idDelivery`,`deliveryDateStart`,`deliveryDateEnd`,`deliveryHourStart` ,`deliveryState` ,`idService` ,`idBill` ,`deliveryHourEnd`) VALUES (6,'2020-03-17','2020-03-17','12:30',2,1,6,'15:30');

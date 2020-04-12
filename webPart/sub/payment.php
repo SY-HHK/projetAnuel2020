@@ -36,7 +36,7 @@ require_once "../vendor/autoload.php";
 
       $addSub = $pdo->prepare("UPDATE USER SET idSubscription = ?, subStart = ?, subEnd = ?, subHourLeft = ? WHERE userEmail = ?");
       $addSub->execute([$idSub, $dateStart->format("Y-m-d"), $dateEnd->format("Y-m-d"), $hourSub, $session["customer_email"]]);
-      header("location: ../login/profilUser.php?sub=yes");
+      header("location: ../login/profilUser.php?shop=sub");
       exit;
     }
   }

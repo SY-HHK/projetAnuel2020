@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once "../vendor/autoload.php";
 include("../include/config.php");
 include('../include/lang.php');
 if (!isset($_SESSION["user"])) {
@@ -16,11 +17,48 @@ if ($nbUser == 0) {
 }
 else $userInfos = $getUserInfos->fetch();
 
-$getBillInfos = $pdo->prepare("SELECT * FROM DELIVERY INNER JOIN DELIVERY ON DELIVERY.idBill = BILL.idBill INNER JOIN SERVICE ON SERVICE.idService = DELIVERY.idService WHERE idBill = ?");
+function getTimeOfDelivery($start, $stop) {
+  if(strtotime($stop) < strtotime($stop)) {
+    $time = 24 - decimalHours($start) + decimalHours($stop);
+  }
+  else {
+    $time = decimalHours($stop) - decimalHours($start);
+  }
+
+ return $time;
+}
+
+function decimalHours($time) {
+    $hms = explode(":", $time);
+    $time = ($hms[0] + ($hms[1]/60));
+    return round($time, 2);
+}
+
+if (isset($_GET["sub"]) && $_GET["sub"] == 1) {
+  $getDeliveryInfos = $pdo->prepare("SELECT deliveryHourStart, deliveryHourEnd FROM DELIVERY WHERE idBill = ?");
+  $getDeliveryInfos->execute([$_GET["idBill"]]);
+  $deliveryInfos = $getDeliveryInfos->fetch();
+  $time = getTimeOfDelivery($deliveryInfos["deliveryHourStart"], $deliveryInfos["deliveryHourEnd"]);
+
+  if ($userInfos["subHourLeft"] >= $time) {
+    $updateHourLeft = $pdo->prepare("UPDATE USER SET subHourLeft = subHourLeft - ? WHERE idUser = ?");
+    $updateHourLeft->execute([$time, $userInfos["idUser"]]);
+
+    $updateBill = $pdo->prepare("UPDATE BILL SET billState = 1, billDescription = concat(billDescription, ?) WHERE idBill = ?");
+    $updateBill->execute([$_GET["idBill"], "(payer avec l'abonnement)."]);
+
+    header("location: profilUser.php?shop=yes");
+    exit;
+  }
+  else {
+    header("location: profilUser.php?shop=noEnoughtHours");
+    exit;
+  }
+}
+
+$getBillInfos = $pdo->prepare("SELECT * FROM BILL WHERE idBill = ?");
 $getBillInfos->execute([$_GET["idBill"]]);
 $billInfos = $getBillInfos->fetch();
-
-$description = $billInfos["billDescription"]." => Pour cette demande, ".$time." heures à ".$billInfos["servicePrice"]."€ jugé(s) nécéssaire(s) par le service client pour son accomplissement."
 
 \Stripe\Stripe::setApiKey('sk_test_9bT77JdwRJaBD1Mn0YJj1Zb600k6QROR7E');
 
@@ -30,15 +68,14 @@ $session = \Stripe\Checkout\Session::create([
     'name' => 'Service(s) BringMe.com',
     'description' => $billInfos["billDescription"],
     //'images' => [''],
-    'amount' => round($billInfos["totalPrice"], 2) * 100,
+    'amount' => round($billInfos["billPrice"], 2) * 100,
     'currency' => 'eur',
     'quantity' => 1,
   ]],
   "client_reference_id" => $billInfos["idBill"],
   'customer_email' => $_SESSION['userEmail'],
-  'success_url' => 'http://localhost/projetAnuel2020/webPart/shop/payment.php?session_id={CHECKOUT_SESSION_ID}',
-  'cancel_url' => 'http://localhost/projetAnuel2020/webPart/shop/payment.php?session_id={CHECKOUT_SESSION_ID}',
-  "metadata"=> ["subHourUsed" => $billInfos["subHourUsed"], "idUser" => $idUser],
+  'success_url' => 'http://localhost/projetAnuel2020/webPart/login/payment.php?session_id={CHECKOUT_SESSION_ID}',
+  'cancel_url' => 'http://localhost/projetAnuel2020/webPart/login/payment.php?session_id={CHECKOUT_SESSION_ID}',
 ]);
 
 ?>

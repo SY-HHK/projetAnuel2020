@@ -334,7 +334,7 @@ if (isset($_GET['deleteContract']) && !empty($_GET['deleteContract'])) {
    if ($rows2 == 1){
     header('location: ../provider.php?deleteContract='.$rows2 );
         exit;
-  } 
+  }
 }
 
 

@@ -144,13 +144,18 @@ else {
               <a class="waves-effect waves-light btn col s3" target="_blank" href="../pdfGenerator.php?idBill=<?=$bill["idBill"]?>">Facture</a>
               <?php } ?>
               <?php if ($bill["billState"] == 3) { ?>
-              <a class="waves-effect waves-light btn col s2" target="_blank" href="../pdfGenerator.php?idBill=<?=$bill["idBill"]?>">Devis</a>
-              <a class="waves-effect waves-light btn col s2" href="payDemand.php?idBill=<?=$bill["idBill"]?>">Payer</a>
-              <a class="waves-effect waves-light btn col s2 red darken-2" href="cancelBill.php?idBill=<?=$bill["idBill"]?>">Annuler</a>
+              <a class="waves-effect waves-light btn col s1" target="_blank" href="../pdfGenerator.php?idBill=<?=$bill["idBill"]?>">Devis</a>
+              <a class="waves-effect waves-light btn col s1" href="payDemand.php?idBill=<?=$bill["idBill"]?>">Payer</a>
+              <a class="waves-effect waves-light btn col s3" href="payDemand.php?idBill=<?=$bill["idBill"]?>&sub=1">Payer avec mon abonnement</a>
+              <a class="waves-effect waves-light btn col s1 red darken-2" href="cancelBill.php?idBill=<?=$bill["idBill"]?>">Annuler</a>
               <?php } ?>
               <?php if ($bill["billState"] == 2) { ?>
               Demande en cours d'étude.
               <a class="waves-effect waves-light btn col s2 red darken-2" href="cancelBill.php?idBill=<?=$bill["idBill"]?>">Annuler</a>
+              <?php } ?>
+              <?php if ($bill["billState"] == 4) { ?>
+              Votre demande à été refusée.
+              <a class="waves-effect waves-light btn col s2 red darken-2" href="cancelBill.php?idBill=<?=$bill["idBill"]?>">Supprimer</a>
               <?php } ?>
             </div>
             <div class="collapsible-body"><span>
@@ -222,6 +227,15 @@ else {
   <?php }
   if ($_GET["shop"] == "succesfullyCanceled") { ?>
     M.toast({html: 'Votre réservation a bien été annulée !'});
-<?php } } ?>
+  <?php }
+  if ($_GET["shop"] == "unconfirmed") { ?>
+    M.toast({html: 'Le paiement n\a pas abouti !'});
+  <?php }
+  if ($_GET["shop"] == "sub") { ?>
+    M.toast({html: 'Vous êtes maintenant abonné !'});
+  <?php }
+  if ($_GET["shop"] == "noEnoughtHours") { ?>
+    M.toast({html: 'Vous ne disposez pas d\'assez d\'heure dans votre abonnement pour payer !'});
+  <?php } } ?>
 
 </script>

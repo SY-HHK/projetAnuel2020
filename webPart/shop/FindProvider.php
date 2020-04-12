@@ -32,7 +32,7 @@ class FindProvider {
       }
       else {
 
-      $checkProvider = $this->pdo->prepare("SELECT idDelivery, deliveryHourStart, deliveryHourEnd, deliveryDateStart, deliveryDateEnd FROM DELIVERY WHERE idProvider = ? && deliveryDateStart = ?");
+      $checkProvider = $this->pdo->prepare("SELECT idDelivery, deliveryHourStart, deliveryHourEnd, deliveryDateStart, deliveryDateEnd FROM DELIVERY WHERE idProvider = ? && deliveryDateStart = ? && deliveryState = 0");
       $checkProvider->execute([$provider["idProvider"], date("Y-m-d", strtotime($this->bookList["date".$index]))]);
       $isAvailible = $checkProvider->rowCount();
 
@@ -57,7 +57,7 @@ class FindProvider {
               else {
                 $date = date_create($this->bookList["date".$index]);
                 date_add($date, date_interval_create_from_date_string('1 days'));
-                $checkProvider = $this->pdo->prepare("SELECT idDelivery, deliveryHourStart, deliveryHourEnd, deliveryDateStart, deliveryDateEnd FROM DELIVERY WHERE idProvider = ? && deliveryDateStart = ?");
+                $checkProvider = $this->pdo->prepare("SELECT idDelivery, deliveryHourStart, deliveryHourEnd, deliveryDateStart, deliveryDateEnd FROM DELIVERY WHERE idProvider = ? && deliveryDateStart = ? && deliveryState = 0");
                 $checkProvider->execute([$provider["idProvider"], date_format($date, "Y-m-d")]);
                 $isAvailible = $checkProvider->rowCount();
                 if ($isAvailible != 0) {
@@ -138,7 +138,7 @@ class FindProvider {
                                   $this->bookList["idService".$index],$idProvider,$idBill]);
   }
 
-  private function findInSameLocation($availibleProviders, $idUserCity, $locationType) {
+  public function findInSameLocation($availibleProviders, $idUserCity, $locationType) {
     $cityUser = $this->getCityInfos($idUserCity);
 
     foreach ($availibleProviders as $provider) {
@@ -222,7 +222,7 @@ class FindProvider {
     else return 1;
   }
 
-  private function getPrice($time, $idService) {
+  public function getPrice($time, $idService) {
     $getPrice = $this->pdo->prepare("SELECT servicePrice FROM SERVICE WHERE idService = ?");
     $getPrice->execute([$idService]);
     $price = $getPrice->fetch();
@@ -232,23 +232,23 @@ class FindProvider {
 
   public function getTimeOfDelivery($index) {
     if(strtotime($this->bookList["hourStop".$index]) < strtotime($this->bookList["hourStart".$index])) {
-      $time = 24 - $this->decimalHours($_POST["hourStart".$index]) + $this->decimalHours($_POST["hourStop".$index]);
+      $time = 24 - $this->decimalHours($this->bookList["hourStart".$index]) + $this->decimalHours($this->bookList["hourStop".$index]);
     }
     else {
-      $time = $this->decimalHours($_POST["hourStop".$index]) - $this->decimalHours($_POST["hourStart".$index]);
+      $time = $this->decimalHours($this->bookList["hourStop".$index]) - $this->decimalHours($this->bookList["hourStart".$index]);
     }
 
     if ($time < 0.5) return -1;
     else return $time;
   }
 
-  private function decimalHours($time) {
+  public function decimalHours($time) {
       $hms = explode(":", $time);
       $time = ($hms[0] + ($hms[1]/60));
       return round($time, 2);
   }
 
-  private function getCityInfos($idUserCity) {
+  public function getCityInfos($idUserCity) {
     $getCityUser = $this->pdo->prepare("SELECT * FROM CITY WHERE idCity = ?");
     $getCityUser->execute([$idUserCity]);
     $cityUser = $getCityUser->fetch();
