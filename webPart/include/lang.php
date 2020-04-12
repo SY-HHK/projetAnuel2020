@@ -16,7 +16,7 @@ if (!isset($_COOKIE['lang'])){
 <script type="text/javascript">
 	try {
 		<?php include('../international/'.$_COOKIE['lang'].'.php');?>
-	} catch (FileNotFoundException e){
+	} catch (FileNotFoundException $e) {
 		<?php include('international/'.$_COOKIE['lang'].'.php');?>
 	}
 </script>

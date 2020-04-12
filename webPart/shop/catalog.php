@@ -49,7 +49,7 @@ $subEnd = $getInfosUser["subHourEnd"];
 
     <?php
 
-      $services = $pdo->prepare("SELECT * FROM SERVICE WHERE serviceValidate = 1");
+      $services = $pdo->prepare("SELECT * FROM SERVICE WHERE idService != 1");
       $services->execute();
       $services = $services->fetchAll();
       foreach ($services as $service) {
@@ -119,20 +119,13 @@ $subEnd = $getInfosUser["subHourEnd"];
             <p><?php echo $lang['beginning']; ?>:</p>
           </div>
           <div class="input-field col s2">
-            <input name="timeStart" type="time" required>
+            <input name="hourStart" type="time" required>
           </div>
           <div class="input-field col s2">
             <p><?php echo $lang['endOptional']; ?>:</p>
           </div>
           <div class="input-field col s2">
-            <input name="timeStop" type="time">
-            <div class="switch">
-              <label>
-                <input name="endTomorow" type="checkbox">
-                <span class="lever"></span>
-                  <?php echo $lang['endNextDay']; ?>
-              </label>
-            </div>
+            <input name="hourStop" type="time">
           </div>
         </div>
         <div class="row">
