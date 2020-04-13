@@ -48,8 +48,8 @@ else {
 	$res = $queryProvider->fetch();
 	if ($nb == 1) {
 		session_start();
-		$_SESSION['provider'] = $res;
-		header('location: ../login/provider.php?error=login_successfull');
+		$_SESSION['provider'] = $res["providerGuid"];
+		header('location: ../login/profilProvider.php?error=login_successfull');
 		exit;
 	}
 	else {

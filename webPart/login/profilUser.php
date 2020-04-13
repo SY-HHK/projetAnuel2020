@@ -3,7 +3,7 @@ session_start();
 include("../include/config.php");
 include('../include/lang.php');
 if (!isset($_SESSION["user"])) {
-  header("../location: index.php");
+  header("location: ../php/deconnexion.php");
   exit;
 }
 

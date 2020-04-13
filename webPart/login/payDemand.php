@@ -8,7 +8,7 @@ if (!isset($_SESSION["user"])) {
   exit;
 }
 
-$getUserInfos = $pdo->prepare("SELECT * FROM USER WHERE userGuid = ?");
+$getUserInfos = $pdo->prepare("SELECT * FROM USER INNER JOIN SUBSCRIPTION ON USER.idSubscription = SUBSCRIPTION.idSub WHERE userGuid = ?");
 $getUserInfos->execute([$_SESSION["user"]]);
 $nbUser = $getUserInfos->rowCount();
 if ($nbUser == 0) {
@@ -35,20 +35,39 @@ function decimalHours($time) {
 }
 
 if (isset($_GET["sub"]) && $_GET["sub"] == 1) {
-  $getDeliveryInfos = $pdo->prepare("SELECT deliveryHourStart, deliveryHourEnd FROM DELIVERY WHERE idBill = ?");
+  $getDeliveryInfos = $pdo->prepare("SELECT deliveryDateStart, deliveryHourStart, deliveryHourEnd FROM DELIVERY WHERE idBill = ?");
   $getDeliveryInfos->execute([$_GET["idBill"]]);
   $deliveryInfos = $getDeliveryInfos->fetch();
   $time = getTimeOfDelivery($deliveryInfos["deliveryHourStart"], $deliveryInfos["deliveryHourEnd"]);
 
   if ($userInfos["subHourLeft"] >= $time) {
-    $updateHourLeft = $pdo->prepare("UPDATE USER SET subHourLeft = subHourLeft - ? WHERE idUser = ?");
-    $updateHourLeft->execute([$time, $userInfos["idUser"]]);
+    if (isset($userInfos["idSubscription"])) {
+      if (strtotime($deliveryInfos["deliveryDateStart"]."last Monday") >= strtotime($deliveryInfos["deliveryDateStart"]."-".($userInfos["subDays"])." days")
+        || date("D", strtotime($deliveryInfos["deliveryDateStart"])) == "Mon") {
+        if (strtotime($deliveryInfos["deliveryHourStart"]) >= strtotime($userInfos["subHourStart"].":00:00") && strtotime($deliveryInfos["deliveryHourEnd"]) <= strtotime($userInfos["subHourEnd"].":00:00")) {
+          $updateHourLeft = $pdo->prepare("UPDATE USER SET subHourLeft = subHourLeft - ? WHERE idUser = ?");
+          $updateHourLeft->execute([$time, $userInfos["idUser"]]);
 
-    $updateBill = $pdo->prepare("UPDATE BILL SET billState = 1, billDescription = concat(billDescription, ?) WHERE idBill = ?");
-    $updateBill->execute([$_GET["idBill"], "(payer avec l'abonnement)."]);
+          $updateBill = $pdo->prepare("UPDATE BILL SET billState = 1, billDescription = concat(billDescription, ?) WHERE idBill = ?");
+          $updateBill->execute([$_GET["idBill"], "(payer avec l'abonnement)."]);
 
-    header("location: profilUser.php?shop=yes");
-    exit;
+          header("location: profilUser.php?shop=yes");
+          exit;
+        }
+        else {
+          header("location: profilUser.php?shop=noEnoughtHours");
+          exit;
+        }
+      }
+      else {
+        header("location: profilUser.php?shop=noEnoughtHours");
+        exit;
+      }
+    }
+    else {
+      header("location: profilUser.php?shop=noEnoughtHours");
+      exit;
+    }
   }
   else {
     header("location: profilUser.php?shop=noEnoughtHours");

@@ -206,8 +206,8 @@ INSERT INTO `bringme`.`CITY` (`cityName`, `cityDepartement`, `cityRegion`) VALUE
 -- -----------------------------------------------------
 -- Data for table `bringme`.`PROVIDER`
 -- -----------------------------------------------------
-INSERT INTO `bringme`.`PROVIDER` (`idProvider`, `providerFirstName`, `providerLastName`, `providerPhone`, `providerEmail`, `providerPassword`, `providerAddress`, `companyName`, `providerIdCity`, `providerRate`, `providerAnnulation`, `state`) VALUES (1, 'Jean', 'Dupont', '0897567876', 'jeandupont@gmail.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', '98 rue test', NULL, 1, 5, DEFAULT, 0);
-INSERT INTO `bringme`.`PROVIDER` (`idProvider`, `providerFirstName`, `providerLastName`, `providerPhone`, `providerEmail`, `providerPassword`, `providerAddress`, `companyName`, `providerIdCity`, `providerRate`, `providerAnnulation`, `state`) VALUES (2, 'Jacques', 'Jardin', '9067842465', 'jardin@gmail.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', '76 avenue test', 'ematch', 1, NULL, DEFAULT, 0);
+INSERT INTO `bringme`.`PROVIDER` (`idProvider`, `providerFirstName`, `providerLastName`, `providerPhone`, `providerEmail`, `providerPassword`, `providerAddress`, `companyName`, `providerIdCity`, `providerRate`, `providerAnnulation`, `state`, `providerGuid`) VALUES (1, 'Jean', 'Dupont', '0897567876', 'jeandupont@gmail.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', '98 rue test', NULL, 1, 5, DEFAULT, 0, 'def8d2ec-7685-4137-80b3-2bc75137b84d');
+INSERT INTO `bringme`.`PROVIDER` (`idProvider`, `providerFirstName`, `providerLastName`, `providerPhone`, `providerEmail`, `providerPassword`, `providerAddress`, `companyName`, `providerIdCity`, `providerRate`, `providerAnnulation`, `state`, `providerGuid`) VALUES (2, 'Jacques', 'Jardin', '9067842465', 'jardin@gmail.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', '76 avenue test', 'ematch', 1, NULL, DEFAULT, 0, '2176c1e2-fff3-4521-88bb-878fde14b16f');
 
 -- -----------------------------------------------------
 -- Data for table `bringme`.`CONTRACT`
