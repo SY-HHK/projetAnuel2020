@@ -157,7 +157,7 @@ $resultats = $query->fetchAll();
   <?php
       foreach ($resultats as $user) { ?>
         <tbody>
-          <tr>
+          <tr <?php if (isset($_GET['userSelected']) && $_GET['userSelected'] == $user['idUser']){ echo 'class="table-active"'; }?>>
             <form action="PHP/userMAJ.php" method="POST">
               <th scope="row"><?php echo $user['idUser']; ?></th>
                   <td>
