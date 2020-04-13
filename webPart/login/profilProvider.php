@@ -12,7 +12,6 @@ $getProviderInfos->execute([$_SESSION["provider"]]);
 $nbProvider = $getProviderInfos->rowCount();
 if ($nbProvider == 0) {
   header("location: ../php/deconnexion.php");
-  echo $_SESSION["provider"];
   exit;
 }
 else {
@@ -269,6 +268,33 @@ function isFirstHour($delivery, $i) {
         </tbody>
       </table>
 
+      <!-- Modal Trigger -->
+  <a class="waves-effect waves-light btn-large modal-trigger" href="#provider">Définir mes horaires</a>
+
+  <!-- Modal Structure -->
+  <div id="provider" class="modal">
+    <div class="modal-content">
+      <h4>Définir mes horaires :</h4>
+      <form action="setProviderAvailibility.php" method="post">
+        <div class="input-field col s1">
+          <p>Début (0 = min) :</p>
+        </div>
+        <div class="input-field col s2">
+          <input name="hourStart" type="time" required>
+        </div>
+        <div class="input-field col s1">
+          <p>Fin (24 = max) :</p>
+        </div>
+        <div class="input-field col s2">
+          <input name="hourEnd" type="time" required>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>
+
 <?php
 $getDeliveryInfos = $pdo->prepare("SELECT * FROM DELIVERY INNER JOIN SERVICE ON DELIVERY.idService = SERVICE.idService WHERE idProvider = ? && deliveryDateStart >= ? && deliveryDateStart <= ?");
 $getDeliveryInfos->execute([$idProvider, $week["monday"], $week["sunday"]]);
@@ -286,6 +312,10 @@ foreach ($deliveryInfos as $delivery) {
     <div class="modal-content">
       <h4><?=$delivery["serviceTitle"]?> le <?=date("d/m/Y",strtotime($delivery["deliveryDateStart"]))?></h4>
       <p>De <?=$delivery["deliveryHourStart"]?> à <?=$delivery["deliveryHourEnd"]?> heures.</p>
+      <?php
+      if ($delivery["idService"] == 1) { ?>
+        <p><?=$clientInfos["billDescription"]?></p>
+      <?php } ?>
       <h5>Adresse :</h5>
       <p>
         Prénom & nom : <?=$clientInfos["userFirstName"]." ".$clientInfos["userLastName"]?><br>
@@ -296,7 +326,9 @@ foreach ($deliveryInfos as $delivery) {
       </p>
     </div>
     <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect btn red darken-3">Annuler</a>
+      <?php if (strtotime($delivery["deliveryDateStart"]) > time() || (strtotime($delivery["deliveryDateStart"]) == strtotime(date("Y-m-d",time())) && strtotime($delivery["deliveryHourStart"]) >= time())) { ?>
+      <a href="cancelDelivery.php?idDelivery=<?=$delivery['idDelivery']?>" class="modal-close waves-effect btn red darken-3">Annuler</a>
+      <?php } ?>
       <a href="#!" class="modal-close waves-effect btn">Fermer</a>
     </div>
   </div>
@@ -344,5 +376,10 @@ foreach ($deliveryInfos as $delivery) {
     var elems = document.querySelectorAll('.modal');
     var instances = M.Modal.init(elems);
   });
+
+  <?php if (isset($_GET["error"]) && !empty($_GET["error"])) {
+    if ($_GET["error"] == "cancel") { ?>
+      M.toast({html: 'Vous venez d\'annuler une intervention, attention à ne pas trop en annuler !'});
+  <?php } } ?>
 
 </script>
