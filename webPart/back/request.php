@@ -42,17 +42,22 @@ $allServices = $query4->fetchAll();
 
       <?php if(isset($_GET['request']) && $_GET['request'] == 1) { ?>
             <div class="alert alert-success text-center" role="alert">
-            <?php echo 'La demande a été refusée' ?>
+            <?php echo 'La demande a été refusée'; ?>
           </div>
 
     <?php } else if(isset($_GET['error']) && $_GET['error'] == 'hourEnd') { ?>
         <div class="alert alert-danger text-center" role="alert">
-            <?php echo ' L\'heure de fin de la préstation est obligatoire' ?>
+            <?php echo ' L\'heure de fin de la préstation est obligatoire' ;?>
         </div>
 
       <?php } else if(isset($_GET['error']) && $_GET['error'] == 'dateEnd') { ?>
           <div class="alert alert-danger text-center" role="alert">
-              <?php echo 'La date de fin de préstation est à indiquer ou à revoir' ?>
+              <?php echo 'La date de fin de préstation est à indiquer ou à revoir'; ?>
+          </div>
+
+      <?php } else if(isset($_GET['error']) && $_GET['error'] == 'noProviderAvailible') { ?>
+          <div class="alert alert-danger text-center" role="alert">
+              <?php echo 'Il n\'y a pas de prestataires libre pour ce créneau'; ?>
           </div>
 
     <?php } ?>
