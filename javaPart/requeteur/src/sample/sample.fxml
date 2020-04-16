@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ControllerMainPage">
+  <children>
+    <MenuBar VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem mnemonicParsing="false" text="New" />
+            <MenuItem mnemonicParsing="false" text="Open…" />
+            <Menu mnemonicParsing="false" text="Open Recent" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Close" />
+            <MenuItem mnemonicParsing="false" text="Save" />
+            <MenuItem mnemonicParsing="false" text="Save As…" />
+            <MenuItem mnemonicParsing="false" text="Revert" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Preferences…" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Quit" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Edit">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Undo" />
+            <MenuItem mnemonicParsing="false" text="Redo" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Cut" />
+            <MenuItem mnemonicParsing="false" text="Copy" />
+            <MenuItem mnemonicParsing="false" text="Paste" />
+            <MenuItem mnemonicParsing="false" text="Delete" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Select All" />
+            <MenuItem mnemonicParsing="false" text="Unselect All" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+          <items>
+            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+         <children>
+            <BorderPane prefHeight="471.5" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <center>
+                  <SplitPane dividerPositions="0.8244147157190636" prefHeight="471.5" prefWidth="600.0" BorderPane.alignment="CENTER">
+                     <items>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="470.0" prefWidth="132.0">
+                           <children>
+                              <Accordion layoutY="6.0" prefHeight="469.5" prefWidth="324.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <panes>
+                                    <TitledPane id="paneUser" animated="false" text="USER">
+                                       <content>
+                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                             <children>
+                                                <TabPane layoutX="8.0" layoutY="7.0" prefHeight="189.5" prefWidth="432.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <tabs>
+                                                      <Tab id="tabSelect" text="SELECT">
+                                                         <content>
+                                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                               <children>
+                                                                  <GridPane layoutX="107.0" layoutY="-3.0" prefHeight="136.0" prefWidth="411.5" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                     <columnConstraints>
+                                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="248.00000762939453" minWidth="10.0" prefWidth="232.00000762939453" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="354.00000762939453" minWidth="10.0" prefWidth="234.49999237060547" />
+                                                                     </columnConstraints>
+                                                                     <rowConstraints>
+                                                                        <RowConstraints maxHeight="74.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints maxHeight="74.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints maxHeight="35.0" minHeight="2.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints maxHeight="154.0" minHeight="10.0" prefHeight="133.0" vgrow="SOMETIMES" />
+                                                                     </rowConstraints>
+                                                                     <children>
+                                                                        <Label prefHeight="17.0" prefWidth="147.0" text="Value =" GridPane.rowIndex="2" />
+                                                                        <Label prefHeight="17.0" prefWidth="85.0" text="Column :" GridPane.rowIndex="1" />
+                                                                        <ChoiceBox fx:id="idSelectBox" prefWidth="150.0" style="-fx-background-radius: 10;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                                        <Button mnemonicParsing="false" text="Cancel" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                                                                        <Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#selectUser" text="Submit" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                                                                           <opaqueInsets>
+                                                                              <Insets left="10.0" />
+                                                                           </opaqueInsets>
+                                                                        </Button>
+                                                                        <TextField fx:id="valueField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                                        <Label text="Sélectionne tous les éléments de la table :" />
+                                                                     </children>
+                                                                  </GridPane>
+                                                               </children>
+                                                            </AnchorPane>
+                                                         </content>
+                                                      </Tab>
+                                                      <Tab id="tabInsert" text="INSERT">
+                                                         <content>
+                                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                               <children>
+                                                                  <GridPane prefHeight="336.0" prefWidth="516.5" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                     <columnConstraints>
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                     </columnConstraints>
+                                                                     <rowConstraints>
+                                                                        <RowConstraints maxHeight="74.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints maxHeight="35.0" minHeight="2.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints maxHeight="79.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints maxHeight="154.0" minHeight="10.0" prefHeight="133.0" vgrow="SOMETIMES" />
+                                                                     </rowConstraints>
+                                                                     <children>
+                                                                        <Label prefHeight="17.0" prefWidth="147.0" text="Value :" GridPane.rowIndex="2" />
+                                                                        <Label prefHeight="17.0" prefWidth="85.0" text="Column :" GridPane.rowIndex="1" />
+                                                                        <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                                        <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                                        <Button mnemonicParsing="false" text="Cancel" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                                                                        <Button alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" text="Submit" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                                     </children>
+                                                                  </GridPane>
+                                                               </children>
+                                                            </AnchorPane>
+                                                         </content>
+                                                      </Tab>
+                                                      <Tab id="tabUpdate" text="UPDATE">
+                                                         <content>
+                                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                               <children>
+                                                                  <GridPane layoutX="191.0" layoutY="1.0" prefHeight="336.0" prefWidth="516.5" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                     <columnConstraints>
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                     </columnConstraints>
+                                                                     <rowConstraints>
+                                                                        <RowConstraints maxHeight="74.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints maxHeight="35.0" minHeight="2.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints maxHeight="79.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints maxHeight="154.0" minHeight="10.0" prefHeight="133.0" vgrow="SOMETIMES" />
+                                                                     </rowConstraints>
+                                                                     <children>
+                                                                        <Label prefHeight="17.0" prefWidth="147.0" text="Value :" GridPane.rowIndex="2" />
+                                                                        <Label prefHeight="17.0" prefWidth="85.0" text="Column :" GridPane.rowIndex="1" />
+                                                                        <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                                        <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                                        <Label prefHeight="17.0" prefWidth="80.0" text="WHERE id = " />
+                                                                        <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" />
+                                                                        <Button mnemonicParsing="false" text="Cancel" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                                                                        <Button alignment="CENTER_RIGHT" mnemonicParsing="false" text="Submit" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                                     </children>
+                                                                  </GridPane>
+                                                               </children>
+                                                            </AnchorPane>
+                                                         </content>
+                                                      </Tab>
+                                                      <Tab id="tabDelete" text="DELETE">
+                                                         <content>
+                                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                               <children>
+                                                                  <GridPane prefHeight="291.0" prefWidth="453.0">
+                                                                     <columnConstraints>
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                                     </columnConstraints>
+                                                                     <rowConstraints>
+                                                                        <RowConstraints maxHeight="74.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints maxHeight="35.0" minHeight="2.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints maxHeight="79.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+                                                                        <RowConstraints maxHeight="79.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+                                                                     </rowConstraints>
+                                                                     <children>
+                                                                        <Label prefHeight="17.0" prefWidth="147.0" text="Value :" GridPane.rowIndex="2" />
+                                                                        <Label prefHeight="17.0" prefWidth="85.0" text="Column :" GridPane.rowIndex="1" />
+                                                                        <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                                        <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                                        <Label prefHeight="17.0" prefWidth="80.0" text="WHERE id = " />
+                                                                        <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" />
+                                                                        <Button mnemonicParsing="false" text="Button" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                                                                        <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                                                                     </children>
+                                                                  </GridPane>
+                                                               </children>
+                                                            </AnchorPane>
+                                                         </content>
+                                                      </Tab>
+                                                   </tabs>
+                                                </TabPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </content>
+                                    </TitledPane>
+                                    <TitledPane animated="false" text="SERVICES">
+                                       <content>
+                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                             <children>
+                                                <TabPane layoutX="7.0" prefHeight="290.0" prefWidth="632.0" tabClosingPolicy="UNAVAILABLE" />
+                                             </children>
+                                          </AnchorPane>
+                                       </content>
+                                    </TitledPane>
+                                    <TitledPane animated="false" text="PROVIDER">
+                                       <content>
+                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                             <children>
+                                                <TabPane prefHeight="287.0" prefWidth="638.0" tabClosingPolicy="UNAVAILABLE" />
+                                             </children>
+                                          </AnchorPane>
+                                       </content>
+                                    </TitledPane>
+                                    <TitledPane animated="false" text="BILL">
+                                      <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                      </content>
+                                    </TitledPane>
+                                    <TitledPane animated="false" text="DELIVERY">
+                                      <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                      </content>
+                                    </TitledPane>
+                                    <TitledPane animated="false" text="ALL TABLES">
+                                      <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                             <children>
+                                                <VBox layoutX="36.0" layoutY="14.0" prefHeight="277.5" prefWidth="487.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <children>
+                                                      <Label text="Selectionner vos tables et remplisser les valeurs">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Separator prefWidth="200.0" />
+                                                      <GridPane>
+                                                         <columnConstraints>
+                                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                         </columnConstraints>
+                                                         <rowConstraints>
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                         </rowConstraints>
+                                                         <children>
+                                                            <CheckBox mnemonicParsing="false" text="USER" GridPane.rowIndex="1" />
+                                                            <CheckBox mnemonicParsing="false" text="SERVICES" GridPane.rowIndex="2" />
+                                                            <CheckBox mnemonicParsing="false" text="PROVIDER" GridPane.rowIndex="3" />
+                                                            <CheckBox mnemonicParsing="false" text="BILL" GridPane.rowIndex="4" />
+                                                            <CheckBox mnemonicParsing="false" text="DELIVERY" GridPane.rowIndex="5" />
+                                                            <Label text="Column" GridPane.columnIndex="1" />
+                                                            <Label text="Value" GridPane.columnIndex="2" />
+                                                            <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                               <GridPane.margin>
+                                                                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                               </GridPane.margin>
+                                                            </ChoiceBox>
+                                                            <ChoiceBox prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                                               <GridPane.margin>
+                                                                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                               </GridPane.margin>
+                                                            </ChoiceBox>
+                                                            <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                               <GridPane.margin>
+                                                                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                               </GridPane.margin>
+                                                            </ChoiceBox>
+                                                            <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                                               <GridPane.margin>
+                                                                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                               </GridPane.margin>
+                                                            </ChoiceBox>
+                                                            <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                               <GridPane.margin>
+                                                                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                               </GridPane.margin>
+                                                            </ChoiceBox>
+                                                            <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                                               <GridPane.margin>
+                                                                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                               </GridPane.margin>
+                                                            </ChoiceBox>
+                                                            <ChoiceBox prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                                               <GridPane.margin>
+                                                                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                               </GridPane.margin>
+                                                            </ChoiceBox>
+                                                            <ChoiceBox prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                                                               <GridPane.margin>
+                                                                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                               </GridPane.margin>
+                                                            </ChoiceBox>
+                                                            <ChoiceBox prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                                                               <GridPane.margin>
+                                                                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                               </GridPane.margin>
+                                                            </ChoiceBox>
+                                                            <ChoiceBox prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                                                               <GridPane.margin>
+                                                                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                               </GridPane.margin>
+                                                            </ChoiceBox>
+                                                         </children>
+                                                      </GridPane>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </AnchorPane>
+                                      </content>
+                                    </TitledPane>
+                                 </panes>
+                              </Accordion>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
+                     </items>
+                  </SplitPane>
+               </center>
+               <top>
+                  <Label text="Requêteur" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </top>
+            </BorderPane>
+         </children>
+    </AnchorPane>
+      <ListView prefHeight="86.0" prefWidth="600.0" />
+  </children>
+</VBox>
