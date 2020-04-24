@@ -3,7 +3,7 @@ session_start();
 include("../include/config.php");
 include('../include/lang.php');
 if (!isset($_SESSION["provider"])) {
-  //header("location: ../php/deconnexion.php");
+  header("location: ../php/deconnexion.php");
   exit;
 }
 
@@ -19,8 +19,13 @@ else {
   $idProvider = $providerInfos["idProvider"];
 }
 
-if (date("D",time()) == "Mon") $monday = date("Y-m-d",time());
-else $monday = date("Y-m-d", strtotime(date("Y-m-d",time())."last monday"));
+if (isset($_GET["day"]) && !empty($_GET["day"])) {
+  $monday = date("Y-m-d", $_GET["day"]);
+}
+else {
+  if (date("D",time()) == "Mon") $monday = date("Y-m-d",time());
+  else $monday = date("Y-m-d", strtotime(date("Y-m-d",time())."last monday"));
+}
 $week = array(
   "monday" => $monday,
   "tuesday" => date("Y-m-d", strtotime($monday."+1 days")),
@@ -48,7 +53,11 @@ function getDeliveyDayOfWeek($pdo, $idProvider, $day, $i) {
     ((deliveryHourStart >= ? && deliveryHourStart < ?) || (deliveryHourStart < ? && deliveryHourEnd > ?))
     ORDER BY deliveryHourStart ASC");
   $getDeliveryInfos->execute([$idProvider, $day, $i.":00:00", ($i+1).":00:00", $i.":00:00", $i.":00:00"]);
-  return $getDeliveryInfos->fetchall();
+  $getDeliveryInfosNight = $pdo->prepare("SELECT * FROM DELIVERY INNER JOIN SERVICE ON DELIVERY.idService = SERVICE.idService
+    WHERE idProvider = ? && ((deliveryDateStart = ? && deliveryDateEnd = ? && deliveryHourStart < ?) || (deliveryDateStart = ? && deliveryDateEnd = ? && deliveryHourEnd > ?))
+    ORDER BY deliveryHourStart ASC");
+  $getDeliveryInfosNight->execute([$idProvider, $day, date("Y-m-d", strtotime($day."+1 days")), $i.":00:00", date("Y-m-d", strtotime($day."-1 days")), $day, $i.":00:00"]);
+  return array_merge($getDeliveryInfos->fetchall(), $getDeliveryInfosNight->fetchAll());
 }
 
 function isFirstHour($delivery, $i) {
@@ -94,8 +103,8 @@ function isFirstHour($delivery, $i) {
   <div class="row">
       <div class="col s12">
         <ul class="tabs blue-grey darken-1">
-          <li class="tab col s6"><a class="active white-text" href="#test1"><?php echo $lang['myInfo']; ?></a></li>
-          <li class="tab col s6"><a class="white-text" href="#test2">Emploi du temps</a></li>
+          <li class="tab col s6"><a class="<?php if (!isset($_GET['day'])) echo 'active';?> white-text" href="#test1"><?php echo $lang['myInfo']; ?></a></li>
+          <li class="tab col s6"><a class="<?php if (isset($_GET['day'])) echo 'active';?> white-text" href="#test2">Emploi du temps</a></li>
         </ul>
       </div>
 
@@ -162,13 +171,19 @@ function isFirstHour($delivery, $i) {
         <thead>
           <tr>
               <th class="cyan lighten-5">Heure</th>
-              <th class="cyan lighten-4">Lundi</th>
-              <th class="cyan lighten-3">Mardi</th>
-              <th class="cyan lighten-2">Mercredi</th>
-              <th class="cyan lighten-1">Jeudi</th>
-              <th class="cyan">Vendredi</th>
-              <th class="cyan darken-1">Samedi</th>
-              <th class="cyan darken-2">Dimanche</th>
+              <th class="cyan lighten-4">
+                Lundi <?=date("d/m",strtotime($week["monday"]))?><br>
+                <a href="profilProvider.php?day=<?=strtotime($monday."-7 days")?>" class="waves-effect waves-light btn-small"><i class="material-icons left">keyboard_arrow_left</i></a>
+              </th>
+              <th class="cyan lighten-3">Mardi <?=date("d/m",strtotime($week["tuesday"]))?></th>
+              <th class="cyan lighten-2">Mercredi <?=date("d/m",strtotime($week["wednesday"]))?></th>
+              <th class="cyan lighten-1">Jeudi <?=date("d/m",strtotime($week["thursday"]))?></th>
+              <th class="cyan">Vendredi <?=date("d/m",strtotime($week["friday"]))?></th>
+              <th class="cyan darken-1">Samedi <?=date("d/m",strtotime($week["saturday"]))?></th>
+              <th class="cyan darken-2">
+                Dimanche <?=date("d/m",strtotime($week["sunday"]))?><br>
+                <a href="profilProvider.php?day=<?=strtotime($monday."+7 days")?>" class="waves-effect waves-light btn-small"><i class="material-icons left">keyboard_arrow_right</i></a>
+              </th>
           </tr>
         </thead>
 
@@ -269,30 +284,45 @@ function isFirstHour($delivery, $i) {
       </table>
 
       <!-- Modal Trigger -->
-  <a class="waves-effect waves-light btn-large modal-trigger" href="#provider">Définir mes horaires</a>
+  <a class="waves-effect waves-light btn-large modal-trigger  blue-grey darken-3" href="#provider" style="margin-left:0%; margin-top:20px;">Définir mes horaires</a>
 
   <!-- Modal Structure -->
   <div id="provider" class="modal">
+    <form action="setProviderAvailabilities.php" method="post">
     <div class="modal-content">
-      <h4>Définir mes horaires :</h4>
-      <form action="setProviderAvailibility.php" method="post">
-        <div class="input-field col s1">
-          <p>Début (0 = min) :</p>
-        </div>
-        <div class="input-field col s2">
-          <input name="hourStart" type="time" required>
-        </div>
-        <div class="input-field col s1">
-          <p>Fin (24 = max) :</p>
-        </div>
-        <div class="input-field col s2">
-          <input name="hourEnd" type="time" required>
-        </div>
-      </form>
+      <div class="row">
+        <h4>Définir mes horaires :</h4>
+          <div class="input-field col s1">
+            <p>Du :</p>
+          </div>
+          <div class="input-field col s2">
+            <input name="dateStart" type="date" required>
+          </div>
+          <div class="input-field col s1">
+            <p>Au :</p>
+          </div>
+          <div class="input-field col s2">
+            <input name="dateEnd" type="date" required>
+          </div>
+          <div class="input-field col s1">
+            <p>Début (0 = mini) :</p>
+          </div>
+          <div class="input-field col s2">
+            <input name="hourStart" type="time" required>
+          </div>
+          <div class="input-field col s1">
+            <p>Fin (24 = max) :</p>
+          </div>
+          <div class="input-field col s2">
+            <input name="hourEnd" type="time" required>
+          </div>
+      </div>
     </div>
     <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+      <a href="#!" class="modal-close waves-effect waves-light btn red darken-2">Annuler</a>
+      <button type="submit" class="waves-effect waves-light btn">Valider</button>
     </div>
+    </form>
   </div>
 
 <?php

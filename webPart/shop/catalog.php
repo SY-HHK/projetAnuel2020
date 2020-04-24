@@ -49,7 +49,7 @@ $subEnd = $getInfosUser["subHourEnd"];
 
     <?php
 
-      $services = $pdo->prepare("SELECT * FROM SERVICE WHERE idService != 1");
+      $services = $pdo->prepare("SELECT * FROM SERVICE WHERE idService != 1 && idService != 50");
       $services->execute();
       $services = $services->fetchAll();
       foreach ($services as $service) {

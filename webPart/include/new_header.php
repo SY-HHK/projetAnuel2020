@@ -9,6 +9,9 @@
         <?php
         if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) { ?>
           <li><a href="/projetAnuel2020/webPart/login/profilUser.php"><?php echo $lang['profil'];?></a></li>
+      <?php  }
+        else if (isset($_SESSION["provider"]) && !empty($_SESSION["provider"])) { ?>
+        <li><a href="/projetAnuel2020/webPart/login/profilProvider.php"><?php echo $lang['profil'];?></a></li>
       <?php  } else { ?>
           <li><a href="/projetAnuel2020/webPart/login/connexion.php"><?php echo $lang['logIn'];?></a></li>
       <?php  } ?>

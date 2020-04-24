@@ -196,7 +196,8 @@ INSERT INTO `SERVICE` (`idService`, `serviceTitle`, `servicePrice`, `serviceDesc
 (2, 'Baby sitter', 9, 'Le baby-sitter, nounou ou garde d’enfant, veille à la sécurité, au confort et au bien-être des petits dont il a la charge en l’absence des parents.', '../images/service1.jpg'),
 (3, 'Plombier', 50, 'Le plombier installe, répare, règle et entretient les équipements sanitaires (toilettes, salles de bains, etc.), ainsi que les canalisations de distribution de gaz, d’eau et d’évacuation (en acier, cuivre, PVC, etc.)', '../images/service2.jpg'),
 (4, 'Services du quotidien', 15, 'Pressing, retouche, cordonnerie, blanchisserie se sont les services du quotidien que nous vous proposons pour alléger vos journées chargées.\r\n\r\nIl vous suffit de déposer vos articles et nous les récupérerons lors de notre passage.','../images/service3.jpg'),
-(5, 'Achats express', 10, 'Nous mettons à votre disposition tous types de services qui peuvent faciliter votre vie : paniers bio, bouquets de fleurs, jusqu’à la livraison des vins & spiritueux', '../images/service4.jpeg');
+(5, 'Achats express', 10, 'Nous mettons à votre disposition tous types de services qui peuvent faciliter votre vie : paniers bio, bouquets de fleurs, jusqu’à la livraison des vins & spiritueux', '../images/service4.jpeg'),
+(50,'Repos',0,'','');
 
 -- -----------------------------------------------------
 -- Data for table `bringme`.`CITY`
