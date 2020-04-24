@@ -10,7 +10,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("test.fxml"));
         primaryStage.setTitle("Requêteur de base de données");
         primaryStage.setScene(new Scene(root, 900, 705));
         primaryStage.show();
@@ -24,5 +24,13 @@ public class Main extends Application {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("sample.fxml"));
         }*/
+
+
+
+
+
+
+
+
     }
 }
