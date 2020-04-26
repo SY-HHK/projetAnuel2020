@@ -110,47 +110,47 @@ function isFirstHour($delivery, $i) {
 
       <div id="test1" class="col s12">
     <div class="row">
-      <form class="col s12">
+      <form method="post" action="../php/updateProvider.php" class="col s12">
         <div class="row">
           <div class="input-field col s12">
-            <input id="last_name" type="text" class="validate" value="<?=$providerInfos["providerFirstName"]." ".$providerInfos["providerLastName"]?>">
-            <label for="last_name"><?php echo $lang['firstName']; echo ' & '.$lang['lastName'] ?></label>
+            <input id="name" name="name" type="text" class="validate" value="<?=$providerInfos["providerFirstName"]." ".$providerInfos["providerLastName"]?>">
+            <label for="name"><?php echo $lang['firstName']; echo ' & '.$lang['lastName'] ?></label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <input id="last_name" type="email" class="validate" value="<?=$providerInfos["providerEmail"]?>">
+            <input id="last_name" name="email" type="email" class="validate" value="<?=$providerInfos["providerEmail"]?>">
             <label for="last_name"><?php echo $lang['email']; ?> :</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <input id="last_name" type="text" class="validate" value="<?=$providerInfos["providerAddress"]?>">
+            <input id="last_name" name="address" type="text" class="validate" value="<?=$providerInfos["providerAddress"]?>">
             <label for="last_name"><?php echo $lang['address']; ?> :</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s5">
-            <input id="last_name" type="text" class="validate" value="<?=$providerInfos["cityName"]?>">
-            <label for="last_name"><?php echo $lang['city']; ?> :</label>
+            <input id="cityName" name="cityName" type="text" class="validate" value="<?=$providerInfos["cityName"]?>">
+            <label for="cityName"><?php echo $lang['city']; ?> :</label>
           </div>
           <div class="input-field col s2">
-            <input id="last_name" type="text" class="validate" value="<?=$providerInfos["cityDepartement"]?>">
-            <label for="last_name"><?php echo $lang['department']; ?> :</label>
+            <input id="cityDepartment" name="cityDepartment" type="text" class="validate" value="<?=$providerInfos["cityDepartement"]?>">
+            <label for="cityDepartment"><?php echo $lang['department']; ?> :</label>
           </div>
           <div class="input-field col s5">
-            <input id="last_name" type="text" class="validate" value="<?=$providerInfos["cityRegion"]?>">
-            <label for="last_name"><?php echo $lang['region']; ?> :</label>
+            <input id="cityRegion" name="cityRegion" type="text" class="validate" value="<?=$providerInfos["cityRegion"]?>">
+            <label for="cityRegion"><?php echo $lang['region']; ?> :</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s6">
-            <input id="password" type="password" class="validate">
+            <input id="password" name="password" type="password" class="validate">
             <label for="password"><?php echo $lang['pwd']; ?> :</label>
           </div>
           <div class="input-field col s6">
-            <input id="password" type="password" class="validate">
-            <label for="password"><?php echo $lang['confirmPwd']; ?> :</label>
+            <input id="newPassword" name="newPassword" type="password" class="validate">
+            <label for="newPassword"><?php echo $lang['confirmPwd']; ?> :</label>
           </div>
         </div>
         <button class="btn waves-effect waves-light" type="submit" name="action"><?php echo $lang['edit']; ?>
