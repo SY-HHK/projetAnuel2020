@@ -1,24 +1,32 @@
 package controllers;
 
 import DBConnector.*;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import application.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static org.slf4j.MDC.clear;
+
 public class ControllerMainPage implements Initializable {
 
-    private Main main;
-
-
     @FXML
-    private ChoiceBox idSelectBox;
+    private AnchorPane rootPane;
 
     @FXML
     private CheckBox checkUsers;
@@ -36,20 +44,18 @@ public class ControllerMainPage implements Initializable {
     private CheckBox checkDelivery;
 
     @FXML
-    private TextField valueField;
-
-    @FXML
-    private void initialize(){
-        //idSelectBox.setItems(idSelectBoxList);
-    }
-
-
-    @FXML
-    private void showBtn(){
+    private void showBtn() throws IOException {
 
         if (checkUsers.isSelected()){
-            UserConnect connect = new UserConnect();
-            connect.getAllUser();
+
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("/vue/user.fxml"));
+            Scene scene = new Scene(root);
+            stage.setTitle("user");
+            stage.setScene(scene);
+            stage.show();
+            //UserConnect connect = new UserConnect();
+            //connect.getAllUser();
         }
         if (checkProvider.isSelected()){
             ProviderConnect connect = new ProviderConnect();
@@ -74,13 +80,43 @@ public class ControllerMainPage implements Initializable {
     }
 
 
+    @FXML
+    public void userLaunch() throws IOException {
+        Stage stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/vue/user.fxml"));
+        Scene scene = new Scene(root);
+        stage.setTitle("user");
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+
+    @FXML
+    public void quitter(ActionEvent actionEvent) {
+        System.exit(0);
+    }
+
+    @FXML
+    public void aboutBringMe(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("About");
+        alert.setHeaderText(null);
+        alert.setContentText("Cette application a été crée par BringMe");
+        alert.showAndWait();
+    }
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
 
-    @FXML
-    public void quitter(ActionEvent actionEvent) {
-        System.exit(0);
+    public AnchorPane getRootPane() {
+        return rootPane;
+    }
+
+    public void setRootPane(AnchorPane rootPane) {
+        this.rootPane = rootPane;
     }
 }

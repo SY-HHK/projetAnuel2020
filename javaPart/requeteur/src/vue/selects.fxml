@@ -7,49 +7,29 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <VBox prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ControllerMainPage">
    <children>
-      <MenuBar VBox.vgrow="NEVER">
+      <MenuBar prefHeight="6.0" prefWidth="601.0">
          <menus>
-            <Menu mnemonicParsing="false" text="File">
+            <Menu mnemonicParsing="false" text="Select">
                <items>
-                  <MenuItem mnemonicParsing="false" text="New" />
-                  <MenuItem mnemonicParsing="false" text="Open…" />
-                  <Menu mnemonicParsing="false" text="Open Recent" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="All select" />
                   <MenuItem mnemonicParsing="false" text="Close" />
-                  <MenuItem mnemonicParsing="false" text="Save" />
-                  <MenuItem mnemonicParsing="false" text="Save As…" />
-                  <MenuItem mnemonicParsing="false" text="Revert" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Preferences…" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Quit" />
                </items>
             </Menu>
+            <Menu mnemonicParsing="false" onAction="#userLaunch" text="User" />
             <Menu mnemonicParsing="false" text="Edit">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Undo" />
-                  <MenuItem mnemonicParsing="false" text="Redo" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Cut" />
-                  <MenuItem mnemonicParsing="false" text="Copy" />
-                  <MenuItem mnemonicParsing="false" text="Paste" />
                   <MenuItem mnemonicParsing="false" text="Delete" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Select All" />
-                  <MenuItem mnemonicParsing="false" text="Unselect All" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Help">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#aboutBringMe" text="About bringMe" />
+                  <MenuItem mnemonicParsing="false" onAction="#aboutBringMe" text="About BringMe" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Quit">
@@ -59,33 +39,22 @@
             </Menu>
          </menus>
       </MenuBar>
-      <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+      <AnchorPane fx:id="rootPane" prefHeight="500.0" prefWidth="600.0">
          <children>
-            <BorderPane prefHeight="471.5" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <top>
-                  <Label text="Requêteur" BorderPane.alignment="CENTER">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-               </top>
-               <center>
-                  <AnchorPane BorderPane.alignment="CENTER">
-                     <children>
-                        <ListView layoutX="200.0" layoutY="64.0" prefHeight="399.5" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                        <Label layoutX="30.0" layoutY="30.0" text="Afficher les éléments de :" />
-                        <CheckBox fx:id="checkUsers" layoutX="167.0" layoutY="60.0" mnemonicParsing="false" text="USER" />
-                        <CheckBox fx:id="checkProvider" layoutX="166.0" layoutY="94.0" mnemonicParsing="false" text="PROVIDER" />
-                        <CheckBox fx:id="checkBill" layoutX="280.0" layoutY="94.0" mnemonicParsing="false" text="BILL" />
-                        <CheckBox fx:id="checkService" layoutX="167.0" layoutY="124.0" mnemonicParsing="false" text="SERVICES" />
-                        <CheckBox fx:id="checkDelivery" layoutX="280.0" layoutY="60.0" mnemonicParsing="false" text="DELIVERY" />
-                        <Button layoutX="492.0" layoutY="128.0" mnemonicParsing="false" onAction="#showBtn" text="Show" />
-                     </children>
-                  </AnchorPane>
-               </center>
-            </BorderPane>
+            <ListView layoutY="36.0" prefHeight="360.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <Label layoutX="31.0" layoutY="110.0" text="Afficher les éléments de :" />
+            <CheckBox fx:id="checkUsers" layoutX="380.0" layoutY="110.0" mnemonicParsing="false" text="USER" />
+            <CheckBox fx:id="checkProvider" layoutX="229.0" layoutY="150.0" mnemonicParsing="false" text="PROVIDER" />
+            <CheckBox fx:id="checkBill" layoutX="380.0" layoutY="150.0" mnemonicParsing="false" text="BILL" />
+            <CheckBox fx:id="checkService" layoutX="229.0" layoutY="193.0" mnemonicParsing="false" text="SERVICES" />
+            <CheckBox fx:id="checkDelivery" layoutX="229.0" layoutY="110.0" mnemonicParsing="false" text="DELIVERY" />
+            <Button layoutX="489.0" layoutY="287.0" mnemonicParsing="false" onAction="#showBtn" text="Show" />
+            <Label layoutX="248.0" layoutY="37.0" text="Requêteur">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
-      <ListView prefHeight="86.0" prefWidth="600.0" />
    </children>
 </VBox>

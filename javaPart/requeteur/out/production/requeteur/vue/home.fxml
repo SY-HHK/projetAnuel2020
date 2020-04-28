@@ -9,6 +9,12 @@
    <children>
       <MenuBar prefHeight="29.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <menus>
+            <Menu mnemonicParsing="false" text="Select">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="All select" />
+                  <MenuItem mnemonicParsing="false" onAction="#quitter" text="Close" />
+               </items>
+            </Menu>
           <Menu mnemonicParsing="false" text="File">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#quitter" text="Close" />

@@ -3,10 +3,14 @@ package controllers;
 import com.google.common.hash.Hashing;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.net.URL;
 
@@ -38,7 +42,6 @@ public class LoginController implements Initializable  {
         ResultSet rs = null;
 
         final String hashed = Hashing.sha256().hashString(textPassword.getText().toString(), StandardCharsets.UTF_8).toString();
-        //String sha256hex = org.apache.commons.codec.digest.DigestUtils.sha256Hex(textPassword.getText().toString());
 
         String sql = "SELECT * FROM USER WHERE userEmail = ? AND userPassword = ? AND userPrivilege = 10";
 
@@ -50,6 +53,13 @@ public class LoginController implements Initializable  {
             rs = statement.executeQuery();
             if (rs.next()){
                 labelState.setText("Conneted !");
+                Stage stage = new Stage();
+                Parent root = FXMLLoader.load(getClass().getResource("/vue/selects.fxml"));
+                Scene scene = new Scene(root);
+                stage.setTitle("Home");
+                stage.setScene(scene);
+                stage.show();
+
             }else{
                 labelState.setText("No connected");
             }

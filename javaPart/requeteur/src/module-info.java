@@ -9,6 +9,7 @@ module requeteur {
     opens vue;
     opens DBConnector;
     opens application;
+    opens model;
 
 
 
