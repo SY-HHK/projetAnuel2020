@@ -30,6 +30,9 @@ public class UserController implements Initializable {
 
     @FXML
     public void showUsers(ActionEvent actionEvent) {
+        /*Clear the actual table before showing*/
+        tableUser.getItems().clear();
+
         try{
             Connection conn = DBConnector.DBconnect.connect();
             String sql = "SELECT * FROM USER INNER JOIN CITY ON CITY.idCity = userIdCity WHERE USER.userPrivilege != 10";
@@ -39,7 +42,6 @@ public class UserController implements Initializable {
             while(rs.next()){
                 System.out.println("eheheeh");
                 data.add(new User(rs.getString(4), rs.getString(5), rs.getString(2), rs.getString(9), rs.getString(7)));
-
             }
             conn.close();
 

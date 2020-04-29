@@ -32,8 +32,6 @@ public class LoginController implements Initializable  {
     @FXML private Label labelState;
 
 
-
-
     @FXML
     public void login(ActionEvent event) throws SQLException{
         
@@ -54,7 +52,7 @@ public class LoginController implements Initializable  {
             if (rs.next()){
                 labelState.setText("Conneted !");
                 Stage stage = new Stage();
-                Parent root = FXMLLoader.load(getClass().getResource("/vue/selects.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("/vue/home.fxml"));
                 Scene scene = new Scene(root);
                 stage.setTitle("Home");
                 stage.setScene(scene);
