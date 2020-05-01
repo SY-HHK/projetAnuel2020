@@ -1,1 +1,1 @@
-/usr/bin/cc -g   CMakeFiles/merger.dir/main.c.o CMakeFiles/merger.dir/database.c.o  -o merger -lmysqlclient 
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/merger.dir/main.c.o CMakeFiles/merger.dir/database.c.o  -o merger  -L/usr/local/Cellar/mysql/8.0.19/lib -Wl,-rpath,/usr/local/Cellar/mysql/8.0.19/lib -lmysqlclient 

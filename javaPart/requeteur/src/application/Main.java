@@ -21,21 +21,11 @@ public class Main extends Application {
         }
     }
 
-
     public static void main(String[] args) {
         launch(args);
-
       /*  private static void show(){
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("sample.fxml"));
         }*/
-
-
-
-
-
-
-
-
     }
 }

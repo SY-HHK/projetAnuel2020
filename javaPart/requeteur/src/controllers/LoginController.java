@@ -1,6 +1,7 @@
 package controllers;
 
 import com.google.common.hash.Hashing;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,6 +40,7 @@ public class LoginController implements Initializable  {
         PreparedStatement statement =null;
         ResultSet rs = null;
 
+        //String hashed = org.apache.commons.codec.digest.DigestUtils.sha256Hex(textPassword.getText());
         final String hashed = Hashing.sha256().hashString(textPassword.getText().toString(), StandardCharsets.UTF_8).toString();
 
         String sql = "SELECT * FROM USER WHERE userEmail = ? AND userPassword = ? AND userPrivilege = 10";
@@ -57,6 +59,8 @@ public class LoginController implements Initializable  {
                 stage.setTitle("Home");
                 stage.setScene(scene);
                 stage.show();
+
+                conn.close();
 
             }else{
                 labelState.setText("No connected");

@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <mysql/mysql.h>
+#include <mysql/mysql/mysql.h>
 
 void finish_with_err(MYSQL *conn);
 

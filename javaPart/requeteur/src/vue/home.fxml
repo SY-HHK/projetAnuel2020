@@ -34,14 +34,14 @@
             <CheckBox fx:id="checkUsers" layoutX="381.0" layoutY="109.0" mnemonicParsing="false" text="USER" />
             <CheckBox fx:id="checkProvider" layoutX="230.0" layoutY="149.0" mnemonicParsing="false" text="PROVIDER" />
             <CheckBox fx:id="checkBill" layoutX="381.0" layoutY="149.0" mnemonicParsing="false" text="BILL" />
-            <CheckBox fx:id="checkService" layoutX="230.0" layoutY="192.0" mnemonicParsing="false" text="SERVICES" />
             <CheckBox fx:id="checkDelivery" layoutX="230.0" layoutY="109.0" mnemonicParsing="false" text="DELIVERY" />
-            <Button layoutX="490.0" layoutY="286.0" mnemonicParsing="false" onAction="#showBtn" text="Show" />
+            <Button layoutX="490.0" layoutY="286.0" mnemonicParsing="false" onAction="#selectBtn" text="Select" />
             <Label layoutX="249.0" layoutY="36.0" text="Requêteur">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
+            <Button layoutX="368.0" layoutY="286.0" mnemonicParsing="false" onAction="#insertTable" text="Insert" />
          </children>
       </AnchorPane>
    </children>
