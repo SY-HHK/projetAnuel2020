@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -19,6 +20,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import static org.slf4j.MDC.clear;
@@ -43,43 +45,36 @@ public class HomeController implements Initializable {
     @FXML
     private CheckBox checkDelivery;
 
+    private static ArrayList<String> tables = new ArrayList<String>();
+
     @FXML
     private void showBtn() throws IOException {
 
         if (checkUsers.isSelected()){
-            Stage stage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("/vue/user.fxml"));
-            Scene scene = new Scene(root);
-            stage.setTitle("user");
-            stage.setScene(scene);
-            stage.show();
+            tables.add("USER");
         }
         if (checkProvider.isSelected()){
-
+            tables.add("PROVIDER");
         }
         if (checkService.isSelected()){
-
+            tables.add("SERVICE");
         }
 
         if (checkBill.isSelected()){
-
+            tables.add("BILL");
         }
 
         if (checkDelivery.isSelected()){
-
+            tables.add("DELIVERY");
         }
-    }
 
-
-    @FXML
-    public void userLaunch() throws IOException {
         Stage stage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("/vue/user.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/vue/select.fxml"));
         Scene scene = new Scene(root);
-        stage.setTitle("user");
+        stage.setUserData(tables);
+        stage.setTitle("Selection");
         stage.setScene(scene);
         stage.show();
-
     }
 
     /* Menus bar functions */
@@ -104,4 +99,11 @@ public class HomeController implements Initializable {
 
     }
 
+    public static ArrayList<String> getTables() {
+        return tables;
+    }
+
+    public static void setTables(ArrayList<String> tables) {
+        HomeController.tables = tables;
+    }
 }

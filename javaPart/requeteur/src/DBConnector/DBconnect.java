@@ -9,8 +9,8 @@ public class DBconnect {
     private Statement statement;
     private ResultSet resultSet;
     private static final String url = "jdbc:mysql://localhost:3306/bringme?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-    private static final String name = "admin";
-    private static final String pwd = "test123";
+    private static final String name = "root";
+    private static final String pwd = "root";
 
 
     private String dma;
