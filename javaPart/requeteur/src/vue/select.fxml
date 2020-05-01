@@ -26,7 +26,7 @@
             </Menu>
          </menus>
       </MenuBar>
-      <Button layoutX="471.0" layoutY="332.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="107.0" text="Executer" onAction="#userLaunch"/>
+      <Button layoutX="471.0" layoutY="332.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="107.0" text="Executer" onAction="#executeBtn"/>
       <ChoiceBox fx:id="col1" layoutX="87.0" layoutY="63.0" prefHeight="25.0" prefWidth="202.0" />
       <TextField fx:id="where1" layoutX="372.0" layoutY="63.0" prefHeight="25.0" prefWidth="202.0" />
       <Label layoutX="21.0" layoutY="67.0" text="Colonne :" />

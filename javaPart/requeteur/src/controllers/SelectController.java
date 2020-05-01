@@ -33,12 +33,17 @@ public class SelectController implements Initializable {
     @FXML private ChoiceBox col4;
     @FXML private ChoiceBox col5;
 
-    @FXML
-    private TextField where1;
+    @FXML private TextField where1;
+    @FXML private TextField where2;
+    @FXML private TextField where3;
+    @FXML private TextField where4;
+    @FXML private TextField where5;
 
     private ArrayList<String> tables;
 
-    private ArrayList<String> columns = new ArrayList<String>();
+    private static ArrayList<String> columns = new ArrayList<String>();
+
+    private static ArrayList<String> where = new ArrayList<String>();
 
     @FXML
     public void userLaunch() throws IOException {
@@ -99,5 +104,48 @@ public class SelectController implements Initializable {
             col5.getItems().add(columns.get(i));
         }
     }
-    
+
+    @FXML
+    private void executeBtn() throws IOException {
+
+        if (!where1.getText().isEmpty()){
+            where.add(col1.getValue().toString()+" = "+where1.getText());
+        }
+        if (!where2.getText().isEmpty()){
+            where.add(col2.getValue().toString()+" = "+where2.getText());
+        }
+        if (!where3.getText().isEmpty()){
+            where.add(col3.getValue().toString()+" = "+where3.getText());
+        }
+        if (!where4.getText().isEmpty()){
+            where.add(col4.getValue().toString()+" = "+where4.getText());
+        }
+        if (!where5.getText().isEmpty()){
+            where.add(col5.getValue().toString()+" = "+where5.getText());
+        }
+
+        Stage stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/vue/result.fxml"));
+        Scene scene = new Scene(root);
+        stage.setUserData(tables);
+        stage.setTitle("Resultats");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static ArrayList<String> getWhere() {
+        return where;
+    }
+
+    public static void setWhere(ArrayList<String> where) {
+        SelectController.where = where;
+    }
+
+    public static ArrayList<String> getColumns() {
+        return columns;
+    }
+
+    public static void setColumns(ArrayList<String> columns) {
+        SelectController.columns = columns;
+    }
 }
