@@ -55,7 +55,7 @@ public class ResultController implements Initializable {
             ResultSet result = statement.executeQuery();
 
             while (result.next()) {
-                columns.add(tables.get(i)+"."+result.getString(1));
+                //columns.add(tables.get(i)+"."+result.getString(1));
             }
             conn.close();
 
