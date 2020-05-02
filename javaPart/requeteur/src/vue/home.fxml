@@ -31,11 +31,11 @@
          <children>
             <ListView layoutY="17.0" prefHeight="471.5" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
             <Label layoutX="32.0" layoutY="109.0" text="Afficher les éléments de :" />
-            <CheckBox fx:id="checkUsers" layoutX="381.0" layoutY="109.0" mnemonicParsing="false" text="USER" />
-            <CheckBox fx:id="checkProvider" layoutX="230.0" layoutY="149.0" mnemonicParsing="false" text="PROVIDER" />
-            <CheckBox fx:id="checkBill" layoutX="381.0" layoutY="149.0" mnemonicParsing="false" text="BILL" />
-            <CheckBox fx:id="checkService" layoutX="230.0" layoutY="192.0" mnemonicParsing="false" text="SERVICES" />
-            <CheckBox fx:id="checkDelivery" layoutX="230.0" layoutY="109.0" mnemonicParsing="false" text="DELIVERY" />
+            <CheckBox fx:id="checkUsers" layoutX="381.0" layoutY="109.0" mnemonicParsing="false" onMouseClicked="#blockUser" text="USER" />
+            <CheckBox fx:id="checkProvider" layoutX="230.0" layoutY="149.0" mnemonicParsing="false" onMouseClicked="#blockProvider" text="PROVIDER" />
+            <CheckBox fx:id="checkBill" layoutX="381.0" layoutY="149.0" mnemonicParsing="false" onMouseClicked="#blockBill" text="BILL" />
+            <CheckBox fx:id="checkService" layoutX="230.0" layoutY="192.0" mnemonicParsing="false" onMouseClicked="#blockService" text="SERVICES" />
+            <CheckBox fx:id="checkDelivery" layoutX="230.0" layoutY="109.0" mnemonicParsing="false" onMouseClicked="#blockDelivery" text="DELIVERY" />
             <Button layoutX="490.0" layoutY="286.0" mnemonicParsing="false" onAction="#showBtn" text="Show" />
             <Label layoutX="249.0" layoutY="36.0" text="Requêteur">
                <font>

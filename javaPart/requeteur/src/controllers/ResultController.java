@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -11,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ResultController implements Initializable {
@@ -42,12 +44,13 @@ public class ResultController implements Initializable {
         }
 
         for (int i = 0; i < columns.size(); i++) {
-            tableResult.getColumns().add(new TableColumn(columns.get(i)));
+            TableColumn col = new TableColumn(columns.get(i));
+            col.setCellValueFactory(new PropertyValueFactory<>(columns.get(i)));
+            tableResult.getColumns().add(col);
         }
 
-        String request = "SELECT * FROM ";
-        //ajouter INNER JOIN nomTable pour chaque iteration
-        //ajouter dans HomeControler un bloquage si les tables sont pas liés
+        String request = "SELECT * FROM " + getSqlInnerJoin() + getSqlWhere();
+        System.out.println(request);
 
         try {
             Connection conn = DBConnector.DBconnect.connect();
@@ -55,12 +58,65 @@ public class ResultController implements Initializable {
             ResultSet result = statement.executeQuery();
 
             while (result.next()) {
-                //columns.add(tables.get(i)+"."+result.getString(1));
+                //tableResult.getItems().add(result);
             }
             conn.close();
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        }
+    }
+
+    private String getSqlInnerJoin() {
+        String innerTest = "";
+        for (int i = 0; i < tables.size(); i++) {
+            innerTest = innerTest+tables.get(i);
+        }
+
+        if (innerTest.matches("USERBILL")) {
+            return "USER INNER JOIN BILL ON USER.idUser = BILL.idUser";
+        }
+        if (innerTest.matches("USERBILLDELIVERY")) {
+            return "USER INNER JOIN BILL ON USER.idUser = BILL.idUser INNER JOIN DELIVERY ON BILL.idBill = DELIVERY.idBill";
+        }
+        if (innerTest.matches("USERBILLDELIVERYPROVIDER")) {
+            return "USER INNER JOIN BILL ON USER.idUser = BILL.idUser INNER JOIN DELIVERY ON BILL.idBill = DELIVERY.idBill" +
+                    " INNER JOIN PROVIDER ON DELIVERY.idProvider = PROVIDER.idProvider";
+        }
+        if (innerTest.matches("USERBILLDELIVERYPROVIDERSERVICE")) {
+            return "USER INNER JOIN BILL ON USER.idUser = BILL.idUser INNER JOIN DELIVERY ON BILL.idBill = DELIVERY.idBill" +
+                    " INNER JOIN PROVIDER ON DELIVERY.idProvider = PROVIDER.idProvider INNER JOIN SERVICE ON DELIVERY.idService = SERVICE.idService";
+        }
+        if (innerTest.matches("BILLDELIVERY")) {
+            return "BILL INNER JOIN DELIVERY ON BILL.idBill = DELIVERY.idBill";
+        }
+        if (innerTest.matches("BILLDELIVERYPROVIDER")) {
+            return "BILL INNER JOIN DELIVERY ON BILL.idBill = DELIVERY.idBill INNER JOIN PROVIDER ON DELIVERY.idProvider = PROVIDER.idProvider";
+        }
+        if (innerTest.matches("BILLDELIVERYPROVIDERSERVICE")) {
+            return "BILL INNER JOIN DELIVERY ON BILL.idBill = DELIVERY.idBill INNER JOIN PROVIDER ON DELIVERY.idProvider = PROVIDER.idProvider" +
+                    " INNER JOIN SERVICE ON DELIVERY.idService = SERVICE.idService";
+        }
+        if (innerTest.matches("DELIVERYPROVIDER")) {
+            return "DELIVERY INNER JOIN PROVIDER ON DELIVERY.idProvider = PROVIDER.idProvider";
+        }
+        if (innerTest.matches("DELIVERYPROVIDERSERVICE")) {
+            return "DELIVERY INNER JOIN PROVIDER ON DELIVERY.idProvider = PROVIDER.idProvider INNER JOIN SERVICE ON DELIVERY.idService = SERVICE.idService";
+        }
+        if (innerTest.matches("DELIVERYSERVICE")) {
+            return "DELIVERY INNER JOIN SERVICE ON DELIVERY.idService = SERVICE.idService";
+        }
+        return tables.get(0);
+    }
+
+    private String getSqlWhere() {
+        if (where.size() == 0) return "";
+        else {
+            String whereString = " WHERE " + where.get(0);
+            for (int i = 1; i < where.size(); i++) {
+                whereString = whereString + " && " + where.get(i);
+            }
+            return whereString;
         }
     }
 }

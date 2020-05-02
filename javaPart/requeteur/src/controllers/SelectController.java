@@ -39,6 +39,12 @@ public class SelectController implements Initializable {
     @FXML private TextField where4;
     @FXML private TextField where5;
 
+    @FXML private ChoiceBox op1;
+    @FXML private ChoiceBox op2;
+    @FXML private ChoiceBox op3;
+    @FXML private ChoiceBox op4;
+    @FXML private ChoiceBox op5;
+
     private ArrayList<String> tables;
 
     private static ArrayList<String> columns = new ArrayList<String>();
@@ -75,6 +81,7 @@ public class SelectController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        columns.clear();
         tables = HomeController.getTables();
 
         String request;
@@ -87,7 +94,7 @@ public class SelectController implements Initializable {
                 ResultSet result = statement.executeQuery();
 
                 while (result.next()) {
-                    columns.add(tables.get(i)+"."+result.getString(1));
+                    columns.add(result.getString(1));
                 }
                 conn.close();
 
@@ -103,25 +110,29 @@ public class SelectController implements Initializable {
             col4.getItems().add(columns.get(i));
             col5.getItems().add(columns.get(i));
         }
+
+        setOpChoice();
     }
 
     @FXML
     private void executeBtn() throws IOException {
 
+        where.clear();
+
         if (!where1.getText().isEmpty()){
-            where.add(col1.getValue().toString()+" = "+where1.getText());
+            where.add(col1.getValue().toString()+op1.getValue().toString()+where1.getText());
         }
         if (!where2.getText().isEmpty()){
-            where.add(col2.getValue().toString()+" = "+where2.getText());
+            where.add(col2.getValue().toString()+op2.getValue().toString()+where2.getText());
         }
         if (!where3.getText().isEmpty()){
-            where.add(col3.getValue().toString()+" = "+where3.getText());
+            where.add(col3.getValue().toString()+op3.getValue().toString()+where3.getText());
         }
         if (!where4.getText().isEmpty()){
-            where.add(col4.getValue().toString()+" = "+where4.getText());
+            where.add(col4.getValue().toString()+op4.getValue().toString()+where4.getText());
         }
         if (!where5.getText().isEmpty()){
-            where.add(col5.getValue().toString()+" = "+where5.getText());
+            where.add(col5.getValue().toString()+op5.getValue().toString()+where5.getText());
         }
 
         Stage stage = new Stage();
@@ -147,5 +158,38 @@ public class SelectController implements Initializable {
 
     public static void setColumns(ArrayList<String> columns) {
         SelectController.columns = columns;
+    }
+
+    //need clean code here
+    private void setOpChoice() {
+        op1.getItems().add(" = ");
+        op1.getItems().add(" > ");
+        op1.getItems().add(" >= ");
+        op1.getItems().add(" < ");
+        op1.getItems().add(" <= ");
+
+        op2.getItems().add(" = ");
+        op2.getItems().add(" > ");
+        op2.getItems().add(" >= ");
+        op2.getItems().add(" < ");
+        op2.getItems().add(" <= ");
+
+        op3.getItems().add(" = ");
+        op3.getItems().add(" > ");
+        op3.getItems().add(" >= ");
+        op3.getItems().add(" < ");
+        op3.getItems().add(" <= ");
+
+        op4.getItems().add(" = ");
+        op4.getItems().add(" > ");
+        op4.getItems().add(" >= ");
+        op4.getItems().add(" < ");
+        op4.getItems().add(" <= ");
+
+        op5.getItems().add(" = ");
+        op5.getItems().add(" > ");
+        op5.getItems().add(" >= ");
+        op5.getItems().add(" < ");
+        op5.getItems().add(" <= ");
     }
 }
