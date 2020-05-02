@@ -1,19 +1,30 @@
 package model;
 
+import java.lang.reflect.Field;
+
 public class Service {
 
     private String title;
-    private int price;
+    private float price;
     private String description;
 
     public Service(){
         super();
     }
 
-    public Service(String title, int price, String description) {
+    public Service(String title, float price, String description) {
         this.title = title;
         this.price = price;
         this.description = description;
+    }
+
+    public static String[] getAllVariable() {
+        String[] array = new String[3];
+        Field[] fields= Service.class.getDeclaredFields();
+        for (int i = 0; i < fields.length; i++) {
+            array[i] = fields[i].getName();
+        }
+        return array;
     }
 
     public String getTitle() {
@@ -24,11 +35,11 @@ public class Service {
         this.title = title;
     }
 
-    public int getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 

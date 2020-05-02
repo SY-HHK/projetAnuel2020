@@ -2,7 +2,7 @@ package model;
 
 import java.lang.reflect.Field;
 
-public class UserBillDelivery {
+public class UserBillDeliveryService {
 
     private String firstName;
     private String lastName;
@@ -22,8 +22,11 @@ public class UserBillDelivery {
     private String getDeliveryHourEnd;
     private int deliveryState;
     private int deliveryRate;
+    private String title;
+    private float price;
+    private String description;
 
-    public UserBillDelivery(String firstName, String lastName, String mail, String phone, String address, int idBill, String billDate, String billDescription, float billPrice, int billState, String billStripeId, int idDelivery, int idService, int idProvider, String deliveryHourStart, String getDeliveryHourEnd, int deliveryState, int deliveryRate) {
+    public UserBillDeliveryService(String firstName, String lastName, String mail, String phone, String address, int idBill, String billDate, String billDescription, float billPrice, int billState, String billStripeId, int idDelivery, int idService, int idProvider, String deliveryHourStart, String getDeliveryHourEnd, int deliveryState, int deliveryRate, String title, float price, String description) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.mail = mail;
@@ -42,11 +45,14 @@ public class UserBillDelivery {
         this.getDeliveryHourEnd = getDeliveryHourEnd;
         this.deliveryState = deliveryState;
         this.deliveryRate = deliveryRate;
+        this.title = title;
+        this.price = price;
+        this.description = description;
     }
 
     public static String[] getAllVariable() {
-        String[] array = new String[18];
-        Field[] fields= UserBillDelivery.class.getDeclaredFields();
+        String[] array = new String[26];
+        Field[] fields= UserBillDeliveryService.class.getDeclaredFields();
         for (int i = 0; i < fields.length; i++) {
             array[i] = fields[i].getName();
         }
@@ -123,5 +129,17 @@ public class UserBillDelivery {
 
     public int getDeliveryRate() {
         return deliveryRate;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

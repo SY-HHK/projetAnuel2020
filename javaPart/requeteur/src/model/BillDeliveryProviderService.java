@@ -1,5 +1,7 @@
 package model;
 
+import java.lang.reflect.Field;
+
 public class BillDeliveryProviderService {
 
     private int idBill;
@@ -21,10 +23,10 @@ public class BillDeliveryProviderService {
     private String companyName;
     private String providerAddress;
     private String title;
-    private int price;
+    private float price;
     private String description;
 
-    public BillDeliveryProviderService(int idBill, String billDate, String billDescription, float billPrice, int billState, String billStripeId, int idDelivery, int idService, int idProvider, String deliveryHourStart, String getDeliveryHourEnd, int deliveryState, int deliveryRate, String providerFirstName, String providerLastName, String providerMail, String companyName, String providerAddress, String title, int price, String description) {
+    public BillDeliveryProviderService(int idBill, String billDate, String billDescription, float billPrice, int billState, String billStripeId, int idDelivery, int idService, int idProvider, String deliveryHourStart, String getDeliveryHourEnd, int deliveryState, int deliveryRate, String providerFirstName, String providerLastName, String providerMail, String companyName, String providerAddress, String title, float price, String description) {
         this.idBill = idBill;
         this.billDate = billDate;
         this.billDescription = billDescription;
@@ -46,6 +48,15 @@ public class BillDeliveryProviderService {
         this.title = title;
         this.price = price;
         this.description = description;
+    }
+
+    public static String[] getAllVariable() {
+        String[] array = new String[21];
+        Field[] fields= BillDeliveryProviderService.class.getDeclaredFields();
+        for (int i = 0; i < fields.length; i++) {
+            array[i] = fields[i].getName();
+        }
+        return array;
     }
 
     public int getIdBill() {
@@ -124,7 +135,7 @@ public class BillDeliveryProviderService {
         return title;
     }
 
-    public int getPrice() {
+    public float getPrice() {
         return price;
     }
 

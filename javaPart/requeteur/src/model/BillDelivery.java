@@ -1,5 +1,7 @@
 package model;
 
+import java.lang.reflect.Field;
+
 public class BillDelivery {
 
     private int idBill;
@@ -30,6 +32,15 @@ public class BillDelivery {
         this.getDeliveryHourEnd = getDeliveryHourEnd;
         this.deliveryState = deliveryState;
         this.deliveryRate = deliveryRate;
+    }
+
+    public static String[] getAllVariable() {
+        String[] array = new String[13];
+        Field[] fields= BillDelivery.class.getDeclaredFields();
+        for (int i = 0; i < fields.length; i++) {
+            array[i] = fields[i].getName();
+        }
+        return array;
     }
 
     public int getIdBill() {

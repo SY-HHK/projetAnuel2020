@@ -1,5 +1,7 @@
 package model;
 
+import java.lang.reflect.Field;
+
 public class DeliveryProvider {
 
     private int idDelivery;
@@ -30,6 +32,15 @@ public class DeliveryProvider {
         this.providerMail = providerMail;
         this.companyName = companyName;
         this.providerAddress = providerAddress;
+    }
+
+    public static String[] getAllVariable() {
+        String[] array = new String[13];
+        Field[] fields= DeliveryProvider.class.getDeclaredFields();
+        for (int i = 0; i < fields.length; i++) {
+            array[i] = fields[i].getName();
+        }
+        return array;
     }
 
     public int getIdDelivery() {

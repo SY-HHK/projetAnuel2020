@@ -1,5 +1,7 @@
 package model;
 
+import java.lang.reflect.Field;
+
 public class UserBill {
 
     private String firstName;
@@ -26,6 +28,15 @@ public class UserBill {
         this.billPrice = billPrice;
         this.billState = billState;
         this.billStripeId = billStripeId;
+    }
+
+    public static String[] getAllVariable() {
+        String[] array = new String[11];
+        Field[] fields= UserBill.class.getDeclaredFields();
+        for (int i = 0; i < fields.length; i++) {
+            array[i] = fields[i].getName();
+        }
+        return array;
     }
 
     public String getFirstName() {

@@ -1,5 +1,7 @@
 package model;
 
+import java.lang.reflect.Field;
+
 public class UserBillDeliveryProviderService {
 
     private String firstName;
@@ -26,10 +28,10 @@ public class UserBillDeliveryProviderService {
     private String companyName;
     private String providerAddress;
     private String title;
-    private int price;
+    private float price;
     private String description;
 
-    public UserBillDeliveryProviderService(String firstName, String lastName, String mail, String phone, String address, int idBill, String billDate, String billDescription, float billPrice, int billState, String billStripeId, int idDelivery, int idService, int idProvider, String deliveryHourStart, String getDeliveryHourEnd, int deliveryState, int deliveryRate, String providerFirstName, String providerLastName, String providerMail, String companyName, String providerAddress, String title, int price, String description) {
+    public UserBillDeliveryProviderService(String firstName, String lastName, String mail, String phone, String address, int idBill, String billDate, String billDescription, float billPrice, int billState, String billStripeId, int idDelivery, int idService, int idProvider, String deliveryHourStart, String getDeliveryHourEnd, int deliveryState, int deliveryRate, String providerFirstName, String providerLastName, String providerMail, String companyName, String providerAddress, String title, float price, String description) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.mail = mail;
@@ -56,6 +58,15 @@ public class UserBillDeliveryProviderService {
         this.title = title;
         this.price = price;
         this.description = description;
+    }
+
+    public static String[] getAllVariable() {
+        String[] array = new String[26];
+        Field[] fields= UserBillDeliveryProviderService.class.getDeclaredFields();
+        for (int i = 0; i < fields.length; i++) {
+            array[i] = fields[i].getName();
+        }
+        return array;
     }
 
     public String getFirstName() {
@@ -154,7 +165,7 @@ public class UserBillDeliveryProviderService {
         return title;
     }
 
-    public int getPrice() {
+    public float getPrice() {
         return price;
     }
 

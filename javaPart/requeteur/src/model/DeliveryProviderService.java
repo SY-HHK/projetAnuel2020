@@ -1,5 +1,7 @@
 package model;
 
+import java.lang.reflect.Field;
+
 public class DeliveryProviderService {
 
     private int idDelivery;
@@ -16,10 +18,10 @@ public class DeliveryProviderService {
     private String companyName;
     private String providerAddress;
     private String title;
-    private int price;
+    private float price;
     private String description;
 
-    public DeliveryProviderService(int idDelivery, int idBill, int idService, int idProvider, String deliveryHourStart, String getDeliveryHourEnd, int deliveryState, int deliveryRate, String providerFirstName, String providerLastName, String providerMail, String companyName, String providerAddress, String title, int price, String description) {
+    public DeliveryProviderService(int idDelivery, int idBill, int idService, int idProvider, String deliveryHourStart, String getDeliveryHourEnd, int deliveryState, int deliveryRate, String providerFirstName, String providerLastName, String providerMail, String companyName, String providerAddress, String title, float price, String description) {
         this.idDelivery = idDelivery;
         this.idBill = idBill;
         this.idService = idService;
@@ -36,6 +38,15 @@ public class DeliveryProviderService {
         this.title = title;
         this.price = price;
         this.description = description;
+    }
+
+    public static String[] getAllVariable() {
+        String[] array = new String[16];
+        Field[] fields= DeliveryProviderService.class.getDeclaredFields();
+        for (int i = 0; i < fields.length; i++) {
+            array[i] = fields[i].getName();
+        }
+        return array;
     }
 
     public int getIdDelivery() {
@@ -94,7 +105,7 @@ public class DeliveryProviderService {
         return title;
     }
 
-    public int getPrice() {
+    public float getPrice() {
         return price;
     }
 
