@@ -1,16 +1,18 @@
 package model;
 
+import java.nio.channels.FileLock;
+
 public class Service {
 
     private String title;
-    private int price;
+    private float price;
     private String description;
 
     public Service(){
         super();
     }
 
-    public Service(String title, int price, String description) {
+    public Service(String title, Float price, String description) {
         this.title = title;
         this.price = price;
         this.description = description;
@@ -24,7 +26,7 @@ public class Service {
         this.title = title;
     }
 
-    public int getPrice() {
+    public Float getPrice() {
         return price;
     }
 

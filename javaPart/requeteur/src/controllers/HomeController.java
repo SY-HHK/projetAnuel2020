@@ -92,9 +92,9 @@ public class HomeController implements Initializable {
         if (checkServices.isSelected() && checkProvider.isSelected()==false && checkUsers.isSelected()==false && checkBill.isSelected()==false && checkDelivery.isSelected()==false){
 
             Stage stage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("/vue/services.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/vue/service.fxml"));
             Scene scene = new Scene(root);
-            stage.setTitle("Provider");
+            stage.setTitle("Service");
             stage.setScene(scene);
             stage.show();
         }
