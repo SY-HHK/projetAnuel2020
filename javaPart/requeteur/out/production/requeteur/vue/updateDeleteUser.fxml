@@ -49,24 +49,24 @@
                   <Label text="Mail" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                   <Label text="City" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                   <Label text="Address" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                  <TextField fx:id="fieldFind" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                   <TextField fx:id="fieldFName" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                   <TextField fx:id="fieldLName" GridPane.columnIndex="2" GridPane.rowIndex="4" />
                   <TextField fx:id="fieldMail" GridPane.columnIndex="2" GridPane.rowIndex="5" />
                   <TextField fx:id="fieldCity" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-                  <TextField fx:id="fieldDepartment" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-                  <TextField fx:id="fieldRegion" GridPane.columnIndex="2" GridPane.rowIndex="8" />
                   <TextField fx:id="fieldAddress" GridPane.columnIndex="2" GridPane.rowIndex="9" />
                   <Button mnemonicParsing="false" onAction="#updateUser" text="Update" GridPane.columnIndex="2" GridPane.rowIndex="11" />
                   <Button mnemonicParsing="false" onAction="#deleteUser" text="Delete" GridPane.columnIndex="3" GridPane.rowIndex="11" />
                   <Label text="Department" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                   <Label text="Region" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                  <TextField fx:id="fieldDepartment" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                  <TextField fx:id="fieldRegion" GridPane.columnIndex="2" GridPane.rowIndex="8" />
                   <Label fx:id="stateLbl" prefHeight="23.0" prefWidth="209.0" GridPane.columnSpan="2">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
                   <Label text="Mail to  find : " GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="fieldFind" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                   <Button contentDisplay="RIGHT" mnemonicParsing="false" onAction="#findUser" text="Find" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                   <Button fx:id="backBtn" mnemonicParsing="false" onAction="#back" text="Back" GridPane.rowIndex="11" />
                </children>

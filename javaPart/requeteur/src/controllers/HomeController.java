@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -33,10 +34,15 @@ public class HomeController implements Initializable {
     private CheckBox checkDelivery;
 
     @FXML
+    private CheckBox checkServices;
+
+    @FXML
+    private Label stateLbl;
+
+    @FXML
     private void selectBtn() throws IOException {
 
         if (checkUsers.isSelected()){
-
 
         }
         if (checkProvider.isSelected()){
@@ -50,13 +56,19 @@ public class HomeController implements Initializable {
         if (checkDelivery.isSelected()){
 
         }
+
+        if (checkServices.isSelected()){
+
+        }
     }
 
 
     @FXML
     private void insertTable() throws IOException {
 
-        if (checkUsers.isSelected()){
+        stateLbl.setText("");
+
+        if (checkUsers.isSelected() && checkProvider.isSelected()==false && checkServices.isSelected()==false && checkBill.isSelected()==false && checkDelivery.isSelected()==false){
 
             Stage stage = new Stage();
             Parent root = FXMLLoader.load(getClass().getResource("/vue/user.fxml"));
@@ -66,17 +78,33 @@ public class HomeController implements Initializable {
             stage.show();
 
         }
-        if (checkProvider.isSelected()){
+        if (checkProvider.isSelected() && checkUsers.isSelected()==false && checkServices.isSelected()==false && checkBill.isSelected()==false && checkDelivery.isSelected()==false){
+
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("/vue/provider.fxml"));
+            Scene scene = new Scene(root);
+            stage.setTitle("Provider");
+            stage.setScene(scene);
+            stage.show();
 
         }
 
-        if (checkBill.isSelected()){
+        if (checkServices.isSelected() && checkProvider.isSelected()==false && checkUsers.isSelected()==false && checkBill.isSelected()==false && checkDelivery.isSelected()==false){
 
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("/vue/services.fxml"));
+            Scene scene = new Scene(root);
+            stage.setTitle("Provider");
+            stage.setScene(scene);
+            stage.show();
         }
 
-        if (checkDelivery.isSelected()){
-
+        if (checkDelivery.isSelected() || checkBill.isSelected()){
+            stateLbl.setText("You can not insert in this or these table(s)");
         }
+
+
+
     }
 
     /* Menus bar functions */

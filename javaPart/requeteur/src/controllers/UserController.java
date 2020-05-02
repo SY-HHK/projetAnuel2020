@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -29,6 +30,8 @@ public class UserController implements Initializable {
     @FXML private TableColumn<User, String> mail;
     @FXML private TableColumn<User, String> address;
     @FXML private TableColumn<User, String> city;
+
+    @FXML public Button backBtn;
 
     public ObservableList<User> data = FXCollections.observableArrayList();
 
@@ -84,10 +87,16 @@ public class UserController implements Initializable {
         Stage stage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("/vue/updateDeleteUser.fxml"));
         Scene scene = new Scene(root);
-        stage.setTitle("user add");
+        stage.setTitle("user update delete");
         stage.setScene(scene);
         stage.show();
 
+    }
+
+    @FXML
+    public void back(ActionEvent event) {
+        Stage stage = (Stage) backBtn.getScene().getWindow();
+        stage.close();
     }
 
 
