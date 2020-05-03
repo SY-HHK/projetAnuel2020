@@ -1,6 +1,7 @@
 package model;
 
 public class Provider {
+
     private String firstName;
     private String lastName;
     private String mail;
