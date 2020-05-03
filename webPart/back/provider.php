@@ -11,14 +11,14 @@ $resultats = $query->fetchAll();
 $providerCounter = 0; // pr modal
 
 
-$query2 = $pdo->prepare('SELECT * FROM CONTRACT WHERE CONTRACT.idProvider = ?');
+$querySelectContrat = $pdo->prepare('SELECT * FROM CONTRACT WHERE CONTRACT.idProvider = ?');
 
-$query3 = $pdo->prepare('SELECT serviceTitle FROM SERVICE WHERE idService = ?');
+$querySelectServiceTitle = $pdo->prepare('SELECT serviceTitle FROM SERVICE WHERE idService = ?');
 
-$query4 = $pdo->prepare('SELECT * FROM SERVICE ');
-$query4->execute();
-$allServices = $query4->fetchAll();
-// var_dump($allServices);
+$querySelectService = $pdo->prepare('SELECT * FROM SERVICE ');
+$querySelectService->execute();
+$allServices = $querySelectService->fetchAll();
+
 ?>
 
 <!DOCTYPE html>
@@ -201,7 +201,6 @@ $allServices = $query4->fetchAll();
         <th scope="col">Région</th>
         <th scope="col">Départ.</th>
         <th scope="col">Entreprise</th>
-        <!-- <th scope="col">Avis</th> -->
         <th scope="col">Pénalités</th>
         <th scope="col">State</th>
         <th scope="col">Plus d'info</th>
@@ -242,9 +241,6 @@ $allServices = $query4->fetchAll();
                   <td>
                     <input type="text" class="input" name="companyName" value="<?php echo $provider['companyName']; ?>">
                   </td>
-                  <!-- <td>
-                    <input type="text" class="inputNbr" name="providerRate" value="<?php echo $provider['providerRate']; ?>">
-                  </td> -->
                   <td> 
                     <input type="text" class="inputNbr" name="annulation" value="<?php echo $provider['providerAnnulation']; ?>">
                   </td>
@@ -285,19 +281,9 @@ $allServices = $query4->fetchAll();
                               }?>
                                 <hr class="my-4">
 
-                              <?php 
-                                $query2->execute([$provider["idProvider"]]);
-                                $resultats2 = $query2->fetchAll();
-
-                                // var_dump($resultats2);
-
-                                // if ($resultats2 == NULL){
-                                //   echo "Ce prestataire n'a pas de contract en cours. ";
-
-                                // } else {
-
-                                
-                                 ?>
+                              <?php
+                              $querySelectContrat->execute([$provider["idProvider"]]);
+                              $contratProvider = $querySelectContrat->fetchAll();  ?>
 
                                   
                               
@@ -318,7 +304,7 @@ $allServices = $query4->fetchAll();
 
                                             <table class="table table-hover">
                                               <?php
-                                                if ($resultats2 == NULL){
+                                                if ($contratProvider == NULL){
                                                     echo "Ce prestataire n'a pas de contract";
                                                    } else {
                                               ?>
@@ -333,17 +319,13 @@ $allServices = $query4->fetchAll();
 
                                                     </tr>
                                                   </thead>
-                                                   <?php     
+                                                   <?php
+                                                    foreach ($contratProvider as $contract) {
 
-                                                 
-                                                    foreach ($resultats2 as $contract) {
+                                                        $querySelectServiceTitle->execute([$contract['idService']]);
+                                                          $service = $querySelectServiceTitle->fetch();
 
-                                                          $query3->execute([$contract['idService']]);
-                                                          $service = $query3->fetch();
-                                                           // var_dump($service);
                                                     ?>
-
-                                                    
                                                                   <tr>
                                                                           <td>
                                                                             <input type="hidden" class="input" name="idContract" value="<?php echo $contract['idContract']; ?>">
@@ -365,8 +347,6 @@ $allServices = $query4->fetchAll();
                                                                           <td>
                                                                             <input type="hidden" class="input" name="idContract" value="<?php echo $contract['idContract']; ?>">
                                                                             <a class="" href="PHP/prestataireMAJ.php?deleteContract=<?php echo $contract['idContract']; ?>">X</a>
-
-                                                                            <!-- <input type="submit" name="deleteContract" class="option"value="X"> -->
                                                                           </td>
                                                                          
                                                                   </tr>
@@ -417,11 +397,9 @@ $allServices = $query4->fetchAll();
                                                                      
                                                                     <option value="<?php echo $service['idService']; ?>"><?php echo $service['serviceTitle']; ?></option>
 
-
                                                                     <?php } ?>
                                                                   </select>
                                                                 </div>
-                                                              <!-- <input type="text" class="input" name="serviceContract" placeholder="..."> -->
                                                             </td>
                                                             <td>
                                                               <input type="hidden" name="idProvider" value="<?php echo $provider['idProvider']; ?>">
@@ -438,10 +416,7 @@ $allServices = $query4->fetchAll();
                         </div>
                       </div>
 
-                    <?php $providerCounter++; //pr modal 
-                          // }
-
-                           ?>
+                    <?php $providerCounter++; //pr modal ?>
 <!-- FIN MODAL -->
                   </td>
                   <td>                    
@@ -454,11 +429,7 @@ $allServices = $query4->fetchAll();
             </form>
           </tr>
         </tbody>
-  <?php 
-                              
-        
-          
-        } ?>
+  <?php } ?>
 </table>
  
 </div>

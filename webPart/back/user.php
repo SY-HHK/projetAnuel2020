@@ -23,8 +23,9 @@ $resultats = $query->fetchAll();
 
 <body>
 
- <?php include('../include/config.php');
+ <?php
 
+ include('../include/config.php');
 
  include('include/headerBack.php');
 
@@ -77,7 +78,7 @@ $resultats = $query->fetchAll();
                   <div class="alert alert-danger text-center" role="alert">
                  Cette adresse mail existe déjà dans notre base de données
                   </div>
-<?php } else if (isset($_GET['error']) && $_GET['error'] == 'pwd') { ?>
+        <?php } else if (isset($_GET['error']) && $_GET['error'] == 'pwd') { ?>
                   <div class="alert alert-danger text-center" role="alert">
                  erreur gene mdp
                   </div>
@@ -93,9 +94,9 @@ $resultats = $query->fetchAll();
                 </div>
 
         <?php } else if (isset($_GET['error']) && $_GET['error'] == 'departement_format') { ?>
-        <div class="alert alert-danger text-center" role="alert">
-         Vous devez entrer un département valide
-        </div>
+                <div class="alert alert-danger text-center" role="alert">
+                 Vous devez entrer un département valide
+                </div>
 
         <?php } else if (isset($_GET['error']) && $_GET['error'] == 'city_missing') { ?>
                   <div class="alert alert-danger text-center" role="alert">

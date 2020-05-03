@@ -6,7 +6,6 @@ if (isset($_POST['pwd'])) {
 include('../../include/config.php');
 	$id = $_POST['idEmployee'];
 	$newPwd = hash('sha256', uniqid());
-var_dump($newPwd);
 
 	$queryUpdate = $pdo->prepare('UPDATE USER SET userPassword = :pwd WHERE idUser = :id');
 
@@ -24,9 +23,7 @@ var_dump($newPwd);
 		header('location: ../employee.php');
         exit;
 	}
-
 }
-
 
 
 if (isset($_POST['delete'])) {

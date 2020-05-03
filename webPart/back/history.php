@@ -3,14 +3,12 @@
 if (!isset($_SESSION['admin'])){
 header('location:../index.php');
 }
-//$query = $pdo->prepare('SELECT * FROM DELIVERY INNER JOIN SERVICE ON SERVICE.idService = DELIVERY.idDelivery INNER JOIN PROVIDER ON PROVIDER.idProvider = DELIVERY.idProvider INNER JOIN BILL ON BILL.idBill = DELIVERY.idBill INNER JOIN USER ON USER.idUser = BILL.idUser WHERE DELIVERY.deliveryState = 1 ');
 
 $query = $pdo->prepare('SELECT * FROM DELIVERY INNER JOIN SERVICE ON SERVICE.idService = DELIVERY.idService INNER JOIN PROVIDER ON PROVIDER.idProvider = DELIVERY.idProvider INNER JOIN BILL ON BILL.idBill = DELIVERY.idBill INNER JOIN USER ON USER.idUser = BILL.idUser WHERE DELIVERY.deliveryState = 1 OR DELIVERY.deliveryState = 0');
 $query->execute();
 $resultats = $query->fetchAll();
 
-//var_dump($resultats);
-$providerCounter = 0; // pr modal
+$counter = 0; // pr modal
 
 ?>
 
@@ -55,15 +53,12 @@ $providerCounter = 0; // pr modal
         <th scope="col">Service</th>
         <th scope="col">Avis</th>
         <th scope="col">Plus d'info</th>
-        <!-- <th scope="col"> </th>
-        <th scope="col"> </th> -->
       </tr>
     </thead>
 
   <?php foreach ($resultats as $delivery) { ?>
         <tbody>
           <tr>
-            <!-- <form action="PHP/prestataireMAJ.php" method="POST"> -->
               <th scope="row"><?php echo $delivery['idDelivery']; ?></th>
                   <td>
                     <input type="text" class="inputHistory" name="user" value="<?php echo $delivery['userFirstName']. '  '. $delivery['userLastName']; ?>">
@@ -79,95 +74,11 @@ $providerCounter = 0; // pr modal
                   </td>
                   
                   <td>
-                    <!-- <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal-<?php echo $providerCounter; ?>">
-                       + 
-                    </button> -->
-
                     <a class="btn btn-info" target="_blank" href="../pdfGenerator.php?idBill=<?=$delivery['idBill']?>&userGuid=<?=$delivery['userGuid']?>">Facture</a>
-
-<!-- DEBUT MODAL -->
-            <!--           <div class="modal fade" id="exampleModal-<?php echo $providerCounter; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-xl" role="document">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              
-                              <h5 class="modal-title" id="exampleModalLabel">Facture</h5>
-                              
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                            </div>
-                            <div class="modal-body">
-                               <div class="modal-content">
-
-                                <table class="table table-hover">
-                                  <thead>
-                                    <tr>
-                                      <th scope="col">Nom</th>
-                                      <th scope="col">Date</th>
-                                      <th scope="col">Description</th>
-                                      <th scope="col">Prix</th>
-                                      <th scope="col">Etat</th>
-                                      <th scope="col"> </th>
-
-                                    </tr>
-                                  </thead>
-
-                                      <tbody>
-                                        <tr>
-                                          
-                                               <td>
-                                                  <input type="text" class="input" name="user" value="<?php echo $delivery['userFirstName']. '  '. $delivery['userLastName']; ?>" >
-                                                </td>
-                                                <td>
-                                                  <input type="text" class="inputDate" name="dateBill" value="<?php echo $delivery['billDate']; ?>">
-                                                </td>
-                                               <td>
-                                                  <input type="text" id="inputEmail" name="descBill" value="<?php echo $delivery['billDescription']; ?>">
-                                                </td>
-                                                
-                                                <td>
-                                                  <input type="text" class="input" name="prix" value="<?php echo $delivery['billPrice']; ?>">
-                                                </td>
-                                                <td>
-                                              
-
-                                                    <?php if ($delivery['billState'] == 1){ ?>
-                                                        <button class="btn btn-success"> Facture payée</button>
-                                                    <?php } else { ?>
-                                                       <button class="btn btn-warning"> Facture nonpayée</button>
-
-                                                   <?php } ?>
-                                                  
-                                                </td>
-                                          
-                                        </tr>
-                                      </tbody>
-                                </table>
-                                </div>
-                                 
-                          </div>
-                        </div>
-                      </div>
-
-                    <?php $providerCounter++; //pr modal 
-                          // }
-
-                           ?>
-
- -->
-
-<!-- FIN MODAL -->
                   </td>
-                  
-            <!-- </form> -->
           </tr>
         </tbody>
-  <?php 
-                              
-        
-          
-        } ?>
+  <?php } ?>
 </table>
  
 </div>
