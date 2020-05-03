@@ -1,19 +1,23 @@
 package controllers;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import model.*;
 
-import java.lang.reflect.Array;
-import java.lang.reflect.Field;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
+
+import static controllers.SelectController.getColumns;
 
 public class ResultController implements Initializable {
 
@@ -27,7 +31,7 @@ public class ResultController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         tables = HomeController.getTables();
-        columns = SelectController.getColumns();
+        columns = getColumns();
         where = SelectController.getWhere();
 
         if (columns.size() > 15) {
@@ -494,5 +498,101 @@ public class ResultController implements Initializable {
             return Delivery.getAllVariable();
         }
         else return Bill.getAllVariable();
+    }
+
+    @FXML
+    public void cancel() {
+        Stage stage = (Stage) tableResult.getScene().getWindow();
+        stage.close();
+    }
+
+    public void delete() {
+
+        if (getModel().matches("USERBILL")) {
+            UserBill bill = (UserBill) tableResult.getSelectionModel().getSelectedItem();
+            deleteInDb("BILL", bill.getIdBill());
+        }
+        if (getModel().matches("USERBILLDELIVERY")) {
+            UserBillDelivery delivery = (UserBillDelivery) tableResult.getSelectionModel().getSelectedItem();
+            deleteInDb("BILL", delivery.getIdBill());
+        }
+        if (getModel().matches("USERBILLDELIVERYPROVIDER")) {
+            UserBillDeliveryProvider delivery = (UserBillDeliveryProvider) tableResult.getSelectionModel().getSelectedItem();
+            deleteInDb("BILL", delivery.getIdBill());
+        }
+        if (getModel().matches("USERBILLDELIVERYSERVICE")) {
+            UserBillDeliveryService delivery = (UserBillDeliveryService) tableResult.getSelectionModel().getSelectedItem();
+            deleteInDb("BILL", delivery.getIdBill());
+        }
+        if (getModel().matches("USERBILLDELIVERYPROVIDERSERVICE")) {
+            UserBillDeliveryProviderService delivery = (UserBillDeliveryProviderService) tableResult.getSelectionModel().getSelectedItem();
+            deleteInDb("BILL", delivery.getIdBill());
+        }
+        if (getModel().matches("BILLDELIVERY")) {
+            BillDelivery delivery = (BillDelivery) tableResult.getSelectionModel().getSelectedItem();
+            deleteInDb("BILL", delivery.getIdBill());
+        }
+        if (getModel().matches("BILLDELIVERYPROVIDER")) {
+            BillDeliveryProvider delivery = (BillDeliveryProvider) tableResult.getSelectionModel().getSelectedItem();
+            deleteInDb("BILL", delivery.getIdBill());
+        }
+        if (getModel().matches("BILLDELIVERYPROVIDERSERVICE")) {
+            BillDeliveryProviderService delivery = (BillDeliveryProviderService) tableResult.getSelectionModel().getSelectedItem();
+            deleteInDb("BILL", delivery.getIdBill());
+        }
+        if (getModel().matches("BILLDELIVERYSERVICE")) {
+            BillDeliveryService delivery = (BillDeliveryService) tableResult.getSelectionModel().getSelectedItem();
+            deleteInDb("BILL", delivery.getIdBill());
+        }
+        if (getModel().matches("DELIVERYPROVIDER")) {
+            DeliveryProvider delivery = (DeliveryProvider) tableResult.getSelectionModel().getSelectedItem();
+            deleteInDb("DELIVERY",delivery.getIdDelivery());
+        }
+        if (getModel().matches("DELIVERYSERVICE")) {
+            DeliveryService delivery = (DeliveryService) tableResult.getSelectionModel().getSelectedItem();
+            deleteInDb("DELIVERY",delivery.getIdDelivery());
+        }
+        if (getModel().matches("DELIVERYPROVIDERSERVICE")) {
+            DeliveryProviderService delivery = (DeliveryProviderService) tableResult.getSelectionModel().getSelectedItem();
+            deleteInDb("DELIVERY",delivery.getIdDelivery());
+        }
+        if (getModel().matches("DELIVERY")) {
+            Delivery delivery = (Delivery)tableResult.getSelectionModel().getSelectedItem();
+            deleteInDb("DELIVERY", delivery.getIdDelivery());
+        }
+        if (getModel().matches("BILL")) {
+            Bill bill = (Bill)tableResult.getSelectionModel().getSelectedItem();
+            deleteInDb("BILL", bill.getIdBill());
+        }
+    }
+
+    private void deleteInDb(String table, int id) {
+        System.out.println(id);
+        String request = "";
+        if (table.matches("DELIVERY")) {
+            request = "DELETE FROM DELIVERY WHERE idDelivery = "+id;
+        }
+        if (table.matches("BILL")) {
+            request = "DELETE FROM Bill WHERE idBill = "+id+"; DELETE FROM DELIVERY WHERE idBill ="+id;
+        }
+        try {
+            Connection conn = DBConnector.DBconnect.connect();
+            PreparedStatement statement = conn.prepareStatement(request);
+            statement.execute();
+
+            conn.close();
+
+            cancel();
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("/vue/result.fxml"));
+            Scene scene = new Scene(root);
+            stage.setUserData(tables);
+            stage.setTitle("Resultats");
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (SQLException | IOException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }
