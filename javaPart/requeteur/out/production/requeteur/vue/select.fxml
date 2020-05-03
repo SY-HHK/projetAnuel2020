@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SelectController">
+   <children>
+      <MenuBar prefHeight="27.0" prefWidth="604.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#aboutBringMe" text="About BringMe" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Quit">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#quitter" text="Exit" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <Button layoutX="471.0" layoutY="332.0" mnemonicParsing="false" onAction="#executeBtn" prefHeight="47.0" prefWidth="107.0" text="Executer" />
+      <ChoiceBox fx:id="col1" layoutX="87.0" layoutY="63.0" prefHeight="25.0" prefWidth="202.0" />
+      <TextField fx:id="where1" layoutX="441.0" layoutY="63.0" prefHeight="25.0" prefWidth="133.0" />
+      <Label layoutX="21.0" layoutY="67.0" text="Colonne :" />
+      <Label layoutX="384.0" layoutY="67.0" text="Valeur :" />
+      <ChoiceBox fx:id="col2" layoutX="87.0" layoutY="107.0" prefHeight="25.0" prefWidth="202.0" />
+      <TextField fx:id="where2" layoutX="441.0" layoutY="107.0" prefHeight="25.0" prefWidth="133.0" />
+      <Label layoutX="21.0" layoutY="111.0" text="Colonne :" />
+      <Label layoutX="384.0" layoutY="111.0" text="Valeur :" />
+      <ChoiceBox fx:id="col3" layoutX="87.0" layoutY="152.0" prefHeight="25.0" prefWidth="202.0" />
+      <TextField fx:id="where3" layoutX="441.0" layoutY="152.0" prefHeight="25.0" prefWidth="133.0" />
+      <Label layoutX="21.0" layoutY="156.0" text="Colonne :" />
+      <Label layoutX="384.0" layoutY="156.0" text="Valeur :" />
+      <ChoiceBox fx:id="col4" layoutX="87.0" layoutY="194.0" prefHeight="25.0" prefWidth="202.0" />
+      <TextField fx:id="where4" layoutX="441.0" layoutY="194.0" prefHeight="25.0" prefWidth="133.0" />
+      <Label layoutX="21.0" layoutY="198.0" text="Colonne :" />
+      <Label layoutX="384.0" layoutY="198.0" text="Valeur :" />
+      <ChoiceBox fx:id="col5" layoutX="87.0" layoutY="235.0" prefHeight="25.0" prefWidth="202.0" />
+      <TextField fx:id="where5" layoutX="441.0" layoutY="235.0" prefHeight="25.0" prefWidth="133.0" />
+      <Label layoutX="21.0" layoutY="239.0" text="Colonne :" />
+      <Label layoutX="384.0" layoutY="239.0" text="Valeur :" />
+      <Button layoutX="338.0" layoutY="332.0" mnemonicParsing="false" onAction="#quitter" prefHeight="47.0" prefWidth="107.0" text="Annuler" />
+      <ChoiceBox fx:id="op1" layoutX="309.0" layoutY="63.0" prefHeight="25.0" prefWidth="59.0" />
+      <ChoiceBox fx:id="op2" layoutX="309.0" layoutY="107.0" prefHeight="25.0" prefWidth="59.0" />
+      <ChoiceBox fx:id="op3" layoutX="309.0" layoutY="152.0" prefHeight="25.0" prefWidth="59.0" />
+      <ChoiceBox fx:id="op4" layoutX="309.0" layoutY="194.0" prefHeight="25.0" prefWidth="59.0" />
+      <ChoiceBox fx:id="op5" layoutX="309.0" layoutY="235.0" prefHeight="25.0" prefWidth="59.0" />
+   </children>
+</AnchorPane>

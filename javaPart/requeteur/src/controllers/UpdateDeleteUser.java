@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.City;
 import model.User;
+
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

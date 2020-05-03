@@ -11,7 +11,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage){
         try{
-            Parent root = FXMLLoader.load(getClass().getResource("/vue/home.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/vue/login.fxml"));
             Scene scene = new Scene(root);
             primaryStage.setTitle("Login");
             primaryStage.setScene(scene);

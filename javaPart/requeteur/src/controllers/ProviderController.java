@@ -16,7 +16,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.City;
 import model.Provider;
-import model.User;
 
 import java.io.IOException;
 import java.net.URL;

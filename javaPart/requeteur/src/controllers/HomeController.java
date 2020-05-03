@@ -57,9 +57,6 @@ public class HomeController implements Initializable {
     private static ArrayList<String> tables = new ArrayList<String>();
 
     @FXML
-    private CheckBox checkServices;
-
-    @FXML
     private Label stateLbl;
 
     @FXML
@@ -83,13 +80,23 @@ public class HomeController implements Initializable {
           tables.add("SERVICE");
       }
 
-      Stage stage = new Stage();
-      Parent root = FXMLLoader.load(getClass().getResource("/vue/select.fxml"));
-      Scene scene = new Scene(root);
-      stage.setUserData(tables);
-      stage.setTitle("Selection");
-      stage.setScene(scene);
-      stage.show();
+        String tablesTotal = "";
+        for (int i = 0; i < tables.size(); i++) {
+            tablesTotal = tablesTotal+tables.get(i);
+        }
+        if (tablesTotal.matches("SERVICE") || tablesTotal.matches("USER") || tablesTotal.matches("PROVIDER")) {
+            insertTable();
+        }
+        else {
+
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("/vue/select.fxml"));
+            Scene scene = new Scene(root);
+            stage.setUserData(tables);
+            stage.setTitle("Selection");
+            stage.setScene(scene);
+            stage.show();
+        }
     }
 
 
@@ -98,7 +105,7 @@ public class HomeController implements Initializable {
 
         stateLbl.setText("");
 
-        if (checkUsers.isSelected() && checkProvider.isSelected()==false && checkServices.isSelected()==false && checkBill.isSelected()==false && checkDelivery.isSelected()==false){
+        if (checkUsers.isSelected() && checkProvider.isSelected()==false && checkService.isSelected()==false && checkBill.isSelected()==false && checkDelivery.isSelected()==false){
 
             Stage stage = new Stage();
             Parent root = FXMLLoader.load(getClass().getResource("/vue/user.fxml"));
@@ -108,7 +115,7 @@ public class HomeController implements Initializable {
             stage.show();
 
         }
-        if (checkProvider.isSelected() && checkUsers.isSelected()==false && checkServices.isSelected()==false && checkBill.isSelected()==false && checkDelivery.isSelected()==false){
+        if (checkProvider.isSelected() && checkUsers.isSelected()==false && checkService.isSelected()==false && checkBill.isSelected()==false && checkDelivery.isSelected()==false){
 
             Stage stage = new Stage();
             Parent root = FXMLLoader.load(getClass().getResource("/vue/provider.fxml"));
@@ -119,7 +126,7 @@ public class HomeController implements Initializable {
 
         }
 
-        if (checkServices.isSelected() && checkProvider.isSelected()==false && checkUsers.isSelected()==false && checkBill.isSelected()==false && checkDelivery.isSelected()==false){
+        if (checkService.isSelected() && checkProvider.isSelected()==false && checkUsers.isSelected()==false && checkBill.isSelected()==false && checkDelivery.isSelected()==false){
 
             Stage stage = new Stage();
             Parent root = FXMLLoader.load(getClass().getResource("/vue/service.fxml"));
@@ -161,9 +168,9 @@ public class HomeController implements Initializable {
         if (table.matches("USER")) {
             checkBill.setDisable(false);
             if (!checkBill.isSelected()) checkDelivery.setDisable(true);
-            if (checkDelivery.isSelected() || checkProvider.isSelected()) checkProvider.setDisable(false);
+            if (checkDelivery.isSelected()) checkProvider.setDisable(false);
             else checkProvider.setDisable(true);
-            if (checkDelivery.isSelected() || checkService.isSelected()) checkService.setDisable(false);
+            if (checkDelivery.isSelected()) checkService.setDisable(false);
             else checkService.setDisable(true);
         }
         if (table.matches("BILL")) {
