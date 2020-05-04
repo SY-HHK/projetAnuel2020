@@ -10,11 +10,10 @@ $query->execute();
 $resultats = $query->fetchAll();
 
 
-$query4 = $pdo->prepare('SELECT * FROM SERVICE ');
-$query4->execute();
-$allServices = $query4->fetchAll();
+$querySelectService= $pdo->prepare('SELECT * FROM SERVICE ');
+$querySelectService->execute();
+$allServices = $querySelectService->fetchAll();
 
-//var_dump($resultats);
 ?>
 
 <!DOCTYPE html>

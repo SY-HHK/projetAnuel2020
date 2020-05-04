@@ -180,7 +180,6 @@ if (isset($_POST['pwd'])) {
 
 	$id = $_POST['idProvider'];
 	$newPwd = hash('sha256', uniqid());
-var_dump($newPwd);
 
 	$queryUpdate = $pdo->prepare('UPDATE PROVIDER SET providerPassword = :pwd WHERE idProvider = :id');
 
@@ -270,30 +269,15 @@ if (isset($_GET['idContract']) && !empty($_GET['idContract']) && isset($_GET['st
   $idContract = htmlspecialchars($_GET['idContract']);
   $start = $_GET['start'];
   $end = $_GET['end'];
-  // $start = htmlspecialchars($_POST['start']);
-  // $end = $_POST['hello'];
-
-  var_dump($idContract);
-  var_dump($start);
-  var_dump($end);
 
   $date = date_create($end);
 
-
   date_add($date, date_interval_create_from_date_string('18 months'));
-  // echo date_format($date, 'Y-m-d');
-
 
   $start = $end;
   $end = $date;
 
-
-
-
-  echo ('new start : '. $start);
   $end =  date_format($date, 'Y-m-d');
-
-  echo ('new end : '.$end);
 
   $queryUpdate = $pdo->prepare('UPDATE CONTRACT SET contractDateStart = :start, contractDateEnd = :endContract WHERE idContract = :id');
 
@@ -312,9 +296,6 @@ if (isset($_GET['idContract']) && !empty($_GET['idContract']) && isset($_GET['st
     header('location: ../provider.php');
         exit;
   }
-
-
-
 
 }
 

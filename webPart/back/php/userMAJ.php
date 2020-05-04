@@ -109,16 +109,12 @@ if (isset($_POST['updateUser'])) {
   $departement =htmlspecialchars($_POST['departement']);
   $state =htmlspecialchars($_POST['state']);
 
-echo 'test';
-var_dump($id ,$mail, $firstName, $lastName, $phone, $birth, $adr, $city ,$region, $departement);
-
     if( isset($_POST['annulation']) && !empty($_POST['annulation']) ){
           $annulation = $_POST['annulation'];
       }else {
         $annulation = 0;
       }
 
-     
       $state = $_POST['state'];
 
      if ($state == 'A') {
@@ -172,8 +168,6 @@ $rows = $queryUpdate->rowCount();
         exit;
   }
 
-
-
 }
 
 // Générer un mdp
@@ -182,7 +176,6 @@ if (isset($_POST['pwd'])) {
 
   $id = $_POST['idUser'];
   $newPwd = hash('sha256', uniqid());
-var_dump($newPwd);
 
   $queryUpdate = $pdo->prepare('UPDATE USER SET userPassword = :pwd WHERE idUser = :id');
 

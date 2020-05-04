@@ -1,9 +1,6 @@
 <?php include('../include/config.php');
   session_start();
-// if (!isset($_SESSION['admin'])){
-// header('location:../index.php');
-// }
-//var_dump($_SESSION['admin']);
+
 $query = $pdo->prepare('SELECT * FROM SUBSCRIPTION');
 $query->execute();
 
@@ -22,10 +19,10 @@ $resultats = $query->fetchAll();
 
 <body>
 
- <?php include('../include/config.php');
+ <?php
+ include('../include/config.php');
 
  include('../css/linkCss.php');
-
 
  include('include/headerBack.php');
 
@@ -120,73 +117,28 @@ $resultats = $query->fetchAll();
                           <td>
                             <div class="form-group">
                               <select class="form-control-sm" name="days">
-                                <option <?php if ($sub['subDays'] == 1){ echo 'selected'; }?>>1</option>
-                                <option <?php if ($sub['subDays'] == 2){ echo 'selected'; }?>>2</option>
-                                <option <?php if ($sub['subDays'] == 3){ echo 'selected'; }?>>3</option>
-                                <option <?php if ($sub['subDays'] == 4){ echo 'selected'; }?>>4</option>
-                                <option <?php if ($sub['subDays'] == 5){ echo 'selected'; }?>>5</option>
-                                <option <?php if ($sub['subDays'] == 6){ echo 'selected'; }?>>6</option>
-                                <option <?php if ($sub['subDays'] == 7){ echo 'selected'; }?>>7</option>
+
+                                  <?php for  ($i = 1; $i <= 7; $i++){ ?>
+                                        <option <?php if ($sub['subDays'] == $i){ echo 'selected'; }?>><?php echo $i; ?></option>
+                                  <?php } ?>
                               </select>
                             </div>
                           </td>
                           <td>
                              <div class="form-group">
                               <select class="form-control-sm" name="start">
-                                <option <?php if ($sub['subHourStart'] == 1){ echo 'selected'; }?>>1</option>
-                                <option <?php if ($sub['subHourStart'] == 2){ echo 'selected'; }?>>2</option>
-                                <option <?php if ($sub['subHourStart'] == 3){ echo 'selected'; }?>>3</option>
-                                <option <?php if ($sub['subHourStart'] == 4){ echo 'selected'; }?>>4</option>
-                                <option <?php if ($sub['subHourStart'] == 5){ echo 'selected'; }?>>5</option>
-                                <option <?php if ($sub['subHourStart'] == 6){ echo 'selected'; }?>>6</option>
-                                <option <?php if ($sub['subHourStart'] == 7){ echo 'selected'; }?>>7</option>
-                                <option <?php if ($sub['subHourStart'] == 8){ echo 'selected'; }?>>8</option>
-                                <option <?php if ($sub['subHourStart'] == 9){ echo 'selected'; }?>>9</option>
-                                <option <?php if ($sub['subHourStart'] == 10){ echo 'selected';}?>>10</option>
-                                <option <?php if ($sub['subHourStart'] == 11){ echo 'selected';}?>>11</option>
-                                <option <?php if ($sub['subHourStart'] == 12){ echo 'selected';}?>>12</option>
-                                <option <?php if ($sub['subHourStart'] == 13){ echo 'selected';}?>>13</option>
-                                <option <?php if ($sub['subHourStart'] == 14){ echo 'selected';}?>>14</option>
-                                <option <?php if ($sub['subHourStart'] == 15){ echo 'selected';}?>>15</option>
-                                <option <?php if ($sub['subHourStart'] == 16){ echo 'selected';}?>>16</option>
-                                <option <?php if ($sub['subHourStart'] == 17){ echo 'selected';}?>>17</option>
-                                <option <?php if ($sub['subHourStart'] == 18){ echo 'selected';}?>>18</option>
-                                <option <?php if ($sub['subHourStart'] == 19){ echo 'selected';}?>>19</option>
-                                <option <?php if ($sub['subHourStart'] == 20){ echo 'selected';}?>>20</option>
-                                <option <?php if ($sub['subHourStart'] == 21){ echo 'selected';}?>>21</option>
-                                <option <?php if ($sub['subHourStart'] == 22){ echo 'selected';}?>>22</option>
-                                <option <?php if ($sub['subHourStart'] == 23){ echo 'selected';}?>>23</option>
-                                <option <?php if ($sub['subHourStart'] == 24){ echo 'selected'; }?>>24</option>
+                                  <?php for  ($i = 1; $i <= 24; $i++){ ?>
+                                      <option <?php if ($sub['subHourStart'] == $i){ echo 'selected'; }?>><?php echo $i; ?></option>
+                                  <?php } ?>
                               </select>
                             </div>
                           </td>
                           <td>
                              <div class="form-group">
                               <select class="form-control-sm" name="end">
-                                <option <?php if ($sub['subHourEnd'] == 1){ echo 'selected'; }?>>1</option>
-                                <option <?php if ($sub['subHourEnd'] == 2){ echo 'selected'; }?>>2</option>
-                                <option <?php if ($sub['subHourEnd'] == 3){ echo 'selected'; }?>>3</option>
-                                <option <?php if ($sub['subHourEnd'] == 4){ echo 'selected'; }?>>4</option>
-                                <option <?php if ($sub['subHourEnd'] == 5){ echo 'selected'; }?>>5</option>
-                                <option <?php if ($sub['subHourEnd'] == 6){ echo 'selected'; }?>>6</option>
-                                <option <?php if ($sub['subHourEnd'] == 7){ echo 'selected'; }?>>7</option>
-                                <option <?php if ($sub['subHourEnd'] == 8){ echo 'selected'; }?>>8</option>
-                                <option <?php if ($sub['subHourEnd'] == 9){ echo 'selected'; }?>>9</option>
-                                <option <?php if ($sub['subHourEnd'] == 10){ echo 'selected';}?>>10</option>
-                                <option <?php if ($sub['subHourEnd'] == 11){ echo 'selected';}?>>11</option>
-                                <option <?php if ($sub['subHourEnd'] == 12){ echo 'selected';}?>>12</option>
-                                <option <?php if ($sub['subHourEnd'] == 13){ echo 'selected';}?>>13</option>
-                                <option <?php if ($sub['subHourEnd'] == 14){ echo 'selected';}?>>14</option>
-                                <option <?php if ($sub['subHourEnd'] == 15){ echo 'selected';}?>>15</option>
-                                <option <?php if ($sub['subHourEnd'] == 16){ echo 'selected';}?>>16</option>
-                                <option <?php if ($sub['subHourEnd'] == 17){ echo 'selected';}?>>17</option>
-                                <option <?php if ($sub['subHourEnd'] == 18){ echo 'selected';}?>>18</option>
-                                <option <?php if ($sub['subHourEnd'] == 19){ echo 'selected';}?>>19</option>
-                                <option <?php if ($sub['subHourEnd'] == 20){ echo 'selected';}?>>20</option>
-                                <option <?php if ($sub['subHourEnd'] == 21){ echo 'selected';}?>>21</option>
-                                <option <?php if ($sub['subHourEnd'] == 22){ echo 'selected';}?>>22</option>
-                                <option <?php if ($sub['subHourEnd'] == 23){ echo 'selected';}?>>23</option>
-                                <option <?php if ($sub['subHourEnd'] == 24){ echo 'selected'; }?>>24</option>
+                                  <?php for  ($i = 1; $i <= 24; $i++){ ?>
+                                      <option <?php if ($sub['subHourEnd'] == $i){ echo 'selected'; }?>><?php echo $i; ?></option>
+                                  <?php } ?>
                               </select>
                             </div>
                           </td>
@@ -259,60 +211,20 @@ $resultats = $query->fetchAll();
                           <td>
                              <div class="form-group">
                               <select class="form-control-sm" name="start">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                                <option>6</option>
-                                <option>7</option>
-                                <option>8</option>
-                                <option>9</option>
-                                <option>10</option>
-                                <option>11</option>
-                                <option>12</option>
-                                <option>13</option>
-                                <option>14</option>
-                                <option>15</option>
-                                <option>16</option>
-                                <option>17</option>
-                                <option>18</option>
-                                <option>19</option>
-                                <option>20</option>
-                                <option>21</option>
-                                <option>22</option>
-                                <option>23</option>
-                                <option>24</option>
+
+                                  <?php for ($i = 1; $i <=24; $i++) { ?>
+                                        <option><?php echo $i; ?></option>
+                                  <?php  } ?>
                               </select>
                             </div>
                           </td>
                           <td>
                              <div class="form-group">
                               <select class="form-control-sm" name="end">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                                <option>6</option>
-                                <option>7</option>
-                                <option>8</option>
-                                <option>9</option>
-                                <option>10</option>
-                                <option>11</option>
-                                <option>12</option>
-                                <option>13</option>
-                                <option>14</option>
-                                <option>15</option>
-                                <option>16</option>
-                                <option>17</option>
-                                <option>18</option>
-                                <option>19</option>
-                                <option>20</option>
-                                <option>21</option>
-                                <option>22</option>
-                                <option>23</option>
-                                <option>24</option>
+
+                                  <?php for ($i = 1; $i <=24; $i++) { ?>
+                                      <option><?php echo $i; ?></option>
+                                  <?php  } ?>
                               </select>
                             </div>
                           </td>
@@ -334,9 +246,6 @@ $resultats = $query->fetchAll();
     </div>
   </div>
 </div>
-
-
-
 
 </div>
 

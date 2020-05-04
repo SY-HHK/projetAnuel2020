@@ -14,7 +14,7 @@ if (isset($_POST['delete'])) {
 
    if ($rows2 == 1){
     header('location: ../service.php?delete='.$rows2.'&id='.$id );
-        exit;
+    exit;
   }
 }
 
@@ -87,9 +87,6 @@ if ($filename != ''){ // Si un nouveau fichier est entré
 
     if ($photoActuelle != $photoBDD){
 
-
-      var_dump($photoActuelle, $photoBDD);
-
     $photo_name = 'service'.rand();
 
     $newFileName = $_FILES['image']['name'];
@@ -112,8 +109,7 @@ if ($filename != ''){ // Si un nouveau fichier est entré
         exit;
       }
       move_uploaded_file($_FILES['image']['tmp_name'], '../'.$photo_path);
-    
-
+      
       }
     }
   }

@@ -5,7 +5,6 @@ include('../../shop/FindProvider.php');
 
 if (isset($_POST['enregistrer'])){
 
-
 	$state = $_POST['state'];
 	$description = $_POST['description'];
     $dateStart = $_POST['dateStart'];
@@ -15,8 +14,6 @@ if (isset($_POST['enregistrer'])){
     $service = $_POST['idService'];
     $idDelivery = $_POST['idDelivery'];
     $idBill = $_POST['idBill'];
-
-    echo ($state .$description .$service.$idDelivery.$idBill);
 
 if ($state == 1) {
 
