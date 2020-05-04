@@ -121,8 +121,8 @@ class FindProvider {
       $availibleProviders = $this->checkProvider($index, $idUserCity);
 
       $idProvider = $this->findInSameLocation($availibleProviders, $idUserCity, "cityName"); //find in the same city
-      if ($idProvider == -1) $this->findInSameLocation($availibleProviders, $idUserCity, "cityDepartment"); //find in the same department
-      if ($idProvider == -1) $this->findInSameLocation($availibleProviders, $idUserCity, "cityRegion"); //region
+      if ($idProvider == -1) $idProvider = $this->findInSameLocation($availibleProviders, $idUserCity, "cityDepartement"); //find in the same department
+      if ($idProvider == -1) $idProvider = $this->findInSameLocation($availibleProviders, $idUserCity, "cityRegion"); //region
 
       if ($this->bookList["hourStart".$index] > $this->bookList["hourStop".$index]) {
         $dateEnd = date("Y-m-d", strtotime($this->bookList["date".$index]."+ 1 days"));
@@ -130,6 +130,8 @@ class FindProvider {
       else {
         $dateEnd = $this->bookList["date".$index];
       }
+
+      echo $idProvider;
 
       $insertNewDelivery = $this->pdo->prepare("INSERT INTO DELIVERY (deliveryDateStart, deliveryDateEnd, deliveryHourStart, deliveryHourEnd, deliveryState,
                                                 idService, idProvider, idBill) VALUES (?,?,?,?,0,?,?,?)");
@@ -140,9 +142,8 @@ class FindProvider {
 
   public function findInSameLocation($availibleProviders, $idUserCity, $locationType) {
     $cityUser = $this->getCityInfos($idUserCity);
-
     foreach ($availibleProviders as $provider) {
-      if ($provider[$locationType] == $cityUser[$locationType]) {
+      if (strcmp(strtolower($provider[$locationType]), strtolower($cityUser[$locationType])) == 0) {
         return $provider["idProvider"];
       }
     }

@@ -52,8 +52,8 @@ if ($state == 1) {
 	$availibleProviders = $request->checkProvider("", $idUserCity);
 
 	$idProvider = $request->findInSameLocation($availibleProviders, $idUserCity, "cityName"); //find in the same city
-	if ($idProvider == -1) $request->findInSameLocation($availibleProviders, $idUserCity, "cityDepartment"); //find in the same department
-	if ($idProvider == -1) $request->findInSameLocation($availibleProviders, $idUserCity, "cityRegion"); //region
+	if ($idProvider == -1) $idProvider = $request->findInSameLocation($availibleProviders, $idUserCity, "cityDepartement"); //find in the same department
+	if ($idProvider == -1) $idProvider = $request->findInSameLocation($availibleProviders, $idUserCity, "cityRegion"); //region
 
 	$time = $request->getTimeOfDelivery("");
 	if ($time == -1) {

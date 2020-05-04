@@ -19,6 +19,9 @@ else $userInfos = $getUserInfos->fetch();
 $cancelBill = $pdo->prepare("DELETE FROM BILL WHERE idBill = ? && idUser = ?");
 $cancelBill->execute([$_GET["idBill"], $userInfos["idUser"]]);
 
+$cancelDelivery = $pdo->prepare("DELETE FROM DELIVERY WHERE idBill = ?");
+$cancelDelivery->execute([$_GET["idBill"]]);
+
 header("location: profilUser.php?shop=succesfullyCanceled");
 
 ?>

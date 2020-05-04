@@ -22,6 +22,8 @@ $bookList = new FindProvider($_POST, $pdo);
 
 if (isset($_POST["quoteButton"])) {
   $billInfos = $bookList->insertBill($idUser);
+  $setBackHourSub = $pdo->prepare("UPDATE USER SET subHourLeft = subHourLeft + ? WHERE idUser = ?");
+  $setBackHourSub->execute([$billInfos["subHourUsed"], $idUser]);
   $i = 1;
   while (isset($_POST["serviceTitle".$i])) {
     $insertNewDelivery = $pdo->prepare("INSERT INTO DELIVERY (idService, deliveryHourStart, deliveryHourEnd, idBill, deliveryState) VALUES (?,?,?,?,-1)");

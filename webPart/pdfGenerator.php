@@ -173,6 +173,12 @@ foreach ($deliverys as $delivery) {
 
 </div>
 
+<div style="margin-left: 10%; margin-top: 30px; margin-right: 10%;">
+
+  <?=$infosBill["billDescription"]?>
+
+</div>
+
 <page_footer>
   <p id="conditions">Réglement par carte bancaire à l'aide de la plateforme Stripe. Pour plus d'informations voir les conditions d'utilisations.</p>
 </page_footer>

@@ -60,10 +60,10 @@ $date = $_POST["dateStart"];
 while (strtotime($date) <= strtotime($_POST["dateEnd"])) {
 
   $insertAvailabilitiesStart = $pdo->prepare("INSERT INTO DELIVERY (idProvider, deliveryDateStart, deliveryDateEnd, deliveryHourStart, deliveryHourEnd, deliveryState, idService) VALUES (?,?,?,?,?,50,50)");
-  $insertAvailabilitiesStart->execute([$idProvider, $_POST["dateStart"], $_POST["dateStart"], "00:00:00", $_POST["hourStart"]]);
+  $insertAvailabilitiesStart->execute([$idProvider, $date, $date, "00:00:00", $_POST["hourStart"]]);
 
   $insertAvailabilitiesStart = $pdo->prepare("INSERT INTO DELIVERY (idProvider, deliveryDateStart, deliveryDateEnd, deliveryHourStart, deliveryHourEnd, deliveryState, idService) VALUES (?,?,?,?,?,50,50)");
-  $insertAvailabilitiesStart->execute([$idProvider, $_POST["dateStart"], $_POST["dateStart"], $_POST["hourEnd"], "24:00:00"]);
+  $insertAvailabilitiesStart->execute([$idProvider, $date,$date, $_POST["hourEnd"], "24:00:00"]);
 
   $date = date("Y-m-d", strtotime($date."+1 day"));
 

@@ -202,7 +202,7 @@ INSERT INTO `SERVICE` (`idService`, `serviceTitle`, `servicePrice`, `serviceDesc
 -- -----------------------------------------------------
 -- Data for table `bringme`.`CITY`
 -- -----------------------------------------------------
-INSERT INTO `bringme`.`CITY` (`cityName`, `cityDepartement`, `cityRegion`) VALUES ('paris', '75', 'lle de france');
+INSERT INTO `bringme`.`CITY` (`cityName`, `cityDepartement`, `cityRegion`) VALUES ('paris', '75', 'Ile de france');
 
 -- -----------------------------------------------------
 -- Data for table `bringme`.`PROVIDER`
